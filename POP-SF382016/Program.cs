@@ -25,7 +25,7 @@ namespace POP_SF382016
                 MaticniBroj = 234324,
                 PIB = 323232,
                 Telefon = "021/342-343",
-                InternetAdresa = "hhtps://www.ftn.uns.ac.rs"
+                Sajt = "hhtps://www.ftn.uns.ac.rs"
             };
 
             var tn1 = new TipNamestaja()
@@ -51,7 +51,9 @@ namespace POP_SF382016
             };
 
             namestaj.Add(n1);
-            Console.WriteLine($"====== Dobrodosli u salon {s1.Naziv}");
+            tipnamestaja.Add(tn1);
+            tipnamestaja.Add(tn2);
+            Console.WriteLine($"====== Dobrodosli u salon {s1.Naziv} =====");
             IspisGlavnogMenija();
 
         }
@@ -114,7 +116,7 @@ namespace POP_SF382016
                 case 3:
                     IzmenaNamestaja();
                     break;
-                case 3:
+                case 4:
                     BrisanjeNamestaja();
                     break;
                 default:
@@ -129,7 +131,7 @@ namespace POP_SF382016
             {
                 if (!namestaj[i].Obrisan)
                 {
-                    Console.WriteLine($"{i+1}.{namestaj[i].Naziv}, cena: {namestaj[i].Cena}, tip namestaja: {namestaj[i].TipNamestaja}");
+                    Console.WriteLine($"{i+1}.{namestaj[i].Naziv}, cena: {namestaj[i].Cena}, tip namestaja: {namestaj[i].TipNamestaja.Naziv}");
                 }
             }
             IspisiMeniNamestaja();
@@ -175,18 +177,15 @@ namespace POP_SF382016
             IspisiMeniNamestaja();
         }
 
-        private static void IzmenaNamsetaja()
+        private static void IzmenaNamestaja()
         {
             Namestaj trazeniNamestaj = null;
-
-            // MENJATI OVDE, NE TREBA PO NAZIVU NEGO PO ID JA MSM
-
             string nazivTrazenogNamestaja = "";
 
             do
             {
                 Console.WriteLine("Unesite naziv namestaja: ");
-                nazivTrazenogNamestaja = Console.ReadLine;
+                nazivTrazenogNamestaja = Console.ReadLine();
 
                 foreach (var nam in namestaj)
                 {
@@ -212,7 +211,7 @@ namespace POP_SF382016
             do
             {
                 Console.WriteLine("Unesite naziv namestaja koji zelite da obrisete: ");
-                nazivZaBrisanje = Console.ReadLine;
+                nazivZaBrisanje = Console.ReadLine();
 
                 foreach (var n in namestaj)
                 {
@@ -223,7 +222,6 @@ namespace POP_SF382016
             trazeniNamestaj.Obrisan = true;
             IspisiMeniNamestaja();
         }
-
 
 
         private static void MeniZaTipNamestaja()
@@ -255,7 +253,7 @@ namespace POP_SF382016
                 case 3:
                     IzmenaTipaNamestaja();
                     break;
-                case 3:
+                case 4:
                     BrisanjeNamestaja();
                     break;
                 default:
@@ -306,7 +304,7 @@ namespace POP_SF382016
             MeniZaTipNamestaja();
         }
 
-        private static void IzmenaTipaNamsetaja()
+        private static void IzmenaTipaNamestaja()
         {
             TipNamestaja trazeniTip = null;
             string nazivTrazenogTipa = "";
@@ -317,7 +315,7 @@ namespace POP_SF382016
             do
             {
                 Console.WriteLine("Unesite naziv tipa namestaja: ");
-                nazivTrazenogTipa = Console.ReadLine;
+                nazivTrazenogTipa = Console.ReadLine();
 
                 foreach (var tip in tipnamestaja)
                 {
@@ -338,26 +336,6 @@ namespace POP_SF382016
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

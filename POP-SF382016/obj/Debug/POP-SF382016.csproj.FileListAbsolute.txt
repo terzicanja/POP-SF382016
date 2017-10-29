@@ -2,3 +2,8 @@ c:\users\temp.ftn.000\documents\visual studio 2015\Projects\POP-SF382016\POP-SF3
 C:\Users\TEMP.FTN.000\POP-SF382016\POP-SF382016\bin\Debug\POP-SF382016.exe.config
 D:\POP\Projekat SalonNamestaja\POP-SF382016\obj\Debug\POP-SF382016.csprojResolveAssemblyReference.cache
 D:\POP\Projekat SalonNamestaja\POP-SF382016\obj\Debug\POP-SF382016.csproj.CoreCompileInputs.cache
+D:\POP\Projekat SalonNamestaja\POP-SF382016\bin\Debug\POP-SF382016.exe.config
+D:\POP\Projekat SalonNamestaja\POP-SF382016\bin\Debug\POP-SF382016.exe
+D:\POP\Projekat SalonNamestaja\POP-SF382016\bin\Debug\POP-SF382016.pdb
+D:\POP\Projekat SalonNamestaja\POP-SF382016\obj\Debug\POP-SF382016.exe
+D:\POP\Projekat SalonNamestaja\POP-SF382016\obj\Debug\POP-SF382016.pdb
