@@ -7,3 +7,10 @@ D:\POP\Projekat SalonNamestaja\POP-SF382016\bin\Debug\POP-SF382016.exe
 D:\POP\Projekat SalonNamestaja\POP-SF382016\bin\Debug\POP-SF382016.pdb
 D:\POP\Projekat SalonNamestaja\POP-SF382016\obj\Debug\POP-SF382016.exe
 D:\POP\Projekat SalonNamestaja\POP-SF382016\obj\Debug\POP-SF382016.pdb
+C:\Users\SF38-2016\source\repos\POP-SF382016\POP-SF382016\bin\Debug\POP-SF382016.exe.config
+C:\Users\SF38-2016\source\repos\POP-SF382016\POP-SF382016\bin\Debug\POP-SF382016.exe
+C:\Users\SF38-2016\source\repos\POP-SF382016\POP-SF382016\bin\Debug\POP-SF382016.pdb
+C:\Users\SF38-2016\source\repos\POP-SF382016\POP-SF382016\obj\Debug\POP-SF382016.csprojResolveAssemblyReference.cache
+C:\Users\SF38-2016\source\repos\POP-SF382016\POP-SF382016\obj\Debug\POP-SF382016.csproj.CoreCompileInputs.cache
+C:\Users\SF38-2016\source\repos\POP-SF382016\POP-SF382016\obj\Debug\POP-SF382016.exe
+C:\Users\SF38-2016\source\repos\POP-SF382016\POP-SF382016\obj\Debug\POP-SF382016.pdb

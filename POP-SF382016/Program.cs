@@ -1,4 +1,5 @@
 ﻿using POP_SF382016.Model;
+using POP_SF382016.utill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,12 +51,32 @@ namespace POP_SF382016
                 KolicinaUMagacinu = 2
             };
 
+            /*var l1 = new List<Namestaj>();
+            l1.Add(n1);
+
+            Console.WriteLine("Serialization...");
+            GenericSerializer.Serialize<Namestaj>("namestaj.xml", l1);
+
+            List<Namestaj> ucitanaLista = GenericSerializer.Deserialize<Namestaj>("namestaj.xml");
+
+            Console.WriteLine("finished");
+            Console.ReadLine();
+
             namestaj.Add(n1);
             tipnamestaja.Add(tn1);
             tipnamestaja.Add(tn2);
             Console.WriteLine($"====== Dobrodosli u salon {s1.Naziv} =====");
-            IspisGlavnogMenija();
+            IspisGlavnogMenija();*/
 
+            var lista = Projekat.Instance.Namestaj;
+            lista.Add(new Namestaj() { Id = 32, Naziv = "remix" });
+            Projekat.Instance.Namestaj = lista;
+
+            foreach (var stavka in lista)
+            {
+                Console.WriteLine($"{stavka.Naziv}");
+            }
+            Console.ReadLine();
         }
 
         private static void IspisGlavnogMenija()

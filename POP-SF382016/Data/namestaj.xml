@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Namestaj>
+    <Id>1</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>Super sofa</Naziv>
+    <Sifra>SF sifra za sofe</Sifra>
+    <Cena>28</Cena>
+    <KolicinaUMagacinu>2</KolicinaUMagacinu>
+    <TipNamestaja>
+      <Id>1</Id>
+      <Obrisan>false</Obrisan>
+      <Naziv>Sofa</Naziv>
+    </TipNamestaja>
+  </Namestaj>
+  <Namestaj>
+    <Id>32</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>remix</Naziv>
+    <Cena>0</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+  </Namestaj>
+</ArrayOfNamestaj>
