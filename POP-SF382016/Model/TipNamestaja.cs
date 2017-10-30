@@ -23,6 +23,7 @@ namespace POP_SF382016.Model
                     return tip; //mozda nije id nego naziv ili nzm i onda pozivan Tipnamestaja.getbyid(idtipnamestaja)
                 }
             }
+            return null;
         }
 
     }

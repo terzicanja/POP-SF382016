@@ -16,8 +16,23 @@ namespace POP_SF382016.Model
 
         public DateTime KrajAkcije { get; set; }
 
-        public List<Namestaj> NamestajNaPopustu { get; set; }
+        //public List<Namestaj> NamestajNaPopustu { get; set; }
 
         public double Popust { get; set; }
+
+        public List<int> IdNamestaja { get; set; }
+
+        /*
+        public static Akcija AkcijaById(int id)
+        {
+            foreach (var akcija in Projekat.Instance.Akcija)
+            {
+                if(akcija.Id == id)
+                {
+                    return akcija;
+                }
+            }
+            return null;
+        }*/
     }
 }

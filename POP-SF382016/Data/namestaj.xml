@@ -7,24 +7,17 @@
     <Sifra>SF sifra za sofe</Sifra>
     <Cena>28</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <TipNamestaja>
-      <Id>1</Id>
-      <Obrisan>false</Obrisan>
-      <Naziv>Sofa</Naziv>
-    </TipNamestaja>
+    <IdAkcije xsi:nil="true" />
+    <IdTipaNamestaja>1</IdTipaNamestaja>
   </Namestaj>
   <Namestaj>
-    <Id>32</Id>
+    <Id>22</Id>
     <Obrisan>false</Obrisan>
-    <Naziv>remix</Naziv>
-    <Cena>0</Cena>
-    <KolicinaUMagacinu>0</KolicinaUMagacinu>
-  </Namestaj>
-  <Namestaj>
-    <Id>32</Id>
-    <Obrisan>false</Obrisan>
-    <Naziv>remix</Naziv>
-    <Cena>0</Cena>
-    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <Naziv>krevet</Naziv>
+    <Sifra>aaaa</Sifra>
+    <Cena>2234</Cena>
+    <KolicinaUMagacinu>33</KolicinaUMagacinu>
+    <IdAkcije xsi:nil="true" />
+    <IdTipaNamestaja>1</IdTipaNamestaja>
   </Namestaj>
 </ArrayOfNamestaj>

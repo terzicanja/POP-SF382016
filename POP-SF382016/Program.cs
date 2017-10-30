@@ -12,6 +12,8 @@ namespace POP_SF382016
     {
         static List<Namestaj> namestaj { get; set;} = new List<Namestaj>();
         static List<TipNamestaja> tipnamestaja { get; set;} = new List<TipNamestaja>();
+        static List<Korisnik> korisnici { get; set; } = new List<Korisnik>();
+
 
 
         static void Main(string[] args)
@@ -38,7 +40,7 @@ namespace POP_SF382016
             var tn2 = new TipNamestaja()
             {
                 Id = 2,
-                Naziv = "Regal",
+                Naziv = "Regal"
             };
 
             var n1 = new Namestaj()
@@ -47,38 +49,54 @@ namespace POP_SF382016
                 Naziv = "Super sofa",
                 Sifra = "SF sifra za sofe",
                 Cena = 28,
-                TipNamestaja = tn1,
+                IdTipaNamestaja = 2,
+                //TipNamestaja = tn1,
                 KolicinaUMagacinu = 2
             };
 
+            var k1 = new Korisnik()
+            {
+                Id = 1,
+                Ime = "Petar",
+                Prezime = "Petrovic",
+                KorisnickoIme = "petarp",
+                Lozinka = "sifra",
+                //TipKorisnika = "Prodavac"
+            };
 
-            /*var l2 = new List<TipNamestaja>();
+            var du1 = new DodatnaUsluga()
+            {
+                Id = 1,
+                Usluga = "Prevoz",
+                Cena = 123
+            };
+
+            var pr1 = new ProdajaNamestaja()
+            {
+                Id = 1,
+                BrojRacuna = 5,
+                PDV = 12
+            };
+
+            /*
+            var l2 = new List<TipNamestaja>();
             l2.Add(tn1);
+            l2.Add(tn2);
             Console.WriteLine("Serialization...");
             GenericSerializer.Serialize<TipNamestaja>("tip.xml", l2);
 
             List<TipNamestaja> ucitanaLista = GenericSerializer.Deserialize<TipNamestaja>("tip.xml");
 
             Console.WriteLine("finished");
-            Console.ReadLine();
-
-
-            var l1 = new List<Namestaj>();
-            l1.Add(n1);
-
-            Console.WriteLine("Serialization...");
-            GenericSerializer.Serialize<Namestaj>("namestaj.xml", l1);
-
-            List<Namestaj> ucitanaLista = GenericSerializer.Deserialize<Namestaj>("namestaj.xml");
-
-            Console.WriteLine("finished");
-            Console.ReadLine();
-
+            //Console.ReadLine();
+            */
+            
             namestaj.Add(n1);
             tipnamestaja.Add(tn1);
             tipnamestaja.Add(tn2);
             Console.WriteLine($"====== Dobrodosli u salon {s1.Naziv} =====");
-            IspisGlavnogMenija();*/
+            IspisGlavnogMenija();
+
             /*
             var lista = Projekat.Instance.Namestaj;
             lista.Add(new Namestaj() { Id = 32, Naziv = "remix" });
@@ -91,19 +109,6 @@ namespace POP_SF382016
             */
 
             
-
-            var listatip = Projekat.Instance.Tip;
-            
-            foreach (var nesto in listatip)
-            {
-                Console.WriteLine($"{nesto.Naziv}");
-            }
-
-            
-
-
-
-            Console.ReadLine();
         }
 
 
@@ -174,7 +179,7 @@ namespace POP_SF382016
                     IzlistajNamestaj();
                     break;
                 case 2:
-                    DodavanjeNovogNamestaja();
+                    //DodavanjeNovogNamestaja();
                     break;
                 case 3:
                     IzmenaNamestaja();
@@ -187,21 +192,39 @@ namespace POP_SF382016
             }
         }
 
+
+
+
+        
+
+
+
+
         private static void IzlistajNamestaj()
         {
             Console.WriteLine("===Izlistavanje namestaja===");
-            for (int i = 0; i < namestaj.Count; i++)
+            var lista = Projekat.Instance.Namestaj;
+            //Projekat.Instance.Namestaj = lista;
+            //hoce i bez ove iznad linije, nisam sigurna dal treba
+            //foreach (var stavka in lista)
+            //{
+            //    Console.WriteLine($"{stavka.Naziv}");
+
+            for (int i = 0; i < lista.Count; i++)
             {
-                if (!namestaj[i].Obrisan)
+                if (!lista[i].Obrisan)
                 {
-                    Console.WriteLine($"{i+1}.{namestaj[i].Naziv}, cena: {namestaj[i].Cena}, tip namestaja: {namestaj[i].TipNamestaja.Naziv}");
+                    Console.WriteLine($"{i+1}.{lista[i].Naziv}, cena: {lista[i].Cena}, tip namestaja: {TipNamestaja.GetById(lista[i].IdTipaNamestaja).Naziv}");
                 }
             }
             IspisiMeniNamestaja();
         }
-
+        /*
         private static void DodavanjeNovogNamestaja()
         {
+
+
+
             Console.WriteLine("====Dodavanje novog namestaja====");
             var noviNamestaj = new Namestaj();
             noviNamestaj.Id = namestaj.Count + 1;
@@ -239,6 +262,14 @@ namespace POP_SF382016
             namestaj.Add(noviNamestaj);
             IspisiMeniNamestaja();
         }
+
+
+
+            */
+
+
+
+
 
         private static void IzmenaNamestaja()
         {
@@ -327,13 +358,25 @@ namespace POP_SF382016
         private static void IzlistajTipoveNamestaja()
         {
             Console.WriteLine("===Izlistavanje tipova namestaja===");
-            for (int i = 0; i < tipnamestaja.Count; i++)
+            var listatip = Projekat.Instance.Tip;
+            //Projekat.Instance.Tip = listatip;        SA OVOM LINIJOM JA MSM DA KAO OPET UPISE U XML ILI NESTO SLICNO
+            
+            foreach (var tip in listatip)
             {
-                if (!tipnamestaja[i].Obrisan)
+                if(!tip.Obrisan)
                 {
-                    Console.WriteLine($"{i+1}.{tipnamestaja[i].Naziv}");
+                    Console.WriteLine($"{tip.Naziv}");
                 }
             }
+            // MOZE OBE VERZIJE
+            /*
+            for (int i = 0; i < listatip.Count; i++)
+            {
+                if (!listatip[i].Obrisan)
+                {
+                    Console.WriteLine($"{i+1}.{listatip[i].Naziv}");
+                }
+            }*/
             IspisiMeniNamestaja();
         }
 

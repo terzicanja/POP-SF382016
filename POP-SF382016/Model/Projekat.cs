@@ -19,7 +19,7 @@ namespace POP_SF382016.Model
             get
             {
                 this.namestaj = GenericSerializer.Deserialize<Namestaj>("namestaj.xml");
-                return this.namestaj;
+                return namestaj;
             }
             set
             {
@@ -40,7 +40,7 @@ namespace POP_SF382016.Model
             }
             set
             {
-                tip = value;
+                this.tip = value;
                 GenericSerializer.Serialize<TipNamestaja>("tip.xml", tip);
             }
         }
@@ -62,7 +62,7 @@ namespace POP_SF382016.Model
             }
         }
 
-
+        /*
         private List<Akcija> akcija;
 
         public List<Akcija> Akcija
@@ -77,7 +77,7 @@ namespace POP_SF382016.Model
                 akcija = value;
                 GenericSerializer.Serialize<Akcija>("akcija.xml", akcija);
             }
-        }
+        } */
 
 
         private List<DodatnaUsluga> dodatnaUsluga;
@@ -95,6 +95,45 @@ namespace POP_SF382016.Model
                 GenericSerializer.Serialize<DodatnaUsluga>("dodatna_usluga.xml", dodatnaUsluga);
             }
         }
+
+
+        private List<ProdajaNamestaja> prodajaNamestaja;
+
+	    public List<ProdajaNamestaja> ProdajaNamestaja
+	    {
+		    get 
+            {
+                this.prodajaNamestaja = GenericSerializer.Deserialize<ProdajaNamestaja>("prodaja.xml");
+                return prodajaNamestaja;
+            }
+		    set 
+            { 
+                prodajaNamestaja = value;
+                GenericSerializer.Serialize<ProdajaNamestaja>("prodaja.xml", prodajaNamestaja);
+            }
+	    }
+
+
+        private List<Salon> salon;
+
+	    public List<Salon> Salon
+	    {
+		    get
+            {
+                this.salon = GenericSerializer.Deserialize<Salon>("salon.xml");
+                return salon;
+            }
+		    set
+            {
+                salon = value;
+                GenericSerializer.Serialize<Salon>("salon.xml", salon);
+            }
+	    }
+
+
+
+        
+
 
 
 

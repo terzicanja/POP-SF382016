@@ -23,6 +23,10 @@ namespace POP_SF382016.Model
 
         public int KolicinaUMagacinu { get; set; }
 
-        public TipNamestaja TipNamestaja { get; set; }
+        public int? IdAkcije { get; set; }
+
+        public int IdTipaNamestaja { get; set; }
+
+        //public TipNamestaja TipNamestaja { get; set; }
     }
 }
