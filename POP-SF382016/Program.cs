@@ -51,7 +51,19 @@ namespace POP_SF382016
                 KolicinaUMagacinu = 2
             };
 
-            /*var l1 = new List<Namestaj>();
+
+            /*var l2 = new List<TipNamestaja>();
+            l2.Add(tn1);
+            Console.WriteLine("Serialization...");
+            GenericSerializer.Serialize<TipNamestaja>("tip.xml", l2);
+
+            List<TipNamestaja> ucitanaLista = GenericSerializer.Deserialize<TipNamestaja>("tip.xml");
+
+            Console.WriteLine("finished");
+            Console.ReadLine();
+
+
+            var l1 = new List<Namestaj>();
             l1.Add(n1);
 
             Console.WriteLine("Serialization...");
@@ -67,7 +79,7 @@ namespace POP_SF382016
             tipnamestaja.Add(tn2);
             Console.WriteLine($"====== Dobrodosli u salon {s1.Naziv} =====");
             IspisGlavnogMenija();*/
-
+            /*
             var lista = Projekat.Instance.Namestaj;
             lista.Add(new Namestaj() { Id = 32, Naziv = "remix" });
             Projekat.Instance.Namestaj = lista;
@@ -76,8 +88,38 @@ namespace POP_SF382016
             {
                 Console.WriteLine($"{stavka.Naziv}");
             }
+            */
+
+            
+
+            var listatip = Projekat.Instance.Tip;
+            
+            foreach (var nesto in listatip)
+            {
+                Console.WriteLine($"{nesto.Naziv}");
+            }
+
+            
+
+
+
             Console.ReadLine();
         }
+
+
+        /*
+         * ovo za dodavanje namestaja i kako tip resiti
+         * 
+        var tipovinamestaja = projekat.instamce.tipovinamestaja;
+        Tipnamestaja trazenitip;
+        foreach (var tip in tipovinamestaja){
+        if (tip.id == idtipanamestaja (to je conolse.readline)){
+            trazenitip = tip
+
+
+        projekat.instance.namestaj = nesto da bi ucitalo u xml valjda
+        */
+  
 
         private static void IspisGlavnogMenija()
         {

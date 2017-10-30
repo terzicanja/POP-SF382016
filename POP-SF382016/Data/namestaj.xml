@@ -20,4 +20,11 @@
     <Cena>0</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
   </Namestaj>
+  <Namestaj>
+    <Id>32</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>remix</Naziv>
+    <Cena>0</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+  </Namestaj>
 </ArrayOfNamestaj>
