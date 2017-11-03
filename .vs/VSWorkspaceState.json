@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\POP-SF382016",
+    "\\POP-SF382016\\Data",
     "\\POP-SF382016\\Model",
-    "\\POP-SF382016\\Util"
+    "\\POP-SF382016\\obj",
+    "\\POP-SF382016\\Properties",
+    "\\POP-SF382016\\utill"
   ],
+  "SelectedNode": "\\POP-SF382016\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

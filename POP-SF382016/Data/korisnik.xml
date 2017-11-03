@@ -3,10 +3,28 @@
   <Korisnik>
     <Id>1</Id>
     <Obrisan>false</Obrisan>
-    <Ime>Petar</Ime>
-    <Prezime>Petrovic</Prezime>
+    <Ime>pero</Ime>
+    <Prezime>peroo</Prezime>
     <KorisnickoIme>petarp</KorisnickoIme>
-    <Lozinka>sifra</Lozinka>
+    <Lozinka>pero</Lozinka>
     <TipKorisnika>Administrator</TipKorisnika>
+  </Korisnik>
+  <Korisnik>
+    <Id>1</Id>
+    <Obrisan>false</Obrisan>
+    <Ime>ivan</Ime>
+    <Prezime>ivanovic</Prezime>
+    <KorisnickoIme>ivani</KorisnickoIme>
+    <Lozinka>sifra</Lozinka>
+    <TipKorisnika>Prodavac</TipKorisnika>
+  </Korisnik>
+  <Korisnik>
+    <Id>3</Id>
+    <Obrisan>false</Obrisan>
+    <Ime>filip</Ime>
+    <Prezime>filipovic</Prezime>
+    <KorisnickoIme>filipf</KorisnickoIme>
+    <Lozinka>sss</Lozinka>
+    <TipKorisnika>Korisnik</TipKorisnika>
   </Korisnik>
 </ArrayOfKorisnik>

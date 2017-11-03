@@ -9,7 +9,7 @@ namespace POP_SF382016.Model
 {
     public class Projekat
     {
-        public static Projekat Instance { get; } = new Projekat();
+        public static Projekat Instance { get; set;  } = new Projekat();
 
 
         private List<Namestaj> namestaj;
@@ -62,7 +62,7 @@ namespace POP_SF382016.Model
             }
         }
 
-        /*
+        
         private List<Akcija> akcija;
 
         public List<Akcija> Akcija
@@ -77,7 +77,7 @@ namespace POP_SF382016.Model
                 akcija = value;
                 GenericSerializer.Serialize<Akcija>("akcija.xml", akcija);
             }
-        } */
+        }
 
 
         private List<DodatnaUsluga> dodatnaUsluga;
@@ -130,9 +130,12 @@ namespace POP_SF382016.Model
             }
 	    }
 
-
-
         
+
+
+
+
+
 
 
 

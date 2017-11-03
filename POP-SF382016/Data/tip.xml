@@ -7,7 +7,22 @@
   </TipNamestaja>
   <TipNamestaja>
     <Id>2</Id>
-    <Obrisan>true</Obrisan>
+    <Obrisan>false</Obrisan>
     <Naziv>Regal</Naziv>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>3</Id>
+    <Obrisan>true</Obrisan>
+    <Naziv>lampa</Naziv>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>4</Id>
+    <Obrisan>true</Obrisan>
+    <Naziv>stoo</Naziv>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>5</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>sofica</Naziv>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

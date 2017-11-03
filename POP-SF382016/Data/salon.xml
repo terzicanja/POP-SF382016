@@ -12,4 +12,16 @@
     <MaticniBroj>234324</MaticniBroj>
     <ZiroRacun>840-00073666-83</ZiroRacun>
   </Salon>
+  <Salon>
+    <Id>2</Id>
+    <Obrisan>true</Obrisan>
+    <Naziv>forma</Naziv>
+    <Adresa>nova</Adresa>
+    <Telefon>123</Telefon>
+    <Email>novi mail</Email>
+    <Sajt>novi sajt</Sajt>
+    <PIB>123</PIB>
+    <MaticniBroj>123</MaticniBroj>
+    <ZiroRacun>123</ZiroRacun>
+  </Salon>
 </ArrayOfSalon>

@@ -9,6 +9,7 @@ namespace POP_SF382016.Model
     public enum TipKorisnika
     {
         Administrator,
+        Korisnik,
         Prodavac
     }
 

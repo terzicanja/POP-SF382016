@@ -11,12 +11,32 @@
     <IdTipaNamestaja>1</IdTipaNamestaja>
   </Namestaj>
   <Namestaj>
-    <Id>22</Id>
+    <Id>2</Id>
     <Obrisan>false</Obrisan>
     <Naziv>krevet</Naziv>
     <Sifra>aaaa</Sifra>
     <Cena>2234</Cena>
     <KolicinaUMagacinu>33</KolicinaUMagacinu>
+    <IdAkcije xsi:nil="true" />
+    <IdTipaNamestaja>1</IdTipaNamestaja>
+  </Namestaj>
+  <Namestaj>
+    <Id>3</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>fotelja</Naziv>
+    <Sifra>1</Sifra>
+    <Cena>234</Cena>
+    <KolicinaUMagacinu>2</KolicinaUMagacinu>
+    <IdAkcije xsi:nil="true" />
+    <IdTipaNamestaja>1</IdTipaNamestaja>
+  </Namestaj>
+  <Namestaj>
+    <Id>4</Id>
+    <Obrisan>true</Obrisan>
+    <Naziv>yy</Naziv>
+    <Sifra>2</Sifra>
+    <Cena>3333</Cena>
+    <KolicinaUMagacinu>1</KolicinaUMagacinu>
     <IdAkcije xsi:nil="true" />
     <IdTipaNamestaja>1</IdTipaNamestaja>
   </Namestaj>
