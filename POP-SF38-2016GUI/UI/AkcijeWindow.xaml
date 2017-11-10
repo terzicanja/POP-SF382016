@@ -1,0 +1,16 @@
+﻿<Window x:Class="POP_SF38_2016GUI.UI.AkcijeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
+        mc:Ignorable="d"
+        Title="AkcijeWindow" Height="352.738" Width="402.882">
+    <Grid>
+        <Label Grid.Row="0" Grid.Column="0" Content="Popust:" FontSize="15" Margin="10,23,242.8,246.2"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbPopust" Margin="78,23,9.8,259.2"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Datum pocetka:" FontSize="15" Margin="10,69,242.8,210.2"/>
+        <DatePicker HorizontalAlignment="Left" Margin="141,77,0,210.2"/>
+        <!--<TextBox Grid.Row="0" Width="Auto" Name="tbUsluga" Margin="129,69,9.8,210.2"/>-->
+    </Grid>
+</Window>

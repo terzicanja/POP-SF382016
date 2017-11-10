@@ -194,10 +194,11 @@ namespace POP_SF382016
                 Console.WriteLine("2. Dodaj novi namestaj");
                 Console.WriteLine("3. Izmeni namestaj");
                 Console.WriteLine("4. Obrisi postojeci");
+                Console.WriteLine("5. Pretraga namestaja");
                 Console.WriteLine("0. Povratak u glavni meni");
 
                 izbor = int.Parse(Console.ReadLine());
-            } while (izbor<0 || izbor>4);
+            } while (izbor<0 || izbor>5);
 
             switch (izbor)
             {
@@ -216,6 +217,9 @@ namespace POP_SF382016
                 case 4:
                     BrisanjeNamestaja();
                     break;
+                //case 5:
+                    //PretragaNamestaja();
+                    //break;
                 default:
                     break;
             }
@@ -364,6 +368,27 @@ namespace POP_SF382016
             GenericSerializer.Serialize<Namestaj>("namestaj.xml", namestaji);
             IspisiMeniNamestaja();
         }
+        /*
+        private static void PretragaNamestaja()
+        {
+            var lista = Projekat.Instance.Namestaj;
+            foreach(var namestaj in lista)
+            {
+                Console.WriteLine("Unesite naziv namestaja za pretragu: ");
+
+                if(Console.ReadLine() == namestaj.Naziv)
+                {
+                    for (int i=0; i<lista.Count; i++)
+                    {
+                        if (!lista[i].Obrisan)
+                        {
+                            Console.WriteLine($"{i + 1}.{lista[i].Naziv}, cena: {lista[i].Cena}, tip namestaja: {TipNamestaja.GetById(lista[i].IdTipaNamestaja)}");
+                        }
+                    }
+                }
+            }
+            IspisiMeniNamestaja();
+        }*/
 
 
         private static void MeniZaTipNamestaja()

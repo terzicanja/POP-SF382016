@@ -1,0 +1,31 @@
+﻿<Window x:Class="POP_SF38_2016GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF38_2016GUI"
+        mc:Ignorable="d"
+        Title="Salon namestaja" Height="640.621" Width="643.225"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="129*"/>
+            <ColumnDefinition Width="421*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="67*"/>
+            <RowDefinition Height="404*"/>
+            <RowDefinition Height="116*"/>
+        </Grid.RowDefinitions>
+        <ListBox BorderThickness="0" Grid.Row="1" Grid.Column="1" FontSize="15" Name="lbPrikaz" Margin="0,0,-0.4,0.2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+        <Button Grid.Row="2" Content="Dodaj" Name="Dodaj" Margin="24.4,43.6,392.8,45.2" Grid.Column="1" Click="DugmeDodaj"/>
+        <Button Grid.Row="2" Content="Izmeni" Name="Izmeni" Margin="118.4,43.6,296.8,45.2" Grid.Column="1" Click="DugmeIzmeni"/>
+        <Button Grid.Row="2" Content="Obrisi" Name="Obrisi" Margin="209.4,43.6,207.8,45.2" Grid.Column="1" Click="DugmeObrisi"/>
+        <Button Grid.Row="2" Content="Izlaz" Margin="380.4,43.6,32.8,45.2" Click="ZatvoriSalon" Grid.Column="1"/>
+        <Button Content="Namestaj" Name="Namestaj" Margin="0,67,486.8,372.2" Grid.RowSpan="2" Grid.ColumnSpan="2" Click="OsveziPrikaz"/>
+        <Button Content="Tip namestaja" Name="Tip" Margin="0,48.4,486.8,323.4" Grid.Row="1" Grid.ColumnSpan="2" Click="TipPrikaz"/>
+        <Button Content="Dodatne usluge" Margin="0,97.4,486.8,274.4" Grid.Row="1" Grid.ColumnSpan="2" Click="UslugePrikaz"/>
+        <Button Content="Akcije" Margin="0,146.4,486.8,225.4" Grid.Row="1" Grid.ColumnSpan="2" Click="AkcijePrikaz"/>
+
+    </Grid>
+</Window>
