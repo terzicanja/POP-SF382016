@@ -28,5 +28,18 @@ namespace POP_SF382016.Model
         public string Lozinka { get; set; }
 
         public TipKorisnika TipKorisnika { get; set; }
+
+
+        public static Korisnik GetById(int id)
+        {
+            foreach (var a in Projekat.Instance.Korisnik)
+            {
+                if (a.Id == id)
+                {
+                    return a; //mozda nije id nego naziv ili nzm i onda pozivan Tipnamestaja.getbyid(idtipnamestaja)
+                }
+            }
+            return null;
+        }
     }
 }

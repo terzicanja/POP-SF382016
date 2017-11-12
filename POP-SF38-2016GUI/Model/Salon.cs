@@ -27,5 +27,11 @@ namespace POP_SF382016.Model
         public int MaticniBroj { get; set; }
 
         public string ZiroRacun { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"{Naziv}, {Adresa}, {Sajt}";
+        }
     }
 }

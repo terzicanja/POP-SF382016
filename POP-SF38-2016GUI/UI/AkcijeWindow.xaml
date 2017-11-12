@@ -10,7 +10,12 @@
         <Label Grid.Row="0" Grid.Column="0" Content="Popust:" FontSize="15" Margin="10,23,242.8,246.2"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbPopust" Margin="78,23,9.8,259.2"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Datum pocetka:" FontSize="15" Margin="10,69,242.8,210.2"/>
-        <DatePicker HorizontalAlignment="Left" Margin="141,77,0,210.2"/>
+        <DatePicker HorizontalAlignment="Left" Margin="141,77,0,210.2" Name="dtPocetka"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Datum zavrsetka:" FontSize="15" Margin="10,127,242.8,152.2"/>
+        <DatePicker HorizontalAlignment="Left" Margin="141,127,0,160.2" Name="dtKraj"/>
         <!--<TextBox Grid.Row="0" Width="Auto" Name="tbUsluga" Margin="129,69,9.8,210.2"/>-->
+
+        <Button Content="Sacuvaj" Margin="33,265,254.8,21.2" Click="SacuvajIzmene"/>
+        <Button Content="Izadji" Margin="254,265,46.8,21.2" Click="ZatvoriAkcijeWindow"/>
     </Grid>
 </Window>

@@ -53,6 +53,21 @@ namespace POP_SF38_2016GUI
         string trenutnoAktivan = "";
 
 
+        private void SalonPrikaz(object sender, RoutedEventArgs e)
+        {
+            trenutnoAktivan = "Salon";
+            lbPrikaz.Items.Clear();
+
+            foreach (var s in Projekat.Instance.Salon)
+            {
+                if (!s.Obrisan)
+                {
+                    lbPrikaz.Items.Add(s);
+                }
+            }
+            lbPrikaz.SelectedIndex = 0;
+        }
+
         private void OsveziPrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Namestaj";
@@ -161,6 +176,17 @@ namespace POP_SF38_2016GUI
             btn.Name = "Dodaj";
             btn.Click += DodajAkciju;*/
         }
+
+        private void ProdajePrikaz(object sender, RoutedEventArgs e)
+        {
+            trenutnoAktivan = "Prodaje";
+            lbPrikaz.Items.Clear();
+            foreach (var prodaja in Projekat.Instance.ProdajaNamestaja)
+            {
+                lbPrikaz.Items.Add(prodaja);
+            }
+            lbPrikaz.SelectedIndex = 0;
+        }
         
 
 
@@ -207,6 +233,13 @@ namespace POP_SF38_2016GUI
         }
 
 
+
+        private void IzmeniSalon()
+        {
+            var izabraniSalon = (Salon)lbPrikaz.SelectedItem;
+            var prozor = new SalonWindow(izabraniSalon, NamestajWindow.Operacija.Izmena);
+            prozor.Show();
+        }
 
         private void IzmeniNamestaj()
         {
@@ -326,6 +359,9 @@ namespace POP_SF38_2016GUI
         {
             switch (trenutnoAktivan)
             {
+                case "Salon":
+                    MessageBoxResult obavestenje = MessageBox.Show("Nije moguce dodati novi salon", "Obavestenje", MessageBoxButton.OK);
+                    break;
                 case "Namestaj":
                     DodajNamestaj();
                     break;
@@ -347,6 +383,9 @@ namespace POP_SF38_2016GUI
         {
             switch (trenutnoAktivan)
             {
+                case "Salon":
+                    IzmeniSalon();
+                    break;
                 case "Namestaj":
                     IzmeniNamestaj();
                     break;
@@ -368,6 +407,9 @@ namespace POP_SF38_2016GUI
         {
             switch (trenutnoAktivan)
             {
+                case "Salon":
+                    MessageBoxResult obavestenje = MessageBox.Show("Nije moguce obrisati salon", "Obavestenje", MessageBoxButton.OK);
+                    break;
                 case "Namestaj":
                     ObrisiNamestaj();
                     break;

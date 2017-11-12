@@ -1,0 +1,30 @@
+﻿<Window x:Class="POP_SF38_2016GUI.UI.SalonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
+        mc:Ignorable="d"
+        Title="SalonWindow" Height="500.071" Width="405.682">
+    <Grid>
+        <Label Grid.Row="0" Grid.Column="0" Content="Naziv:" FontSize="15" Margin="10,10,242.2,420.4"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbNaziv" Margin="78,10,9.2,420.4"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Adresa:" FontSize="15" Margin="10,50,242.2,380.4"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbAdresa" Margin="78,50,9.2,380.4"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Telefon:" FontSize="15" Margin="10,90,242.2,340.4"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbTelefon" Margin="78,90,9.2,340.4"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="E-mail:" FontSize="15" Margin="10,130,242.2,300.4"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbEmail" Margin="78,130,9.2,300.4"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Sajt:" FontSize="15" Margin="10,170,242.2,260.4"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbSajt" Margin="78,170,9.2,260.4"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="PIB:" FontSize="15" Margin="10,210,242.2,220.4"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbPIB" Margin="78,210,9.2,220.4"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Maticni broj:" FontSize="15" Margin="10,250,242.2,180.4"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbMaticniBroj" Margin="109,250,9.2,180.4"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Ziro racun:" FontSize="15" Margin="10,290,242.2,132.4"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbZiroRacun" Margin="109,290,9.2,132.4"/>
+
+        <Button Content="Sacuvaj" Margin="33,410,263.2,21.4" Click="SacuvajIzmene"/>
+        <Button Content="Izadji" Margin="256,410,46.2,21.4" Click="ZatvoriSalonWindow"/>
+    </Grid>
+</Window>

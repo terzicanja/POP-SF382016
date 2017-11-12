@@ -21,5 +21,17 @@ namespace POP_SF382016.Model
         {
             return $"{Usluga}, {Cena}";
         }
+
+        public static DodatnaUsluga GetById(int id)
+        {
+            foreach (var a in Projekat.Instance.DodatnaUsluga)
+            {
+                if (a.Id == id)
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
     }
 }

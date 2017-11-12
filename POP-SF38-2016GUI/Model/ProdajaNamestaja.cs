@@ -26,5 +26,23 @@ namespace POP_SF382016.Model
         public List<int> IdUsluga { get; set; }
 
         public double UkupanIznos { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"{DatumProdaje}, {IdKupca}";
+        }
+
+        public static ProdajaNamestaja GetById(int id)
+        {
+            foreach (var a in Projekat.Instance.ProdajaNamestaja)
+            {
+                if (a.Id == id)
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
     }
 }

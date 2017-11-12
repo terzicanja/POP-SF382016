@@ -21,3 +21,5 @@ D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\UslugeWindow.g.cs
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\UslugeWindow.baml
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\AkcijeWindow.g.cs
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\AkcijeWindow.baml
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SalonWindow.g.cs
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SalonWindow.baml

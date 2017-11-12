@@ -28,6 +28,18 @@ namespace POP_SF382016.Model
             return $"{Popust}%, Pocetak akcije: {PocetakAkcije}, Kraj akcije: {KrajAkcije}";
         }
 
+        public static Akcija GetById(int id)
+        {
+            foreach (var a in Projekat.Instance.Akcija)
+            {
+                if (a.Id == id)
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
+
         /*
         public static Akcija AkcijaById(int id)
         {

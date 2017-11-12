@@ -36,8 +36,9 @@ namespace POP_SF38_2016GUI.UI
             this.akcija = akcija;
             this.operacija = operacija;
 
-            //this.t.Text = usluga.Usluga;
-            //this.tbCena.Text = usluga.Cena.ToString();
+            this.tbPopust.Text = akcija.Popust.ToString();
+            this.dtPocetka.Text = akcija.PocetakAkcije.ToString();
+            this.dtKraj.Text = akcija.KrajAkcije.ToString();
         }
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
@@ -51,6 +52,8 @@ namespace POP_SF38_2016GUI.UI
                     {
                         Id = lista.Count + 1,
                         Popust = Double.Parse(this.tbPopust.Text),
+                        PocetakAkcije = DateTime.Parse(this.dtPocetka.Text),
+                        KrajAkcije = DateTime.Parse(this.dtKraj.Text)
                         //PocetakAkcije = this.DatumPocetka.Text
                     };
                     lista.Add(novaAkcija);
@@ -60,8 +63,9 @@ namespace POP_SF38_2016GUI.UI
                     {
                         if (n.Id == akcija.Id)
                         {
-                            //n.Usluga = this.tbUsluga.Text;
-                            //n.Cena = int.Parse(this.tbCena.Text);
+                            n.Popust = Double.Parse(this.tbPopust.Text);
+                            n.PocetakAkcije = DateTime.Parse(this.dtPocetka.Text);
+                            n.KrajAkcije = DateTime.Parse(this.dtKraj.Text);
                             break;
                         }
                     }
@@ -69,6 +73,11 @@ namespace POP_SF38_2016GUI.UI
             }
             Projekat.Instance.Akcija = lista;
             Close();
+        }
+
+        private void ZatvoriAkcijeWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
 

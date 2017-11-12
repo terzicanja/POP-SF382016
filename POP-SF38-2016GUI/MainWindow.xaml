@@ -22,10 +22,12 @@
         <Button Grid.Row="2" Content="Izmeni" Name="Izmeni" Margin="118.4,43.6,296.8,45.2" Grid.Column="1" Click="DugmeIzmeni"/>
         <Button Grid.Row="2" Content="Obrisi" Name="Obrisi" Margin="209.4,43.6,207.8,45.2" Grid.Column="1" Click="DugmeObrisi"/>
         <Button Grid.Row="2" Content="Izlaz" Margin="380.4,43.6,32.8,45.2" Click="ZatvoriSalon" Grid.Column="1"/>
-        <Button Content="Namestaj" Name="Namestaj" Margin="0,67,486.8,372.2" Grid.RowSpan="2" Grid.ColumnSpan="2" Click="OsveziPrikaz"/>
-        <Button Content="Tip namestaja" Name="Tip" Margin="0,48.4,486.8,323.4" Grid.Row="1" Grid.ColumnSpan="2" Click="TipPrikaz"/>
-        <Button Content="Dodatne usluge" Margin="0,97.4,486.8,274.4" Grid.Row="1" Grid.ColumnSpan="2" Click="UslugePrikaz"/>
-        <Button Content="Akcije" Margin="0,146.4,486.8,225.4" Grid.Row="1" Grid.ColumnSpan="2" Click="AkcijePrikaz"/>
+        <Button Content="Salon" Name="Salon" Margin="0,0.4,486.8,368.4" Grid.ColumnSpan="2" Click="SalonPrikaz" Grid.Row="1"/>
+        <Button Content="Namestaj" Name="Namestaj" Margin="0,52.4,486.8,317.4" Grid.ColumnSpan="2" Click="OsveziPrikaz" Grid.Row="1"/>
+        <Button Content="Tip namestaja" Name="Tip" Margin="0,103.4,486.8,268.4" Grid.Row="1" Grid.ColumnSpan="2" Click="TipPrikaz"/>
+        <Button Content="Dodatne usluge" Margin="0,152.4,486.8,219.4" Grid.Row="1" Grid.ColumnSpan="2" Click="UslugePrikaz"/>
+        <Button Content="Akcije" Margin="0,201.4,486.8,170.4" Grid.Row="1" Grid.ColumnSpan="2" Click="AkcijePrikaz"/>
+        <Button Content="Prodaje" Margin="0,250.4,486.8,121.4" Grid.Row="1" Grid.ColumnSpan="2" Click="ProdajePrikaz"/>
 
     </Grid>
 </Window>
