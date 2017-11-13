@@ -238,7 +238,7 @@ namespace POP_SF38_2016GUI
         {
             var izabraniSalon = (Salon)lbPrikaz.SelectedItem;
             var prozor = new SalonWindow(izabraniSalon, NamestajWindow.Operacija.Izmena);
-            prozor.Show();
+            prozor.ShowDialog();
         }
 
         private void IzmeniNamestaj()
@@ -246,7 +246,7 @@ namespace POP_SF38_2016GUI
             var izabraniNamestaj = (Namestaj) lbPrikaz.SelectedItem;
 
             var namestajProzor = new NamestajWindow(izabraniNamestaj, NamestajWindow.Operacija.Izmena);
-            namestajProzor.Show();
+            namestajProzor.ShowDialog();
             //ili moze ovde da ne ide show nego showdialog, samo sto onda mora posle svake
         }
 
@@ -280,7 +280,7 @@ namespace POP_SF38_2016GUI
         {
             var izabraniNamestaj = (Namestaj)lbPrikaz.SelectedItem;
             var lista = Projekat.Instance.Namestaj;
-            MessageBoxResult potvrda = MessageBox.Show("Da li ste sigurni da zelite da obrisete?", "Brisanje", MessageBoxButton.YesNo);
+            MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniNamestaj.Naziv}?", "Brisanje", MessageBoxButton.YesNo);
 
             if(potvrda == MessageBoxResult.Yes)
             {
@@ -299,7 +299,7 @@ namespace POP_SF38_2016GUI
         {
             var izabraniTip = (TipNamestaja)lbPrikaz.SelectedItem;
             var lista = Projekat.Instance.Tip;
-            MessageBoxResult potvrda = MessageBox.Show("Da li ste sigurni da zelite da obrisete?", "Brisanje", MessageBoxButton.YesNo);
+            MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniTip.Naziv}?", "Brisanje", MessageBoxButton.YesNo);
 
             if (potvrda == MessageBoxResult.Yes)
             {
@@ -318,7 +318,7 @@ namespace POP_SF38_2016GUI
         {
             var izabraniTip = (DodatnaUsluga)lbPrikaz.SelectedItem;
             var lista = Projekat.Instance.DodatnaUsluga;
-            MessageBoxResult potvrda = MessageBox.Show("Da li ste sigurni da zelite da obrisete?", "Brisanje", MessageBoxButton.YesNo);
+            MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniTip.Usluga}?", "Brisanje", MessageBoxButton.YesNo);
 
             if (potvrda == MessageBoxResult.Yes)
             {
@@ -429,7 +429,8 @@ namespace POP_SF38_2016GUI
 
 
 
-
+        //wpf control !!!!!!!!
+        //i sve u try catch
 
         /*
         private void Prikaz()
@@ -487,11 +488,6 @@ namespace POP_SF38_2016GUI
         private void ZatvoriSalon(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-        
-        private void Window_Activated (object sender, EventArgs e)
-        {
-            //OsveziPrikaz();
         }
 
         private void TipNamestajaPrikaz(object sender, RoutedEventArgs e)

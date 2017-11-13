@@ -1,0 +1,22 @@
+﻿<Window x:Class="POP_SF38_2016GUI.UI.ProdajeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
+        mc:Ignorable="d"
+        Title="ProdajeWindow" Height="349.733" Width="397.873">
+    <Grid>
+        <Label Grid.Row="0" Grid.Column="0" Content="Datum prodaje:" FontSize="15" Margin="24,36,159.6,243"/>
+        <DatePicker HorizontalAlignment="Left" Margin="151,40,0,247" Name="dtProdaje"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Broj racuna:" FontSize="15" Margin="10,82,209.6,187"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbBrRacuna" Margin="130,77,9.2,205"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Kupac:" FontSize="15" Margin="15,120,209.6,150"/>
+        <ComboBox Name="cbKorisnik" HorizontalAlignment="Left" Margin="130,120,0,0" VerticalAlignment="Top" Width="185" Height="35"/>
+        
+        
+        <Label Grid.Row="0" Grid.Column="0" Content="Ukupan iznos:" FontSize="15" Margin="10,214,209.6,55"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbUkupanIznos" Margin="130,214,9.2,68"/>
+
+    </Grid>
+</Window>

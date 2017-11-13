@@ -12,6 +12,8 @@ namespace POP_SF382016.Model
 
         //i ovde isto nije lista namestaja nego lista integera id namestaja, i tako za svaku listu otp
         //public List<Namestaj> NamestajZaProdaju { get; set; }
+
+
         public List<int> IdNamestaja { get; set; }
 
         public DateTime DatumProdaje { get; set; }

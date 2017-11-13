@@ -45,11 +45,27 @@ namespace POP_SF38_2016GUI.UI
             this.tbSifra.Text = namestaj.Sifra;
             this.tbCena.Text = namestaj.Cena.ToString();
             this.tbKolicina.Text = namestaj.KolicinaUMagacinu.ToString();
+
+            foreach (var tip in Projekat.Instance.Tip)
+            {
+                cbTipNamestaja.Items.Add(tip);
+            }
+
+            foreach (TipNamestaja tipNamestaja in cbTipNamestaja.Items)
+            {
+                if(tipNamestaja.Id == namestaj.IdTipaNamestaja)
+                {
+                    cbTipNamestaja.SelectedItem = tipNamestaja;
+                    break;
+                }
+            }
+            
         }
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var listaNamestaja = Projekat.Instance.Namestaj;
+            var izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
 
             switch (operacija)
             {
@@ -60,7 +76,8 @@ namespace POP_SF38_2016GUI.UI
                         Naziv = this.tbNaziv.Text,
                         Sifra = this.tbSifra.Text,
                         Cena = Double.Parse(this.tbCena.Text),
-                        KolicinaUMagacinu = int.Parse(this.tbKolicina.Text)
+                        KolicinaUMagacinu = int.Parse(this.tbKolicina.Text),
+                        IdTipaNamestaja = izabraniTipNamestaja.Id
                     };
                     listaNamestaja.Add(noviNamestaj);
                     break;
@@ -73,6 +90,7 @@ namespace POP_SF38_2016GUI.UI
                             n.Sifra = this.tbSifra.Text;
                             n.Cena = Double.Parse(this.tbCena.Text);
                             n.KolicinaUMagacinu = int.Parse(this.tbKolicina.Text);
+                            n.IdTipaNamestaja = izabraniTipNamestaja.Id;
                             break;
                         }
                     }

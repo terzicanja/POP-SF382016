@@ -12,6 +12,6 @@
         <Label Grid.Row="0" Grid.Column="0" Content="Password:" FontSize="15" Margin="25,131,227.2,159"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbPass" Margin="123,131,42.2,170"/>
 
-        <Button Content="Login" Margin="33,410,263.2,21.4" Click=""/>
+        <Button Content="Login" Margin="33,410,263.2,21.4"/>
     </Grid>
 </Window>
