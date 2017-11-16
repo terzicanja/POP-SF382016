@@ -106,4 +106,14 @@
     <IdAkcije xsi:nil="true" />
     <IdTipaNamestaja>7</IdTipaNamestaja>
   </Namestaj>
+  <Namestaj>
+    <Id>12</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>nestonnnn</Naziv>
+    <Sifra>rrr</Sifra>
+    <Cena>777</Cena>
+    <KolicinaUMagacinu>55</KolicinaUMagacinu>
+    <IdAkcije xsi:nil="true" />
+    <IdTipaNamestaja>7</IdTipaNamestaja>
+  </Namestaj>
 </ArrayOfNamestaj>
