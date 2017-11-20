@@ -1,33 +1,130 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace POP_SF382016.Model
 {
-    public class Namestaj
+    public class Namestaj : INotifyPropertyChanged, ICloneable
     {
-        public int Id { get; set; }
+        private int id;
+        private string naziv;
+        private string sifra;
+        private double cena;
+        private int kolicinaUMagacinu;
+        public int idAkcije;
+        public int idTipaNamestaja;
+        private bool obrisan;
+        private TipNamestaja tipNamestaja;
 
-        public bool Obrisan { get; set; }
+        [XmlIgnore]
+        public TipNamestaja TipNamestaja
+        {
+            get
+            {
+                if(tipNamestaja == null)
+                {
+                    tipNamestaja = TipNamestaja.GetById(IdTipaNamestaja);
+                }
+                return tipNamestaja;
+            }
+            set
+            {
+                tipNamestaja = value;
+                IdTipaNamestaja = tipNamestaja.Id;
+                OnPropertyChanged("TipNamestaja");
+            }
+        }
 
-        public string Naziv { get; set; }
+
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        public string Naziv
+        {
+            get { return naziv; }
+            set
+            {
+                naziv = value;
+                OnPropertyChanged("Naziv");
+            }
+        }
+
+        public string Sifra
+        {
+            get { return sifra; }
+            set
+            {
+                sifra = value;
+                OnPropertyChanged("Sifra");
+            }
+        }
+
+        public double Cena
+        {
+            get { return cena; }
+            set
+            {
+                cena = value;
+                OnPropertyChanged("Cena");
+            }
+        }
+
+        public int KolicinaUMagacinu
+        {
+            get { return kolicinaUMagacinu; }
+            set
+            {
+                kolicinaUMagacinu = value;
+                OnPropertyChanged("KolicinaUMagacinu");
+            }
+        }
+
+        public int IdAkcije
+        {
+            get { return idAkcije; }
+            set
+            {
+                idAkcije = value;
+                OnPropertyChanged("IdAkcije");
+            }
+        }
+        public int IdTipaNamestaja
+        {
+            get { return idTipaNamestaja; }
+            set
+            {
+                idTipaNamestaja = value;
+                OnPropertyChanged("IdTipaNamestaja");
+            }
+        }
+
+        public bool Obrisan
+        {
+            get { return obrisan; }
+            set
+            {
+                obrisan = value;
+                OnPropertyChanged("Obrisan");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        
 
         //treba izmeniti kod tipa da je int i da je to id, i dodati akciju i uraditi isto
         //public int? AkcijaId treba taj upitnik da bi bilo null a ne 0 (nullable)
-
-        public string Sifra { get; set; }
-
-        public double Cena { get; set; }
-
-        public int KolicinaUMagacinu { get; set; }
-
-        public int? IdAkcije { get; set; }
-
-        public int IdTipaNamestaja { get; set; }
-
-        //public TipNamestaja TipNamestaja { get; set; }
 
         public override string ToString()
         {
@@ -44,6 +141,27 @@ namespace POP_SF382016.Model
                 }
             }
             return null;
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public object Clone()
+        {
+            return new Namestaj()
+            {
+                Id = id,
+                Naziv = naziv,
+                Cena = cena,
+                Obrisan = obrisan, 
+                TipNamestaja = tipNamestaja,
+                IdTipaNamestaja = idTipaNamestaja
+            };
         }
     }
 }

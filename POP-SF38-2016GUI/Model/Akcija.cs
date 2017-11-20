@@ -1,26 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POP_SF382016.Model
 {
-    public class Akcija
+    public class Akcija : INotifyPropertyChanged, ICloneable
     {
-        public int Id { get; set; }
+        private int id;
+        private DateTime pocetakAkcije;
+        private DateTime krajAkcije;
+        private double popust;
+        private List<int> idNamestaja;
+        private bool obrisan;
 
-        public bool Obrisan { get; set; }
+        
 
-        public DateTime PocetakAkcije { get; set; }
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
 
-        public DateTime KrajAkcije { get; set; }
+        public DateTime PocetakAkcije
+        {
+            get { return pocetakAkcije; }
+            set
+            {
+                pocetakAkcije = value;
+                OnPropertyChanged("PocetakAkcije");
+            }
+        }
 
+        public DateTime KrajAkcije
+        {
+            get { return krajAkcije; }
+            set
+            {
+                krajAkcije = value;
+                OnPropertyChanged("KrajAkcije");
+            }
+        }
+
+        public double Popust
+        {
+            get { return popust; }
+            set
+            {
+                popust = value;
+                OnPropertyChanged("Popust");
+            }
+        }
+
+        public List<int> IdNamestaja
+        {
+            get { return idNamestaja; }
+            set
+            {
+                idNamestaja = value;
+                OnPropertyChanged("IdNamestaja");
+            }
+        }
+
+        public bool Obrisan
+        {
+            get { return obrisan; }
+            set
+            {
+                obrisan = value;
+                OnPropertyChanged("Obrisan");
+            }
+        }
+
+
+        
         //public List<Namestaj> NamestajNaPopustu { get; set; }
+        
 
-        public double Popust { get; set; }
 
-        public List<int> IdNamestaja { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
 
 
         public override string ToString()
@@ -40,17 +107,26 @@ namespace POP_SF382016.Model
             return null;
         }
 
-        /*
-        public static Akcija AkcijaById(int id)
+        protected void OnPropertyChanged(string propertyName)
         {
-            foreach (var akcija in Projekat.Instance.Akcija)
+            if (PropertyChanged != null)
             {
-                if(akcija.Id == id)
-                {
-                    return akcija;
-                }
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-            return null;
-        }*/
+        }
+
+
+        public object Clone()
+        {
+            return new Akcija()
+            {
+                Id = id,
+                PocetakAkcije = pocetakAkcije,
+                KrajAkcije = krajAkcije,
+                Popust = popust,
+                IdNamestaja = idNamestaja,
+                Obrisan = obrisan
+            };
+        }
     }
 }

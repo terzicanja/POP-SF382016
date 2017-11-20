@@ -1,4 +1,5 @@
 ﻿using POP_SF382016.Model;
+using POP_SF382016.utill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,20 +34,16 @@ namespace POP_SF38_2016GUI.UI
         {
             InitializeComponent();
 
-            InicijalizujVrednosti(tip, operacija);
-        }
-
-        private void InicijalizujVrednosti(TipNamestaja tip, Operacija operacija)
-        {
             this.tip = tip;
             this.operacija = operacija;
 
-            this.tbNaziv.Text = tip.Naziv;
+            tbNaziv.DataContext = tip;
         }
+        
 
         private void DodajTipNamestaja(object sender, RoutedEventArgs e)
         {
-            var listaTipova = Projekat.Instance.Tip;
+            var listaTipova = Projekat.Instance.TipoviNamestaja;
 
             switch (operacija)
             {
@@ -63,13 +60,14 @@ namespace POP_SF38_2016GUI.UI
                     {
                         if (n.Id == tip.Id)
                         {
-                            n.Naziv = this.tbNaziv.Text;
+                            n.Naziv = tip.Naziv;
+                            //n.Naziv = this.tbNaziv.Text;
                             break;
                         }
                     }
                     break;
             }
-            Projekat.Instance.Tip = listaTipova;
+            GenericSerializer.Serialize("tip.xml", listaTipova);
             Close();
         }
 

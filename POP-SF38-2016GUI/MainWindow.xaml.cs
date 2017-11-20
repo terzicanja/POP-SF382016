@@ -1,5 +1,6 @@
 ﻿using POP_SF38_2016GUI.UI;
 using POP_SF382016.Model;
+using POP_SF382016.utill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,30 +23,16 @@ namespace POP_SF38_2016GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Namestaj IzabraniNamestaj { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
-            /*
-            lbPrikaz.Items.Clear();
-            foreach (var namestaj in Projekat.Instance.Namestaj)
-            {
-                if (!namestaj.Obrisan)
-                {
-                    lbPrikaz.Items.Add(namestaj);
-                }
-            }
-            lbPrikaz.SelectedIndex = 0;
-            */
-            //Dugmici();
 
-            /*
-            if (Namestaj)
-            {
-                Console.WriteLine("radiiii");
-            }
-            */
-            //OsveziPrikaz();
-            //prikaz();
+            dgPrikaz.IsSynchronizedWithCurrentItem = true;
+            dgPrikaz.DataContext = this;
+            //dgPrikaz.ItemsSource = Projekat.Instance.Namestaj;
+            
         }
 
 
@@ -55,7 +42,9 @@ namespace POP_SF38_2016GUI
         private void SalonPrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Salon";
-            Prikaz();
+            
+            dgPrikaz.ItemsSource = Projekat.Instance.Salon;
+            //Prikaz();
             /*lbPrikaz.Items.Clear();
 
             foreach (var s in Projekat.Instance.Salon)
@@ -70,39 +59,24 @@ namespace POP_SF38_2016GUI
 
         private void NamestajPrikaz(object sender, RoutedEventArgs e)
         {
-            trenutnoAktivan = "Namestaj";
-            Prikaz();
-            /*
-            lbPrikaz.Items.Clear();
+            //dgPrikaz.IsSynchronizedWithCurrentItem = true;
+            //dgPrikaz.DataContext = this;
+            dgPrikaz.ItemsSource = Projekat.Instance.Namestaj;
+            Dodaj.Click += DodajNamestaj;
+            //trenutnoAktivan = "Namestaj";
+            //Prikaz();
 
-            foreach (var namestaj in Projekat.Instance.Namestaj)
-            {
-                if (!namestaj.Obrisan)
-                {
-                    lbPrikaz.Items.Add(namestaj);
-                }
-            }
-            lbPrikaz.SelectedIndex = 0;
-            */
-            //bool namestajWasClicked = true;
             /*
             Button btn = Dodaj;
             btn.Name = "Dodaj";
-            btn.Click += DodajNamestaj;
-
-            Button btnI = Izmeni;
-            btnI.Name = "Izmeni";
-            btnI.Click += IzmeniNamestaj;
-
-            Button btnD = Obrisi;
-            btnD.Name = "Obrisi";
-            btnD.Click += ObrisiNamestaj;*/
+            btn.Click += DodajNamestaj;*/
         }
 
         private void TipPrikaz(object sender, RoutedEventArgs e)
         {
-            trenutnoAktivan = "Tip";
-            Prikaz();
+            dgPrikaz.ItemsSource = Projekat.Instance.TipoviNamestaja;
+            //trenutnoAktivan = "Tip";
+            //Prikaz();
             /*
             lbPrikaz.Items.Clear();
             foreach (var tip in Projekat.Instance.Tip)
@@ -118,80 +92,32 @@ namespace POP_SF38_2016GUI
             Button btn = Dodaj;
             btn.Content = "novooo";
             btn.Name = "Dodaj";
-            btn.Click += DodajTipNamestaja;
-
-            Button btnI = Izmeni;
-            btnI.Name = "Izmeni";
-            btnI.Click += IzmeniTipNamestaja;
-
-            Button btnD = Obrisi;
-            btnD.Name = "Obrisi";
-            btnD.Click += ObrisiTipNamestaja;*/
+            btn.Click += DodajTipNamestaja;*/
         }
 
         private void UslugePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Usluge";
-            Prikaz();
-            /*
-            lbPrikaz.Items.Clear();
-            foreach (var usluga in Projekat.Instance.DodatnaUsluga)
-            {
-                if (!usluga.Obrisan)
-                {
-                    lbPrikaz.Items.Add(usluga);
-                }
-            }
-            lbPrikaz.SelectedIndex = 0;*/
-            /*
-            Button btn = Dodaj;
-            btn.Name = "Dodaj";
-            btn.Click += DodajUslugu;
-
-            Button btnI = Izmeni;
-            btnI.Content = "aaaaa";
-            btnI.Name = "Izmeni";
-            btnI.Click += IzmeniUslugu;
-
-            Button btnD = Obrisi;
-            btnD.Name = "Obrisi";
-            btnD.Click += ObrisiUslugu;*/
+            dgPrikaz.ItemsSource = Projekat.Instance.DodatnaUsluga;
+            //Prikaz();
         }
 
         private void AkcijePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Akcije";
-            Prikaz();
-            /*
-            lbPrikaz.Items.Clear();
-            foreach (var usluga in Projekat.Instance.Akcija)
-            {
-                if (!usluga.Obrisan)
-                {
-                    lbPrikaz.Items.Add(usluga);
-                }
-            }
-            lbPrikaz.SelectedIndex = 0;*/
-            /*
-            Button btn = Dodaj;
-            btn.Name = "Dodaj";
-            btn.Click += DodajAkciju;*/
+            dgPrikaz.ItemsSource = Projekat.Instance.Akcija;
+            //Prikaz();
         }
-
+        
         private void ProdajePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Prodaje";
-            lbPrikaz.Items.Clear();
-            foreach (var prodaja in Projekat.Instance.ProdajaNamestaja)
-            {
-                lbPrikaz.Items.Add(prodaja);
-            }
-            lbPrikaz.SelectedIndex = 0;
+            dgPrikaz.ItemsSource = Projekat.Instance.ProdajaNamestaja;
         }
         
 
 
-        private void DodajNamestaj()
+        private void DodajNamestaj(object sender, RoutedEventArgs e)
         {
             var noviNamestaj = new Namestaj()
             {
@@ -199,10 +125,10 @@ namespace POP_SF38_2016GUI
             };
             var namestajProzor = new NamestajWindow(noviNamestaj, NamestajWindow.Operacija.Dodavanje);
             namestajProzor.ShowDialog();
-            Prikaz();
+            //Prikaz();
         }
 
-        private void DodajTipNamestaja()
+        private void DodajTipNamestaja(object sender, RoutedEventArgs e)
         {
             var noviTip = new TipNamestaja()
             {
@@ -210,7 +136,7 @@ namespace POP_SF38_2016GUI
             };
             var tipProzor = new TipNamestajaWindow(noviTip, TipNamestajaWindow.Operacija.Dodavanje);
             tipProzor.ShowDialog();
-            Prikaz();
+            //Prikaz();
         }
 
         private void DodajUslugu()
@@ -222,7 +148,7 @@ namespace POP_SF38_2016GUI
             };
             var uslugeProzor = new UslugeWindow(novaUsluga, NamestajWindow.Operacija.Dodavanje);
             uslugeProzor.ShowDialog();
-            Prikaz();
+            //Prikaz();
         }
 
         private void DodajAkciju()
@@ -233,29 +159,26 @@ namespace POP_SF38_2016GUI
             };
             var prozor = new AkcijeWindow(novaAkcija, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
-            Prikaz();
+            //Prikaz();
         }
 
 
 
-        private void IzmeniSalon()
+        /*private void IzmeniSalon()
         {
             var izabraniSalon = (Salon)lbPrikaz.SelectedItem;
             var prozor = new SalonWindow(izabraniSalon, NamestajWindow.Operacija.Izmena);
             prozor.ShowDialog();
             Prikaz();
-        }
+        }*/
 
         private void IzmeniNamestaj()
         {
-            var izabraniNamestaj = (Namestaj) lbPrikaz.SelectedItem;
-
-            var namestajProzor = new NamestajWindow(izabraniNamestaj, NamestajWindow.Operacija.Izmena);
+            Namestaj kopija = (Namestaj)IzabraniNamestaj.Clone();
+            var namestajProzor = new NamestajWindow(kopija, NamestajWindow.Operacija.Izmena);
             namestajProzor.ShowDialog();
-            Prikaz();
-            //ili moze ovde da ne ide show nego showdialog, samo sto onda mora posle svake
         }
-
+        /*
         private void IzmeniTipNamestaja()
         {
             var izabraniTip = (TipNamestaja)lbPrikaz.SelectedItem;
@@ -282,12 +205,12 @@ namespace POP_SF38_2016GUI
             prozor.ShowDialog();
             Prikaz();
         }
-        
+        */
 
 
         private void ObrisiNamestaj()
         {
-            var izabraniNamestaj = (Namestaj)lbPrikaz.SelectedItem;
+            var izabraniNamestaj = (Namestaj)dgPrikaz.SelectedItem;
             var lista = Projekat.Instance.Namestaj;
             MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniNamestaj.Naziv}?", "Brisanje", MessageBoxButton.YesNo);
 
@@ -298,13 +221,15 @@ namespace POP_SF38_2016GUI
                     if (n.Id == izabraniNamestaj.Id)
                     {
                         n.Obrisan = true;
+                        break;
                     }
                 }
+                GenericSerializer.Serialize("namestaj.xml", lista);
             }
-            Projekat.Instance.Namestaj = lista;
-            Prikaz();
+            
+            //Prikaz();
         }
-
+        /*
         private void ObrisiTipNamestaja()
         {
             var izabraniTip = (TipNamestaja)lbPrikaz.SelectedItem;
@@ -363,87 +288,64 @@ namespace POP_SF38_2016GUI
             }
             Projekat.Instance.Akcija = lista;
             Prikaz();
-        }
+        }*/
 
 
+        
+        /*private void Proba(object p)
+        {
+            lbPrikaz.Items.Clear();
+            //var nesto = Projekat.Instance.p;
+            foreach (var s in p)
+            {
+                if (!s.Obrisan)
+                {
+                    lbPrikaz.Items.Add(s);
+                }
+            }
+        }*/
 
-        private void Prikaz()
+        /*private void Prikaz()
         {
             switch (trenutnoAktivan)
             {
                 case "Salon":
-                    lbPrikaz.Items.Clear();
-                    foreach (var s in Projekat.Instance.Salon)
-                    {
-                        if (!s.Obrisan)
-                        {
-                            lbPrikaz.Items.Add(s);
-                        }
-                    }
-                    lbPrikaz.SelectedIndex = 0;
+                    Proba(Projekat.Instance.Salon);
+                    Dodaj.Visibility = Visibility.Hidden;
                     break;
                 case "Namestaj":
-                    lbPrikaz.Items.Clear();
-                    foreach (var namestaj in Projekat.Instance.Namestaj)
-                    {
-                        if (!namestaj.Obrisan)
-                        {
-                            lbPrikaz.Items.Add(namestaj);
-                        }
-                    }
-                    lbPrikaz.SelectedIndex = 0;
+                    dgPrikaz.ItemsSource = Projekat.Instance.Namestaj;
+                    //Proba(Projekat.Instance.Namestaj);
+                    Dodaj.Click += DodajNamestaj;
                     break;
                 case "Tip":
-                    lbPrikaz.Items.Clear();
-                    foreach (var tip in Projekat.Instance.Tip)
-                    {
-                        if (!tip.Obrisan)
-                        {
-                            lbPrikaz.Items.Add(tip);
-                        }
-                    }
-                    lbPrikaz.SelectedIndex = 0;
+                    Proba(Projekat.Instance.TipoviNamestaja);
+                    Dodaj.Click += DodajTipNamestaja;
                     break;
                 case "Usluge":
-                    lbPrikaz.Items.Clear();
-                    foreach (var usluga in Projekat.Instance.DodatnaUsluga)
-                    {
-                        if (!usluga.Obrisan)
-                        {
-                            lbPrikaz.Items.Add(usluga);
-                        }
-                    }
-                    lbPrikaz.SelectedIndex = 0;
+                    Proba(Projekat.Instance.DodatnaUsluga);
                     break;
                 case "Akcije":
-                    lbPrikaz.Items.Clear();
-                    foreach (var usluga in Projekat.Instance.Akcija)
-                    {
-                        if (!usluga.Obrisan)
-                        {
-                            lbPrikaz.Items.Add(usluga);
-                        }
-                    }
-                    lbPrikaz.SelectedIndex = 0;
+                    Proba(Projekat.Instance.Akcija);
                     break;
                 default:
                     break;
             }
-        }
+        }*/
 
-        private void DugmeDodaj(object sender, RoutedEventArgs e)
+        /*private void DugmeDodaj(object sender, RoutedEventArgs e)
         {
             switch (trenutnoAktivan)
             {
                 case "Salon":
                     MessageBoxResult obavestenje = MessageBox.Show("Nije moguce dodati novi salon", "Obavestenje", MessageBoxButton.OK);
                     break;
-                case "Namestaj":
-                    DodajNamestaj();
-                    break;
-                case "Tip":
-                    DodajTipNamestaja();
-                    break;
+                //case "Namestaj":
+                    //DodajNamestaj();
+                    //break;
+                //case "Tip":
+                    //DodajTipNamestaja();
+                    //break;
                 case "Usluge":
                     DodajUslugu();
                     break;
@@ -453,26 +355,26 @@ namespace POP_SF38_2016GUI
                 default:
                     break;
             }
-        }
+        }*/
 
         private void DugmeIzmeni(object sender, RoutedEventArgs e)
         {
             switch (trenutnoAktivan)
             {
                 case "Salon":
-                    IzmeniSalon();
+                    //IzmeniSalon();
                     break;
                 case "Namestaj":
                     IzmeniNamestaj();
                     break;
                 case "Tip":
-                    IzmeniTipNamestaja();
+                    //IzmeniTipNamestaja();
                     break;
                 case "Usluge":
-                    IzmeniUslugu();
+                    //IzmeniUslugu();
                     break;
                 case "Akcije":
-                    IzmeniAkciju();
+                    //IzmeniAkciju();
                     break;
                 default:
                     break;
@@ -490,13 +392,13 @@ namespace POP_SF38_2016GUI
                     ObrisiNamestaj();
                     break;
                 case "Tip":
-                    ObrisiTipNamestaja();
+                    //ObrisiTipNamestaja();
                     break;
                 case "Usluge":
-                    ObrisiUslugu();
+                    //ObrisiUslugu();
                     break;
                 case "Akcije":
-                    ObrisiAkciju();
+                    //ObrisiAkciju();
                     break;
                 default:
                     break;

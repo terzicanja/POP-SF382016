@@ -1,18 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POP_SF382016.Model
 {
-    public class TipNamestaja
+    public class TipNamestaja : INotifyPropertyChanged, ICloneable
     {
-        public int Id { get; set; }
+        private int id;
+        private string naziv;
+        private bool obrisan;
 
-        public bool Obrisan { get; set; }
 
-        public string Naziv { get; set; }
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        public string Naziv
+        {
+            get { return naziv; }
+            set
+            {
+                naziv = value;
+                OnPropertyChanged("Naziv");
+            }
+        }
+
+        public bool Obrisan
+        {
+            get { return obrisan; }
+            set
+            {
+                obrisan = value;
+                OnPropertyChanged("Obrisan");
+            }
+        }
+
+        
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
 
         public override string ToString()
         {
@@ -21,7 +57,7 @@ namespace POP_SF382016.Model
 
         public static TipNamestaja GetById(int id)
         {
-            foreach (var tip in Projekat.Instance.Tip)
+            foreach (var tip in Projekat.Instance.TipoviNamestaja)
             {
                 if(tip.Id == id)
                 {
@@ -31,5 +67,22 @@ namespace POP_SF382016.Model
             return null;
         }
 
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public object Clone()
+        {
+            return new TipNamestaja()
+            {
+                Id = id,
+                Naziv = naziv,
+                Obrisan = obrisan
+            };
+        }
     }
 }

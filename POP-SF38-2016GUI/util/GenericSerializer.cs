@@ -6,16 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace POP_SF382016.utill
 {
     class GenericSerializer
     {
-        public static void Serialize<T>(string fileName, List<T> listToSerialize) where T : class
+        public static void Serialize<T>(string fileName, ObservableCollection<T> listToSerialize) where T : class
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(List<T>));
+                var serializer = new XmlSerializer(typeof(ObservableCollection<T>));
                 using (var sw = new StreamWriter($@"../../Data/{fileName}"))
                 {
                     serializer.Serialize(sw, listToSerialize);
@@ -28,14 +29,14 @@ namespace POP_SF382016.utill
         }
 
 
-        public static List<T> Deserialize<T>(string fileName) where T : class
+        public static ObservableCollection<T> Deserialize<T>(string fileName) where T : class
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(List<T>));
+                var serializer = new XmlSerializer(typeof(ObservableCollection<T>));
                 using (var sr = new StreamReader($@"../../Data/{fileName}"))
                 {
-                    return (List<T>) serializer.Deserialize(sr);
+                    return (ObservableCollection<T>) serializer.Deserialize(sr);
                 }
             }
             catch (Exception)

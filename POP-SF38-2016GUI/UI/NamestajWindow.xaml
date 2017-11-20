@@ -16,7 +16,7 @@
             <RowDefinition Height="13*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Naziv:" FontSize="15" Grid.ColumnSpan="2" Margin="10,10,323.6,310"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbNaziv" Margin="10,10,15.6,310" Grid.Column="1"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbNaziv" Margin="10,10,15.6,310" Grid.Column="1" Text="{Binding Path=Naziv}"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Sifra:" FontSize="15" Grid.ColumnSpan="2" Margin="10,50,323.6,270"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbSifra" Margin="10,50,15.6,270" Grid.Column="1"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Cena:" FontSize="15" Grid.ColumnSpan="2" Margin="10,90,323.6,230"/>
@@ -24,7 +24,7 @@
         <Label Grid.Row="0" Grid.Column="0" Content="Kolicina:" FontSize="15" Grid.ColumnSpan="2" Margin="10,130,323.6,190"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbKolicina" Margin="10,130,15.6,190" Grid.Column="1"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Tip namestaja:" FontSize="15" Grid.ColumnSpan="2" Margin="10,170,323.6,150"/>
-        <ComboBox Grid.Column="1" Name="cbTipNamestaja" HorizontalAlignment="Left" Margin="15,175,0,0" VerticalAlignment="Top" Width="185" Height="35"/>
+        <ComboBox Grid.Column="1" Name="cbTipNamestaja" HorizontalAlignment="Left" Margin="15,175,0,0" VerticalAlignment="Top" Width="185" Height="35" SelectedItem="{Binding Path=TipNamestaja}"/>
         
         <Button Content="Sacuvaj" Margin="33,25,181.6,21.6" Click="SacuvajIzmene" Grid.Row="1" Grid.Column="1"/>
         <Button Content="Izadji" Grid.Column="1" Margin="173,25,46.6,21.6" Click="ZatvoriNamestajWindow" Grid.Row="1"/>
