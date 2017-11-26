@@ -2,37 +2,42 @@
 <ArrayOfTipNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TipNamestaja>
     <Id>0</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Podrazumevani tip</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>1</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Sofa</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>2</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Regal</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>3</Id>
-    <Obrisan>true</Obrisan>
     <Naziv>lampa</Naziv>
+    <Obrisan>true</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>4</Id>
-    <Obrisan>true</Obrisan>
     <Naziv>stoo</Naziv>
+    <Obrisan>true</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>5</Id>
+    <Naziv>soficaaa</Naziv>
     <Obrisan>false</Obrisan>
-    <Naziv>sofica</Naziv>
   </TipNamestaja>
   <TipNamestaja>
     <Id>7</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>jastuceee</Naziv>
+    <Obrisan>false</Obrisan>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>8</Id>
+    <Naziv>krevetac</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

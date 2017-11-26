@@ -157,7 +157,10 @@ namespace POP_SF382016.Model
             {
                 Id = id,
                 Naziv = naziv,
+                Sifra = sifra,
                 Cena = cena,
+                KolicinaUMagacinu = kolicinaUMagacinu,
+                IdAkcije = idAkcije,
                 Obrisan = obrisan, 
                 TipNamestaja = tipNamestaja,
                 IdTipaNamestaja = idTipaNamestaja

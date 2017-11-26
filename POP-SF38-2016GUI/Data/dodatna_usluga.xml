@@ -2,26 +2,32 @@
 <ArrayOfDodatnaUsluga xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DodatnaUsluga>
     <Id>1</Id>
-    <Obrisan>false</Obrisan>
     <Usluga>Prevoz</Usluga>
     <Cena>123</Cena>
+    <Obrisan>false</Obrisan>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Id>2</Id>
-    <Obrisan>false</Obrisan>
     <Usluga>nesto</Usluga>
     <Cena>22222</Cena>
+    <Obrisan>false</Obrisan>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Id>3</Id>
-    <Obrisan>false</Obrisan>
     <Usluga>parking</Usluga>
-    <Cena>1212</Cena>
+    <Cena>1212222</Cena>
+    <Obrisan>false</Obrisan>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Id>4</Id>
-    <Obrisan>false</Obrisan>
     <Usluga>parkiranje</Usluga>
-    <Cena>777</Cena>
+    <Cena>77</Cena>
+    <Obrisan>false</Obrisan>
+  </DodatnaUsluga>
+  <DodatnaUsluga>
+    <Id>5</Id>
+    <Usluga>montiranje</Usluga>
+    <Cena>99</Cena>
+    <Obrisan>false</Obrisan>
   </DodatnaUsluga>
 </ArrayOfDodatnaUsluga>

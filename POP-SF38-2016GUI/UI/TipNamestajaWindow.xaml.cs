@@ -48,12 +48,9 @@ namespace POP_SF38_2016GUI.UI
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    var noviTip = new TipNamestaja()
-                    {
-                        Id = listaTipova.Count + 1,
-                        Naziv = this.tbNaziv.Text
-                    };
-                    listaTipova.Add(noviTip);
+                    tip.Id = listaTipova.Count + 1;
+                    tip.Naziv = tbNaziv.Text;
+                    listaTipova.Add(tip);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaTipova)

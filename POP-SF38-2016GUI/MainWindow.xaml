@@ -17,8 +17,8 @@
             <RowDefinition Height="404*"/>
             <RowDefinition Height="116*"/>
         </Grid.RowDefinitions>
-        <DataGrid BorderThickness="0" Grid.Row="1" Grid.Column="1" FontSize="15" Name="dgPrikaz" Margin="0.4,0.4,20.8,0.4" SelectedItem="{Binding Path=IzabraniNamestaj}"/>
-        <Button Grid.Row="2" Content="Dodaj" Name="Dodaj" Margin="24.4,43.6,392.8,45.2" Grid.Column="1"/>
+        <DataGrid BorderThickness="0" Grid.Row="1" Grid.Column="1" FontSize="15" Name="dgPrikaz" Margin="0.4,0.4,20.8,0.4" SelectedItem="{Binding Path=IzabranaProdaja}"/>
+        <Button Grid.Row="2" Content="Dodaj" Name="Dodaj" Margin="24.4,43.6,392.8,45.2" Grid.Column="1" Click="DugmeDodaj"/>
         <Button Grid.Row="2" Content="Izmeni" Name="Izmeni" Margin="118.4,43.6,296.8,45.2" Grid.Column="1" Click="DugmeIzmeni"/>
         <Button Grid.Row="2" Content="Obrisi" Name="Obrisi" Margin="209.4,43.6,207.8,45.2" Grid.Column="1" Click="DugmeObrisi"/>
         <Button Grid.Row="2" Content="Izlaz" Margin="380.4,43.6,32.8,45.2" Click="ZatvoriSalon" Grid.Column="1"/>

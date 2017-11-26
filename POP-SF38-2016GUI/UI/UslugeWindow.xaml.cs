@@ -1,4 +1,5 @@
 ﻿using POP_SF382016.Model;
+using POP_SF382016.utill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,17 +29,13 @@ namespace POP_SF38_2016GUI.UI
         {
             InitializeComponent();
 
-            InicijalizujVrednosti(usluga, operacija);
-        }
-
-        private void InicijalizujVrednosti(DodatnaUsluga usluga, Operacija operacija)
-        {
             this.usluga = usluga;
             this.operacija = operacija;
 
-            this.tbUsluga.Text = usluga.Usluga;
-            this.tbCena.Text = usluga.Cena.ToString();
+            tbUsluga.DataContext = usluga;
+            tbCena.DataContext = usluga;
         }
+        
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
@@ -47,27 +44,25 @@ namespace POP_SF38_2016GUI.UI
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    var novaUsluga = new DodatnaUsluga()
-                    {
-                        Id = lista.Count + 1,
-                        Usluga = this.tbUsluga.Text,
-                        Cena = int.Parse(this.tbCena.Text)
-                    };
-                    lista.Add(novaUsluga);
+                    usluga.Id = lista.Count + 1;
+                    usluga.Usluga = tbUsluga.Text;
+                    usluga.Cena = int.Parse(tbCena.Text);
+                    
+                    lista.Add(usluga);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in lista)
                     {
                         if (n.Id == usluga.Id)
                         {
-                            n.Usluga = this.tbUsluga.Text;
-                            n.Cena = int.Parse(this.tbCena.Text);
+                            n.Usluga = usluga.Usluga;
+                            n.Cena = usluga.Cena;
                             break;
                         }
                     }
                     break;
             }
-            Projekat.Instance.DodatnaUsluga = lista;
+            GenericSerializer.Serialize("dodatna_usluga.xml", lista);
             Close();
         }
 

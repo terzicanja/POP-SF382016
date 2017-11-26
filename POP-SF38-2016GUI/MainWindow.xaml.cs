@@ -24,6 +24,11 @@ namespace POP_SF38_2016GUI
     public partial class MainWindow : Window
     {
         public Namestaj IzabraniNamestaj { get; set; }
+        public TipNamestaja IzabraniTipNamestaja { get; set; }
+        public Salon IzabraniSalon { get; set; }
+        public DodatnaUsluga IzabranaUsluga { get; set; }
+        public Akcija IzabranaAkcija { get; set; }
+        public ProdajaNamestaja IzabranaProdaja { get; set; }
 
         public MainWindow()
         {
@@ -31,41 +36,23 @@ namespace POP_SF38_2016GUI
 
             dgPrikaz.IsSynchronizedWithCurrentItem = true;
             dgPrikaz.DataContext = this;
-            //dgPrikaz.ItemsSource = Projekat.Instance.Namestaj;
             
         }
-
-
+        
         string trenutnoAktivan = "";
 
 
         private void SalonPrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Salon";
-            
             dgPrikaz.ItemsSource = Projekat.Instance.Salon;
-            //Prikaz();
-            /*lbPrikaz.Items.Clear();
-
-            foreach (var s in Projekat.Instance.Salon)
-            {
-                if (!s.Obrisan)
-                {
-                    lbPrikaz.Items.Add(s);
-                }
-            }
-            lbPrikaz.SelectedIndex = 0;*/
         }
 
         private void NamestajPrikaz(object sender, RoutedEventArgs e)
         {
-            //dgPrikaz.IsSynchronizedWithCurrentItem = true;
-            //dgPrikaz.DataContext = this;
             dgPrikaz.ItemsSource = Projekat.Instance.Namestaj;
-            Dodaj.Click += DodajNamestaj;
-            //trenutnoAktivan = "Namestaj";
-            //Prikaz();
-
+            //dgPrikaz.SelectedItem += "{Binding Path=IzabraniNamestaj}";
+            trenutnoAktivan = "Namestaj";
             /*
             Button btn = Dodaj;
             btn.Name = "Dodaj";
@@ -75,49 +62,34 @@ namespace POP_SF38_2016GUI
         private void TipPrikaz(object sender, RoutedEventArgs e)
         {
             dgPrikaz.ItemsSource = Projekat.Instance.TipoviNamestaja;
-            //trenutnoAktivan = "Tip";
-            //Prikaz();
-            /*
-            lbPrikaz.Items.Clear();
-            foreach (var tip in Projekat.Instance.Tip)
-            {
-                if (!tip.Obrisan)
-                {
-                    lbPrikaz.Items.Add(tip);
-                }
-            }
-            lbPrikaz.SelectedIndex = 0;*/
-            /*
+            //dgPrikaz.SelectedItem = "{Binding Path=IzabraniTipNamestaja}";
+            //Dodaj.Click += DodajTipNamestaja;
+            trenutnoAktivan = "Tip";
+            
             //Dodaj.Visibility = Visibility.Hidden;
-            Button btn = Dodaj;
-            btn.Content = "novooo";
-            btn.Name = "Dodaj";
-            btn.Click += DodajTipNamestaja;*/
         }
 
         private void UslugePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Usluge";
             dgPrikaz.ItemsSource = Projekat.Instance.DodatnaUsluga;
-            //Prikaz();
         }
 
         private void AkcijePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Akcije";
             dgPrikaz.ItemsSource = Projekat.Instance.Akcija;
-            //Prikaz();
         }
         
         private void ProdajePrikaz(object sender, RoutedEventArgs e)
         {
-            trenutnoAktivan = "Prodaje";
+            trenutnoAktivan = "Prodaja";
             dgPrikaz.ItemsSource = Projekat.Instance.ProdajaNamestaja;
         }
         
 
 
-        private void DodajNamestaj(object sender, RoutedEventArgs e)
+        private void DodajNamestaj()
         {
             var noviNamestaj = new Namestaj()
             {
@@ -125,10 +97,9 @@ namespace POP_SF38_2016GUI
             };
             var namestajProzor = new NamestajWindow(noviNamestaj, NamestajWindow.Operacija.Dodavanje);
             namestajProzor.ShowDialog();
-            //Prikaz();
         }
 
-        private void DodajTipNamestaja(object sender, RoutedEventArgs e)
+        private void DodajTipNamestaja()
         {
             var noviTip = new TipNamestaja()
             {
@@ -136,7 +107,6 @@ namespace POP_SF38_2016GUI
             };
             var tipProzor = new TipNamestajaWindow(noviTip, TipNamestajaWindow.Operacija.Dodavanje);
             tipProzor.ShowDialog();
-            //Prikaz();
         }
 
         private void DodajUslugu()
@@ -148,9 +118,9 @@ namespace POP_SF38_2016GUI
             };
             var uslugeProzor = new UslugeWindow(novaUsluga, NamestajWindow.Operacija.Dodavanje);
             uslugeProzor.ShowDialog();
-            //Prikaz();
         }
 
+        //KAKO DA STAVI DANASNJI DATUM?? !!!!!
         private void DodajAkciju()
         {
             var novaAkcija = new Akcija()
@@ -159,18 +129,26 @@ namespace POP_SF38_2016GUI
             };
             var prozor = new AkcijeWindow(novaAkcija, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
-            //Prikaz();
+        }
+
+        private void DodajProdaju()
+        {
+            var novaProdaja = new ProdajaNamestaja()
+            {
+                BrojRacuna = 0
+            };
+            var prozor = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
+            prozor.ShowDialog();
         }
 
 
 
-        /*private void IzmeniSalon()
+        private void IzmeniSalon()
         {
-            var izabraniSalon = (Salon)lbPrikaz.SelectedItem;
-            var prozor = new SalonWindow(izabraniSalon, NamestajWindow.Operacija.Izmena);
+            Salon kopija = (Salon)IzabraniSalon.Clone();
+            var prozor = new SalonWindow(kopija, SalonWindow.Operacija.Izmena);
             prozor.ShowDialog();
-            Prikaz();
-        }*/
+        }
 
         private void IzmeniNamestaj()
         {
@@ -178,34 +156,29 @@ namespace POP_SF38_2016GUI
             var namestajProzor = new NamestajWindow(kopija, NamestajWindow.Operacija.Izmena);
             namestajProzor.ShowDialog();
         }
-        /*
+        
         private void IzmeniTipNamestaja()
         {
-            var izabraniTip = (TipNamestaja)lbPrikaz.SelectedItem;
-
-            var prozor = new TipNamestajaWindow(izabraniTip, TipNamestajaWindow.Operacija.Izmena);
+            TipNamestaja kopija = (TipNamestaja)IzabraniTipNamestaja.Clone();
+            var prozor = new TipNamestajaWindow(kopija, TipNamestajaWindow.Operacija.Izmena);
             prozor.ShowDialog();
-            Prikaz();
+            //Prikaz();
         }
-
+        
         private void IzmeniUslugu()
         {
-            var izabranaUsluga = (DodatnaUsluga)lbPrikaz.SelectedItem;
-
-            var prozor = new UslugeWindow(izabranaUsluga, NamestajWindow.Operacija.Izmena);
+            DodatnaUsluga kopija = (DodatnaUsluga)IzabranaUsluga.Clone();
+            var prozor = new UslugeWindow(kopija, NamestajWindow.Operacija.Izmena);
             prozor.ShowDialog();
-            Prikaz();
         }
-
+        
         private void IzmeniAkciju()
         {
-            var izabranaAkcija = (Akcija)lbPrikaz.SelectedItem;
-
-            var prozor = new AkcijeWindow(izabranaAkcija, NamestajWindow.Operacija.Izmena);
+            Akcija kopija = (Akcija)IzabranaAkcija.Clone();
+            var prozor = new AkcijeWindow(kopija, NamestajWindow.Operacija.Izmena);
             prozor.ShowDialog();
-            Prikaz();
         }
-        */
+        
 
 
         private void ObrisiNamestaj()
@@ -226,14 +199,12 @@ namespace POP_SF38_2016GUI
                 }
                 GenericSerializer.Serialize("namestaj.xml", lista);
             }
-            
-            //Prikaz();
         }
-        /*
+        
         private void ObrisiTipNamestaja()
         {
-            var izabraniTip = (TipNamestaja)lbPrikaz.SelectedItem;
-            var lista = Projekat.Instance.Tip;
+            var izabraniTip = (TipNamestaja)dgPrikaz.SelectedItem;
+            var lista = Projekat.Instance.TipoviNamestaja;
             MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniTip.Naziv}?", "Brisanje", MessageBoxButton.YesNo);
 
             if (potvrda == MessageBoxResult.Yes)
@@ -243,16 +214,16 @@ namespace POP_SF38_2016GUI
                     if(t.Id == izabraniTip.Id)
                     {
                         t.Obrisan = true;
+                        break;
                     }
                 }
+                GenericSerializer.Serialize("tip.xml", lista);
             }
-            Projekat.Instance.Tip = lista;
-            Prikaz();
         }
 
         private void ObrisiUslugu()
         {
-            var izabraniTip = (DodatnaUsluga)lbPrikaz.SelectedItem;
+            var izabraniTip = (DodatnaUsluga)dgPrikaz.SelectedItem;
             var lista = Projekat.Instance.DodatnaUsluga;
             MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniTip.Usluga}?", "Brisanje", MessageBoxButton.YesNo);
 
@@ -263,16 +234,16 @@ namespace POP_SF38_2016GUI
                     if (t.Id == izabraniTip.Id)
                     {
                         t.Obrisan = true;
+                        break;
                     }
                 }
             }
-            Projekat.Instance.DodatnaUsluga = lista;
-            Prikaz();
+            GenericSerializer.Serialize("dodatna_usluga.xml", lista);
         }
 
         private void ObrisiAkciju()
         {
-            var izabranaAkcija = (Akcija)lbPrikaz.SelectedItem;
+            var izabranaAkcija = (Akcija)dgPrikaz.SelectedItem;
             var lista = Projekat.Instance.Akcija;
             MessageBoxResult potvrda = MessageBox.Show("Da li ste sigurni da zelite da obrisete?", "Brisanje", MessageBoxButton.YesNo);
 
@@ -283,12 +254,12 @@ namespace POP_SF38_2016GUI
                     if(a.Id == izabranaAkcija.Id)
                     {
                         a.Obrisan = true;
+                        break;
                     }
                 }
             }
-            Projekat.Instance.Akcija = lista;
-            Prikaz();
-        }*/
+            GenericSerializer.Serialize("akcija.xml", lista);
+        }
 
 
         
@@ -333,48 +304,51 @@ namespace POP_SF38_2016GUI
             }
         }*/
 
-        /*private void DugmeDodaj(object sender, RoutedEventArgs e)
+        private void DugmeDodaj(object sender, RoutedEventArgs e)
         {
             switch (trenutnoAktivan)
             {
                 case "Salon":
                     MessageBoxResult obavestenje = MessageBox.Show("Nije moguce dodati novi salon", "Obavestenje", MessageBoxButton.OK);
                     break;
-                //case "Namestaj":
-                    //DodajNamestaj();
-                    //break;
-                //case "Tip":
-                    //DodajTipNamestaja();
-                    //break;
+                case "Namestaj":
+                    DodajNamestaj();
+                    break;
+                case "Tip":
+                    DodajTipNamestaja();
+                    break;
                 case "Usluge":
                     DodajUslugu();
                     break;
                 case "Akcije":
                     DodajAkciju();
                     break;
+                case "Prodaja":
+                    DodajProdaju();
+                    break;
                 default:
                     break;
             }
-        }*/
+        }
 
         private void DugmeIzmeni(object sender, RoutedEventArgs e)
         {
             switch (trenutnoAktivan)
             {
                 case "Salon":
-                    //IzmeniSalon();
+                    IzmeniSalon();
                     break;
                 case "Namestaj":
                     IzmeniNamestaj();
                     break;
                 case "Tip":
-                    //IzmeniTipNamestaja();
+                    IzmeniTipNamestaja();
                     break;
                 case "Usluge":
-                    //IzmeniUslugu();
+                    IzmeniUslugu();
                     break;
                 case "Akcije":
-                    //IzmeniAkciju();
+                    IzmeniAkciju();
                     break;
                 default:
                     break;
@@ -392,82 +366,27 @@ namespace POP_SF38_2016GUI
                     ObrisiNamestaj();
                     break;
                 case "Tip":
-                    //ObrisiTipNamestaja();
+                    ObrisiTipNamestaja();
                     break;
                 case "Usluge":
-                    //ObrisiUslugu();
+                    ObrisiUslugu();
                     break;
                 case "Akcije":
-                    //ObrisiAkciju();
+                    ObrisiAkciju();
                     break;
                 default:
                     break;
             }
         }
 
-
-
+        
         //wpf control !!!!!!!!
         //i sve u try catch
-
-        /*
-        private void Prikaz()
-        {
-            switch (trenutnoAktivan)
-            {
-                case "Namestaj":
-                    lbPrikaz.Items.Clear();
-                    foreach (var namestaj in Projekat.Instance.Namestaj)
-                    {
-                        if (!namestaj.Obrisan)
-                        {
-                            lbPrikaz.Items.Add(namestaj);
-                        }
-                    }
-                    lbPrikaz.SelectedIndex = 0;
-
-
-                    Button btn = Dodaj;
-                    btn.Name = "Dodaj";
-                    btn.Click += DodajNamestaj;
-
-                    Button btnI = Izmeni;
-                    btnI.Name = "Izmeni";
-                    btnI.Click += IzmeniNamestaj;
-                    break;
-                case "Tip":
-                    lbPrikaz.Items.Clear();
-
-                    foreach (var tip in Projekat.Instance.Tip)
-                    {
-                        if (!tip.Obrisan)
-                        {
-                            lbPrikaz.Items.Add(tip);
-                        }
-                    }
-                    lbPrikaz.SelectedIndex = 0;
-
-
-                    Button btnTip = Dodaj;
-                    btnTip.Content = "novooo";
-                    btnTip.Name = "Dodaj";
-                    btnTip.Click += DodajTipNamestaja;
-
-                    Button btnIzmeniTip = Izmeni;
-                    btnIzmeniTip.Name = "Izmeni";
-                    btnIzmeniTip.Click += IzmeniTipNamestaja;
-                    break;
-                default:
-                    break;
-            }
-        }
-        */
+        
 
         private void ZatvoriSalon(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        
-        
     }
 }

@@ -40,38 +40,44 @@ namespace POP_SF38_2016GUI.UI
             cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
 
             tbNaziv.DataContext = namestaj;
+            tbSifra.DataContext = namestaj;
+            tbCena.DataContext = namestaj;
+            tbKolicina.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
         }
 
-        
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var listaNamestaja = Projekat.Instance.Namestaj;
+            var izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
+            //var izabranaAkcija = (Akcija)cbAkcija.SelectedItem;
 
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    /*Id = listaNamestaja.Count + 1,
-                    Naziv = this.tbNaziv.Text,
-                    Sifra = this.tbSifra.Text,
-                    Cena = Double.Parse(this.tbCena.Text),
-                    KolicinaUMagacinu = int.Parse(this.tbKolicina.Text),
-                    IdTipaNamestaja = izabraniTipNamestaja.Id
+                    namestaj.Id = listaNamestaja.Count + 1;
+                    namestaj.Naziv = tbNaziv.Text;
+                    namestaj.Sifra = tbSifra.Text;
+                    namestaj.Cena = Double.Parse(tbCena.Text);
+                    namestaj.KolicinaUMagacinu = int.Parse(tbKolicina.Text);
+                    namestaj.IdTipaNamestaja = izabraniTipNamestaja.Id;
                     
-                    listaNamestaja.Add(noviNamestaj);*/
+                    listaNamestaja.Add(namestaj);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaNamestaja)
                     {
                         if (n.Id == namestaj.Id)
                         {
-
                             n.Naziv = namestaj.Naziv;
                             n.TipNamestaja = namestaj.TipNamestaja; //i ovako za sve
-                            n.Sifra = this.tbSifra.Text;
-                            n.Cena = Double.Parse(this.tbCena.Text);
-                            n.KolicinaUMagacinu = int.Parse(this.tbKolicina.Text);
+                            n.Sifra = namestaj.Sifra;
+                            n.Cena = namestaj.Cena;
+                            n.KolicinaUMagacinu = namestaj.KolicinaUMagacinu;
+                            //n.Sifra = this.tbSifra.Text;
+                            //n.Cena = Double.Parse(this.tbCena.Text);
+                            //n.KolicinaUMagacinu = int.Parse(this.tbKolicina.Text);
                             //n.IdTipaNamestaja = izabraniTipNamestaja.Id;
                             break;
                         }

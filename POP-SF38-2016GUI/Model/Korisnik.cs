@@ -100,6 +100,11 @@ namespace POP_SF382016.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
 
+        public override string ToString()
+        {
+            return $"{Ime} {Prezime}";
+        }
+
         public static Korisnik GetById(int id)
         {
             foreach (var a in Projekat.Instance.Korisnik)

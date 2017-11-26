@@ -131,14 +131,26 @@
   </Namestaj>
   <Namestaj>
     <idAkcije>0</idAkcije>
-    <idTipaNamestaja>7</idTipaNamestaja>
+    <idTipaNamestaja>0</idTipaNamestaja>
     <Id>12</Id>
-    <Naziv>nestonnnn</Naziv>
-    <Sifra>rrr</Sifra>
-    <Cena>777</Cena>
-    <KolicinaUMagacinu>55</KolicinaUMagacinu>
+    <Naziv>proba</Naziv>
+    <Sifra>proba</Sifra>
+    <Cena>9090</Cena>
+    <KolicinaUMagacinu>90</KolicinaUMagacinu>
     <IdAkcije>0</IdAkcije>
-    <IdTipaNamestaja>7</IdTipaNamestaja>
+    <IdTipaNamestaja>0</IdTipaNamestaja>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idAkcije>0</idAkcije>
+    <idTipaNamestaja>4</idTipaNamestaja>
+    <Id>13</Id>
+    <Naziv>krevetac</Naziv>
+    <Sifra>ccccc</Sifra>
+    <Cena>55550</Cena>
+    <KolicinaUMagacinu>66</KolicinaUMagacinu>
+    <IdAkcije>0</IdAkcije>
+    <IdTipaNamestaja>4</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

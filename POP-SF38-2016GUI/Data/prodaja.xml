@@ -2,10 +2,29 @@
 <ArrayOfProdajaNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProdajaNamestaja>
     <Id>1</Id>
+    <IdNamestaja />
     <DatumProdaje>0001-01-01T00:00:00</DatumProdaje>
     <BrojRacuna>5</BrojRacuna>
     <IdKupca>0</IdKupca>
     <PDV>12</PDV>
+    <IdUsluga />
+    <UkupanIznos>0</UkupanIznos>
+  </ProdajaNamestaja>
+  <ProdajaNamestaja>
+    <Korisnik>
+      <Id>3</Id>
+      <Ime>filip</Ime>
+      <Prezime>filipovic</Prezime>
+      <KorisnickoIme>filipf</KorisnickoIme>
+      <Lozinka>sss</Lozinka>
+      <TipKorisnika>Korisnik</TipKorisnika>
+      <Obrisan>false</Obrisan>
+    </Korisnik>
+    <Id>2</Id>
+    <DatumProdaje>2017-11-17T00:00:00</DatumProdaje>
+    <BrojRacuna>22</BrojRacuna>
+    <IdKupca>3</IdKupca>
+    <PDV>0</PDV>
     <UkupanIznos>0</UkupanIznos>
   </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

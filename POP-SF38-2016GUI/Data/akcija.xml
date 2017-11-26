@@ -2,34 +2,42 @@
 <ArrayOfAkcija xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Akcija>
     <Id>1</Id>
-    <Obrisan>false</Obrisan>
     <PocetakAkcije>0001-01-01T00:00:00</PocetakAkcije>
     <KrajAkcije>0001-01-01T00:00:00</KrajAkcije>
     <Popust>12</Popust>
     <IdNamestaja />
+    <Obrisan>false</Obrisan>
   </Akcija>
   <Akcija>
     <Id>2</Id>
-    <Obrisan>false</Obrisan>
     <PocetakAkcije>2009-10-22T00:00:00</PocetakAkcije>
     <KrajAkcije>2014-07-18T00:00:00</KrajAkcije>
     <Popust>45</Popust>
     <IdNamestaja />
+    <Obrisan>false</Obrisan>
   </Akcija>
   <Akcija>
     <Id>3</Id>
-    <Obrisan>false</Obrisan>
-    <PocetakAkcije>0001-01-01T00:00:00</PocetakAkcije>
-    <KrajAkcije>0001-01-01T00:00:00</KrajAkcije>
+    <PocetakAkcije>2001-01-12T00:00:00</PocetakAkcije>
+    <KrajAkcije>2001-01-19T00:00:00</KrajAkcije>
     <Popust>55</Popust>
     <IdNamestaja />
+    <Obrisan>false</Obrisan>
   </Akcija>
   <Akcija>
     <Id>4</Id>
-    <Obrisan>false</Obrisan>
     <PocetakAkcije>2017-12-30T00:00:00</PocetakAkcije>
     <KrajAkcije>0001-01-01T00:00:00</KrajAkcije>
     <Popust>37</Popust>
     <IdNamestaja />
+    <Obrisan>false</Obrisan>
+  </Akcija>
+  <Akcija>
+    <Id>5</Id>
+    <PocetakAkcije>2002-04-19T00:00:00</PocetakAkcije>
+    <KrajAkcije>2002-01-18T00:00:00</KrajAkcije>
+    <Popust>4545</Popust>
+    <IdNamestaja />
+    <Obrisan>true</Obrisan>
   </Akcija>
 </ArrayOfAkcija>
