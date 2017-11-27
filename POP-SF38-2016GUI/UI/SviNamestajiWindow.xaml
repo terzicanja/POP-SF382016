@@ -1,0 +1,18 @@
+﻿<Window x:Class="POP_SF38_2016GUI.UI.SviNamestajiWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
+        mc:Ignorable="d"
+        Title="SviNamestajiWindow" Height="457.813" Width="436.458">
+    <Grid>
+        <DataGrid Name="dgSviNamestaji" Margin="10,10,10.4,126.6" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Naziv}"/>
+                <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
+                <DataGridTextColumn Header="Na stanju" Width="*" Binding="{Binding Path=KolicinaUMagacinu}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

@@ -103,7 +103,7 @@
     <KolicinaUMagacinu>3</KolicinaUMagacinu>
     <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>3</IdTipaNamestaja>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
     <idAkcije>0</idAkcije>
@@ -139,7 +139,7 @@
     <KolicinaUMagacinu>90</KolicinaUMagacinu>
     <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>0</IdTipaNamestaja>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
     <idAkcije>0</idAkcije>

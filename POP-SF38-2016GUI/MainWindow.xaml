@@ -5,29 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF38_2016GUI"
         mc:Ignorable="d"
-        Title="Salon namestaja" Height="640.621" Width="643.225"
+        Title="Salon namestaja" Height="640.621" Width="728.025"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="129*"/>
-            <ColumnDefinition Width="421*"/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="85*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="67*"/>
             <RowDefinition Height="404*"/>
             <RowDefinition Height="116*"/>
         </Grid.RowDefinitions>
-        <DataGrid BorderThickness="0" Grid.Row="1" Grid.Column="1" FontSize="15" Name="dgPrikaz" Margin="0.4,0.4,20.8,0.4" SelectedItem="{Binding Path=IzabranaProdaja}"/>
-        <Button Grid.Row="2" Content="Dodaj" Name="Dodaj" Margin="24.4,43.6,392.8,45.2" Grid.Column="1" Click="DugmeDodaj"/>
-        <Button Grid.Row="2" Content="Izmeni" Name="Izmeni" Margin="118.4,43.6,296.8,45.2" Grid.Column="1" Click="DugmeIzmeni"/>
-        <Button Grid.Row="2" Content="Obrisi" Name="Obrisi" Margin="209.4,43.6,207.8,45.2" Grid.Column="1" Click="DugmeObrisi"/>
-        <Button Grid.Row="2" Content="Izlaz" Margin="380.4,43.6,32.8,45.2" Click="ZatvoriSalon" Grid.Column="1"/>
-        <Button Content="Salon" Name="Salon" Margin="0,0.4,486.8,368.4" Grid.ColumnSpan="2" Click="SalonPrikaz" Grid.Row="1"/>
-        <Button Content="Namestaj" Name="Namestaj" Margin="0,52.4,486.8,317.4" Grid.ColumnSpan="2" Click="NamestajPrikaz" Grid.Row="1"/>
-        <Button Content="Tip namestaja" Name="Tip" Margin="0,103.4,486.8,268.4" Grid.Row="1" Grid.ColumnSpan="2" Click="TipPrikaz"/>
-        <Button Content="Dodatne usluge" Margin="0,152.4,486.8,219.4" Grid.Row="1" Grid.ColumnSpan="2" Click="UslugePrikaz"/>
-        <Button Content="Akcije" Margin="0,201.4,486.8,170.4" Grid.Row="1" Grid.ColumnSpan="2" Click="AkcijePrikaz"/>
-        <Button Content="Prodaje" Margin="0,250.4,486.8,121.4" Grid.Row="1" Grid.ColumnSpan="2" Click="ProdajePrikaz"/>
+        <DataGrid BorderThickness="0" Grid.Row="1" Grid.Column="1" FontSize="15" Name="dgPrikaz" Margin="1.6,0.4,20.6,0.4" CanUserAddRows="False"
+                  AutoGeneratingColumn="dgPrikaz_AutoGeneratingColumn" IsReadOnly="True"/>
+        <Button Grid.Row="2" Content="Dodaj" Name="Dodaj" Margin="21.6,43.6,496.6,45.2" Grid.Column="1" Click="DugmeDodaj"/>
+        <Button Grid.Row="2" Content="Izmeni" Name="Izmeni" Margin="115.6,43.6,393.6,45.2" Grid.Column="1" Click="DugmeIzmeni"/>
+        <Button Grid.Row="2" Content="Obrisi" Name="Obrisi" Margin="206.6,43.6,283.6,45.2" Grid.Column="1" Click="DugmeObrisi"/>
+        <Button Grid.Row="2" Content="Izlaz" Margin="472.6,43.6,32.6,45.2" Click="ZatvoriSalon" Grid.Column="1"/>
+        <Button Content="Salon" Name="Salon" Margin="0,0.4,0.4,368.4" Click="SalonPrikaz" Grid.Row="1"/>
+        <Button Content="Namestaj" Name="Namestaj" Margin="0,52.4,0.4,317.4" Click="NamestajPrikaz" Grid.Row="1"/>
+        <Button Content="Tip namestaja" Name="Tip" Margin="0,103.4,0.4,268.4" Grid.Row="1" Click="TipPrikaz"/>
+        <Button Content="Dodatne usluge" Margin="0,152.4,0.4,219.4" Grid.Row="1" Click="UslugePrikaz"/>
+        <Button Content="Akcije" Margin="0,201.4,0.4,170.4" Grid.Row="1" Click="AkcijePrikaz"/>
+        <Button Content="Prodaje" Margin="0,250.4,0.4,121.4" Grid.Row="1" Click="ProdajePrikaz"/>
+        <Button Content="Korisnici" Margin="0,299.4,0.4,72.4" Grid.Row="1" Click="KorisniciPrikaz"/>
 
     </Grid>
 </Window>

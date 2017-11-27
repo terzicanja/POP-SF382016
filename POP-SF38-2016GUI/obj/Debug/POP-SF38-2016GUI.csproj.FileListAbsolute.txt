@@ -27,3 +27,7 @@ D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\LoginWindow.g.cs
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\LoginWindow.baml
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\ProdajeWindow.g.cs
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\ProdajeWindow.baml
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\KorisniciWindow.g.cs
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\KorisniciWindow.baml
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SviNamestajiWindow.g.cs
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SviNamestajiWindow.baml

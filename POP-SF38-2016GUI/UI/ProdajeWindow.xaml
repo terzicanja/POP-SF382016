@@ -8,11 +8,11 @@
         Title="ProdajeWindow" Height="444.68" Width="469.15">
     <Grid>
         <Label Grid.Row="0" Grid.Column="0" Content="Datum prodaje:" FontSize="15" Margin="24,36,316.4,333.2"/>
-        <DatePicker HorizontalAlignment="Left" Margin="151,40,0,343.2" Name="dtProdaje"/>
+        <DatePicker HorizontalAlignment="Left" Margin="151,40,0,343.2" Name="dtProdaje" SelectedDate="{Binding Path=DatumProdaje}"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Broj racuna:" FontSize="15" Margin="10,82,337.4,295.2"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbBrRacuna" Margin="130,77,62.4,300.2"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbBrRacuna" Margin="130,77,62.4,300.2" Text="{Binding Path=BrojRacuna}"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Kupac:" FontSize="15" Margin="15,120,337.4,260.2"/>
-        <ComboBox Name="cbKorisnik" HorizontalAlignment="Left" Margin="130,120,0,0" VerticalAlignment="Top" Width="185" Height="35" SelectedItem="{Binding Path=Korisnik}"/>
+        <ComboBox Name="cbKorisnik" HorizontalAlignment="Left" Margin="130,120,0,0" VerticalAlignment="Top" Width="194" Height="35" SelectedItem="{Binding Path=Korisnik}"/>
 
 
         <Label Grid.Row="0" Grid.Column="0" Content="Ukupan iznos:" FontSize="15" Margin="10,214,337.4,163.2"/>

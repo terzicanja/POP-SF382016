@@ -13,9 +13,9 @@
         <DatePicker HorizontalAlignment="Left" Margin="141,77,0,437" Name="dtPocetka" SelectedDate="{Binding Path=PocetakAkcije}"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Datum zavrsetka:" FontSize="15" Margin="10,127,472.8,375"/>
         <DatePicker HorizontalAlignment="Left" Margin="141,127,0,380" Name="dtKraj" SelectedDate="{Binding Path=KrajAkcije}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Namestaji na popustu:" FontSize="15" Margin="10,173,280,205.2"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Namestaji na popustu:" FontSize="15" Margin="10,173,385.8,251"/>
         <DataGrid Margin="188,183,10,102.2" Name="dgPopustNamestaj" SelectionMode="Extended" IsReadOnly="True"/>
-        <Button Content="Dodaj Namestaj" Margin="33,214,448.8,287"/>
+        <Button Content="Dodaj Namestaj" Margin="33,214,448.8,287" Click="SviNamestaji"/>
         <!--<TextBox Grid.Row="0" Width="Auto" Name="tbUsluga" Margin="129,69,9.8,210.2"/>-->
 
         <Button Content="Sacuvaj" Margin="33,482,385.8,21" Click="SacuvajIzmene"/>

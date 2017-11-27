@@ -78,6 +78,10 @@ namespace POP_SF38_2016GUI.UI
             this.Close();
         }
 
-
+        private void SviNamestaji(object sender, RoutedEventArgs e)
+        {
+            var namestaji = new SviNamestajiWindow();
+            namestaji.ShowDialog();
+        }
     }
 }

@@ -37,13 +37,14 @@ namespace POP_SF38_2016GUI.UI
             this.namestaj = namestaj;
             this.operacija = operacija;
 
-            cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
+            
 
             tbNaziv.DataContext = namestaj;
             tbSifra.DataContext = namestaj;
             tbCena.DataContext = namestaj;
             tbKolicina.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
+            cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
         }
 
 
