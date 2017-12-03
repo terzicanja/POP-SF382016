@@ -37,22 +37,23 @@ namespace POP_SF38_2016GUI.UI
             this.namestaj = namestaj;
             this.operacija = operacija;
 
-            
-
             tbNaziv.DataContext = namestaj;
             tbSifra.DataContext = namestaj;
             tbCena.DataContext = namestaj;
             tbKolicina.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
             cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
+            cbAkcija.DataContext = namestaj;
+            cbAkcija.ItemsSource = Projekat.Instance.Akcija;
         }
 
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var listaNamestaja = Projekat.Instance.Namestaj;
+            var listaAkcija = Projekat.Instance.Akcija;
             var izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
-            //var izabranaAkcija = (Akcija)cbAkcija.SelectedItem;
+            var izabranaAkcija = (Akcija)cbAkcija.SelectedItem;
 
             switch (operacija)
             {
@@ -63,6 +64,7 @@ namespace POP_SF38_2016GUI.UI
                     namestaj.Cena = Double.Parse(tbCena.Text);
                     namestaj.KolicinaUMagacinu = int.Parse(tbKolicina.Text);
                     namestaj.IdTipaNamestaja = izabraniTipNamestaja.Id;
+                    namestaj.IdAkcije = izabranaAkcija.Id;
                     
                     listaNamestaja.Add(namestaj);
                     break;
@@ -76,6 +78,16 @@ namespace POP_SF38_2016GUI.UI
                             n.Sifra = namestaj.Sifra;
                             n.Cena = namestaj.Cena;
                             n.KolicinaUMagacinu = namestaj.KolicinaUMagacinu;
+                            n.Akcija = namestaj.Akcija;
+
+                            foreach (var ak in listaAkcija)
+                            {
+                                if(ak.Id == n.IdAkcije)
+                                {
+                                    ak.IdNamestaja.Add(n.Id);
+                                }
+                            }
+
                             //n.Sifra = this.tbSifra.Text;
                             //n.Cena = Double.Parse(this.tbCena.Text);
                             //n.KolicinaUMagacinu = int.Parse(this.tbKolicina.Text);
@@ -86,6 +98,7 @@ namespace POP_SF38_2016GUI.UI
                     break;
             }
             GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
+            GenericSerializer.Serialize("akcija.xml", listaAkcija);
             Close();
         }
 

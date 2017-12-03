@@ -37,14 +37,18 @@ namespace POP_SF38_2016GUI.UI
             dtKraj.DataContext = akcija;
 
             dgPopustNamestaj.IsSynchronizedWithCurrentItem = true;
-            dgPopustNamestaj.DataContext = this;
-            dgPopustNamestaj.ItemsSource = Projekat.Instance.Namestaj;
+            //dgPopustNamestaj.DataContext = akcija;
+            //dgPopustNamestaj.SelectedValue = SelectedNamestaj;
+
+            dgPopustNamestaj.ItemsSource = akcija.IdNamestaja;
+            //dgPopustNamestaj.ItemsSource = dgPopustNamestaj.SelectedItem
         }
         
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var lista = Projekat.Instance.Akcija;
+            var listaNamestaja = Projekat.Instance.Namestaj;
 
             switch (operacija)
             {
@@ -53,6 +57,9 @@ namespace POP_SF38_2016GUI.UI
                     akcija.Popust = Double.Parse(tbPopust.Text);
                     akcija.PocetakAkcije = DateTime.Parse(dtPocetka.Text);
                     akcija.KrajAkcije = DateTime.Parse(dtKraj.Text);
+                    //akcija.IdNamestaja.Add(akcija.IdNamestaja)
+                    //akcija.IdNamestaja = Namestaj.GetById(int.Parse(dgPopustNamestaj.SelectedItem.ToString()));
+                    //dgPopustNamestaj.ItemsSource = akcija.IdNamestaja;
                     //PocetakAkcije = this.DatumPocetka.Text
                     lista.Add(akcija);
                     break;
@@ -64,12 +71,21 @@ namespace POP_SF38_2016GUI.UI
                             n.Popust = akcija.Popust;
                             n.PocetakAkcije = akcija.PocetakAkcije;
                             n.KrajAkcije = akcija.KrajAkcije;
+                            n.IdNamestaja = akcija.IdNamestaja;
+                            foreach (var nam in listaNamestaja)
+                            {
+                                if(n.IdNamestaja.Contains(nam.Id))
+                                {
+                                    nam.IdAkcije = n.Id;
+                                }
+                            }
                             break;
                         }
                     }
                     break;
             }
             GenericSerializer.Serialize("akcija.xml", lista);
+            GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
             Close();
         }
 
@@ -80,8 +96,45 @@ namespace POP_SF38_2016GUI.UI
 
         private void SviNamestaji(object sender, RoutedEventArgs e)
         {
-            var namestaji = new SviNamestajiWindow();
-            namestaji.ShowDialog();
+            var lista = Projekat.Instance.Namestaj;
+            //var NamestajNaPopustu = akcija.IdNamestaja;
+            SviNamestajiWindow prozor = new SviNamestajiWindow(SviNamestajiWindow.Radnja.Preuzmi);
+            //prozor.ShowDialog();
+            if(prozor.ShowDialog() == true)
+            {
+                //akcija.IdNamestaja = prozor.SelektovaniNamestaj.Id;
+                akcija.IdNamestaja.Add(prozor.SelektovaniNamestaj.Id);
+                //akcija.IdNamestaja = prozor.SelektovaniNamestaj
+                //var namId = prozor.SelektovaniNamestaj.Id;
+                
+                //akcija.IdNamestaja.Add(prozor.SelektovaniNamestaj.Id);
+                //akcija.IdNamestaja = int.Parse(prozor.SelektovaniNamestaj);
+                //akcija.IdNamestaja = Namestaj.GetById(int.Parse(prozor.SelektovaniNamestaj.Naziv));
+            }
+            /*if(dgPopustNamestaj.SelectedItem is Namestaj n)
+            //if(prozor.SelektovaniNamestaj is Namestaj n)
+            {
+                //NamestajNaPopustu.Add(n.Id);
+                akcija.IdNamestaja.Add(n.Id);
+                dgPopustNamestaj.DataContext = akcija.IdNamestaja;
+                //lista.Add(prozor.SelektovaniNamestaj);
+                //IdNamestajaNaAkciji.Add(prozor.SelektovaniNamestaj.Id);
+            }*/
         }
+
+
+
+        /*public Namestaj selectedNamestaj;
+
+        public Namestaj SelectedNamestaj
+        {
+            get { return selectedNamestaj; }
+            set
+            {
+                if (selectedNamestaj == value) return;
+                selectedNamestaj = value;
+                akcija.IdNamestaja.Add(selectedNamestaj.Id);
+            }
+        }*/
     }
 }

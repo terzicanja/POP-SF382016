@@ -32,18 +32,22 @@ namespace POP_SF38_2016GUI.UI
             this.prodaja = prodaja;
             this.operacija = operacija;
 
-            cbKorisnik.ItemsSource = Projekat.Instance.Korisnik;
+            //cbKorisnik.ItemsSource = Projekat.Instance.Korisnik;
 
             dtProdaje.DataContext = prodaja;
             tbBrRacuna.DataContext = prodaja;
-            cbKorisnik.DataContext = prodaja;
+            //tbKupac = prodaja;
+            //cbKorisnik.DataContext = prodaja;
             tbUkupanIznos.DataContext = prodaja;
+
+            dgProdajaNamestaj.ItemsSource = prodaja.IdStavki;
         }
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var listaProdaja = Projekat.Instance.ProdajaNamestaja;
-            var izabraniKorisnik = (Korisnik)cbKorisnik.SelectedItem;
+            var listaStavki = Projekat.Instance.StavkaProdaje;
+            //var izabraniKorisnik = (Korisnik)cbKorisnik.SelectedItem;
 
             switch (operacija)
             {
@@ -51,7 +55,7 @@ namespace POP_SF38_2016GUI.UI
                     prodaja.Id = listaProdaja.Count + 1;
                     prodaja.DatumProdaje = DateTime.Parse(dtProdaje.Text);
                     prodaja.BrojRacuna = int.Parse(tbBrRacuna.Text);
-                    prodaja.IdKupca = izabraniKorisnik.Id;
+                    //prodaja.IdKupca = izabraniKorisnik.Id;
                     //prodaja.UkupanIznos = 
 
                     listaProdaja.Add(prodaja);
@@ -63,7 +67,7 @@ namespace POP_SF38_2016GUI.UI
                         {
                             n.DatumProdaje = prodaja.DatumProdaje;
                             n.BrojRacuna = prodaja.BrojRacuna;
-                            n.Korisnik = prodaja.Korisnik;
+                            //n.Korisnik = prodaja.Korisnik;
                         }
                     }
                     break;
@@ -75,6 +79,15 @@ namespace POP_SF38_2016GUI.UI
         private void ZatvoriProdajeWindow(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void SviNamestajiZaProdaju(object sender, RoutedEventArgs e)
+        {
+            SviNamestajiWindow prozor = new SviNamestajiWindow(SviNamestajiWindow.Radnja.Sacuvaj);
+            if(prozor.ShowDialog() == true)
+            {
+                prodaja.IdStavki.Add(prozor.SelektovanaStavka.Id);
+            }
         }
     }
 }

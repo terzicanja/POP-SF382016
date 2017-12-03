@@ -3,6 +3,7 @@ using POP_SF382016.Model;
 using POP_SF382016.utill;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -151,7 +152,10 @@ namespace POP_SF38_2016GUI
         {
             var novaAkcija = new Akcija()
             {
-                Popust = 0
+                Popust = 0,
+                PocetakAkcije = DateTime.Today,
+                KrajAkcije = DateTime.Now,
+                IdNamestaja = new ObservableCollection<int>()
             };
             var prozor = new AkcijeWindow(novaAkcija, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
@@ -161,7 +165,10 @@ namespace POP_SF38_2016GUI
         {
             var novaProdaja = new ProdajaNamestaja()
             {
-                BrojRacuna = 0
+                DatumProdaje = DateTime.Today,
+                BrojRacuna = 0,
+                Kupac = "",
+                IdUsluga = new ObservableCollection<int>()
             };
             var prozor = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();

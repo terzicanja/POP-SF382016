@@ -13,7 +13,9 @@
     <PocetakAkcije>2009-10-22T00:00:00</PocetakAkcije>
     <KrajAkcije>2014-07-18T00:00:00</KrajAkcije>
     <Popust>45</Popust>
-    <IdNamestaja />
+    <IdNamestaja>
+      <int>3</int>
+    </IdNamestaja>
     <Obrisan>false</Obrisan>
   </Akcija>
   <Akcija>
@@ -29,7 +31,9 @@
     <PocetakAkcije>2017-12-30T00:00:00</PocetakAkcije>
     <KrajAkcije>0001-01-01T00:00:00</KrajAkcije>
     <Popust>37</Popust>
-    <IdNamestaja />
+    <IdNamestaja>
+      <int>1</int>
+    </IdNamestaja>
     <Obrisan>false</Obrisan>
   </Akcija>
   <Akcija>
@@ -37,7 +41,41 @@
     <PocetakAkcije>2002-04-19T00:00:00</PocetakAkcije>
     <KrajAkcije>2002-01-18T00:00:00</KrajAkcije>
     <Popust>4545</Popust>
-    <IdNamestaja />
+    <IdNamestaja>
+      <int>2</int>
+    </IdNamestaja>
     <Obrisan>true</Obrisan>
+  </Akcija>
+  <Akcija>
+    <Id>6</Id>
+    <PocetakAkcije>2017-12-03T00:00:00</PocetakAkcije>
+    <KrajAkcije>2017-12-03T00:00:00</KrajAkcije>
+    <Popust>0</Popust>
+    <IdNamestaja>
+      <int>11</int>
+    </IdNamestaja>
+    <Obrisan>false</Obrisan>
+  </Akcija>
+  <Akcija>
+    <Id>7</Id>
+    <PocetakAkcije>2017-12-03T00:00:00</PocetakAkcije>
+    <KrajAkcije>2017-12-22T00:00:00</KrajAkcije>
+    <Popust>777</Popust>
+    <IdNamestaja>
+      <int>1</int>
+      <int>2</int>
+    </IdNamestaja>
+    <Obrisan>false</Obrisan>
+  </Akcija>
+  <Akcija>
+    <Id>8</Id>
+    <PocetakAkcije>2017-12-03T00:00:00</PocetakAkcije>
+    <KrajAkcije>2017-12-03T00:00:00</KrajAkcije>
+    <Popust>0</Popust>
+    <IdNamestaja>
+      <int>14</int>
+      <int>13</int>
+    </IdNamestaja>
+    <Obrisan>false</Obrisan>
   </Akcija>
 </ArrayOfAkcija>

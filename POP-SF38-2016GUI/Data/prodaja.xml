@@ -10,21 +10,4 @@
     <IdUsluga />
     <UkupanIznos>0</UkupanIznos>
   </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Korisnik>
-      <Id>3</Id>
-      <Ime>filip</Ime>
-      <Prezime>filipovic</Prezime>
-      <KorisnickoIme>filipf</KorisnickoIme>
-      <Lozinka>sss</Lozinka>
-      <TipKorisnika>Korisnik</TipKorisnika>
-      <Obrisan>false</Obrisan>
-    </Korisnik>
-    <Id>2</Id>
-    <DatumProdaje>2017-11-17T00:00:00</DatumProdaje>
-    <BrojRacuna>22</BrojRacuna>
-    <IdKupca>3</IdKupca>
-    <PDV>0</PDV>
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

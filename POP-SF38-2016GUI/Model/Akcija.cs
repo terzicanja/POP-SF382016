@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace POP_SF382016.Model
 {
@@ -13,8 +15,28 @@ namespace POP_SF382016.Model
         private DateTime pocetakAkcije;
         private DateTime krajAkcije;
         private double popust;
-        private List<int> idNamestaja;
+        //private List<int> idNamestaja;
+        private ObservableCollection<int> idNamestaja;
         private bool obrisan;
+        //private Namestaj namestaj;
+        //public Namestaj selectedNamestaj;
+
+        /*[XmlIgnore]
+        public Namestaj Namestaj
+        {
+            get
+            {
+                if(namestaj == null)
+                {
+                    foreach (var i in IdNamestaja)
+                    {
+                        namestaj = Namestaj.GetById(IdNamestaja);
+                    }
+                    namestaj = Namestaj.GetById(IdNamestaja);
+                    return namestaj;
+                }
+            }
+        }*/
 
         
 
@@ -58,7 +80,7 @@ namespace POP_SF382016.Model
             }
         }
 
-        public List<int> IdNamestaja
+        public ObservableCollection<int> IdNamestaja
         {
             get { return idNamestaja; }
             set
@@ -67,6 +89,23 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("IdNamestaja");
             }
         }
+
+        /*public Namestaj SelectedNamestaj
+        {
+            get { return selectedNamestaj; }
+            set
+            {
+                if (selectedNamestaj == value) return;
+                selectedNamestaj = value;
+            }
+        }
+        private void IzabraniNamestaj()
+        {
+            var listaAkcija = Projekat.Instance.Akcija;
+            
+        }*/
+
+
 
         public bool Obrisan
         {
@@ -81,9 +120,6 @@ namespace POP_SF382016.Model
 
         
         //public List<Namestaj> NamestajNaPopustu { get; set; }
-        
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -124,7 +160,8 @@ namespace POP_SF382016.Model
                 PocetakAkcije = pocetakAkcije,
                 KrajAkcije = krajAkcije,
                 Popust = popust,
-                IdNamestaja = idNamestaja,
+                //IdNamestaja = idNamestaja,
+                IdNamestaja = new ObservableCollection<int>(idNamestaja),
                 Obrisan = obrisan
             };
         }

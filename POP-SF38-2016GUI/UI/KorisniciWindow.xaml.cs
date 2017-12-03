@@ -33,9 +33,11 @@ namespace POP_SF38_2016GUI.UI
             this.operacija = operacija;
 
             tbIme.DataContext = korisnik;
+            tbPrezime.DataContext = korisnik;
+            tbUser.DataContext = korisnik;
+            tbPass.DataContext = korisnik;
             cbTipKorisnika.DataContext = korisnik;
             cbTipKorisnika.ItemsSource = Enum.GetValues(typeof(TipKorisnika)).Cast<TipKorisnika>();
-            //yourComboBox.itemssource = enum.getvalues(typeof(tipkorisnika)).cast<tipkorisnika>();
         }
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
@@ -47,6 +49,10 @@ namespace POP_SF38_2016GUI.UI
                 case Operacija.Dodavanje:
                     korisnik.Id = listaKorisnika.Count + 1;
                     korisnik.Ime = tbIme.Text;
+                    korisnik.Prezime = tbPrezime.Text;
+                    korisnik.KorisnickoIme = tbUser.Text;
+                    korisnik.Lozinka = tbPass.Text;
+                    korisnik.TipKorisnika = (TipKorisnika)cbTipKorisnika.SelectedItem;
 
                     listaKorisnika.Add(korisnik);
                     break;
@@ -56,7 +62,10 @@ namespace POP_SF38_2016GUI.UI
                         if(n.Id == korisnik.Id)
                         {
                             n.Ime = korisnik.Ime;
-
+                            n.Prezime = korisnik.Prezime;
+                            n.KorisnickoIme = korisnik.KorisnickoIme;
+                            n.Lozinka = korisnik.Lozinka;
+                            n.TipKorisnika = korisnik.TipKorisnika;
                             break;
                         }
                     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,16 @@ namespace POP_SF382016.Model
     public class ProdajaNamestaja : INotifyPropertyChanged, ICloneable
     {
         private int id;
-        private List<int> idNamestaja;
+        //private List<int> idNamestaja;
+        private ObservableCollection<int> idStavki;
         private DateTime datumProdaje;
         private int brojRacuna;
-        private int idKupca;
+        //private int idKupca;
+        private string kupac;
         private double pdv;
-        private List<int> idUsluga;
+        private ObservableCollection<int> idUsluga;
         private double ukupanIznos;
-        private Korisnik korisnik;
+        /*private Korisnik korisnik;
 
 
         public Korisnik Korisnik
@@ -36,7 +39,7 @@ namespace POP_SF382016.Model
                 IdKupca = korisnik.Id;
                 OnPropertyChanged("IdKupca");
             }
-        }
+        }*/
 
 
 
@@ -50,13 +53,13 @@ namespace POP_SF382016.Model
             }
         }
 
-        public List<int> IdNamestaja
+        public ObservableCollection<int> IdStavki
         {
-            get { return idNamestaja; }
+            get { return idStavki; }
             set
             {
-                idNamestaja = value;
-                OnPropertyChanged("IdNamestaja");
+                idStavki = value;
+                OnPropertyChanged("IdStavki");
             }
         }
 
@@ -80,27 +83,27 @@ namespace POP_SF382016.Model
             }
         }
 
-        public int IdKupca
+        public string Kupac
         {
-            get { return idKupca; }
+            get { return kupac; }
             set
             {
-                idKupca = value;
-                OnPropertyChanged("IdKupca");
+                kupac = value;
+                OnPropertyChanged("Kupac");
             }
         }
 
         public double PDV
         {
-            get { return pdv; }
-            set
+            get { return 0.02; }
+            /*set
             {
                 pdv = value;
                 OnPropertyChanged("PDV");
-            }
+            }*/
         }
 
-        public List<int> IdUsluga
+        public ObservableCollection<int> IdUsluga
         {
             get { return idUsluga; }
             set
@@ -134,7 +137,7 @@ namespace POP_SF382016.Model
 
         public override string ToString()
         {
-            return $"{DatumProdaje}, {IdKupca}";
+            return $"{DatumProdaje}, {Kupac}";
         }
 
         public static ProdajaNamestaja GetById(int id)
@@ -162,12 +165,12 @@ namespace POP_SF382016.Model
             return new ProdajaNamestaja()
             {
                 Id = id,
-                IdNamestaja = idNamestaja,
+                IdStavki = new ObservableCollection<int>(idStavki),
                 DatumProdaje = datumProdaje,
                 BrojRacuna = brojRacuna,
-                IdKupca = idKupca,
-                PDV = pdv,
-                IdUsluga = idUsluga,
+                Kupac = kupac,
+                //PDV = 0.2,
+                IdUsluga = new ObservableCollection<int>(idUsluga),
                 UkupanIznos = ukupanIznos
             };
         }

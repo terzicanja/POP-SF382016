@@ -7,12 +7,17 @@
         mc:Ignorable="d"
         Title="SviNamestajiWindow" Height="457.813" Width="436.458">
     <Grid>
-        <DataGrid Name="dgSviNamestaji" Margin="10,10,10.4,126.6" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+        <DataGrid Name="dgSviNamestaji" Margin="10,10,10.4,126.6" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Naziv}"/>
                 <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
                 <DataGridTextColumn Header="Na stanju" Width="*" Binding="{Binding Path=KolicinaUMagacinu}"/>
+                <DataGridTextColumn Header="Kolicina" Width="*" />
+                <DataGridComboBoxColumn Header="Koliko" Width="*" x:Name="koliko"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Content="Sacuvaj" Margin="98,355,237.4,28" Name="PickSave"/>
+        <Button Content="Izadji" Margin="301,355,45.4,22"/>
     </Grid>
 </Window>

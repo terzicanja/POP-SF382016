@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Namestaj>
-    <idAkcije>0</idAkcije>
+    <idAkcije>2</idAkcije>
     <idTipaNamestaja>1</idTipaNamestaja>
     <Id>1</Id>
     <Naziv>Super sofa</Naziv>
     <Sifra>SF sifra za sofe</Sifra>
     <Cena>2833</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
+    <IdAkcije>2</IdAkcije>
     <IdTipaNamestaja>1</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
+    <idAkcije>5</idAkcije>
     <idTipaNamestaja>1</idTipaNamestaja>
     <Id>2</Id>
     <Naziv>krevet</Naziv>
     <Sifra>aaaa</Sifra>
     <Cena>2234</Cena>
     <KolicinaUMagacinu>33</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
+    <IdAkcije>5</IdAkcije>
     <IdTipaNamestaja>1</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
+    <idAkcije>2</idAkcije>
     <idTipaNamestaja>2</idTipaNamestaja>
     <Id>3</Id>
     <Naziv>fotelja</Naziv>
     <Sifra>1</Sifra>
     <Cena>234</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
+    <IdAkcije>2</IdAkcije>
     <IdTipaNamestaja>2</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -49,25 +49,25 @@
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
+    <idAkcije>3</idAkcije>
     <idTipaNamestaja>3</idTipaNamestaja>
     <Id>5</Id>
     <Naziv>stolica</Naziv>
     <Sifra>ddd</Sifra>
     <Cena>123</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
+    <IdAkcije>3</IdAkcije>
     <IdTipaNamestaja>3</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
+    <idAkcije>1</idAkcije>
     <idTipaNamestaja>0</idTipaNamestaja>
     <Id>6</Id>
     <Naziv>najnoviji</Naziv>
     <Cena>0</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
+    <IdAkcije>1</IdAkcije>
     <IdTipaNamestaja>0</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -142,15 +142,27 @@
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
+    <idAkcije>1</idAkcije>
     <idTipaNamestaja>4</idTipaNamestaja>
     <Id>13</Id>
     <Naziv>krevetac</Naziv>
     <Sifra>ccccc</Sifra>
     <Cena>55550</Cena>
     <KolicinaUMagacinu>66</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
+    <IdAkcije>1</IdAkcije>
     <IdTipaNamestaja>4</IdTipaNamestaja>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idAkcije>4</idAkcije>
+    <idTipaNamestaja>8</idTipaNamestaja>
+    <Id>14</Id>
+    <Naziv>kk</Naziv>
+    <Sifra>kk</Sifra>
+    <Cena>11</Cena>
+    <KolicinaUMagacinu>11</KolicinaUMagacinu>
+    <IdAkcije>4</IdAkcije>
+    <IdTipaNamestaja>8</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

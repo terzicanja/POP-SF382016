@@ -5,14 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
         mc:Ignorable="d"
-        Title="KorisniciWindow" Height="402.343" Width="422.917">
+        Title="KorisniciWindow" Height="490.943" Width="467.717">
     <Grid>
-        <Label Grid.Row="0" Grid.Column="0" Content="Ime:" FontSize="15" Margin="10,23,316.8,316.8"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbIme" Margin="141,23,46.8,316.8" Text="{Binding Path=Ime}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Tip korisnika:" FontSize="15" Margin="10,170,280.8,149.8"/>
-        <ComboBox Name="cbTipKorisnika" HorizontalAlignment="Left" Margin="141,170,0,0" VerticalAlignment="Top" Width="185" Height="35" SelectedItem="{Binding Path=TipKorisnika}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Ime:" FontSize="15" Margin="10,23,316.6,400.6"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbIme" Margin="141,23,46.6,405.6" Text="{Binding Path=Ime}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Prezime:" FontSize="15" Margin="10,61,316.6,366.6"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbPrezime" Margin="141,61,46.6,366.6" Text="{Binding Path=Prezime}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Username:" FontSize="15" Margin="10,100,316.6,316.6"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbUser" Margin="141,100,46.6,325.6" Text="{Binding Path=KorisnickoIme}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Lozinka:" FontSize="15" Margin="10,141,316.6,284.6"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbPass" Margin="141,141,46.6,284.6" Text="{Binding Path=Lozinka}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Tip korisnika:" FontSize="15" Margin="10,191,280.6,236.6"/>
+        <ComboBox Name="cbTipKorisnika" HorizontalAlignment="Left" Margin="141,190,0,0" VerticalAlignment="Top" Width="203" Height="35" SelectedItem="{Binding Path=TipKorisnika}"/>
 
-        <Button Content="Sacuvaj" Margin="52,307,258.8,20.8" Click="SacuvajIzmene"/>
-        <Button Content="Izadji" Margin="263,307,46.8,20.8" Click="ZatvoriKorisniciWindow"/>
+        <Button Content="Sacuvaj" Margin="52,393,258.6,20.6" Click="SacuvajIzmene"/>
+        <Button Content="Izadji" Margin="263,393,46.6,20.6" Click="ZatvoriKorisniciWindow"/>
     </Grid>
 </Window>
