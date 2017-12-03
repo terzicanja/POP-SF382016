@@ -62,13 +62,14 @@
   </Namestaj>
   <Namestaj>
     <idAkcije>1</idAkcije>
-    <idTipaNamestaja>0</idTipaNamestaja>
+    <idTipaNamestaja>2</idTipaNamestaja>
     <Id>6</Id>
     <Naziv>najnoviji</Naziv>
-    <Cena>0</Cena>
-    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <Sifra>jj</Sifra>
+    <Cena>45</Cena>
+    <KolicinaUMagacinu>2</KolicinaUMagacinu>
     <IdAkcije>1</IdAkcije>
-    <IdTipaNamestaja>0</IdTipaNamestaja>
+    <IdTipaNamestaja>2</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>

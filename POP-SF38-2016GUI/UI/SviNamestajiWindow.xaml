@@ -17,6 +17,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <TextBox Grid.Row="0" Width="Auto" Name="tbKoliko" Margin="142,301,45.4,83" Text="{Binding Path=Kolicina}"/>
+
         <Button Content="Sacuvaj" Margin="98,355,237.4,28" Name="PickSave"/>
         <Button Content="Izadji" Margin="301,355,45.4,22"/>
     </Grid>

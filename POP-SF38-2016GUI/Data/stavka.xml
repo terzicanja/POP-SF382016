@@ -1,8 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfStavkaProdaje xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <StavkaProdaje>
     <Id>1</Id>
     <IdNamestaja>2</IdNamestaja>
     <Kolicina>2</Kolicina>
+  </StavkaProdaje>
+  <StavkaProdaje>
+    <Id>1</Id>
+    <IdNamestaja>0</IdNamestaja>
+    <Kolicina>0</Kolicina>
+  </StavkaProdaje>
+  <StavkaProdaje>
+    <Id>3</Id>
+    <IdNamestaja>0</IdNamestaja>
+    <Kolicina>0</Kolicina>
+  </StavkaProdaje>
+  <StavkaProdaje>
+    <Id>4</Id>
+    <IdNamestaja>6</IdNamestaja>
+    <Kolicina>0</Kolicina>
+  </StavkaProdaje>
+  <StavkaProdaje>
+    <Id>5</Id>
+    <IdNamestaja>14</IdNamestaja>
+    <Kolicina>5</Kolicina>
+  </StavkaProdaje>
+  <StavkaProdaje>
+    <Id>6</Id>
+    <IdNamestaja>1</IdNamestaja>
+    <Kolicina>2</Kolicina>
+  </StavkaProdaje>
+  <StavkaProdaje>
+    <Id>7</Id>
+    <IdNamestaja>4</IdNamestaja>
+    <Kolicina>6</Kolicina>
+  </StavkaProdaje>
+  <StavkaProdaje>
+    <Id>8</Id>
+    <IdNamestaja>12</IdNamestaja>
+    <Kolicina>77</Kolicina>
   </StavkaProdaje>
 </ArrayOfStavkaProdaje>

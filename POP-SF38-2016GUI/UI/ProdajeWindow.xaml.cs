@@ -55,6 +55,7 @@ namespace POP_SF38_2016GUI.UI
                     prodaja.Id = listaProdaja.Count + 1;
                     prodaja.DatumProdaje = DateTime.Parse(dtProdaje.Text);
                     prodaja.BrojRacuna = int.Parse(tbBrRacuna.Text);
+                    prodaja.Kupac = tbKupac.Text;
                     //prodaja.IdKupca = izabraniKorisnik.Id;
                     //prodaja.UkupanIznos = 
 

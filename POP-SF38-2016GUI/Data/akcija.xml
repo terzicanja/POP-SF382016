@@ -5,7 +5,9 @@
     <PocetakAkcije>0001-01-01T00:00:00</PocetakAkcije>
     <KrajAkcije>0001-01-01T00:00:00</KrajAkcije>
     <Popust>12</Popust>
-    <IdNamestaja />
+    <IdNamestaja>
+      <int>6</int>
+    </IdNamestaja>
     <Obrisan>false</Obrisan>
   </Akcija>
   <Akcija>

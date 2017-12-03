@@ -49,10 +49,37 @@ namespace POP_SF38_2016GUI
             dgPrikaz.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
-        private bool PrikazFilter(object obj)
+        private bool NamestajFilter(object obj)
         {
             return !((Namestaj)obj).Obrisan;
         }
+
+        private bool SalonFilter(object obj)
+        {
+            return !((Salon)obj).Obrisan;
+        }
+
+        private bool TipFilter(object obj)
+        {
+            return !((TipNamestaja)obj).Obrisan;
+        }
+
+        private bool UslugeFilter(object obj)
+        {
+            return !((DodatnaUsluga)obj).Obrisan;
+        }
+
+        private bool AkcijeFilter(object obj)
+        {
+            return !((Akcija)obj).Obrisan;
+        }
+
+        private bool KorisniciFilter(object obj)
+        {
+            return !((Korisnik)obj).Obrisan;
+        }
+
+
 
         string trenutnoAktivan = "";
 
@@ -60,7 +87,10 @@ namespace POP_SF38_2016GUI
         private void SalonPrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Salon";
-            dgPrikaz.ItemsSource = Projekat.Instance.Salon;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Salon);
+            view.Filter = SalonFilter;
+            dgPrikaz.ItemsSource = view;
+            //dgPrikaz.ItemsSource = Projekat.Instance.Salon;
         }
 
         private void NamestajPrikaz(object sender, RoutedEventArgs e)
@@ -70,7 +100,7 @@ namespace POP_SF38_2016GUI
 
             trenutnoAktivan = "Namestaj";
             view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
-            view.Filter = PrikazFilter;
+            view.Filter = NamestajFilter;
             dgPrikaz.ItemsSource = view;
 
             /*
@@ -83,35 +113,50 @@ namespace POP_SF38_2016GUI
 
         private void TipPrikaz(object sender, RoutedEventArgs e)
         {
-            dgPrikaz.ItemsSource = Projekat.Instance.TipoviNamestaja;
+            //dgPrikaz.ItemsSource = Projekat.Instance.TipoviNamestaja;
             trenutnoAktivan = "Tip";
-            
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.TipoviNamestaja);
+            view.Filter = TipFilter;
+            dgPrikaz.ItemsSource = view;
+
         }
 
         private void UslugePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Usluge";
-            dgPrikaz.ItemsSource = Projekat.Instance.DodatnaUsluga;
-            dgPrikaz.SelectedItem = IzabranaUsluga;
+            //dgPrikaz.ItemsSource = Projekat.Instance.DodatnaUsluga;
+            //dgPrikaz.SelectedItem = IzabranaUsluga;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatnaUsluga);
+            view.Filter = UslugeFilter;
+            dgPrikaz.ItemsSource = view;
         }
 
         private void AkcijePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Akcije";
-            dgPrikaz.ItemsSource = Projekat.Instance.Akcija;
+            //dgPrikaz.ItemsSource = Projekat.Instance.Akcija;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcija);
+            view.Filter = AkcijeFilter;
+            dgPrikaz.ItemsSource = view;
         }
         
         private void ProdajePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Prodaja";
             dgPrikaz.ItemsSource = Projekat.Instance.ProdajaNamestaja;
-            dgPrikaz.SelectedItem = IzabranaProdaja;
+            //dgPrikaz.SelectedItem = IzabranaProdaja;
+            //view = CollectionViewSource.GetDefaultView(Projekat.Instance.ProdajaNamestaja);
+            //view.Filter = ProdajeFilter;
+            //dgPrikaz.ItemsSource = view;
         }
 
         private void KorisniciPrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Korisnici";
-            dgPrikaz.ItemsSource = Projekat.Instance.Korisnik;
+            //dgPrikaz.ItemsSource = Projekat.Instance.Korisnik;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Korisnik);
+            view.Filter = KorisniciFilter;
+            dgPrikaz.ItemsSource = view;
         }
         
 
@@ -165,6 +210,7 @@ namespace POP_SF38_2016GUI
         {
             var novaProdaja = new ProdajaNamestaja()
             {
+                IdStavki = new ObservableCollection<int>(),
                 DatumProdaje = DateTime.Today,
                 BrojRacuna = 0,
                 Kupac = "",
@@ -467,7 +513,8 @@ namespace POP_SF38_2016GUI
 
         private void dgPrikaz_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if((string)e.Column.Header == "Id")
+            if((string)e.Column.Header == "Id" || (string)e.Column.Header == "Obrisan" || (string)e.Column.Header == "PIB"
+                || (string)e.Column.Header == "IdStavki" || (string)e.Column.Header == "IdTipaNamestaja")
             {
                 e.Cancel = true;
             } 

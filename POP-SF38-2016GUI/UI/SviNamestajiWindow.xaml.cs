@@ -39,7 +39,7 @@ namespace POP_SF38_2016GUI.UI
             SelektovaniNamestaj = new Namestaj();
             this.DataContext = SelektovaniNamestaj;
             this.radnja = radnja;
-            this.stavka = stavka;
+            this.stavka = new StavkaProdaje();
             
 
             if(radnja == Radnja.Preuzmi)
@@ -74,13 +74,19 @@ namespace POP_SF38_2016GUI.UI
         private void SacuvajStavku(object sender, RoutedEventArgs e)
         {
             var listaStavki = Projekat.Instance.StavkaProdaje;
-            stavka.Id = 1;
+            SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
+            stavka.Id = listaStavki.Count+1;
             stavka.IdNamestaja = SelektovaniNamestaj.Id;
-            stavka.Kolicina = 0;
+            stavka.Kolicina = int.Parse(tbKoliko.Text);
+            
 
             listaStavki.Add(stavka);
 
+            SelektovanaStavka = stavka;
+
             GenericSerializer.Serialize("stavka.xml", listaStavki);
+
+            this.Close();
         }
         
     }
