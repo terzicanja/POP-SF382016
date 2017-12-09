@@ -23,13 +23,16 @@ namespace POP_SF38_2016GUI.UI
     public partial class ProdajeWindow : Window
     {
         private ProdajaNamestaja prodaja;
+        private DodatnaUsluga SelektovanaUsluga;
         private Operacija operacija;
 
         public ProdajeWindow(ProdajaNamestaja prodaja, Operacija operacija)
         {
             InitializeComponent();
+            
 
             this.prodaja = prodaja;
+            //this.usluga = usluga;
             this.operacija = operacija;
 
             //cbKorisnik.ItemsSource = Projekat.Instance.Korisnik;
@@ -39,8 +42,15 @@ namespace POP_SF38_2016GUI.UI
             //tbKupac = prodaja;
             //cbKorisnik.DataContext = prodaja;
             tbUkupanIznos.DataContext = prodaja;
+            tbKupac.DataContext = prodaja;
+            lbUsluge.DataContext = prodaja;
 
             dgProdajaNamestaj.ItemsSource = prodaja.IdStavki;
+            //dgProdajaUsluge.ItemsSource = Projekat.Instance.DodatnaUsluga;
+            lbUsluge.ItemsSource = Projekat.Instance.DodatnaUsluga;
+            cbUsluge.Content = Projekat.Instance.DodatnaUsluga;
+
+            
         }
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
@@ -49,6 +59,8 @@ namespace POP_SF38_2016GUI.UI
             var listaStavki = Projekat.Instance.StavkaProdaje;
             //var izabraniKorisnik = (Korisnik)cbKorisnik.SelectedItem;
 
+            SelektovanaUsluga = (DodatnaUsluga)lbUsluge.SelectedItem;
+
             switch (operacija)
             {
                 case Operacija.Dodavanje:
@@ -56,8 +68,11 @@ namespace POP_SF38_2016GUI.UI
                     prodaja.DatumProdaje = DateTime.Parse(dtProdaje.Text);
                     prodaja.BrojRacuna = int.Parse(tbBrRacuna.Text);
                     prodaja.Kupac = tbKupac.Text;
+                    prodaja.IdStavki = prodaja.IdStavki;
+                    prodaja.IdUsluga.Add(SelektovanaUsluga.Id);
                     //prodaja.IdKupca = izabraniKorisnik.Id;
                     //prodaja.UkupanIznos = 
+                    
 
                     listaProdaja.Add(prodaja);
                     break;
@@ -68,6 +83,8 @@ namespace POP_SF38_2016GUI.UI
                         {
                             n.DatumProdaje = prodaja.DatumProdaje;
                             n.BrojRacuna = prodaja.BrojRacuna;
+                            n.Kupac = prodaja.Kupac;
+                            n.IdUsluga = prodaja.IdUsluga;
                             //n.Korisnik = prodaja.Korisnik;
                         }
                     }
@@ -85,10 +102,11 @@ namespace POP_SF38_2016GUI.UI
         private void SviNamestajiZaProdaju(object sender, RoutedEventArgs e)
         {
             SviNamestajiWindow prozor = new SviNamestajiWindow(SviNamestajiWindow.Radnja.Sacuvaj);
-            if(prozor.ShowDialog() == true)
-            {
+            prozor.ShowDialog();
+            //if(prozor.ShowDialog() == true)
+            //{
                 prodaja.IdStavki.Add(prozor.SelektovanaStavka.Id);
-            }
+            //}
         }
     }
 }

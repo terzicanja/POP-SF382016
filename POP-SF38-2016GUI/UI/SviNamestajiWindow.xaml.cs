@@ -75,17 +75,34 @@ namespace POP_SF38_2016GUI.UI
         {
             var listaStavki = Projekat.Instance.StavkaProdaje;
             SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
+
+            /*foreach (var s in listaStavki)
+            {
+                if(s.IdNamestaja == SelektovaniNamestaj.Id && s.Kolicina == int.Parse(tbKoliko.Text))
+                {
+                    SelektovanaStavka = s;
+                }
+                else
+                {
+                    stavka.Id = listaStavki.Count + 1;
+                    stavka.IdNamestaja = SelektovaniNamestaj.Id;
+                    stavka.Kolicina = int.Parse(tbKoliko.Text);
+
+                    listaStavki.Add(stavka);
+
+                    SelektovanaStavka = stavka;
+                    GenericSerializer.Serialize("stavka.xml", listaStavki);
+                }
+            }*/
+            
             stavka.Id = listaStavki.Count+1;
             stavka.IdNamestaja = SelektovaniNamestaj.Id;
             stavka.Kolicina = int.Parse(tbKoliko.Text);
-            
 
             listaStavki.Add(stavka);
 
             SelektovanaStavka = stavka;
-
             GenericSerializer.Serialize("stavka.xml", listaStavki);
-
             this.Close();
         }
         

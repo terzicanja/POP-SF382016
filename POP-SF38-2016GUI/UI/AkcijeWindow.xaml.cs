@@ -36,7 +36,7 @@ namespace POP_SF38_2016GUI.UI
             dtPocetka.DataContext = akcija;
             dtKraj.DataContext = akcija;
 
-            dgPopustNamestaj.IsSynchronizedWithCurrentItem = true;
+            //dgPopustNamestaj.IsSynchronizedWithCurrentItem = true;
             //dgPopustNamestaj.DataContext = akcija;
             //dgPopustNamestaj.SelectedValue = SelectedNamestaj;
 
@@ -72,13 +72,15 @@ namespace POP_SF38_2016GUI.UI
                             n.PocetakAkcije = akcija.PocetakAkcije;
                             n.KrajAkcije = akcija.KrajAkcije;
                             n.IdNamestaja = akcija.IdNamestaja;
-                            foreach (var nam in listaNamestaja)
+
+
+                            /*foreach (var nam in listaNamestaja)
                             {
                                 if(n.IdNamestaja.Contains(nam.Id))
                                 {
                                     nam.IdAkcije = n.Id;
                                 }
-                            }
+                            }*/
                             break;
                         }
                     }

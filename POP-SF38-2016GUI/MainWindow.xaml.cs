@@ -314,6 +314,7 @@ namespace POP_SF38_2016GUI
         private void ObrisiTipNamestaja()
         {
             var izabraniTip = (TipNamestaja)dgPrikaz.SelectedItem;
+            var listaNamestaja = Projekat.Instance.Namestaj;
             var lista = Projekat.Instance.TipoviNamestaja;
             MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniTip.Naziv}?", "Brisanje", MessageBoxButton.YesNo);
 
@@ -324,10 +325,30 @@ namespace POP_SF38_2016GUI
                     if(t.Id == izabraniTip.Id)
                     {
                         t.Obrisan = true;
+                        foreach (var nam in listaNamestaja)
+                        {
+                            if (t.Id == nam.IdTipaNamestaja)
+                            {
+                                nam.Obrisan = true;
+                            }
+                        }
+                        view.Refresh();
                         break;
                     }
+
+                    /*if (t.Obrisan)
+                    {
+                        foreach (var nam in listaNamestaja)
+                        {
+                            if(t.Id == nam.IdTipaNamestaja)
+                            {
+                                nam.Obrisan = true;
+                            }
+                        }
+                    }*/
                 }
                 GenericSerializer.Serialize("tip.xml", lista);
+                GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
             }
         }
 
@@ -344,6 +365,7 @@ namespace POP_SF38_2016GUI
                     if (t.Id == izabraniTip.Id)
                     {
                         t.Obrisan = true;
+                        view.Refresh();
                         break;
                     }
                 }
@@ -364,6 +386,7 @@ namespace POP_SF38_2016GUI
                     if(a.Id == izabranaAkcija.Id)
                     {
                         a.Obrisan = true;
+                        view.Refresh();
                         break;
                     }
                 }
@@ -371,8 +394,29 @@ namespace POP_SF38_2016GUI
             GenericSerializer.Serialize("akcija.xml", lista);
         }
 
+        private void ObrisiKorisnika()
+        {
+            var izabraniKorisnik = (Korisnik)dgPrikaz.SelectedItem;
+            var lista = Projekat.Instance.Korisnik;
+            MessageBoxResult potvrda = MessageBox.Show("Da li ste sigurni da zelite da obrisete?", "Brisanje", MessageBoxButton.YesNo);
 
-        
+            if (potvrda == MessageBoxResult.Yes)
+            {
+                foreach (var a in lista)
+                {
+                    if (a.Id == izabraniKorisnik.Id)
+                    {
+                        a.Obrisan = true;
+                        view.Refresh();
+                        break;
+                    }
+                }
+            }
+            GenericSerializer.Serialize("korisnik.xml", lista);
+        }
+
+
+
         /*private void Proba(object p)
         {
             lbPrikaz.Items.Clear();
@@ -493,6 +537,9 @@ namespace POP_SF38_2016GUI
                 case "Akcije":
                     ObrisiAkciju();
                     break;
+                case "Korisnici":
+                    ObrisiKorisnika();
+                    break;
                 case "Prodaja":
                     MessageBoxResult obavestenjeP = MessageBox.Show("Nije moguce obrisati prodaju", "Obavestenje", MessageBoxButton.OK);
                     break;
@@ -514,10 +561,16 @@ namespace POP_SF38_2016GUI
         private void dgPrikaz_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if((string)e.Column.Header == "Id" || (string)e.Column.Header == "Obrisan" || (string)e.Column.Header == "PIB"
-                || (string)e.Column.Header == "IdStavki" || (string)e.Column.Header == "IdTipaNamestaja")
+                || (string)e.Column.Header == "IdStavki" || (string)e.Column.Header == "IdTipaNamestaja" || (string)e.Column.Header == "IdAkcije")
             {
                 e.Cancel = true;
             } 
+        }
+
+        private void dgPrikaz_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex()+1).ToString();
+            //+1 je da krene da broji od 1
         }
     }
 }

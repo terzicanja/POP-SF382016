@@ -40,6 +40,7 @@ namespace POP_SF38_2016GUI.UI
                     switch (tipKorisnika)
                     {
                         case TipKorisnika.Administrator:
+                            var mainProzor = new MainWindow();
                             break;
                         case TipKorisnika.Korisnik:
                             break;

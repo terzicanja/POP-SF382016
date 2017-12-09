@@ -37,12 +37,28 @@ namespace POP_SF38_2016GUI.UI
             this.namestaj = namestaj;
             this.operacija = operacija;
 
+            var listaTipova = Projekat.Instance.TipoviNamestaja;
+
             tbNaziv.DataContext = namestaj;
             tbSifra.DataContext = namestaj;
             tbCena.DataContext = namestaj;
             tbKolicina.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
             cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
+            for (int i=0; i<cbTipNamestaja.Items.Count; i++)
+            {
+                //if((ComboBoxItem)(cbTipNamestaja.Items[i]))
+            }
+
+
+            foreach (var t in listaTipova)
+            {
+                if(t.Obrisan == true)
+                {
+                    cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
+                }
+            }
+            //cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
             cbAkcija.DataContext = namestaj;
             cbAkcija.ItemsSource = Projekat.Instance.Akcija;
         }
@@ -64,8 +80,36 @@ namespace POP_SF38_2016GUI.UI
                     namestaj.Cena = Double.Parse(tbCena.Text);
                     namestaj.KolicinaUMagacinu = int.Parse(tbKolicina.Text);
                     namestaj.IdTipaNamestaja = izabraniTipNamestaja.Id;
-                    namestaj.IdAkcije = izabranaAkcija.Id;
-                    
+                    //namestaj.IdAkcije = izabranaAkcija.Id;
+
+                    if(izabranaAkcija != null)
+                    {
+                        foreach (var ak in listaAkcija)
+                        {
+                            if(ak.Id == izabranaAkcija.Id)
+                            {
+                                ak.IdNamestaja.Add(namestaj.Id);
+                            }
+                        }
+                    }
+
+                    /*
+                    foreach (var ak in listaAkcija)
+                    {
+                        if (izabranaAkcija != null)
+                        {
+                            ak.IdNamestaja.Add(namestaj.Id);
+                        }
+                    }*/
+
+                    /*foreach (var ak in listaAkcija)
+                    {
+                        if (ak.Id == izabranaAkcija.Id)
+                        {
+                            ak.IdNamestaja.Add(namestaj.Id);
+                        }
+                    }*/
+
                     listaNamestaja.Add(namestaj);
                     break;
                 case Operacija.Izmena:
@@ -78,15 +122,36 @@ namespace POP_SF38_2016GUI.UI
                             n.Sifra = namestaj.Sifra;
                             n.Cena = namestaj.Cena;
                             n.KolicinaUMagacinu = namestaj.KolicinaUMagacinu;
-                            n.Akcija = namestaj.Akcija;
+                            //n.Akcija = namestaj.Akcija;
 
+                            if (izabranaAkcija != null)
+                            {
+                                foreach (var ak in listaAkcija)
+                                {
+                                    if (ak.Id == izabranaAkcija.Id)
+                                    {
+                                        ak.IdNamestaja.Add(namestaj.Id);
+                                    }
+                                }
+                            }
+
+                            /*
+                            foreach (var ak in listaAkcija)
+                            {
+                                if (izabranaAkcija != null)
+                                {
+                                    ak.IdNamestaja.Add(namestaj.Id);
+                                }
+                            }
+                            */
+                            /*
                             foreach (var ak in listaAkcija)
                             {
                                 if(ak.Id == n.IdAkcije)
                                 {
                                     ak.IdNamestaja.Add(n.Id);
                                 }
-                            }
+                            }*/
 
                             //n.Sifra = this.tbSifra.Text;
                             //n.Cena = Double.Parse(this.tbCena.Text);

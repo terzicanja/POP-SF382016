@@ -15,7 +15,7 @@ namespace POP_SF382016.Model
         private string sifra;
         private double cena;
         private int kolicinaUMagacinu;
-        public int idAkcije;
+        //public int idAkcije;
         public int idTipaNamestaja;
         private bool obrisan;
         private TipNamestaja tipNamestaja;
@@ -39,7 +39,7 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("TipNamestaja");
             }
         }
-
+        /*
         [XmlIgnore]
         public Akcija Akcija
         {
@@ -58,7 +58,7 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("Akcija");
             }
         }
-
+        */
 
 
         public int Id
@@ -110,7 +110,7 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("KolicinaUMagacinu");
             }
         }
-
+        /*
         public int IdAkcije
         {
             get { return idAkcije; }
@@ -119,7 +119,7 @@ namespace POP_SF382016.Model
                 idAkcije = value;
                 OnPropertyChanged("IdAkcije");
             }
-        }
+        }*/
         public int IdTipaNamestaja
         {
             get { return idTipaNamestaja; }
@@ -180,7 +180,7 @@ namespace POP_SF382016.Model
                 Sifra = sifra,
                 Cena = cena,
                 KolicinaUMagacinu = kolicinaUMagacinu,
-                IdAkcije = idAkcije,
+                //IdAkcije = idAkcije,
                 Obrisan = obrisan, 
                 TipNamestaja = tipNamestaja,
                 IdTipaNamestaja = idTipaNamestaja

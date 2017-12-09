@@ -62,7 +62,7 @@ namespace POP_SF382016.Model
 
         public override string ToString()
         {
-            return $"{Usluga}, {Cena}";
+            return $"{Usluga}, {Cena} dinara";
         }
 
         public static DodatnaUsluga GetById(int id)

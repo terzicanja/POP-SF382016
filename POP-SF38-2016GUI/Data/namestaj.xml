@@ -1,169 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Namestaj>
-    <idAkcije>2</idAkcije>
     <idTipaNamestaja>1</idTipaNamestaja>
     <Id>1</Id>
     <Naziv>Super sofa</Naziv>
     <Sifra>SF sifra za sofe</Sifra>
     <Cena>2833</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <IdAkcije>2</IdAkcije>
     <IdTipaNamestaja>1</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>5</idAkcije>
     <idTipaNamestaja>1</idTipaNamestaja>
     <Id>2</Id>
     <Naziv>krevet</Naziv>
     <Sifra>aaaa</Sifra>
     <Cena>2234</Cena>
     <KolicinaUMagacinu>33</KolicinaUMagacinu>
-    <IdAkcije>5</IdAkcije>
     <IdTipaNamestaja>1</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>2</idAkcije>
     <idTipaNamestaja>2</idTipaNamestaja>
     <Id>3</Id>
     <Naziv>fotelja</Naziv>
     <Sifra>1</Sifra>
     <Cena>234</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <IdAkcije>2</IdAkcije>
     <IdTipaNamestaja>2</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
     <idTipaNamestaja>1</idTipaNamestaja>
     <Id>4</Id>
     <Naziv>izmenjen opet</Naziv>
     <Sifra>2</Sifra>
     <Cena>3333</Cena>
     <KolicinaUMagacinu>1</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>1</IdTipaNamestaja>
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>3</idAkcije>
     <idTipaNamestaja>3</idTipaNamestaja>
     <Id>5</Id>
     <Naziv>stolica</Naziv>
     <Sifra>ddd</Sifra>
     <Cena>123</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <IdAkcije>3</IdAkcije>
     <IdTipaNamestaja>3</IdTipaNamestaja>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>1</idAkcije>
     <idTipaNamestaja>2</idTipaNamestaja>
     <Id>6</Id>
     <Naziv>najnoviji</Naziv>
     <Sifra>jj</Sifra>
     <Cena>45</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <IdAkcije>1</IdAkcije>
     <IdTipaNamestaja>2</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
     <idTipaNamestaja>0</idTipaNamestaja>
     <Id>7</Id>
     <Naziv>jos noviji</Naziv>
     <Cena>0</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>0</IdTipaNamestaja>
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
     <idTipaNamestaja>0</idTipaNamestaja>
     <Id>8</Id>
     <Naziv>jastuk</Naziv>
     <Cena>0</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>0</IdTipaNamestaja>
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
     <idTipaNamestaja>3</idTipaNamestaja>
     <Id>9</Id>
     <Naziv>kredenac</Naziv>
     <Sifra>kk</Sifra>
     <Cena>444</Cena>
     <KolicinaUMagacinu>3</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>3</IdTipaNamestaja>
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
     <idTipaNamestaja>0</idTipaNamestaja>
     <Id>10</Id>
     <Naziv />
     <Sifra>aaa</Sifra>
     <Cena>0</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>0</IdTipaNamestaja>
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
     <idTipaNamestaja>7</idTipaNamestaja>
     <Id>11</Id>
     <Naziv>ugg</Naziv>
     <Sifra>dfdf</Sifra>
     <Cena>342</Cena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>7</IdTipaNamestaja>
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>0</idAkcije>
     <idTipaNamestaja>0</idTipaNamestaja>
     <Id>12</Id>
     <Naziv>proba</Naziv>
     <Sifra>proba</Sifra>
     <Cena>9090</Cena>
     <KolicinaUMagacinu>90</KolicinaUMagacinu>
-    <IdAkcije>0</IdAkcije>
     <IdTipaNamestaja>0</IdTipaNamestaja>
     <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>1</idAkcije>
     <idTipaNamestaja>4</idTipaNamestaja>
     <Id>13</Id>
     <Naziv>krevetac</Naziv>
     <Sifra>ccccc</Sifra>
     <Cena>55550</Cena>
     <KolicinaUMagacinu>66</KolicinaUMagacinu>
-    <IdAkcije>1</IdAkcije>
     <IdTipaNamestaja>4</IdTipaNamestaja>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idAkcije>4</idAkcije>
     <idTipaNamestaja>8</idTipaNamestaja>
     <Id>14</Id>
     <Naziv>kk</Naziv>
     <Sifra>kk</Sifra>
     <Cena>11</Cena>
     <KolicinaUMagacinu>11</KolicinaUMagacinu>
-    <IdAkcije>4</IdAkcije>
     <IdTipaNamestaja>8</IdTipaNamestaja>
+    <Obrisan>true</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idTipaNamestaja>2</idTipaNamestaja>
+    <Id>15</Id>
+    <Naziv>oooo</Naziv>
+    <Sifra>yy</Sifra>
+    <Cena>9999</Cena>
+    <KolicinaUMagacinu>1</KolicinaUMagacinu>
+    <IdTipaNamestaja>2</IdTipaNamestaja>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idTipaNamestaja>7</idTipaNamestaja>
+    <Id>16</Id>
+    <Naziv>ertttttt</Naziv>
+    <Sifra>fff</Sifra>
+    <Cena>2222</Cena>
+    <KolicinaUMagacinu>333</KolicinaUMagacinu>
+    <IdTipaNamestaja>7</IdTipaNamestaja>
+    <Obrisan>true</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idTipaNamestaja>9</idTipaNamestaja>
+    <Id>17</Id>
+    <Naziv>aaa</Naziv>
+    <Sifra>a</Sifra>
+    <Cena>123</Cena>
+    <KolicinaUMagacinu>3</KolicinaUMagacinu>
+    <IdTipaNamestaja>9</IdTipaNamestaja>
+    <Obrisan>true</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idTipaNamestaja>1</idTipaNamestaja>
+    <Id>18</Id>
+    <Naziv>proba za akciju</Naziv>
+    <Sifra>aaa</Sifra>
+    <Cena>999</Cena>
+    <KolicinaUMagacinu>3</KolicinaUMagacinu>
+    <IdTipaNamestaja>1</IdTipaNamestaja>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idTipaNamestaja>1</idTipaNamestaja>
+    <Id>19</Id>
+    <Naziv>akcija proba</Naziv>
+    <Sifra>cccc</Sifra>
+    <Cena>345</Cena>
+    <KolicinaUMagacinu>2</KolicinaUMagacinu>
+    <IdTipaNamestaja>1</IdTipaNamestaja>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idTipaNamestaja>0</idTipaNamestaja>
+    <Id>20</Id>
+    <Naziv>akcijaaaa</Naziv>
+    <Sifra>aaa</Sifra>
+    <Cena>334</Cena>
+    <KolicinaUMagacinu>2</KolicinaUMagacinu>
+    <IdTipaNamestaja>0</IdTipaNamestaja>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idTipaNamestaja>0</idTipaNamestaja>
+    <Id>21</Id>
+    <Naziv>najnovija proba</Naziv>
+    <Sifra>sdf</Sifra>
+    <Cena>44</Cena>
+    <KolicinaUMagacinu>2</KolicinaUMagacinu>
+    <IdTipaNamestaja>0</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

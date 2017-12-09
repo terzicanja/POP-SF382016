@@ -9,25 +9,31 @@
   <DodatnaUsluga>
     <Id>2</Id>
     <Usluga>nesto</Usluga>
-    <Cena>22222</Cena>
+    <Cena>1111</Cena>
     <Obrisan>false</Obrisan>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Id>3</Id>
     <Usluga>parking</Usluga>
     <Cena>1212222</Cena>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Id>4</Id>
-    <Usluga>parkiranje</Usluga>
-    <Cena>77</Cena>
+    <Usluga>parkiranjeww</Usluga>
+    <Cena>333</Cena>
     <Obrisan>false</Obrisan>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Id>5</Id>
     <Usluga>montiranje</Usluga>
-    <Cena>99</Cena>
+    <Cena>567</Cena>
+    <Obrisan>false</Obrisan>
+  </DodatnaUsluga>
+  <DodatnaUsluga>
+    <Id>6</Id>
+    <Usluga>najnovija</Usluga>
+    <Cena>4545</Cena>
     <Obrisan>false</Obrisan>
   </DodatnaUsluga>
 </ArrayOfDodatnaUsluga>

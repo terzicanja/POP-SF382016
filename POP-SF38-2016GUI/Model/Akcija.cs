@@ -12,6 +12,10 @@ namespace POP_SF382016.Model
     public class Akcija : INotifyPropertyChanged, ICloneable
     {
         private int id;
+        private string naziv;
+
+        
+
         private DateTime pocetakAkcije;
         private DateTime krajAkcije;
         private double popust;
@@ -47,6 +51,16 @@ namespace POP_SF382016.Model
             {
                 id = value;
                 OnPropertyChanged("Id");
+            }
+        }
+
+        public string Naziv
+        {
+            get { return naziv; }
+            set
+            {
+                naziv = value;
+                OnPropertyChanged("Naziv");
             }
         }
 
@@ -128,7 +142,7 @@ namespace POP_SF382016.Model
 
         public override string ToString()
         {
-            return $"{Popust}%, Pocetak akcije: {PocetakAkcije}, Kraj akcije: {KrajAkcije}";
+            return $"{Naziv} {Popust}%";
         }
 
         public static Akcija GetById(int id)

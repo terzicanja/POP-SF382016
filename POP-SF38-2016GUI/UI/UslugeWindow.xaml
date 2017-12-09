@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
         mc:Ignorable="d"
-        Title="UslugeWindow" Height="307.818" Width="399.674">
+        Title="UslugeWindow" Height="307.818" Width="399.674" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="163*"/>

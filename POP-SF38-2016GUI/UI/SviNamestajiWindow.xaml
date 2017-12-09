@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
         mc:Ignorable="d"
-        Title="SviNamestajiWindow" Height="457.813" Width="436.458">
+        Title="SviNamestajiWindow" Height="457.813" Width="436.458" WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid Name="dgSviNamestaji" Margin="10,10,10.4,126.6" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>

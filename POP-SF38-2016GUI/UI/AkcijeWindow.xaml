@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
         mc:Ignorable="d"
-        Title="AkcijeWindow" Height="577.305" Width="615.562">
+        Title="AkcijeWindow" Height="577.305" Width="615.562" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Grid.Row="0" Grid.Column="0" Content="Popust:" FontSize="15" Margin="10,23,472.8,484"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbPopust" Margin="141,23,46.8,484" Text="{Binding Path=Popust}"/>
@@ -13,7 +13,7 @@
         <DatePicker HorizontalAlignment="Left" Margin="141,77,0,437" Name="dtPocetka" SelectedDate="{Binding Path=PocetakAkcije}"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Datum zavrsetka:" FontSize="15" Margin="10,127,472.8,375"/>
         <DatePicker HorizontalAlignment="Left" Margin="141,127,0,380" Name="dtKraj" SelectedDate="{Binding Path=KrajAkcije}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Namestaji na popustu:" FontSize="15" Margin="10,173,385.8,251"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Namestaji na popustu:" FontSize="15" Margin="10,173,385.8,339"/>
         <DataGrid Margin="188,183,10,102.2" DataContext="{Binding Path=Namestaj}" Name="dgPopustNamestaj" SelectionMode="Extended" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="id" Width="*" Binding="{Binding Id}"/>

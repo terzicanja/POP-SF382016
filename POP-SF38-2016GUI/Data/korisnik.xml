@@ -2,12 +2,12 @@
 <ArrayOfKorisnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Korisnik>
     <Id>1</Id>
-    <Ime>pero</Ime>
-    <Prezime>peroo</Prezime>
-    <KorisnickoIme>petarp</KorisnickoIme>
-    <Lozinka>pero</Lozinka>
-    <TipKorisnika>Administrator</TipKorisnika>
-    <Obrisan>false</Obrisan>
+    <Ime>ivan</Ime>
+    <Prezime>ivanovic</Prezime>
+    <KorisnickoIme>ivani</KorisnickoIme>
+    <Lozinka>sifra</Lozinka>
+    <TipKorisnika>Korisnik</TipKorisnika>
+    <Obrisan>true</Obrisan>
   </Korisnik>
   <Korisnik>
     <Id>1</Id>
@@ -24,16 +24,34 @@
     <Prezime>filipovic</Prezime>
     <KorisnickoIme>filipf</KorisnickoIme>
     <Lozinka>sss</Lozinka>
-    <TipKorisnika>Korisnik</TipKorisnika>
+    <TipKorisnika>Administrator</TipKorisnika>
     <Obrisan>false</Obrisan>
   </Korisnik>
   <Korisnik>
     <Id>4</Id>
-    <Ime>Petar</Ime>
+    <Ime>perooooo</Ime>
     <Prezime>Petrovic</Prezime>
     <KorisnickoIme>pero</KorisnickoIme>
-    <Lozinka>pero</Lozinka>
+    <Lozinka>wert</Lozinka>
     <TipKorisnika>Administrator</TipKorisnika>
+    <Obrisan>false</Obrisan>
+  </Korisnik>
+  <Korisnik>
+    <Id>5</Id>
+    <Ime>aaa</Ime>
+    <Prezime>aa</Prezime>
+    <KorisnickoIme>asd</KorisnickoIme>
+    <Lozinka>ooo</Lozinka>
+    <TipKorisnika>Korisnik</TipKorisnika>
+    <Obrisan>false</Obrisan>
+  </Korisnik>
+  <Korisnik>
+    <Id>6</Id>
+    <Ime>cccccc</Ime>
+    <Prezime>bbb</Prezime>
+    <KorisnickoIme>bb</KorisnickoIme>
+    <Lozinka>b</Lozinka>
+    <TipKorisnika>Korisnik</TipKorisnika>
     <Obrisan>false</Obrisan>
   </Korisnik>
 </ArrayOfKorisnik>

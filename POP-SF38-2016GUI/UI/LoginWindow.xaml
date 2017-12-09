@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="369.886" Width="417.613">
+        Title="LoginWindow" Height="369.886" Width="417.613" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Grid.Row="0" Grid.Column="0" Content="Username:" FontSize="15" Margin="25,65,227.4,225"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbUser" Margin="123,65,42.2,236"/>
