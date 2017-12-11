@@ -31,3 +31,4 @@ D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\KorisniciWindow.g.c
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\KorisniciWindow.baml
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SviNamestajiWindow.g.cs
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SviNamestajiWindow.baml
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\POP-SF38-2016GUI_Content.g.cs

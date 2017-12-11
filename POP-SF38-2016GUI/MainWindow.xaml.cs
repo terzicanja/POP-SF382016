@@ -40,6 +40,12 @@ namespace POP_SF38_2016GUI
         {
             InitializeComponent();
 
+            var noviTip = TipNamestaja.Create(new TipNamestaja()
+            {
+                Naziv = "novi",
+                Obrisan = false
+            });
+
             //view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
             //view.Filter = PrikazFilter;
             //dgPrikaz.ItemsSource = view;

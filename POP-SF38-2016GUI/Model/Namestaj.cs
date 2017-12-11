@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -186,5 +190,105 @@ namespace POP_SF382016.Model
                 IdTipaNamestaja = idTipaNamestaja
             };
         }
+
+        #region CRUD
+        public static ObservableCollection<Namestaj> GetAll()
+        {
+            var namestaji = new ObservableCollection<Namestaj>();
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+
+                cmd.CommandText = "SELECT * FROM Namestaj WHERE Obrisan = 0;";
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Namestaj");
+
+                foreach (DataRow row in ds.Tables["Namestaj"].Rows)
+                {
+                    var n = new Namestaj();
+                    n.Id = Convert.ToInt32(row["Id"]);
+                    n.IdTipaNamestaja = Convert.ToInt32(row["TipNamestajaId"]);
+                    n.Naziv = row["Naziv"].ToString();
+                    n.Sifra = row["Sifra"].ToString();
+                    n.Cena = double.Parse(row["Cena"].ToString());
+                    n.KolicinaUMagacinu = Convert.ToInt32(row["Kolicina"]);
+                    n.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                    namestaji.Add(n);
+                }
+            }
+            return namestaji;
+        }
+
+        public static Namestaj Create(Namestaj n)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "INSERT INTO Namestaj (TipNamestajaId, Naziv, Sifra, Cena, Kolicina, Obrisan) VALUES (@TipNamestajaId, @Naziv, @Sifra, @Cena, @Kolicina, @Obrisan);";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                //sql injection google
+                cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
+                cmd.Parameters.AddWithValue("Naziv", n.Naziv);
+                cmd.Parameters.AddWithValue("Sifra", n.Sifra);
+                cmd.Parameters.AddWithValue("Cena", n.Cena);
+                cmd.Parameters.AddWithValue("Kolicina", n.KolicinaUMagacinu);
+                cmd.Parameters.AddWithValue("Obrisan", n.Obrisan);
+
+                n.Id = int.Parse(cmd.ExecuteScalar().ToString());
+            }
+            Projekat.Instance.Namestaj.Add(n);
+
+            return n;
+        }
+
+        public static void Update(Namestaj n)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "UPDATE Namestaj SET TipNamestajaId=@TipNamestajaId, Naziv=@Naziv, " +
+                    "Sifra=@Sifra, Cena=@Cena, Kolicina=@Kolicina, Obrisan=@Obrisan WHERE Id=@Id;";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                //sql injection google
+                cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
+                cmd.Parameters.AddWithValue("Naziv", n.Naziv);
+                cmd.Parameters.AddWithValue("Sifra", n.Sifra);
+                cmd.Parameters.AddWithValue("Cena", n.Cena);
+                cmd.Parameters.AddWithValue("Kolicina", n.KolicinaUMagacinu);
+                cmd.Parameters.AddWithValue("Obrisan", n.Obrisan);
+
+                cmd.ExecuteNonQuery();
+            }
+
+            foreach (var nam in Projekat.Instance.Namestaj)
+            {
+                if(n.Id == nam.Id)
+                {
+                    nam.IdTipaNamestaja = n.IdTipaNamestaja;
+                    nam.Naziv = n.Naziv;
+                    nam.Sifra = n.Sifra;
+                    nam.Cena = n.Cena;
+                    nam.KolicinaUMagacinu = n.KolicinaUMagacinu;
+                    nam.Obrisan = n.Obrisan;
+                }
+            }
+        }
+
+        public static void Delete(Namestaj n)
+        {
+            n.Obrisan = true;
+            Update(n);
+        }
+        #endregion
     }
 }

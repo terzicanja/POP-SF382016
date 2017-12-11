@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -183,6 +184,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\stavka.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Db_scripts\crebas.sql" />
+    <Content Include="Db_scripts\seed.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
