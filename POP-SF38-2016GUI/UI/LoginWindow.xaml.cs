@@ -28,7 +28,7 @@ namespace POP_SF38_2016GUI.UI
 
         private void Login(object sender, RoutedEventArgs e)
         {
-            var korisnici = Projekat.Instance.Korisnik;
+            var korisnici = Projekat.Instance.Korisnici;
             TipKorisnika tipKorisnika;
 
             foreach (var k in korisnici)

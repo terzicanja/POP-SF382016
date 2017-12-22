@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +59,6 @@ namespace POP_SF382016.Model
         }
 
         
-        
         public event PropertyChangedEventHandler PropertyChanged;
 
 
@@ -67,7 +70,7 @@ namespace POP_SF382016.Model
 
         public static DodatnaUsluga GetById(int id)
         {
-            foreach (var a in Projekat.Instance.DodatnaUsluga)
+            foreach (var a in Projekat.Instance.DodatneUsluge)
             {
                 if (a.Id == id)
                 {
@@ -95,5 +98,90 @@ namespace POP_SF382016.Model
                 Obrisan = obrisan
             };
         }
+
+
+        #region CRUD
+        public static ObservableCollection<DodatnaUsluga> GetAll()
+        {
+            var usluge = new ObservableCollection<DodatnaUsluga>();
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+
+                cmd.CommandText = "SELECT * FROM Usluga WHERE Obrisan = 0;";
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Usluga");
+
+                foreach (DataRow row in ds.Tables["Usluga"].Rows)
+                {
+                    var tn = new DodatnaUsluga();
+                    tn.Id = Convert.ToInt32(row["Id"]);
+                    tn.Usluga = row["Naziv"].ToString();
+                    tn.Cena = Convert.ToInt32(row["Cena"]);
+                    tn.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                    usluge.Add(tn);
+                }
+            }
+            return usluge;
+        }
+
+        public static DodatnaUsluga Create(DodatnaUsluga dn)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES (@Naziv, @Cena, @Obrisan);";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Naziv", dn.Usluga);
+                cmd.Parameters.AddWithValue("Cena", dn.Cena);
+                cmd.Parameters.AddWithValue("Obrisan", dn.Obrisan);
+
+                dn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+            }
+            Projekat.Instance.DodatneUsluge.Add(dn);
+            return dn;
+        }
+
+        public static void Update(DodatnaUsluga dn)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES (@Naziv, @Cena, @Obrisan);";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Naziv", dn.Usluga);
+                cmd.Parameters.AddWithValue("Cena", dn.Cena);
+                cmd.Parameters.AddWithValue("Obrisan", dn.Obrisan);
+
+                cmd.ExecuteNonQuery();
+            }
+
+            foreach (var du in Projekat.Instance.DodatneUsluge)
+            {
+                if (dn.Id == du.Id)
+                {
+                    du.Usluga = dn.Usluga;
+                    du.Cena = dn.Cena;
+                    du.Obrisan = dn.Obrisan;
+                }
+            }
+        }
+
+        public static void Delete(DodatnaUsluga n)
+        {
+            n.Obrisan = true;
+            Update(n);
+        }
+        #endregion
     }
 }

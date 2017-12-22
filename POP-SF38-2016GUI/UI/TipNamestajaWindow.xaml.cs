@@ -48,9 +48,12 @@ namespace POP_SF38_2016GUI.UI
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    tip.Id = listaTipova.Count + 1;
+                    //tip.Id = listaTipova.Count + 1;
                     tip.Naziv = tbNaziv.Text;
-                    listaTipova.Add(tip);
+                    TipNamestaja.Create(tip);
+                    /*tip.Id = listaTipova.Count + 1;
+                    tip.Naziv = tbNaziv.Text;
+                    listaTipova.Add(tip);*/
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaTipova)
@@ -58,13 +61,14 @@ namespace POP_SF38_2016GUI.UI
                         if (n.Id == tip.Id)
                         {
                             n.Naziv = tip.Naziv;
+                            TipNamestaja.Update(n);
                             //n.Naziv = this.tbNaziv.Text;
                             break;
                         }
                     }
                     break;
             }
-            GenericSerializer.Serialize("tip.xml", listaTipova);
+            //GenericSerializer.Serialize("tip.xml", listaTipova);
             Close();
         }
 

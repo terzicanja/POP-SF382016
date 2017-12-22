@@ -151,7 +151,6 @@ namespace POP_SF382016.Model
 
                 cmd.CommandText = "UPDATE TipNamestaja SET Naziv = @Naziv, Obrisan = @Obrisan WHERE Id=@Id;";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                //sql injection google
                 cmd.Parameters.AddWithValue("Id", tn.Id);
                 cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
                 cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);

@@ -42,7 +42,7 @@ namespace POP_SF38_2016GUI.UI
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
-            var listaKorisnika = Projekat.Instance.Korisnik;
+            var listaKorisnika = Projekat.Instance.Korisnici;
 
             switch (operacija)
             {
@@ -54,7 +54,8 @@ namespace POP_SF38_2016GUI.UI
                     korisnik.Lozinka = tbPass.Text;
                     korisnik.TipKorisnika = (TipKorisnika)cbTipKorisnika.SelectedItem;
 
-                    listaKorisnika.Add(korisnik);
+                    Korisnik.Create(korisnik);
+                    //listaKorisnika.Add(korisnik);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaKorisnika)
@@ -66,12 +67,14 @@ namespace POP_SF38_2016GUI.UI
                             n.KorisnickoIme = korisnik.KorisnickoIme;
                             n.Lozinka = korisnik.Lozinka;
                             n.TipKorisnika = korisnik.TipKorisnika;
+
+                            Korisnik.Update(n);
                             break;
                         }
                     }
                     break;
             }
-            GenericSerializer.Serialize("korisnik.xml", listaKorisnika);
+            //GenericSerializer.Serialize("korisnik.xml", listaKorisnika);
             Close();
         }
 

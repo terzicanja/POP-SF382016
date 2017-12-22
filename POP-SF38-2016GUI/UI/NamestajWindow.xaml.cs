@@ -2,6 +2,7 @@
 using POP_SF382016.utill;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace POP_SF38_2016GUI.UI
             Izmena
         };
 
+        ICollectionView view;
+
         private Namestaj namestaj;
         private Operacija operacija;
 
@@ -39,13 +42,16 @@ namespace POP_SF38_2016GUI.UI
 
             var listaTipova = Projekat.Instance.TipoviNamestaja;
 
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.TipoviNamestaja);
+            view.Filter = TipFilter;
+
             tbNaziv.DataContext = namestaj;
             tbSifra.DataContext = namestaj;
             tbCena.DataContext = namestaj;
             tbKolicina.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
             cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
-            for (int i=0; i<cbTipNamestaja.Items.Count; i++)
+            /*for (int i=0; i<cbTipNamestaja.Items.Count; i++)
             {
                 //if((ComboBoxItem)(cbTipNamestaja.Items[i]))
             }
@@ -57,16 +63,21 @@ namespace POP_SF38_2016GUI.UI
                 {
                     cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
                 }
-            }
+            }*/
             //cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
             cbAkcija.DataContext = namestaj;
             cbAkcija.ItemsSource = Projekat.Instance.Akcija;
         }
 
+        private bool TipFilter(object obj)
+        {
+            return !((TipNamestaja)obj).Obrisan;
+        }
+
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
-            var listaNamestaja = Projekat.Instance.Namestaj;
+            var listaNamestaja = Projekat.Instance.Namestaji;
             var listaAkcija = Projekat.Instance.Akcija;
             var izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
             var izabranaAkcija = (Akcija)cbAkcija.SelectedItem;
@@ -74,7 +85,7 @@ namespace POP_SF38_2016GUI.UI
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    namestaj.Id = listaNamestaja.Count + 1;
+                    //namestaj.Id = listaNamestaja.Count + 1;
                     namestaj.Naziv = tbNaziv.Text;
                     namestaj.Sifra = tbSifra.Text;
                     namestaj.Cena = Double.Parse(tbCena.Text);
@@ -110,7 +121,8 @@ namespace POP_SF38_2016GUI.UI
                         }
                     }*/
 
-                    listaNamestaja.Add(namestaj);
+                    Namestaj.Create(namestaj);
+                    //listaNamestaja.Add(namestaj);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaNamestaja)
@@ -134,6 +146,7 @@ namespace POP_SF38_2016GUI.UI
                                     }
                                 }
                             }
+                            Namestaj.Update(n);
 
                             /*
                             foreach (var ak in listaAkcija)
@@ -162,7 +175,7 @@ namespace POP_SF38_2016GUI.UI
                     }
                     break;
             }
-            GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
+            //GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
             GenericSerializer.Serialize("akcija.xml", listaAkcija);
             Close();
         }

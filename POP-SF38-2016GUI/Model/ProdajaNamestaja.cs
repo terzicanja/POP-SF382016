@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +15,13 @@ namespace POP_SF382016.Model
     {
         private int id;
         //private List<int> idNamestaja;
-        private ObservableCollection<int> idStavki;
+        //private ObservableCollection<int> idStavki;
         private DateTime datumProdaje;
         private int brojRacuna;
         //private int idKupca;
         private string kupac;
         private double pdv;
-        private ObservableCollection<int> idUsluga;
+        //private ObservableCollection<int> idUsluga;
         private double ukupanIznos;
         /*private Korisnik korisnik;
 
@@ -53,7 +56,7 @@ namespace POP_SF382016.Model
             }
         }
 
-        public ObservableCollection<int> IdStavki
+        /*public ObservableCollection<int> IdStavki
         {
             get { return idStavki; }
             set
@@ -61,7 +64,7 @@ namespace POP_SF382016.Model
                 idStavki = value;
                 OnPropertyChanged("IdStavki");
             }
-        }
+        }*/
 
         public DateTime DatumProdaje
         {
@@ -103,7 +106,7 @@ namespace POP_SF382016.Model
             }*/
         }
 
-        public ObservableCollection<int> IdUsluga
+        /*public ObservableCollection<int> IdUsluga
         {
             get { return idUsluga; }
             set
@@ -111,7 +114,7 @@ namespace POP_SF382016.Model
                 idUsluga = value;
                 OnPropertyChanged("IdUsluga");
             }
-        }
+        }*/
 
         public double UkupanIznos
         {
@@ -142,7 +145,7 @@ namespace POP_SF382016.Model
 
         public static ProdajaNamestaja GetById(int id)
         {
-            foreach (var a in Projekat.Instance.ProdajaNamestaja)
+            foreach (var a in Projekat.Instance.ProdajeNamestaja)
             {
                 if (a.Id == id)
                 {
@@ -165,14 +168,102 @@ namespace POP_SF382016.Model
             return new ProdajaNamestaja()
             {
                 Id = id,
-                IdStavki = new ObservableCollection<int>(idStavki),
+                //IdStavki = new ObservableCollection<int>(idStavki),
                 DatumProdaje = datumProdaje,
                 BrojRacuna = brojRacuna,
                 Kupac = kupac,
                 //PDV = 0.2,
-                IdUsluga = new ObservableCollection<int>(idUsluga),
+                //IdUsluga = new ObservableCollection<int>(idUsluga),
                 UkupanIznos = ukupanIznos
             };
         }
+
+        #region CRUD
+        public static ObservableCollection<ProdajaNamestaja> GetAll()
+        {
+            var prodaje = new ObservableCollection<ProdajaNamestaja>();
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+
+                cmd.CommandText = "SELECT * FROM Prodaja;";
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Prodaja");
+
+                foreach (DataRow row in ds.Tables["Prodaja"].Rows)
+                {
+                    var tn = new ProdajaNamestaja();
+                    tn.Id = Convert.ToInt32(row["Id"]);
+                    tn.DatumProdaje = DateTime.Parse(row["DatumProdaje"].ToString());
+                    tn.BrojRacuna = Convert.ToInt32(row["BrojRacuna"]);
+                    tn.Kupac = row["Kupac"].ToString();
+                    tn.UkupanIznos = double.Parse(row["UkupanIznos"].ToString());
+
+                    prodaje.Add(tn);
+                }
+            }
+            return prodaje;
+        }
+
+        public static ProdajaNamestaja Create(ProdajaNamestaja tn)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "INSERT INTO Prodaja (DatumProdaje, BrojRacuna, Kupac, UkupanIznos) VALUES (@DatumProdaje, @BrojRacuna, @Kupac, @UkupanIznos);";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                
+                cmd.Parameters.AddWithValue("DatumProdaje", tn.DatumProdaje);
+                cmd.Parameters.AddWithValue("BrojRacuna", tn.BrojRacuna);
+                cmd.Parameters.AddWithValue("Kupac", tn.Kupac);
+                cmd.Parameters.AddWithValue("UkupanIznos", tn.UkupanIznos);
+
+                tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+            }
+
+            Projekat.Instance.ProdajeNamestaja.Add(tn);
+
+            return tn;
+        }
+
+        public static void Update(ProdajaNamestaja tn)
+        {
+            //azuriranje baze
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "UPDATE Prodaja SET DatumProdaje = @DatumProdaje, BrojRacuna = @BrojRacuna, " +
+                    "Kupac = @Kupac, UkupanIznos = @UkupanIznos WHERE Id=@Id;";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", tn.Id);
+                cmd.Parameters.AddWithValue("DatumProdaje", tn.DatumProdaje);
+                cmd.Parameters.AddWithValue("BrojRacuna", tn.BrojRacuna);
+                cmd.Parameters.AddWithValue("Kupac", tn.Kupac);
+                cmd.Parameters.AddWithValue("UkupanIznos", tn.UkupanIznos);
+
+                cmd.ExecuteNonQuery();
+            }
+            //azuriranje modela
+            foreach (var tip in Projekat.Instance.ProdajeNamestaja)
+            {
+                if (tn.Id == tip.Id)
+                {
+                    tip.DatumProdaje = tn.DatumProdaje;
+                    tip.BrojRacuna = tn.BrojRacuna;
+                    tip.Kupac = tn.Kupac;
+                    tip.UkupanIznos = tn.UkupanIznos;
+                }
+            }
+        }
+        #endregion
     }
 }

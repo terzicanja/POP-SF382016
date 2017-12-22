@@ -61,7 +61,7 @@ namespace POP_SF38_2016GUI.UI
             //dgSviNamestaji.SelectedValue = selectedna
 
             dgSviNamestaji.DataContext = this;
-            dgSviNamestaji.ItemsSource = Projekat.Instance.Namestaj;
+            dgSviNamestaji.ItemsSource = Projekat.Instance.Namestaji;
         }
 
         private void PickNamestaj(object sender, RoutedEventArgs e)

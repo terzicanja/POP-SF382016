@@ -45,17 +45,20 @@ namespace POP_SF38_2016GUI.UI
             tbKupac.DataContext = prodaja;
             lbUsluge.DataContext = prodaja;
 
-            dgProdajaNamestaj.ItemsSource = prodaja.IdStavki;
+            //dgProdajaNamestaj.ItemsSource = prodaja.IdStavki;
+            //OVO POSLE BAZA NE RADI PREPRAVITI
+
+
             //dgProdajaUsluge.ItemsSource = Projekat.Instance.DodatnaUsluga;
-            lbUsluge.ItemsSource = Projekat.Instance.DodatnaUsluga;
-            cbUsluge.Content = Projekat.Instance.DodatnaUsluga;
+            lbUsluge.ItemsSource = Projekat.Instance.DodatneUsluge;
+            cbUsluge.Content = Projekat.Instance.DodatneUsluge;
 
             
         }
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
-            var listaProdaja = Projekat.Instance.ProdajaNamestaja;
+            var listaProdaja = Projekat.Instance.ProdajeNamestaja;
             var listaStavki = Projekat.Instance.StavkaProdaje;
             //var izabraniKorisnik = (Korisnik)cbKorisnik.SelectedItem;
 
@@ -65,16 +68,17 @@ namespace POP_SF38_2016GUI.UI
             {
                 case Operacija.Dodavanje:
                     prodaja.Id = listaProdaja.Count + 1;
-                    prodaja.DatumProdaje = DateTime.Parse(dtProdaje.Text);
+                    //prodaja.DatumProdaje = DateTime.Parse(dtProdaje.Text);
                     prodaja.BrojRacuna = int.Parse(tbBrRacuna.Text);
                     prodaja.Kupac = tbKupac.Text;
-                    prodaja.IdStavki = prodaja.IdStavki;
-                    prodaja.IdUsluga.Add(SelektovanaUsluga.Id);
+                    //prodaja.IdStavki = prodaja.IdStavki;
+                    //prodaja.IdUsluga.Add(SelektovanaUsluga.Id);
                     //prodaja.IdKupca = izabraniKorisnik.Id;
                     //prodaja.UkupanIznos = 
-                    
 
-                    listaProdaja.Add(prodaja);
+                    ProdajaNamestaja.Create(prodaja);
+
+                    //listaProdaja.Add(prodaja);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaProdaja)
@@ -84,13 +88,15 @@ namespace POP_SF38_2016GUI.UI
                             n.DatumProdaje = prodaja.DatumProdaje;
                             n.BrojRacuna = prodaja.BrojRacuna;
                             n.Kupac = prodaja.Kupac;
-                            n.IdUsluga = prodaja.IdUsluga;
+                            //n.IdUsluga = prodaja.IdUsluga;
                             //n.Korisnik = prodaja.Korisnik;
+
+                            ProdajaNamestaja.Update(n);
                         }
                     }
                     break;
             }
-            GenericSerializer.Serialize("prodaja.xml", listaProdaja);
+            //GenericSerializer.Serialize("prodaja.xml", listaProdaja);
             Close();
         }
 
@@ -105,7 +111,7 @@ namespace POP_SF38_2016GUI.UI
             prozor.ShowDialog();
             //if(prozor.ShowDialog() == true)
             //{
-                prodaja.IdStavki.Add(prozor.SelektovanaStavka.Id);
+                //prodaja.IdStavki.Add(prozor.SelektovanaStavka.Id);
             //}
         }
     }

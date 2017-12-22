@@ -39,7 +39,7 @@ namespace POP_SF38_2016GUI.UI
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
-            var lista = Projekat.Instance.DodatnaUsluga;
+            var lista = Projekat.Instance.DodatneUsluge;
 
             switch (operacija)
             {
@@ -47,8 +47,9 @@ namespace POP_SF38_2016GUI.UI
                     usluga.Id = lista.Count + 1;
                     usluga.Usluga = tbUsluga.Text;
                     usluga.Cena = int.Parse(tbCena.Text);
-                    
-                    lista.Add(usluga);
+
+                    DodatnaUsluga.Create(usluga);
+                    //lista.Add(usluga);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in lista)
@@ -62,7 +63,7 @@ namespace POP_SF38_2016GUI.UI
                     }
                     break;
             }
-            GenericSerializer.Serialize("dodatna_usluga.xml", lista);
+            //GenericSerializer.Serialize("dodatna_usluga.xml", lista);
             Close();
         }
 

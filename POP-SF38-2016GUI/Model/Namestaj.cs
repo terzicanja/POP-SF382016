@@ -25,7 +25,7 @@ namespace POP_SF382016.Model
         private TipNamestaja tipNamestaja;
         private Akcija akcija;
 
-        [XmlIgnore]
+        /*[XmlIgnore]
         public TipNamestaja TipNamestaja
         {
             get
@@ -42,7 +42,7 @@ namespace POP_SF382016.Model
                 IdTipaNamestaja = tipNamestaja.Id;
                 OnPropertyChanged("TipNamestaja");
             }
-        }
+        }*/
         /*
         [XmlIgnore]
         public Akcija Akcija
@@ -82,6 +82,25 @@ namespace POP_SF382016.Model
             {
                 naziv = value;
                 OnPropertyChanged("Naziv");
+            }
+        }
+
+        [XmlIgnore]
+        public TipNamestaja TipNamestaja
+        {
+            get
+            {
+                if (tipNamestaja == null)
+                {
+                    tipNamestaja = TipNamestaja.GetById(IdTipaNamestaja);
+                }
+                return tipNamestaja;
+            }
+            set
+            {
+                tipNamestaja = value;
+                IdTipaNamestaja = tipNamestaja.Id;
+                OnPropertyChanged("TipNamestaja");
             }
         }
 
@@ -157,7 +176,7 @@ namespace POP_SF382016.Model
 
         public static Namestaj GetById(int id)
         {
-            foreach (var namestaj in Projekat.Instance.Namestaj)
+            foreach (var namestaj in Projekat.Instance.Namestaji)
             {
                 if (namestaj.Id == id)
                 {
@@ -233,7 +252,6 @@ namespace POP_SF382016.Model
 
                 cmd.CommandText = "INSERT INTO Namestaj (TipNamestajaId, Naziv, Sifra, Cena, Kolicina, Obrisan) VALUES (@TipNamestajaId, @Naziv, @Sifra, @Cena, @Kolicina, @Obrisan);";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                //sql injection google
                 cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
                 cmd.Parameters.AddWithValue("Naziv", n.Naziv);
                 cmd.Parameters.AddWithValue("Sifra", n.Sifra);
@@ -243,7 +261,7 @@ namespace POP_SF382016.Model
 
                 n.Id = int.Parse(cmd.ExecuteScalar().ToString());
             }
-            Projekat.Instance.Namestaj.Add(n);
+            Projekat.Instance.Namestaji.Add(n);
 
             return n;
         }
@@ -260,6 +278,7 @@ namespace POP_SF382016.Model
                     "Sifra=@Sifra, Cena=@Cena, Kolicina=@Kolicina, Obrisan=@Obrisan WHERE Id=@Id;";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
                 //sql injection google
+                cmd.Parameters.AddWithValue("Id", n.Id);
                 cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
                 cmd.Parameters.AddWithValue("Naziv", n.Naziv);
                 cmd.Parameters.AddWithValue("Sifra", n.Sifra);
@@ -270,7 +289,7 @@ namespace POP_SF382016.Model
                 cmd.ExecuteNonQuery();
             }
 
-            foreach (var nam in Projekat.Instance.Namestaj)
+            foreach (var nam in Projekat.Instance.Namestaji)
             {
                 if(n.Id == nam.Id)
                 {

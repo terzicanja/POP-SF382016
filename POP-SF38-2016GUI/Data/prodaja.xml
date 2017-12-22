@@ -2,107 +2,16 @@
 <ArrayOfProdajaNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProdajaNamestaja>
     <Id>1</Id>
-    <IdStavki />
-    <DatumProdaje>0001-01-01T00:00:00</DatumProdaje>
-    <BrojRacuna>5</BrojRacuna>
-    <IdUsluga />
-    <UkupanIznos>0</UkupanIznos>
+    <DatumProdaje>2010-11-12T11:22:33</DatumProdaje>
+    <BrojRacuna>23</BrojRacuna>
+    <Kupac>Peroo</Kupac>
+    <UkupanIznos>2345</UkupanIznos>
   </ProdajaNamestaja>
   <ProdajaNamestaja>
     <Id>2</Id>
-    <IdStavki />
-    <DatumProdaje>2017-12-06T00:00:00</DatumProdaje>
-    <BrojRacuna>777</BrojRacuna>
-    <Kupac>rrrrr</Kupac>
-    <IdUsluga />
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Id>3</Id>
-    <IdStavki />
-    <DatumProdaje>2017-12-20T00:00:00</DatumProdaje>
-    <BrojRacuna>4444</BrojRacuna>
-    <Kupac>eeeee</Kupac>
-    <IdUsluga />
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Id>4</Id>
-    <IdStavki />
-    <DatumProdaje>2017-12-14T00:00:00</DatumProdaje>
-    <BrojRacuna>8888</BrojRacuna>
-    <Kupac>iiiii</Kupac>
-    <IdUsluga />
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Id>5</Id>
-    <IdStavki />
-    <DatumProdaje>2017-12-21T00:00:00</DatumProdaje>
-    <BrojRacuna>4444</BrojRacuna>
-    <Kupac>uuuuu</Kupac>
-    <IdUsluga />
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Id>6</Id>
-    <IdStavki>
-      <int>12</int>
-    </IdStavki>
-    <DatumProdaje>2017-12-09T00:00:00</DatumProdaje>
-    <BrojRacuna>678</BrojRacuna>
-    <Kupac>wwww</Kupac>
-    <IdUsluga />
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Id>7</Id>
-    <IdStavki>
-      <int>13</int>
-      <int>14</int>
-    </IdStavki>
-    <DatumProdaje>2017-12-09T00:00:00</DatumProdaje>
-    <BrojRacuna>222</BrojRacuna>
-    <Kupac>zzz</Kupac>
-    <IdUsluga />
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Id>8</Id>
-    <IdStavki>
-      <int>15</int>
-      <int>16</int>
-    </IdStavki>
-    <DatumProdaje>2017-12-10T00:00:00</DatumProdaje>
-    <BrojRacuna>11111</BrojRacuna>
-    <Kupac>iiiiii</Kupac>
-    <IdUsluga />
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Id>9</Id>
-    <IdStavki>
-      <int>18</int>
-    </IdStavki>
-    <DatumProdaje>2017-12-20T00:00:00</DatumProdaje>
-    <BrojRacuna>20</BrojRacuna>
-    <Kupac>proba za usluge</Kupac>
-    <IdUsluga>
-      <int>1</int>
-    </IdUsluga>
-    <UkupanIznos>0</UkupanIznos>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <Id>10</Id>
-    <IdStavki>
-      <int>19</int>
-    </IdStavki>
-    <DatumProdaje>2017-12-09T00:00:00</DatumProdaje>
-    <BrojRacuna>222</BrojRacuna>
-    <Kupac>usluge</Kupac>
-    <IdUsluga>
-      <int>5</int>
-    </IdUsluga>
+    <DatumProdaje>2017-12-25T00:00:00</DatumProdaje>
+    <BrojRacuna>33</BrojRacuna>
+    <Kupac>baza</Kupac>
     <UkupanIznos>0</UkupanIznos>
   </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

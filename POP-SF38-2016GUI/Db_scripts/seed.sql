@@ -10,3 +10,16 @@ INSERT INTO Namestaj (TipNamestajaId, Naziv, Sifra, Cena, Kolicina, Obrisan)
 VALUES (2, 'Crni regal', 'cr2re', 345, 7, 0);
 INSERT INTO Namestaj (TipNamestajaId, Naziv, Sifra, Cena, Kolicina, Obrisan)
 VALUES (3, 'Ugggg', 'ug1po', 765, 5, 0);
+
+INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES ('Prevoz', 220, 0);
+INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES ('Montiranje', 7800, 0);
+INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES ('Nesto', 399, 0);
+
+INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, TipKorisnika, Obrisan)
+VALUES ('Petar', 'Petrovic', 'pera', 'pera', 'Administrator', 0);
+
+INSERT INTO Prodaja (DatumProdaje, BrojRacuna, Kupac, UkupanIznos)
+VALUES ('2010-11-12 11:22:33', 23, 'Peroo', 2345);
+
+INSERT INTO Stavka (IdProdaje, IdNamestaja, Kolicina) VALUES (1, 2, 3);
+INSERT INTO Stavka (IdProdaje, IdNamestaja, Kolicina) VALUES (2, 1, 4);

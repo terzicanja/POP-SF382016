@@ -39,12 +39,12 @@ namespace POP_SF38_2016GUI
         public MainWindow()
         {
             InitializeComponent();
-
+            /*
             var noviTip = TipNamestaja.Create(new TipNamestaja()
             {
                 Naziv = "novi",
                 Obrisan = false
-            });
+            });*/
 
             //view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
             //view.Filter = PrikazFilter;
@@ -105,7 +105,7 @@ namespace POP_SF38_2016GUI
             //dgPrikaz.SelectedItem += "{Binding Path=IzabraniNamestaj}";
 
             trenutnoAktivan = "Namestaj";
-            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaji);
             view.Filter = NamestajFilter;
             dgPrikaz.ItemsSource = view;
 
@@ -132,7 +132,7 @@ namespace POP_SF38_2016GUI
             trenutnoAktivan = "Usluge";
             //dgPrikaz.ItemsSource = Projekat.Instance.DodatnaUsluga;
             //dgPrikaz.SelectedItem = IzabranaUsluga;
-            view = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatnaUsluga);
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatneUsluge);
             view.Filter = UslugeFilter;
             dgPrikaz.ItemsSource = view;
         }
@@ -149,7 +149,9 @@ namespace POP_SF38_2016GUI
         private void ProdajePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Prodaja";
-            dgPrikaz.ItemsSource = Projekat.Instance.ProdajaNamestaja;
+            dgPrikaz.ItemsSource = Projekat.Instance.ProdajeNamestaja;
+
+
             //dgPrikaz.SelectedItem = IzabranaProdaja;
             //view = CollectionViewSource.GetDefaultView(Projekat.Instance.ProdajaNamestaja);
             //view.Filter = ProdajeFilter;
@@ -160,13 +162,13 @@ namespace POP_SF38_2016GUI
         {
             trenutnoAktivan = "Korisnici";
             //dgPrikaz.ItemsSource = Projekat.Instance.Korisnik;
-            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Korisnik);
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Korisnici);
             view.Filter = KorisniciFilter;
             dgPrikaz.ItemsSource = view;
         }
-        
 
 
+        #region Dodavanje
         private void DodajNamestaj()
         {
             var noviNamestaj = new Namestaj()
@@ -198,7 +200,6 @@ namespace POP_SF38_2016GUI
             uslugeProzor.ShowDialog();
         }
 
-        //KAKO DA STAVI DANASNJI DATUM?? !!!!!
         private void DodajAkciju()
         {
             var novaAkcija = new Akcija()
@@ -216,11 +217,11 @@ namespace POP_SF38_2016GUI
         {
             var novaProdaja = new ProdajaNamestaja()
             {
-                IdStavki = new ObservableCollection<int>(),
-                DatumProdaje = DateTime.Today,
+                //IdStavki = new ObservableCollection<int>(),
+                DatumProdaje = DateTime.Now,
                 BrojRacuna = 0,
                 Kupac = "",
-                IdUsluga = new ObservableCollection<int>()
+                //IdUsluga = new ObservableCollection<int>()
             };
             var prozor = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
@@ -235,9 +236,9 @@ namespace POP_SF38_2016GUI
             var prozor = new KorisniciWindow(noviKorisnik, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
         }
+        #endregion
 
-
-
+        #region Izmena
         private void IzmeniSalon()
         {
             Salon kopija = (Salon)IzabraniSalon.Clone();
@@ -293,13 +294,13 @@ namespace POP_SF38_2016GUI
             var prozor = new KorisniciWindow(kopija, NamestajWindow.Operacija.Izmena);
             prozor.ShowDialog();
         }
-        
+        #endregion
 
-
+        #region Brisanje
         private void ObrisiNamestaj()
         {
             var IzabraniNamestaj = (Namestaj)dgPrikaz.SelectedItem;
-            var lista = Projekat.Instance.Namestaj;
+            var lista = Projekat.Instance.Namestaji;
             MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {IzabraniNamestaj.Naziv}?", "Brisanje", MessageBoxButton.YesNo);
 
             if(potvrda == MessageBoxResult.Yes)
@@ -308,7 +309,7 @@ namespace POP_SF38_2016GUI
                 {
                     if (n.Id == IzabraniNamestaj.Id)
                     {
-                        n.Obrisan = true;
+                        //n.Obrisan = true;
                         view.Refresh();
                         break;
                     }
@@ -320,7 +321,7 @@ namespace POP_SF38_2016GUI
         private void ObrisiTipNamestaja()
         {
             var izabraniTip = (TipNamestaja)dgPrikaz.SelectedItem;
-            var listaNamestaja = Projekat.Instance.Namestaj;
+            var listaNamestaja = Projekat.Instance.Namestaji;
             var lista = Projekat.Instance.TipoviNamestaja;
             MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniTip.Naziv}?", "Brisanje", MessageBoxButton.YesNo);
 
@@ -330,12 +331,14 @@ namespace POP_SF38_2016GUI
                 {
                     if(t.Id == izabraniTip.Id)
                     {
-                        t.Obrisan = true;
+                        TipNamestaja.Delete(t);
+                        //t.Obrisan = true;
                         foreach (var nam in listaNamestaja)
                         {
                             if (t.Id == nam.IdTipaNamestaja)
                             {
-                                nam.Obrisan = true;
+                                Namestaj.Delete(nam);
+                                //nam.Obrisan = true;
                             }
                         }
                         view.Refresh();
@@ -353,15 +356,15 @@ namespace POP_SF38_2016GUI
                         }
                     }*/
                 }
-                GenericSerializer.Serialize("tip.xml", lista);
-                GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
+                //GenericSerializer.Serialize("tip.xml", lista);
+                //GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
             }
         }
 
         private void ObrisiUslugu()
         {
             var izabraniTip = (DodatnaUsluga)dgPrikaz.SelectedItem;
-            var lista = Projekat.Instance.DodatnaUsluga;
+            var lista = Projekat.Instance.DodatneUsluge;
             MessageBoxResult potvrda = MessageBox.Show($"Da li ste sigurni da zelite da obrisete {izabraniTip.Usluga}?", "Brisanje", MessageBoxButton.YesNo);
 
             if (potvrda == MessageBoxResult.Yes)
@@ -403,7 +406,7 @@ namespace POP_SF38_2016GUI
         private void ObrisiKorisnika()
         {
             var izabraniKorisnik = (Korisnik)dgPrikaz.SelectedItem;
-            var lista = Projekat.Instance.Korisnik;
+            var lista = Projekat.Instance.Korisnici;
             MessageBoxResult potvrda = MessageBox.Show("Da li ste sigurni da zelite da obrisete?", "Brisanje", MessageBoxButton.YesNo);
 
             if (potvrda == MessageBoxResult.Yes)
@@ -420,7 +423,7 @@ namespace POP_SF38_2016GUI
             }
             GenericSerializer.Serialize("korisnik.xml", lista);
         }
-
+        #endregion
 
 
         /*private void Proba(object p)

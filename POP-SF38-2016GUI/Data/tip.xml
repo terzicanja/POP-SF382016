@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTipNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TipNamestaja>
-    <Id>0</Id>
-    <Naziv>Podrazumevani tip</Naziv>
-    <Obrisan>false</Obrisan>
-  </TipNamestaja>
-  <TipNamestaja>
     <Id>1</Id>
-    <Naziv>Sofa</Naziv>
+    <Naziv>Polica</Naziv>
     <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
@@ -17,32 +12,17 @@
   </TipNamestaja>
   <TipNamestaja>
     <Id>3</Id>
-    <Naziv>lampa</Naziv>
+    <Naziv>Ugaona</Naziv>
     <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>4</Id>
-    <Naziv>stoo</Naziv>
+    <Naziv>Krevet</Naziv>
+    <Obrisan>false</Obrisan>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>1002</Id>
+    <Naziv>uuuuuu</Naziv>
     <Obrisan>true</Obrisan>
-  </TipNamestaja>
-  <TipNamestaja>
-    <Id>5</Id>
-    <Naziv>soficaaa</Naziv>
-    <Obrisan>true</Obrisan>
-  </TipNamestaja>
-  <TipNamestaja>
-    <Id>7</Id>
-    <Naziv>jastuceee</Naziv>
-    <Obrisan>false</Obrisan>
-  </TipNamestaja>
-  <TipNamestaja>
-    <Id>8</Id>
-    <Naziv>krevetac</Naziv>
-    <Obrisan>false</Obrisan>
-  </TipNamestaja>
-  <TipNamestaja>
-    <Id>9</Id>
-    <Naziv>123</Naziv>
-    <Obrisan>false</Obrisan>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

@@ -48,7 +48,7 @@ namespace POP_SF38_2016GUI.UI
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var lista = Projekat.Instance.Akcija;
-            var listaNamestaja = Projekat.Instance.Namestaj;
+            var listaNamestaja = Projekat.Instance.Namestaji;
 
             switch (operacija)
             {
@@ -98,7 +98,7 @@ namespace POP_SF38_2016GUI.UI
 
         private void SviNamestaji(object sender, RoutedEventArgs e)
         {
-            var lista = Projekat.Instance.Namestaj;
+            var lista = Projekat.Instance.Namestaji;
             //var NamestajNaPopustu = akcija.IdNamestaja;
             SviNamestajiWindow prozor = new SviNamestajiWindow(SviNamestajiWindow.Radnja.Preuzmi);
             //prozor.ShowDialog();
