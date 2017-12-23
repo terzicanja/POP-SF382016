@@ -12,13 +12,12 @@ using System.Xml.Serialization;
 
 namespace POP_SF382016.Model
 {
-    public class StavkaProdaje : INotifyPropertyChanged, ICloneable
+    public class NaAkciji : INotifyPropertyChanged, ICloneable
     {
         private int id;
-        private int idProdaje;
+        private int idAkcije;
         private int idNamestaja;
-        private int kolicina;
-        private ProdajaNamestaja prodajaNamestaja;
+        private Akcija akcija;
         private Namestaj namestaj;
 
         public int Id
@@ -31,31 +30,31 @@ namespace POP_SF382016.Model
             }
         }
 
-        public int IdProdaje
+        public int IdAkcije
         {
-            get { return idProdaje; }
+            get { return idAkcije; }
             set
             {
-                idProdaje = value;
-                OnPropertyChanged("IdProdaje");
+                idAkcije = value;
+                OnPropertyChanged("IdAkcije");
             }
         }
         [XmlIgnore]
-        public ProdajaNamestaja ProdajaNamestaja
+        public Akcija Akcija
         {
             get
             {
-                if(prodajaNamestaja == null)
+                if (akcija == null)
                 {
-                    prodajaNamestaja = ProdajaNamestaja.GetById(IdProdaje);
+                    akcija = Akcija.GetById(IdAkcije);
                 }
-                return prodajaNamestaja;
+                return akcija;
             }
             set
             {
-                prodajaNamestaja = value;
-                IdProdaje = prodajaNamestaja.Id;
-                OnPropertyChanged("ProdajaNamestaja");
+                akcija = value;
+                IdAkcije = akcija.Id;
+                OnPropertyChanged("Akcija");
             }
         }
 
@@ -88,22 +87,13 @@ namespace POP_SF382016.Model
             }
         }
 
-        public int Kolicina
-        {
-            get { return kolicina; }
-            set
-            {
-                kolicina = value;
-                OnPropertyChanged("Kolicina");
-            }
-        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
@@ -111,20 +101,18 @@ namespace POP_SF382016.Model
 
         public object Clone()
         {
-            return new StavkaProdaje()
+            return new NaAkciji()
             {
                 Id = id,
-                IdProdaje = idProdaje,
-                IdNamestaja = idNamestaja,
-                Kolicina = kolicina
+                IdAkcije = idAkcije,
+                IdNamestaja = idNamestaja
             };
         }
 
-
         #region CRUD
-        public static ObservableCollection<StavkaProdaje> GetAll()
+        public static ObservableCollection<NaAkciji> GetAll()
         {
-            var stavke = new ObservableCollection<StavkaProdaje>();
+            var naAkciji = new ObservableCollection<NaAkciji>();
 
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
@@ -132,48 +120,46 @@ namespace POP_SF382016.Model
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                cmd.CommandText = "SELECT * FROM Stavka;";
+                cmd.CommandText = "SELECT * FROM NaAkciji;";
                 da.SelectCommand = cmd;
-                da.Fill(ds, "Stavka");
+                da.Fill(ds, "NaAkciji");
 
-                foreach (DataRow row in ds.Tables["Stavka"].Rows)
+                foreach (DataRow row in ds.Tables["NaAkciji"].Rows)
                 {
-                    var tn = new StavkaProdaje();
+                    var tn = new NaAkciji();
                     tn.Id = Convert.ToInt32(row["Id"]);
-                    tn.IdProdaje = Convert.ToInt32(row["IdProdaje"]);
+                    tn.IdAkcije = Convert.ToInt32(row["IdAkcije"]);
                     tn.IdNamestaja = Convert.ToInt32(row["IdNamestaja"]);
-                    tn.Kolicina = Convert.ToInt32(row["Kolicina"]);
 
-                    stavke.Add(tn);
+                    naAkciji.Add(tn);
                 }
             }
-            return stavke;
+            return naAkciji;
         }
 
-        public static StavkaProdaje Create(StavkaProdaje tn)
+        public static NaAkciji Create(NaAkciji tn)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
                 con.Open();
 
                 SqlCommand cmd = con.CreateCommand();
-                
-                cmd.CommandText = "INSERT INTO Stavka (IdProdaje, IdNamestaja, Kolicina) VALUES (@IdProdaje, @IdNamestaja, @Kolicina);";
+
+                cmd.CommandText = "INSERT INTO NaAkciji (IdAkcije, IdNamestaja) VALUES (@IdAkcije, @IdNamestaja);";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
                 //sql injection google
+                cmd.Parameters.AddWithValue("IdAkcije", tn.IdAkcije);
                 cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
-                cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
-                cmd.Parameters.AddWithValue("Kolicina", tn.Kolicina);
 
                 tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
             }
 
-            Projekat.Instance.StavkeProdaje.Add(tn);
+            Projekat.Instance.NaAkcijama.Add(tn);
 
             return tn;
         }
 
-        public static void Update(StavkaProdaje tn)
+        public static void Update(NaAkciji tn)
         {
             //azuriranje baze
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
@@ -182,23 +168,21 @@ namespace POP_SF382016.Model
 
                 SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "UPDATE Stavka SET IdProdaje = @IdProdaje, IdNamestaja = @IdNamestaja, Kolicina = @Kolicina WHERE Id=@Id;";
+                cmd.CommandText = "UPDATE NaAkciji SET IdAkcije = @IdAkcije, IdNamestaja = @IdNamestaja WHERE Id=@Id;";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
                 cmd.Parameters.AddWithValue("Id", tn.Id);
-                cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
+                cmd.Parameters.AddWithValue("IdAkcije", tn.IdAkcije);
                 cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
-                cmd.Parameters.AddWithValue("Kolicina", tn.Kolicina);
 
                 cmd.ExecuteNonQuery();
             }
             //azuriranje modela
-            foreach (var tip in Projekat.Instance.StavkeProdaje)
+            foreach (var tip in Projekat.Instance.NaAkcijama)
             {
                 if (tn.Id == tip.Id)
                 {
-                    tip.IdProdaje = tn.IdProdaje;
+                    tip.IdAkcije = tn.IdAkcije;
                     tip.IdNamestaja = tn.IdNamestaja;
-                    tip.Kolicina = tn.Kolicina;
                 }
             }
         }

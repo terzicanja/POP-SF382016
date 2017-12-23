@@ -2,102 +2,20 @@
 <ArrayOfStavkaProdaje xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <StavkaProdaje>
     <Id>1</Id>
+    <IdProdaje>1</IdProdaje>
     <IdNamestaja>2</IdNamestaja>
-    <Kolicina>2</Kolicina>
+    <Kolicina>3</Kolicina>
   </StavkaProdaje>
   <StavkaProdaje>
-    <Id>1</Id>
-    <IdNamestaja>0</IdNamestaja>
-    <Kolicina>0</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>3</Id>
-    <IdNamestaja>0</IdNamestaja>
-    <Kolicina>0</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>4</Id>
-    <IdNamestaja>6</IdNamestaja>
-    <Kolicina>0</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>5</Id>
-    <IdNamestaja>14</IdNamestaja>
-    <Kolicina>5</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>6</Id>
+    <Id>2</Id>
+    <IdProdaje>2</IdProdaje>
     <IdNamestaja>1</IdNamestaja>
-    <Kolicina>2</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>7</Id>
-    <IdNamestaja>4</IdNamestaja>
-    <Kolicina>6</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>8</Id>
-    <IdNamestaja>12</IdNamestaja>
-    <Kolicina>77</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>9</Id>
-    <IdNamestaja>6</IdNamestaja>
-    <Kolicina>3</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>10</Id>
-    <IdNamestaja>16</IdNamestaja>
-    <Kolicina>77</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>11</Id>
-    <IdNamestaja>1</IdNamestaja>
-    <Kolicina>3</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>12</Id>
-    <IdNamestaja>3</IdNamestaja>
-    <Kolicina>3</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>13</Id>
-    <IdNamestaja>1</IdNamestaja>
-    <Kolicina>1</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>14</Id>
-    <IdNamestaja>7</IdNamestaja>
-    <Kolicina>7</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>15</Id>
-    <IdNamestaja>5</IdNamestaja>
-    <Kolicina>5</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>16</Id>
-    <IdNamestaja>7</IdNamestaja>
-    <Kolicina>3</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>17</Id>
-    <IdNamestaja>7</IdNamestaja>
-    <Kolicina>7</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>18</Id>
-    <IdNamestaja>5</IdNamestaja>
-    <Kolicina>12</Kolicina>
-  </StavkaProdaje>
-  <StavkaProdaje>
-    <Id>19</Id>
-    <IdNamestaja>2</IdNamestaja>
     <Kolicina>4</Kolicina>
   </StavkaProdaje>
   <StavkaProdaje>
-    <Id>20</Id>
-    <IdNamestaja>4</IdNamestaja>
-    <Kolicina>3</Kolicina>
+    <Id>3</Id>
+    <IdProdaje>0</IdProdaje>
+    <IdNamestaja>1</IdNamestaja>
+    <Kolicina>1</Kolicina>
   </StavkaProdaje>
 </ArrayOfStavkaProdaje>

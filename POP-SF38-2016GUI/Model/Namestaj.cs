@@ -23,7 +23,8 @@ namespace POP_SF382016.Model
         public int idTipaNamestaja;
         private bool obrisan;
         private TipNamestaja tipNamestaja;
-        private Akcija akcija;
+
+        //private Akcija akcija;
 
         /*[XmlIgnore]
         public TipNamestaja TipNamestaja

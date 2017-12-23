@@ -53,30 +53,58 @@ namespace POP_SF38_2016GUI.UI
             lbUsluge.ItemsSource = Projekat.Instance.DodatneUsluge;
             cbUsluge.Content = Projekat.Instance.DodatneUsluge;
 
-            
+
+            prodaja.Id = Projekat.Instance.ProdajeNamestaja.Count + 1;
+            prodaja.BrojRacuna = 1;
+            prodaja.Kupac = "a";
+            prodaja.UkupanIznos = 0;
+            ProdajaNamestaja.Create(prodaja);
+
+
         }
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var listaProdaja = Projekat.Instance.ProdajeNamestaja;
-            var listaStavki = Projekat.Instance.StavkaProdaje;
+            var listaStavki = Projekat.Instance.StavkeProdaje;
             //var izabraniKorisnik = (Korisnik)cbKorisnik.SelectedItem;
 
             SelektovanaUsluga = (DodatnaUsluga)lbUsluge.SelectedItem;
 
+
+            
+
+
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    prodaja.Id = listaProdaja.Count + 1;
+                    //prodaja.Id = listaProdaja.Count + 1;
+
+
                     //prodaja.DatumProdaje = DateTime.Parse(dtProdaje.Text);
+
+
                     prodaja.BrojRacuna = int.Parse(tbBrRacuna.Text);
                     prodaja.Kupac = tbKupac.Text;
+
+
                     //prodaja.IdStavki = prodaja.IdStavki;
                     //prodaja.IdUsluga.Add(SelektovanaUsluga.Id);
                     //prodaja.IdKupca = izabraniKorisnik.Id;
                     //prodaja.UkupanIznos = 
+                    foreach (var i in listaStavki)
+                    {
+                        if(i.IdProdaje == prodaja.Id)
+                        {
+                            prodaja.UkupanIznos += i.Namestaj.Cena * i.Kolicina;
+                        }
+                    }
 
-                    ProdajaNamestaja.Create(prodaja);
+                    prodaja.UkupanIznos += SelektovanaUsluga.Cena;
+                    //prodaja.UkupanIznos = listaStavki.Sum(item => item.Namestaj.Cena);
+
+                    ProdajaNamestaja.Update(prodaja);
+                    //ProdajaNamestaja.Create(prodaja);
 
                     //listaProdaja.Add(prodaja);
                     break;
@@ -90,6 +118,18 @@ namespace POP_SF38_2016GUI.UI
                             n.Kupac = prodaja.Kupac;
                             //n.IdUsluga = prodaja.IdUsluga;
                             //n.Korisnik = prodaja.Korisnik;
+
+                            foreach (var i in listaStavki)
+                            {
+                                if (i.IdProdaje == prodaja.Id)
+                                {
+                                    n.UkupanIznos += i.Namestaj.Cena * i.Kolicina;
+                                }
+                            }
+
+                            n.UkupanIznos += SelektovanaUsluga.Cena;
+
+
 
                             ProdajaNamestaja.Update(n);
                         }
@@ -107,8 +147,29 @@ namespace POP_SF38_2016GUI.UI
 
         private void SviNamestajiZaProdaju(object sender, RoutedEventArgs e)
         {
+            /*prodaja.Id = Projekat.Instance.ProdajeNamestaja.Count + 1;
+            prodaja.BrojRacuna = 1;
+            prodaja.Kupac = "a";
+            prodaja.UkupanIznos = 0;
+            ProdajaNamestaja.Create(prodaja);*/
+
             SviNamestajiWindow prozor = new SviNamestajiWindow(SviNamestajiWindow.Radnja.Sacuvaj);
             prozor.ShowDialog();
+            //if(prozor.ShowDialog() == true)
+            //{
+                var stavkaa = prozor.SelektovanaStavka;
+                //stavkaa.Id = Projekat.Instance.StavkeProdaje.Count + 1;
+            stavkaa.IdNamestaja = stavkaa.IdNamestaja;
+            stavkaa.IdProdaje = prodaja.Id;
+            stavkaa.Kolicina = stavkaa.Kolicina;
+            StavkaProdaje.Update(stavkaa);
+                //StavkaProdaje.Create(stavkaa);
+            //}
+            /*prozor.SelektovanaStavka.Id = Projekat.Instance.StavkeProdaje.Count + 1;
+            prozor.SelektovanaStavka.IdNamestaja = 1;
+            prozor.SelektovanaStavka.IdProdaje = prodaja.Id;
+            prozor.SelektovanaStavka.Kolicina = 1;
+            StavkaProdaje.Create(prozor.SelektovanaStavka);*/
             //if(prozor.ShowDialog() == true)
             //{
                 //prodaja.IdStavki.Add(prozor.SelektovanaStavka.Id);

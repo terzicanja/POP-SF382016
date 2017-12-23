@@ -20,7 +20,9 @@ namespace POP_SF382016.Model
         private int brojRacuna;
         //private int idKupca;
         private string kupac;
+
         private double pdv;
+
         //private ObservableCollection<int> idUsluga;
         private double ukupanIznos;
         /*private Korisnik korisnik;

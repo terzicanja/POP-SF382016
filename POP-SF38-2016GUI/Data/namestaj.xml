@@ -21,16 +21,6 @@
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <idTipaNamestaja>3</idTipaNamestaja>
-    <Id>3</Id>
-    <Naziv>Ugggg</Naziv>
-    <Sifra>ug1po</Sifra>
-    <Cena>765</Cena>
-    <KolicinaUMagacinu>5</KolicinaUMagacinu>
-    <IdTipaNamestaja>3</IdTipaNamestaja>
-    <Obrisan>false</Obrisan>
-  </Namestaj>
-  <Namestaj>
     <idTipaNamestaja>4</idTipaNamestaja>
     <Id>1002</Id>
     <Naziv>probasss</Naziv>
@@ -38,6 +28,16 @@
     <Cena>8811</Cena>
     <KolicinaUMagacinu>8811</KolicinaUMagacinu>
     <IdTipaNamestaja>4</IdTipaNamestaja>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <idTipaNamestaja>1</idTipaNamestaja>
+    <Id>1004</Id>
+    <Naziv>baza</Naziv>
+    <Sifra>aa</Sifra>
+    <Cena>300</Cena>
+    <KolicinaUMagacinu>4</KolicinaUMagacinu>
+    <IdTipaNamestaja>1</IdTipaNamestaja>
     <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

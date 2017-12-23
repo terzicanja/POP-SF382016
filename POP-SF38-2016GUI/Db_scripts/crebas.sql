@@ -50,9 +50,33 @@ CREATE TABLE Stavka(
 	FOREIGN KEY (IdNamestaja) REFERENCES Namestaj(Id)
 );
 
+CREATE TABLE UslugaProdaje(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	IdProdaje INT,
+	IdUsluge INT,
+	FOREIGN KEY (IdProdaje) REFERENCES Prodaja(Id),
+	FOREIGN KEY (IdUsluge) REFERENCES Usluga(Id)
+);
+
+CREATE TABLE Akcija(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	Naziv VARCHAR(70),
+	PocetakAkcije DATE,
+	KrajAkcije DATE,
+	Popust INT
+);
+
+CREATE TABLE NaAkciji(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	IdAkcije INT,
+	IdNamestaja INT,
+	FOREIGN KEY (IdAkcije) REFERENCES Akcija(Id),
+	FOREIGN KEY (IdNamestaja) REFERENCES Namestaj(Id)
+);
 
 
-DROP TABLE Stavka;
+
+DROP TABLE Akcija;
 
 
 SELECT * FROM Namestaj;

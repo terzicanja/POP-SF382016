@@ -23,3 +23,14 @@ VALUES ('2010-11-12 11:22:33', 23, 'Peroo', 2345);
 
 INSERT INTO Stavka (IdProdaje, IdNamestaja, Kolicina) VALUES (1, 2, 3);
 INSERT INTO Stavka (IdProdaje, IdNamestaja, Kolicina) VALUES (2, 1, 4);
+
+INSERT INTO UslugaProdaje (IdProdaje, IdUsluge) VALUES (1, 2);
+
+INSERT INTO Akcija (Naziv, PocetakAkcije, KrajAkcije, Popust)
+VALUES ('Novogodisnji popust', '2010-11-12', '2015-11-12', 22);
+INSERT INTO Akcija (Naziv, PocetakAkcije, KrajAkcije, Popust)
+VALUES ('Uskrsnji popust', '2015-11-03', '2017-02-12', 15);
+
+INSERT INTO NaAkciji (IdAkcije, IdNamestaja) VALUES (1, 1);
+
+DELETE FROM Stavka WHERE Id = 20;

@@ -66,7 +66,7 @@ namespace POP_SF38_2016GUI.UI
             }*/
             //cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
             cbAkcija.DataContext = namestaj;
-            cbAkcija.ItemsSource = Projekat.Instance.Akcija;
+            cbAkcija.ItemsSource = Projekat.Instance.Akcije;
         }
 
         private bool TipFilter(object obj)
@@ -78,7 +78,7 @@ namespace POP_SF38_2016GUI.UI
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var listaNamestaja = Projekat.Instance.Namestaji;
-            var listaAkcija = Projekat.Instance.Akcija;
+            var listaAkcija = Projekat.Instance.Akcije;
             var izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
             var izabranaAkcija = (Akcija)cbAkcija.SelectedItem;
 
@@ -99,7 +99,8 @@ namespace POP_SF38_2016GUI.UI
                         {
                             if(ak.Id == izabranaAkcija.Id)
                             {
-                                ak.IdNamestaja.Add(namestaj.Id);
+                                //ak.IdNamestaja.Add(namestaj.Id);
+                                //OVO RADI, ALI BAZE....
                             }
                         }
                     }
@@ -142,7 +143,8 @@ namespace POP_SF38_2016GUI.UI
                                 {
                                     if (ak.Id == izabranaAkcija.Id)
                                     {
-                                        ak.IdNamestaja.Add(namestaj.Id);
+                                        //ak.IdNamestaja.Add(namestaj.Id);
+                                        //TAKODJE BAZEE
                                     }
                                 }
                             }

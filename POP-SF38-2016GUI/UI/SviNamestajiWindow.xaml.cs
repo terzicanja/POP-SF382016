@@ -29,7 +29,9 @@ namespace POP_SF38_2016GUI.UI
 
         public Namestaj SelektovaniNamestaj = null;
         public StavkaProdaje SelektovanaStavka = null;
+        public NaAkciji SelektovanNaAkciji = null;
         private StavkaProdaje stavka;
+        private NaAkciji naAkciji;
         private Radnja radnja;
         
         public SviNamestajiWindow(Radnja radnja = Radnja.Sacuvaj)
@@ -40,6 +42,7 @@ namespace POP_SF38_2016GUI.UI
             this.DataContext = SelektovaniNamestaj;
             this.radnja = radnja;
             this.stavka = new StavkaProdaje();
+            this.naAkciji = new NaAkciji();
             
 
             if(radnja == Radnja.Preuzmi)
@@ -57,6 +60,7 @@ namespace POP_SF38_2016GUI.UI
             //int idNamestajaZaProdaju = SelektovaniNamestaj.Id;
             //int kolicinaN = koliko.ToString()
             SelektovanaStavka = new StavkaProdaje();
+            SelektovanNaAkciji = new NaAkciji();
 
             //dgSviNamestaji.SelectedValue = selectedna
 
@@ -66,43 +70,42 @@ namespace POP_SF38_2016GUI.UI
 
         private void PickNamestaj(object sender, RoutedEventArgs e)
         {
+            var listaNamNaAkciji = Projekat.Instance.NaAkcijama;
             SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
+
+            naAkciji.IdNamestaja = SelektovaniNamestaj.Id;
+            naAkciji.IdAkcije = 1;
+
+            NaAkciji.Create(naAkciji);
+
+            SelektovanNaAkciji = naAkciji;
+            
             this.DialogResult = true;
             this.Close();
         }
 
         private void SacuvajStavku(object sender, RoutedEventArgs e)
         {
-            var listaStavki = Projekat.Instance.StavkaProdaje;
+            var listaStavki = Projekat.Instance.StavkeProdaje;
             SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
 
-            /*foreach (var s in listaStavki)
-            {
-                if(s.IdNamestaja == SelektovaniNamestaj.Id && s.Kolicina == int.Parse(tbKoliko.Text))
-                {
-                    SelektovanaStavka = s;
-                }
-                else
-                {
-                    stavka.Id = listaStavki.Count + 1;
-                    stavka.IdNamestaja = SelektovaniNamestaj.Id;
-                    stavka.Kolicina = int.Parse(tbKoliko.Text);
-
-                    listaStavki.Add(stavka);
-
-                    SelektovanaStavka = stavka;
-                    GenericSerializer.Serialize("stavka.xml", listaStavki);
-                }
-            }*/
+            
+            //var novaProdaja = new ProdajaNamestaja();
+            //ProdajeWindow prodajeWindow = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
+            
             
             stavka.Id = listaStavki.Count+1;
             stavka.IdNamestaja = SelektovaniNamestaj.Id;
+            //stavka.IdProdaje = novaProdaja.Id;
+            stavka.IdProdaje = 1;
             stavka.Kolicina = int.Parse(tbKoliko.Text);
 
-            listaStavki.Add(stavka);
+            //StavkaProdaje.Update(stavka);
+            StavkaProdaje.Create(stavka);
+            //listaStavki.Add(stavka);
 
             SelektovanaStavka = stavka;
-            GenericSerializer.Serialize("stavka.xml", listaStavki);
+            //GenericSerializer.Serialize("stavka.xml", listaStavki);
             this.Close();
         }
         

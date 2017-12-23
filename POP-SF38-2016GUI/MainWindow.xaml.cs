@@ -75,10 +75,10 @@ namespace POP_SF38_2016GUI
             return !((DodatnaUsluga)obj).Obrisan;
         }
 
-        private bool AkcijeFilter(object obj)
+        /*private bool AkcijeFilter(object obj)
         {
             return !((Akcija)obj).Obrisan;
-        }
+        }*/
 
         private bool KorisniciFilter(object obj)
         {
@@ -120,6 +120,7 @@ namespace POP_SF38_2016GUI
         private void TipPrikaz(object sender, RoutedEventArgs e)
         {
             //dgPrikaz.ItemsSource = Projekat.Instance.TipoviNamestaja;
+            //dgPrikaz.ItemsSource = Projekat.Instance.UslugeProdaje;
             trenutnoAktivan = "Tip";
             view = CollectionViewSource.GetDefaultView(Projekat.Instance.TipoviNamestaja);
             view.Filter = TipFilter;
@@ -140,10 +141,10 @@ namespace POP_SF38_2016GUI
         private void AkcijePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Akcije";
-            //dgPrikaz.ItemsSource = Projekat.Instance.Akcija;
-            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcija);
+            dgPrikaz.ItemsSource = Projekat.Instance.Akcije;
+            /*view = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcije);
             view.Filter = AkcijeFilter;
-            dgPrikaz.ItemsSource = view;
+            dgPrikaz.ItemsSource = view;*/
         }
         
         private void ProdajePrikaz(object sender, RoutedEventArgs e)
@@ -204,10 +205,11 @@ namespace POP_SF38_2016GUI
         {
             var novaAkcija = new Akcija()
             {
+                Naziv = "",
                 Popust = 0,
                 PocetakAkcije = DateTime.Today,
                 KrajAkcije = DateTime.Now,
-                IdNamestaja = new ObservableCollection<int>()
+                //IdNamestaja = new ObservableCollection<int>()
             };
             var prozor = new AkcijeWindow(novaAkcija, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
@@ -385,7 +387,7 @@ namespace POP_SF38_2016GUI
         private void ObrisiAkciju()
         {
             var izabranaAkcija = (Akcija)dgPrikaz.SelectedItem;
-            var lista = Projekat.Instance.Akcija;
+            var lista = Projekat.Instance.Akcije;
             MessageBoxResult potvrda = MessageBox.Show("Da li ste sigurni da zelite da obrisete?", "Brisanje", MessageBoxButton.YesNo);
 
             if(potvrda == MessageBoxResult.Yes)
@@ -394,7 +396,9 @@ namespace POP_SF38_2016GUI
                 {
                     if(a.Id == izabranaAkcija.Id)
                     {
-                        a.Obrisan = true;
+                        //a.Obrisan = true;
+                        //POSLE BAZA NE RADI
+
                         view.Refresh();
                         break;
                     }
