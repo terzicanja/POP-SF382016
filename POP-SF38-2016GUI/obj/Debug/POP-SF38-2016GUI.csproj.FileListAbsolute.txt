@@ -32,3 +32,11 @@ D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\KorisniciWindow.bam
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SviNamestajiWindow.g.cs
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SviNamestajiWindow.baml
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\POP-SF38-2016GUI_Content.g.cs
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\DetaljiProdajeWindow.g.cs
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\DetaljiProdajeWindow.baml
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\MaterialDesignColors.dll
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\MahApps.Metro.dll
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\System.Windows.Interactivity.dll
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\MahApps.Metro.pdb
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\MahApps.Metro.xml
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\App.baml

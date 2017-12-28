@@ -14,7 +14,6 @@ namespace POP_SF382016.Model
     public enum TipKorisnika
     {
         Administrator,
-        Korisnik,
         Prodavac
     }
 
@@ -191,7 +190,7 @@ namespace POP_SF382016.Model
                 cmd.Parameters.AddWithValue("Prezime", tn.Prezime);
                 cmd.Parameters.AddWithValue("KorisnickoIme", tn.KorisnickoIme);
                 cmd.Parameters.AddWithValue("Lozinka", tn.Lozinka);
-                cmd.Parameters.AddWithValue("TipKorisnika", tn.TipKorisnika);
+                cmd.Parameters.AddWithValue("TipKorisnika", tn.TipKorisnika.ToString());
                 cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
 
                 tn.Id = int.Parse(cmd.ExecuteScalar().ToString());

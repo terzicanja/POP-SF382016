@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using MahApps.Metro.Controls;
 using System.Windows.Shapes;
 
 namespace POP_SF38_2016GUI
@@ -35,10 +36,16 @@ namespace POP_SF38_2016GUI
         public object IzabranaStavka { get; set; }
 
         ICollectionView view;
+        public ProdajaNamestaja SelektovanaProdaja = null;
+        private TipKorisnika tipKorisnika;
+        public ProdajaNamestaja novaProdaja = null;
 
-        public MainWindow()
+        public MainWindow(TipKorisnika tipKorisnika)
         {
             InitializeComponent();
+
+            this.tipKorisnika = tipKorisnika;
+            SelektovanaProdaja = new ProdajaNamestaja();
             /*
             var noviTip = TipNamestaja.Create(new TipNamestaja()
             {
@@ -53,6 +60,20 @@ namespace POP_SF38_2016GUI
             dgPrikaz.DataContext = this;
 
             dgPrikaz.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
+
+
+            switch (tipKorisnika)
+            {
+                case TipKorisnika.Administrator:
+                    break;
+                case TipKorisnika.Prodavac:
+                    //STA PRODAVAC SME DA RADII?????!?!?!!!
+                    //Dodaj.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    break;
+            }
         }
 
         private bool NamestajFilter(object obj)
@@ -217,14 +238,20 @@ namespace POP_SF38_2016GUI
 
         private void DodajProdaju()
         {
-            var novaProdaja = new ProdajaNamestaja()
+            novaProdaja = new ProdajaNamestaja()
             {
                 //IdStavki = new ObservableCollection<int>(),
-                DatumProdaje = DateTime.Now,
+                /*DatumProdaje = DateTime.Now,
                 BrojRacuna = 0,
-                Kupac = "",
+                Kupac = "",*/
+
+                
+                DatumProdaje = DateTime.Now,
+                Kupac = "proba za bazu",
+                BrojRacuna = 123
                 //IdUsluga = new ObservableCollection<int>()
             };
+            ProdajaNamestaja.Create(novaProdaja);
             var prozor = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
         }
@@ -243,7 +270,8 @@ namespace POP_SF38_2016GUI
         #region Izmena
         private void IzmeniSalon()
         {
-            Salon kopija = (Salon)IzabraniSalon.Clone();
+            Salon oznacen = dgPrikaz.SelectedItem as Salon;
+            Salon kopija = (Salon)oznacen.Clone();
             var prozor = new SalonWindow(kopija, SalonWindow.Operacija.Izmena);
             prozor.ShowDialog();
         }
@@ -554,7 +582,13 @@ namespace POP_SF38_2016GUI
                     ObrisiKorisnika();
                     break;
                 case "Prodaja":
-                    MessageBoxResult obavestenjeP = MessageBox.Show("Nije moguce obrisati prodaju", "Obavestenje", MessageBoxButton.OK);
+                    //MessageBoxResult obavestenjeP = MessageBox.Show("Nije moguce obrisati prodaju", "Obavestenje", MessageBoxButton.OK);
+
+                    SelektovanaProdaja = dgPrikaz.SelectedItem as ProdajaNamestaja;
+
+                    var propro = new DetaljiProdajeWindow(SelektovanaProdaja);
+                    propro.ShowDialog();
+
                     break;
                 default:
                     break;
@@ -574,7 +608,7 @@ namespace POP_SF38_2016GUI
         private void dgPrikaz_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
             if((string)e.Column.Header == "Id" || (string)e.Column.Header == "Obrisan" || (string)e.Column.Header == "PIB"
-                || (string)e.Column.Header == "IdStavki" || (string)e.Column.Header == "IdTipaNamestaja" || (string)e.Column.Header == "IdAkcije")
+                || (string)e.Column.Header == "PDV" || (string)e.Column.Header == "IdTipaNamestaja" || (string)e.Column.Header == "IdAkcije")
             {
                 e.Cancel = true;
             } 

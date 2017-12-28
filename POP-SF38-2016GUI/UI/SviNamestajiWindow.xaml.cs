@@ -89,10 +89,15 @@ namespace POP_SF38_2016GUI.UI
             var listaStavki = Projekat.Instance.StavkeProdaje;
             SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
 
-            
+
             //var novaProdaja = new ProdajaNamestaja();
             //ProdajeWindow prodajeWindow = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
-            
+
+
+            /*SelektovaniNamestaj.KolicinaUMagacinu = SelektovaniNamestaj.KolicinaUMagacinu - stavka.Kolicina;
+            Namestaj.Update(SelektovaniNamestaj);*/
+
+
             
             stavka.Id = listaStavki.Count+1;
             stavka.IdNamestaja = SelektovaniNamestaj.Id;

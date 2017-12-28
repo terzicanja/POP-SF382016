@@ -47,9 +47,9 @@ namespace POP_SF38_2016GUI.UI
             //dgPopustNamestaj.ItemsSource = dgPopustNamestaj.SelectedItem
 
 
-            akcija.Id = Projekat.Instance.Akcije.Count + 1;
+            /*akcija.Id = Projekat.Instance.Akcije.Count + 1;
             akcija.Naziv = "a";
-            Akcija.Create(akcija);
+            Akcija.Create(akcija);*/
         }
         
 
@@ -57,6 +57,10 @@ namespace POP_SF38_2016GUI.UI
         {
             var lista = Projekat.Instance.Akcije;
             var listaNamestaja = Projekat.Instance.Namestaji;
+
+            akcija.Id = Projekat.Instance.Akcije.Count + 1;
+            akcija.Naziv = "a";
+            Akcija.Create(akcija);
 
             switch (operacija)
             {
@@ -85,6 +89,9 @@ namespace POP_SF38_2016GUI.UI
                             //n.IdNamestaja = akcija.IdNamestaja;
 
 
+                            Akcija.Update(n);
+
+
                             /*foreach (var nam in listaNamestaja)
                             {
                                 if(n.IdNamestaja.Contains(nam.Id))
@@ -97,8 +104,8 @@ namespace POP_SF38_2016GUI.UI
                     }
                     break;
             }
-            GenericSerializer.Serialize("akcija.xml", lista);
-            GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
+            //GenericSerializer.Serialize("akcija.xml", lista);
+            //GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
             Close();
         }
 

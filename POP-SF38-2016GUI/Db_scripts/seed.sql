@@ -17,6 +17,8 @@ INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES ('Nesto', 399, 0);
 
 INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, TipKorisnika, Obrisan)
 VALUES ('Petar', 'Petrovic', 'pera', 'pera', 'Administrator', 0);
+INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, TipKorisnika, Obrisan)
+VALUES ('Ivan', 'Ivanovic', 'ivan', 'ivan', 'Prodavac', 0);
 
 INSERT INTO Prodaja (DatumProdaje, BrojRacuna, Kupac, UkupanIznos)
 VALUES ('2010-11-12 11:22:33', 23, 'Peroo', 2345);
@@ -33,4 +35,4 @@ VALUES ('Uskrsnji popust', '2015-11-03', '2017-02-12', 15);
 
 INSERT INTO NaAkciji (IdAkcije, IdNamestaja) VALUES (1, 1);
 
-DELETE FROM Stavka WHERE Id = 20;
+DELETE FROM Prodaja WHERE Id BETWEEN 56 AND 67;

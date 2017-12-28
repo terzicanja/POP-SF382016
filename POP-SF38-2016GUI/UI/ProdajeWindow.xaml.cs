@@ -2,6 +2,7 @@
 using POP_SF382016.utill;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,12 @@ namespace POP_SF38_2016GUI.UI
     public partial class ProdajeWindow : Window
     {
         private ProdajaNamestaja prodaja;
+        private StavkaProdaje stavke;
         private DodatnaUsluga SelektovanaUsluga;
+        private ObservableCollection<UslugaProdaje> SelektovanaUslugaProdaje;
+        private ProdajaNamestaja prodajaNova;
         private Operacija operacija;
+        private double cenaBezPDV;
 
         public ProdajeWindow(ProdajaNamestaja prodaja, Operacija operacija)
         {
@@ -45,20 +50,49 @@ namespace POP_SF38_2016GUI.UI
             tbKupac.DataContext = prodaja;
             lbUsluge.DataContext = prodaja;
 
+            var listaStavki = Projekat.Instance.StavkeProdaje;
+
+
+
+            dgProdajaNamestaj.ItemsSource = Projekat.Instance.StavkeProdaje;
+
             //dgProdajaNamestaj.ItemsSource = prodaja.IdStavki;
             //OVO POSLE BAZA NE RADI PREPRAVITI
 
 
             //dgProdajaUsluge.ItemsSource = Projekat.Instance.DodatnaUsluga;
             lbUsluge.ItemsSource = Projekat.Instance.DodatneUsluge;
-            cbUsluge.Content = Projekat.Instance.DodatneUsluge;
+            //cbUsluge.Content = Projekat.Instance.DodatneUsluge;
 
-
-            prodaja.Id = Projekat.Instance.ProdajeNamestaja.Count + 1;
+            cenaBezPDV = 0;
+            /*prodaja.Id = Projekat.Instance.ProdajeNamestaja.Count + 1;
             prodaja.BrojRacuna = 1;
-            prodaja.Kupac = "a";
+            prodaja.Kupac = "";
             prodaja.UkupanIznos = 0;
-            ProdajaNamestaja.Create(prodaja);
+            ProdajaNamestaja.Create(prodaja);*/
+
+            /*var listaNaAkciji = Projekat.Instance.NaAkcijama;
+            foreach (var i in listaStavki)
+            {
+                //if(i.IdProdaje == prodajaNova.Id)
+                if (i.IdProdaje == prodaja.Id)
+                {
+                    cenaBezPDV += i.Namestaj.Cena * i.Kolicina;
+                    //prodaja.UkupanIznos += i.Namestaj.Cena * i.Kolicina;
+
+
+
+                    foreach (var na in listaNaAkciji)
+                    {
+                        if (na.IdNamestaja == i.IdNamestaja && na.Akcija.PocetakAkcije < DateTime.Today && na.Akcija.KrajAkcije > DateTime.Today)
+                        {
+                            cenaBezPDV = cenaBezPDV - ((cenaBezPDV * na.Akcija.Popust) / 100); //* na.Akcija.Popust); //- cenaBezPDV*(na.Akcija.Popust / 100);
+                        }
+                    }
+                }
+            }
+
+            prodaja.UkupanIznos = cenaBezPDV + cenaBezPDV * prodaja.PDV;*/
 
 
         }
@@ -67,10 +101,11 @@ namespace POP_SF38_2016GUI.UI
         {
             var listaProdaja = Projekat.Instance.ProdajeNamestaja;
             var listaStavki = Projekat.Instance.StavkeProdaje;
+            var listaAkcija = Projekat.Instance.Akcije;
+            var listaNaAkciji = Projekat.Instance.NaAkcijama;
             //var izabraniKorisnik = (Korisnik)cbKorisnik.SelectedItem;
 
-            SelektovanaUsluga = (DodatnaUsluga)lbUsluge.SelectedItem;
-
+            SelektovanaUslugaProdaje.Add((UslugaProdaje)lbUsluge.SelectedItems);// = (UslugaProdaje)lbUsluge.SelectedItems;
 
             
 
@@ -78,35 +113,86 @@ namespace POP_SF38_2016GUI.UI
             switch (operacija)
             {
                 case Operacija.Dodavanje:
+                    //var prozorZaProdaju = new MainWindow((TipKorisnika)Enum.Parse(typeof(TipKorisnika), "Administrator"));
+                    
+                    //prodaja = prozorZaProdaju.novaProdaja;
+                    //prozorZaProdaju.Close();
+
+                    //prodaja.Id = prodaja.Id;
+
+
                     //prodaja.Id = listaProdaja.Count + 1;
+                    
 
 
-                    //prodaja.DatumProdaje = DateTime.Parse(dtProdaje.Text);
+                    //NapraviProdaju();
+
+                    //prodajaNova.BrojRacuna = int.Parse(tbBrRacuna.Text);
+                    //prodajaNova.Kupac = tbKupac.Text;
+
+                    //prodaja.BrojRacuna = int.Parse(tbBrRacuna.Text);
+                    //prodaja.Kupac = tbKupac.Text;
 
 
-                    prodaja.BrojRacuna = int.Parse(tbBrRacuna.Text);
-                    prodaja.Kupac = tbKupac.Text;
 
 
                     //prodaja.IdStavki = prodaja.IdStavki;
                     //prodaja.IdUsluga.Add(SelektovanaUsluga.Id);
-                    //prodaja.IdKupca = izabraniKorisnik.Id;
-                    //prodaja.UkupanIznos = 
+
+
                     foreach (var i in listaStavki)
                     {
+                        //if(i.IdProdaje == prodajaNova.Id)
                         if(i.IdProdaje == prodaja.Id)
                         {
-                            prodaja.UkupanIznos += i.Namestaj.Cena * i.Kolicina;
+                            cenaBezPDV += i.Namestaj.Cena * i.Kolicina;
+                            //prodaja.UkupanIznos += i.Namestaj.Cena * i.Kolicina;
+
+                            
+
+                            foreach (var na in listaNaAkciji)
+                            {
+                                if (na.IdNamestaja == i.IdNamestaja && na.Akcija.PocetakAkcije < DateTime.Today && na.Akcija.KrajAkcije > DateTime.Today)
+                                {
+                                    cenaBezPDV = cenaBezPDV - ((cenaBezPDV * na.Akcija.Popust) / 100); //* na.Akcija.Popust); //- cenaBezPDV*(na.Akcija.Popust / 100);
+                                }
+                            }
                         }
                     }
 
-                    prodaja.UkupanIznos += SelektovanaUsluga.Cena;
-                    //prodaja.UkupanIznos = listaStavki.Sum(item => item.Namestaj.Cena);
+                    foreach (var item in SelektovanaUslugaProdaje)
+                    {
+                        if (UslugaProdaje.GetById(item.Id).IdProdaje == prodaja.Id)
+                        {
+                            cenaBezPDV += item.DodatnaUsluga.Cena;
+                        }
+                    }
 
+
+
+                    //cenaBezPDV += SelektovanaUsluga.Cena;
+
+
+                    //NEMAM SOLUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+                    //prodajaNova.UkupanIznos = cenaBezPDV + cenaBezPDV * prodajaNova.PDV;
+
+
+
+                    prodaja.UkupanIznos = cenaBezPDV + cenaBezPDV * prodaja.PDV;
+                    /*foreach (var i in listaProdaja)
+                    {
+                        if(i.Id == prodaja.Id)
+                        {
+                            ProdajaNamestaja.Update(prodaja);
+                        }
+                    }*/
                     ProdajaNamestaja.Update(prodaja);
-                    //ProdajaNamestaja.Create(prodaja);
 
-                    //listaProdaja.Add(prodaja);
+
+
+                    //ProdajaNamestaja.Create(prodaja);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaProdaja)
@@ -127,7 +213,7 @@ namespace POP_SF38_2016GUI.UI
                                 }
                             }
 
-                            n.UkupanIznos += SelektovanaUsluga.Cena;
+                            //n.UkupanIznos += SelektovanaUsluga.Cena;
 
 
 
@@ -136,9 +222,20 @@ namespace POP_SF38_2016GUI.UI
                     }
                     break;
             }
-            //GenericSerializer.Serialize("prodaja.xml", listaProdaja);
             Close();
         }
+
+        /*private void NapraviProdaju()
+        {
+            var novaProdaja = new ProdajaNamestaja()
+            {
+                DatumProdaje = DateTime.Now,
+                Kupac = "proba za bazu",
+                BrojRacuna = 123
+            };
+            ProdajaNamestaja.Create(novaProdaja);
+            prodajaNova = novaProdaja;
+        }*/
 
         private void ZatvoriProdajeWindow(object sender, RoutedEventArgs e)
         {
@@ -163,6 +260,9 @@ namespace POP_SF38_2016GUI.UI
             stavkaa.IdProdaje = prodaja.Id;
             stavkaa.Kolicina = stavkaa.Kolicina;
             StavkaProdaje.Update(stavkaa);
+
+            //dgProdajaNamestaj.ItemsSource = (Namestaj)prozor.SelektovaniNamestaj;
+
                 //StavkaProdaje.Create(stavkaa);
             //}
             /*prozor.SelektovanaStavka.Id = Projekat.Instance.StavkeProdaje.Count + 1;

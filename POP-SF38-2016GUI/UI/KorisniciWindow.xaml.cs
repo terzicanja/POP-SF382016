@@ -47,17 +47,18 @@ namespace POP_SF38_2016GUI.UI
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    korisnik.Id = listaKorisnika.Count + 1;
+                    /*korisnik.Id = listaKorisnika.Count + 1;
                     korisnik.Ime = tbIme.Text;
                     korisnik.Prezime = tbPrezime.Text;
                     korisnik.KorisnickoIme = tbUser.Text;
                     korisnik.Lozinka = tbPass.Text;
-                    korisnik.TipKorisnika = (TipKorisnika)cbTipKorisnika.SelectedItem;
+                    korisnik.TipKorisnika = (TipKorisnika)cbTipKorisnika.SelectedItem;*/
 
                     Korisnik.Create(korisnik);
                     //listaKorisnika.Add(korisnik);
                     break;
                 case Operacija.Izmena:
+                    //Korisnik.Update(korisnik);
                     foreach (var n in listaKorisnika)
                     {
                         if(n.Id == korisnik.Id)

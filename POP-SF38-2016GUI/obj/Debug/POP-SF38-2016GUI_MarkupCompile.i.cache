@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\App.xaml
-101487275257
+11-1892696815
 2-136411049
-302034244355
-14-799888181
-MainWindow.xaml;UI\AkcijeWindow.xaml;UI\KorisniciWindow.xaml;UI\LoginWindow.xaml;UI\NamestajWindow.xaml;UI\ProdajeWindow.xaml;UI\SalonWindow.xaml;UI\SviNamestajiWindow.xaml;UI\TipNamestajaWindow.xaml;UI\UslugeWindow.xaml;
+311881568410
+17428534468
+MainWindow.xaml;UI\AkcijeWindow.xaml;UI\DetaljiProdajeWindow.xaml;UI\KorisniciWindow.xaml;UI\LoginWindow.xaml;UI\NamestajWindow.xaml;UI\ProdajeWindow.xaml;UI\SalonWindow.xaml;UI\SviNamestajiWindow.xaml;UI\TipNamestajaWindow.xaml;UI\UslugeWindow.xaml;
 
-False
+True
 

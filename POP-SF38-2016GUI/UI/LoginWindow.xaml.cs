@@ -20,6 +20,8 @@ namespace POP_SF38_2016GUI.UI
     /// </summary>
     public partial class LoginWindow : Window
     {
+        public static Korisnik ulogovaniKorisnik;
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -35,20 +37,30 @@ namespace POP_SF38_2016GUI.UI
             {
                 if(!k.Obrisan && k.KorisnickoIme == tbUser.Text && k.Lozinka == tbPass.Text)
                 {
+                    //this.Hide();
+                    var mainProzor = new MainWindow(k.TipKorisnika);
+                    this.Close();
+                    mainProzor.ShowDialog();
+                    //this.Close();
+
+
+                    /*ulogovaniKorisnik = k;
                     tipKorisnika = k.TipKorisnika;
 
                     switch (tipKorisnika)
                     {
                         case TipKorisnika.Administrator:
-                            var mainProzor = new MainWindow();
-                            break;
-                        case TipKorisnika.Korisnik:
+                            //this.Close();
+                            var mainProzor = new MainWindow(k.TipKorisnika);
+                            mainProzor.ShowDialog();
                             break;
                         case TipKorisnika.Prodavac:
+                            var prozorMain = new MainWindow(k.TipKorisnika);
+                            prozorMain.ShowDialog();
                             break;
                         default:
                             break;
-                    }
+                    }*/
                 }
             }
         }

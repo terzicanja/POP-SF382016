@@ -100,7 +100,7 @@ namespace POP_SF382016.Model
 
         public double PDV
         {
-            get { return 0.02; }
+            get { return 0.2; }
             /*set
             {
                 pdv = value;

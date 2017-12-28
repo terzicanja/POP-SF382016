@@ -29,7 +29,7 @@ CREATE TABLE Korisnik(
 	Prezime VARCHAR(40),
 	KorisnickoIme VARCHAR(40),
 	Lozinka VARCHAR(50),
-	TipKorisnika VARCHAR(20) CHECK(TipKorisnika IN ('Administrator', 'Prodavac')),
+	TipKorisnika VARCHAR(20) NOT NULL CHECK(TipKorisnika IN ('Administrator', 'Prodavac')),
 	Obrisan BIT
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE NaAkciji(
 
 
 
-DROP TABLE Akcija;
+DROP TABLE Korisnik;
 
 
 SELECT * FROM Namestaj;

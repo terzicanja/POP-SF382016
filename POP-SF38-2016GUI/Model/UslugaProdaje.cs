@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace POP_SF382016.Model
 {
@@ -16,6 +17,8 @@ namespace POP_SF382016.Model
         private int id;
         private int idProdaje;
         private int idUsluge;
+        private ProdajaNamestaja prodajaNamestaja;
+        private DodatnaUsluga dodatnaUsluga;
 
         public int Id
         {
@@ -36,6 +39,24 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("IdProdaje");
             }
         }
+        [XmlIgnore]
+        public ProdajaNamestaja ProdajaNamestaja
+        {
+            get
+            {
+                if (prodajaNamestaja == null)
+                {
+                    prodajaNamestaja = ProdajaNamestaja.GetById(IdProdaje);
+                }
+                return prodajaNamestaja;
+            }
+            set
+            {
+                prodajaNamestaja = value;
+                IdProdaje = prodajaNamestaja.Id;
+                OnPropertyChanged("ProdajaNamestaja");
+            }
+        }
 
         public int IdUsluge
         {
@@ -44,6 +65,24 @@ namespace POP_SF382016.Model
             {
                 idUsluge = value;
                 OnPropertyChanged("IdUsluge");
+            }
+        }
+        [XmlIgnore]
+        public DodatnaUsluga DodatnaUsluga
+        {
+            get
+            {
+                if (dodatnaUsluga == null)
+                {
+                    dodatnaUsluga = DodatnaUsluga.GetById(IdUsluge);
+                }
+                return dodatnaUsluga;
+            }
+            set
+            {
+                dodatnaUsluga = value;
+                IdUsluge = dodatnaUsluga.Id;
+                OnPropertyChanged("DodatnaUsluga");
             }
         }
 
@@ -57,6 +96,18 @@ namespace POP_SF382016.Model
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public static UslugaProdaje GetById(int id)
+        {
+            foreach (var u in Projekat.Instance.UslugeProdaje)
+            {
+                if (u.Id == id)
+                {
+                    return u;
+                }
+            }
+            return null;
         }
 
         public object Clone()
