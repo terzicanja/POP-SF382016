@@ -58,9 +58,9 @@ namespace POP_SF38_2016GUI.UI
             var lista = Projekat.Instance.Akcije;
             var listaNamestaja = Projekat.Instance.Namestaji;
 
-            akcija.Id = Projekat.Instance.Akcije.Count + 1;
+            /*akcija.Id = Projekat.Instance.Akcije.Count + 1;
             akcija.Naziv = "a";
-            Akcija.Create(akcija);
+            Akcija.Create(akcija);*/
 
             switch (operacija)
             {

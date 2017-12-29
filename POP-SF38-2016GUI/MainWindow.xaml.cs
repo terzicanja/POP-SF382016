@@ -226,12 +226,13 @@ namespace POP_SF38_2016GUI
         {
             var novaAkcija = new Akcija()
             {
-                Naziv = "",
-                Popust = 0,
+                Naziv = "bazz",
+                Popust = 11,
                 PocetakAkcije = DateTime.Today,
                 KrajAkcije = DateTime.Now,
                 //IdNamestaja = new ObservableCollection<int>()
             };
+            Akcija.Create(novaAkcija);
             var prozor = new AkcijeWindow(novaAkcija, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
         }
@@ -240,12 +241,6 @@ namespace POP_SF38_2016GUI
         {
             novaProdaja = new ProdajaNamestaja()
             {
-                //IdStavki = new ObservableCollection<int>(),
-                /*DatumProdaje = DateTime.Now,
-                BrojRacuna = 0,
-                Kupac = "",*/
-
-                
                 DatumProdaje = DateTime.Now,
                 Kupac = "proba za bazu",
                 BrojRacuna = 123

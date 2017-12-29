@@ -97,6 +97,8 @@ namespace POP_SF38_2016GUI.UI
             /*SelektovaniNamestaj.KolicinaUMagacinu = SelektovaniNamestaj.KolicinaUMagacinu - stavka.Kolicina;
             Namestaj.Update(SelektovaniNamestaj);*/
 
+            /*stavka.Namestaj.KolicinaUMagacinu = stavka.Namestaj.KolicinaUMagacinu - stavka.Kolicina;
+            Namestaj.Update(stavka.Namestaj);*/
 
             
             stavka.Id = listaStavki.Count+1;

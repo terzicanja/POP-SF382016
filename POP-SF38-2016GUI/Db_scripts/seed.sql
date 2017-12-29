@@ -35,4 +35,5 @@ VALUES ('Uskrsnji popust', '2015-11-03', '2017-02-12', 15);
 
 INSERT INTO NaAkciji (IdAkcije, IdNamestaja) VALUES (1, 1);
 
-DELETE FROM Prodaja WHERE Id BETWEEN 56 AND 67;
+DELETE FROM Prodaja WHERE Id BETWEEN 68 AND 78;
+DELETE FROM UslugaProdaje WHERE Id BETWEEN 2 AND 3;

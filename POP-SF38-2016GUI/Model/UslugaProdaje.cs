@@ -149,6 +149,27 @@ namespace POP_SF382016.Model
             return uslugeZaProdaju;
         }
 
+        public static UslugaProdaje Create(UslugaProdaje tn)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "INSERT INTO UslugaProdaje (IdProdaje, IdUsluge) VALUES (@IdProdaje, @IdUsluge);";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("IdUsluge", tn.IdUsluge);
+                cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
+
+                tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+            }
+
+            Projekat.Instance.UslugeProdaje.Add(tn);
+
+            return tn;
+        }
+
         #endregion
     }
 }

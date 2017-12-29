@@ -5,33 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
         mc:Ignorable="d"
-        Title="ProdajeWindow" Height="683.08" Width="609.15" WindowStartupLocation="CenterScreen">
+        Title="ProdajeWindow" Height="759.08" Width="609.15" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Grid.Row="0" Grid.Column="0" Content="Datum prodaje:" FontSize="15" Margin="68,36,412.4,581.6"/>
-        <DatePicker HorizontalAlignment="Left" Margin="206,35,0,581.6" Name="dtProdaje" SelectedDate="{Binding Path=DatumProdaje}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="206,35,0,657.6" Name="dtProdaje" SelectedDate="{Binding Path=DatumProdaje}"/>
         <Label Grid.Row="0" Grid.Column="0" Content="Broj racuna:" FontSize="15" Margin="68,82,419.4,538.6"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbBrRacuna" Margin="206,77,84.4,538.6" Text="{Binding Path=BrojRacuna}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Kupac:" FontSize="15" Margin="68,120,424.4,497.6"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbKupac" Margin="206,120,84.4,497.6" Text="{Binding Path=Kupac}"/>
-        <DataGrid Margin="167,183,31.4,346.6" DataContext="{Binding Path=SelektovanaStavka}" Name="dgProdajaNamestaj" SelectionMode="Single" IsReadOnly="True">
+        <TextBox Grid.Row="0" Width="Auto" Name="tbBrRacuna" Margin="206,77,84.4,623.6" Text="{Binding Path=BrojRacuna}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Kupac:" FontSize="15" Margin="68,120,424.4,576.6"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbKupac" Margin="206,120,84.4,581.6" Text="{Binding Path=Kupac}"/>
+        <DataGrid Margin="167,153,31.4,381.6" DataContext="{Binding Path=SelektovanaStavka}" Name="dgProdajaNamestaj" SelectionMode="Single" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="id" Width="*" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Naziv}"/>
                 <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ListBox Margin="167,337,31.4,193.6" Name="lbUsluge" DataContext="{Binding Path=DodatnaUsluga}" SelectionMode="Multiple">
+        <ListBox Margin="167,353,31.4,193.6" Name="lbUsluge" DataContext="{Binding Path=DodatnaUsluga}" SelectionMode="Multiple">
             
         </ListBox>
-        <Button Content="Dodaj Namestaj" Margin="36,221,456.4,399.6" Click="SviNamestajiZaProdaju"/>
-        <Button Content="Dodaj uslugu" Margin="36,349,456.4,271.6" Click="SviNamestajiZaProdaju"/>
+        <Button Content="Dodaj Namestaj" Margin="36,191,456.4,479.6" Click="SviNamestajiZaProdaju"/>
+        <Button Content="Dodaj uslugu" Margin="36,411,456.4,271.6" Click="SviNamestajiZaProdaju"/>
 
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Ukupan iznos:" FontSize="15" Margin="15,518,472.4,90.6"/>
-        <Label Margin="130,465,264.4,140.6" Content="za cenu" />
-        <TextBox Grid.Row="0" Width="Auto" Name="tbUkupanIznos" Margin="130,518,62.4,90.6" Text="{Binding Path=prodaja.UkupanIznos}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Ukupan iznos:" FontSize="15" Margin="15,612,472.4,90.6"/>
+        <Label Margin="130,560,264.4,140.6" Content="za cenu" />
+        <TextBox Grid.Row="0" Width="Auto" Name="tbUkupanIznos" Margin="130,612,62.4,80.6" Text="{Binding Path=prodaja.UkupanIznos}"/>
 
-        <Button Content="Sacuvaj" Margin="82,596,405.4,21.6" Click="SacuvajIzmene"/>
-        <Button Content="Izadji" Margin="371,596,100.4,21.6" Click="ZatvoriProdajeWindow"/>
+        <Button Content="Sacuvaj" Margin="82,674,405.4,21.6" Click="SacuvajIzmene"/>
+        <Button Content="Izadji" Margin="371,674,100.4,21.6" Click="ZatvoriProdajeWindow"/>
     </Grid>
 </Window>
