@@ -157,8 +157,9 @@ namespace POP_SF382016.Model
 
                 SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES (@Naziv, @Cena, @Obrisan);";
+                cmd.CommandText = "UPDATE Usluga SET Naziv=@Naziv, Cena=@Cena, Obrisan=@Obrisan WHERE Id=@Id;";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", dn.Id);
                 cmd.Parameters.AddWithValue("Naziv", dn.Usluga);
                 cmd.Parameters.AddWithValue("Cena", dn.Cena);
                 cmd.Parameters.AddWithValue("Obrisan", dn.Obrisan);

@@ -7,31 +7,38 @@
         mc:Ignorable="d"
         Title="ProdajeWindow" Height="759.08" Width="609.15" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Grid.Row="0" Grid.Column="0" Content="Datum prodaje:" FontSize="15" Margin="68,36,412.4,581.6"/>
-        <DatePicker HorizontalAlignment="Left" Margin="206,35,0,657.6" Name="dtProdaje" SelectedDate="{Binding Path=DatumProdaje}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Broj racuna:" FontSize="15" Margin="68,82,419.4,538.6"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbBrRacuna" Margin="206,77,84.4,623.6" Text="{Binding Path=BrojRacuna}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Kupac:" FontSize="15" Margin="68,120,424.4,576.6"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbKupac" Margin="206,120,84.4,581.6" Text="{Binding Path=Kupac}"/>
-        <DataGrid Margin="167,153,31.4,381.6" DataContext="{Binding Path=SelektovanaStavka}" Name="dgProdajaNamestaj" SelectionMode="Single" IsReadOnly="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="212*"/>
+            <RowDefinition Height="163*"/>
+            <RowDefinition Height="180*"/>
+            <RowDefinition Height="79*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="78*"/>
+            <ColumnDefinition Width="223*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Kupac:" FontSize="15" Margin="36,54,10,8.2"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbKupac" Margin="11,48,80.4,8.2" Text="{Binding Path=Kupac}" Grid.Column="1"/>
+        <DataGrid Margin="11,10.8,31.4,6.2" AutoGenerateColumns="False" DataContext="{Binding Path=SelektovanaStavka}" Name="dgProdajaNamestaj" SelectionMode="Single" IsReadOnly="True" Grid.Column="1" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="id" Width="*" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Naziv}"/>
-                <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
+                <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Namestaj.Naziv}"/>
+                <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Namestaj.Cena}"/>
+                <DataGridTextColumn Header="Kolicina" Width="*" Binding="{Binding Path=Kolicina}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ListBox Margin="167,353,31.4,193.6" Name="lbUsluge" DataContext="{Binding Path=DodatnaUsluga}" SelectionMode="Multiple">
-            
+        <ListBox Margin="11,10.8,31.4,31.4" Name="lbUsluge" DataContext="{Binding Path=DodatnaUsluga}" SelectionMode="Multiple" Grid.Column="1" Grid.Row="2">
+
         </ListBox>
-        <Button Content="Dodaj Namestaj" Margin="36,191,456.4,479.6" Click="SviNamestajiZaProdaju"/>
-        <Button Content="Dodaj uslugu" Margin="36,411,456.4,271.6" Click="SviNamestajiZaProdaju"/>
+        <Button Content="Dodaj Namestaj" Margin="36,31.8,10,121.2" Click="SviNamestajiZaProdaju" Grid.Row="1"/>
+        <Button Content="Dodaj uslugu" Margin="36,23.8,10,92.4" Click="SviNamestajiZaProdaju" Grid.Row="2"/>
 
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Ukupan iznos:" FontSize="15" Margin="15,612,472.4,90.6"/>
-        <Label Margin="130,560,264.4,140.6" Content="za cenu" />
-        <TextBox Grid.Row="0" Width="Auto" Name="tbUkupanIznos" Margin="130,612,62.4,80.6" Text="{Binding Path=prodaja.UkupanIznos}"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Ukupan iznos:" FontSize="15" Margin="21,129.6,20,23.6"/>
+        <Label Margin="38,27.6,200.4,95.6" Content="{Binding UkupanIznos}" Grid.Row="3" Grid.Column="1" />
+        <TextBox Grid.Row="3" Width="Auto" Name="tbUkupanIznos" Margin="11,119.6,25.4,23.6" Text="{Binding Path=UkupanIznos}" Grid.Column="1"/>
 
-        <Button Content="Sacuvaj" Margin="82,674,405.4,21.6" Click="SacuvajIzmene"/>
-        <Button Content="Izadji" Margin="371,674,100.4,21.6" Click="ZatvoriProdajeWindow"/>
+        <Button Content="Sacuvaj" Margin="11,23.4,320.4,21.6" Click="SacuvajIzmene" Grid.Row="4" Grid.Column="1"/>
+        <Button Content="Izadji" Margin="252,23.4,63.4,21.6" Click="ZatvoriProdajeWindow" Grid.Column="1" Grid.Row="4"/>
     </Grid>
 </Window>

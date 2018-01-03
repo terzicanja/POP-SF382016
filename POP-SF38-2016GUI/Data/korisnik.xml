@@ -2,56 +2,47 @@
 <ArrayOfKorisnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Korisnik>
     <Id>1</Id>
-    <Ime>ivan</Ime>
-    <Prezime>ivanovic</Prezime>
-    <KorisnickoIme>ivani</KorisnickoIme>
-    <Lozinka>sifra</Lozinka>
-    <TipKorisnika>Korisnik</TipKorisnika>
-    <Obrisan>true</Obrisan>
+    <Ime>Petar</Ime>
+    <Prezime>Petrovic</Prezime>
+    <KorisnickoIme>pera</KorisnickoIme>
+    <Lozinka>pera</Lozinka>
+    <TipKorisnika>Administrator</TipKorisnika>
+    <Obrisan>false</Obrisan>
   </Korisnik>
   <Korisnik>
-    <Id>1</Id>
-    <Ime>ivan</Ime>
-    <Prezime>ivanovic</Prezime>
-    <KorisnickoIme>ivani</KorisnickoIme>
-    <Lozinka>sifra</Lozinka>
+    <Id>2</Id>
+    <Ime>Ivan</Ime>
+    <Prezime>Ivanovic</Prezime>
+    <KorisnickoIme>ivan</KorisnickoIme>
+    <Lozinka>ivan</Lozinka>
     <TipKorisnika>Prodavac</TipKorisnika>
     <Obrisan>false</Obrisan>
   </Korisnik>
   <Korisnik>
     <Id>3</Id>
-    <Ime>filip</Ime>
-    <Prezime>filipovic</Prezime>
-    <KorisnickoIme>filipf</KorisnickoIme>
-    <Lozinka>sss</Lozinka>
-    <TipKorisnika>Administrator</TipKorisnika>
+    <Ime>a</Ime>
+    <Prezime>b</Prezime>
+    <KorisnickoIme>c</KorisnickoIme>
+    <Lozinka>d</Lozinka>
+    <TipKorisnika>Prodavac</TipKorisnika>
     <Obrisan>false</Obrisan>
   </Korisnik>
   <Korisnik>
     <Id>4</Id>
-    <Ime>perooooo</Ime>
-    <Prezime>Petrovic</Prezime>
-    <KorisnickoIme>pero</KorisnickoIme>
-    <Lozinka>wert</Lozinka>
+    <Ime>asa</Ime>
+    <Prezime>a</Prezime>
+    <KorisnickoIme>sa</KorisnickoIme>
+    <Lozinka>a</Lozinka>
     <TipKorisnika>Administrator</TipKorisnika>
     <Obrisan>false</Obrisan>
   </Korisnik>
   <Korisnik>
     <Id>5</Id>
-    <Ime>aaa</Ime>
-    <Prezime>aa</Prezime>
-    <KorisnickoIme>asd</KorisnickoIme>
-    <Lozinka>ooo</Lozinka>
-    <TipKorisnika>Korisnik</TipKorisnika>
-    <Obrisan>false</Obrisan>
-  </Korisnik>
-  <Korisnik>
-    <Id>6</Id>
-    <Ime>cccccc</Ime>
-    <Prezime>bbb</Prezime>
-    <KorisnickoIme>bb</KorisnickoIme>
-    <Lozinka>b</Lozinka>
-    <TipKorisnika>Korisnik</TipKorisnika>
-    <Obrisan>false</Obrisan>
+    <Ime>admin</Ime>
+    <Prezime>admin</Prezime>
+    <KorisnickoIme>a</KorisnickoIme>
+    <Lozinka>a</Lozinka>
+    <TipKorisnika>Administrator</TipKorisnika>
+    <Obrisan>true</Obrisan>
   </Korisnik>
 </ArrayOfKorisnik>

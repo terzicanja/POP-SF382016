@@ -18,6 +18,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using MahApps.Metro.Controls;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace POP_SF38_2016GUI
 {
@@ -122,7 +124,7 @@ namespace POP_SF38_2016GUI
 
         private void NamestajPrikaz(object sender, RoutedEventArgs e)
         {
-            //dgPrikaz.ItemsSource = Projekat.Instance.Namestaj;
+            //dgPrikaz.ItemsSource = Projekat.Instance.Namestaji;
             //dgPrikaz.SelectedItem += "{Binding Path=IzabraniNamestaj}";
 
             trenutnoAktivan = "Namestaj";
@@ -249,6 +251,7 @@ namespace POP_SF38_2016GUI
             ProdajaNamestaja.Create(novaProdaja);
             var prozor = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
+            //view.Refresh();
         }
 
         private void DodajKorisnika()
@@ -357,32 +360,17 @@ namespace POP_SF38_2016GUI
                     if(t.Id == izabraniTip.Id)
                     {
                         TipNamestaja.Delete(t);
-                        //t.Obrisan = true;
                         foreach (var nam in listaNamestaja)
                         {
                             if (t.Id == nam.IdTipaNamestaja)
                             {
                                 Namestaj.Delete(nam);
-                                //nam.Obrisan = true;
                             }
                         }
                         view.Refresh();
                         break;
                     }
-
-                    /*if (t.Obrisan)
-                    {
-                        foreach (var nam in listaNamestaja)
-                        {
-                            if(t.Id == nam.IdTipaNamestaja)
-                            {
-                                nam.Obrisan = true;
-                            }
-                        }
-                    }*/
                 }
-                //GenericSerializer.Serialize("tip.xml", lista);
-                //GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
             }
         }
 
@@ -398,13 +386,12 @@ namespace POP_SF38_2016GUI
                 {
                     if (t.Id == izabraniTip.Id)
                     {
-                        t.Obrisan = true;
+                        DodatnaUsluga.Delete(t);
                         view.Refresh();
                         break;
                     }
                 }
             }
-            GenericSerializer.Serialize("dodatna_usluga.xml", lista);
         }
 
         private void ObrisiAkciju()
@@ -442,13 +429,12 @@ namespace POP_SF38_2016GUI
                 {
                     if (a.Id == izabraniKorisnik.Id)
                     {
-                        a.Obrisan = true;
+                        Korisnik.Delete(a);
                         view.Refresh();
                         break;
                     }
                 }
             }
-            GenericSerializer.Serialize("korisnik.xml", lista);
         }
         #endregion
 
@@ -522,6 +508,16 @@ namespace POP_SF38_2016GUI
                 default:
                     break;
             }
+        }
+
+        private void DugmeSearch(object sender, RoutedEventArgs e)
+        {
+            switch (trenutnoAktivan)
+            {
+                default:
+                    break;
+            }
+
         }
 
         private void DugmeIzmeni(object sender, RoutedEventArgs e)

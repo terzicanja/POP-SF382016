@@ -28,9 +28,10 @@ namespace POP_SF38_2016GUI.UI
         private StavkaProdaje stavke;
         private ObservableCollection<DodatnaUsluga> SelektovanaUsluga;
         private ObservableCollection<UslugaProdaje> SelektovanaUslugaProdaje;
-        private ProdajaNamestaja prodajaNova;
         private Operacija operacija;
-        private double cenaBezPDV;
+        public double cenaBezPDV;
+        public ObservableCollection<Namestaj> listaNamestaja;
+        public ObservableCollection<StavkaProdaje> listaStavki;
 
         public ProdajeWindow(ProdajaNamestaja prodaja, Operacija operacija)
         {
@@ -38,30 +39,30 @@ namespace POP_SF38_2016GUI.UI
             
             this.prodaja = prodaja;
             this.operacija = operacija;
+            this.listaNamestaja = new ObservableCollection<Namestaj>();
+            this.listaStavki = new ObservableCollection<StavkaProdaje>();
 
             uslugaProdaje = new UslugaProdaje();
             SelektovanaUsluga = new ObservableCollection<DodatnaUsluga>();
 
             //cbKorisnik.ItemsSource = Projekat.Instance.Korisnik;
 
-            dtProdaje.DataContext = prodaja;
-            tbBrRacuna.DataContext = prodaja;
+            
             tbUkupanIznos.DataContext = prodaja;
             tbKupac.DataContext = prodaja;
             lbUsluge.DataContext = prodaja;
+            dgProdajaNamestaj.DataContext = prodaja;
 
             var listaStavki = Projekat.Instance.StavkeProdaje;
             
 
-            dgProdajaNamestaj.ItemsSource = Projekat.Instance.StavkeProdaje;
-
+            //dgProdajaNamestaj.ItemsSource = Projekat.Instance.StavkeProdaje;
             //dgProdajaNamestaj.ItemsSource = prodaja.IdStavki;
             //OVO POSLE BAZA NE RADI PREPRAVITI
 
 
-            //dgProdajaUsluge.ItemsSource = Projekat.Instance.DodatnaUsluga;
+            
             lbUsluge.ItemsSource = Projekat.Instance.DodatneUsluge;
-            //cbUsluge.Content = Projekat.Instance.DodatneUsluge;
 
             cenaBezPDV = 0;
             
@@ -83,17 +84,20 @@ namespace POP_SF38_2016GUI.UI
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    //prodajaNova.BrojRacuna = int.Parse(tbBrRacuna.Text);
-                    //prodajaNova.Kupac = tbKupac.Text;
 
-                    //prodaja.BrojRacuna = int.Parse(tbBrRacuna.Text);
-                    //prodaja.Kupac = tbKupac.Text;
+                    Random random = new Random();
+                    int randomNumber = random.Next(0, 100);
+                    prodaja.BrojRacuna = int.Parse(prodaja.Id.ToString() + randomNumber.ToString() + DateTime.Now.Minute.ToString());
 
                     foreach (var a in SelektovanaUsluga)
                     {
-                        uslugaProdaje.IdProdaje = prodaja.Id;
-                        uslugaProdaje.IdUsluge = a.Id;
-                        UslugaProdaje.Create(uslugaProdaje);
+                        if (a != null)
+                        {
+                            uslugaProdaje.IdProdaje = prodaja.Id;
+                            uslugaProdaje.IdUsluge = a.Id;
+                            UslugaProdaje.Create(uslugaProdaje);
+                        }
+                        
                     }
                     
                     foreach (var i in listaStavki)
@@ -126,16 +130,8 @@ namespace POP_SF38_2016GUI.UI
                     //NEMAM SOLUTION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     
                     prodaja.UkupanIznos = cenaBezPDV + cenaBezPDV * prodaja.PDV;
-                    /*foreach (var i in listaProdaja)
-                    {
-                        if(i.Id == prodaja.Id)
-                        {
-                            ProdajaNamestaja.Update(prodaja);
-                        }
-                    }*/
-                    ProdajaNamestaja.Update(prodaja);
                     
-                    //ProdajaNamestaja.Create(prodaja);
+                    ProdajaNamestaja.Update(prodaja);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaProdaja)
@@ -156,8 +152,18 @@ namespace POP_SF38_2016GUI.UI
                                 }
                             }
 
+                            //lbUsluge.SelectedIndex = prodaja.
+
                             //n.UkupanIznos += SelektovanaUsluga.Cena;
-                            
+
+                            foreach (var item in listaUslugaProdaja)
+                            {
+                                if (UslugaProdaje.GetById(item.Id).IdProdaje == prodaja.Id)
+                                {
+                                    lbUsluge.SelectedIndex = item.IdUsluge;
+                                    cenaBezPDV += item.DodatnaUsluga.Cena;
+                                }
+                            }
                             ProdajaNamestaja.Update(n);
                         }
                     }
@@ -169,38 +175,59 @@ namespace POP_SF38_2016GUI.UI
 
         private void ZatvoriProdajeWindow(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            var listaStavki = Projekat.Instance.StavkeProdaje;
+            switch (operacija)
+            {
+                case Operacija.Dodavanje:
+                    
+                    foreach (var i in listaStavki)
+                    {
+                        if (i.IdProdaje == prodaja.Id)
+                        {
+                            StavkaProdaje.Delete(i);
+                        }
+                    }
+                    ProdajaNamestaja.Delete(prodaja);
+
+                    this.Close();
+                    break;
+                case Operacija.Izmena:
+                    this.Close();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         private void SviNamestajiZaProdaju(object sender, RoutedEventArgs e)
         {
             SviNamestajiWindow prozor = new SviNamestajiWindow(SviNamestajiWindow.Radnja.Sacuvaj);
             prozor.ShowDialog();
-            //if(prozor.ShowDialog() == true)
-            //{
+            
             var stavkaa = prozor.SelektovanaStavka;
-                //stavkaa.Id = Projekat.Instance.StavkeProdaje.Count + 1;
             stavkaa.IdNamestaja = stavkaa.IdNamestaja;
             stavkaa.IdProdaje = prodaja.Id;
             stavkaa.Kolicina = stavkaa.Kolicina;
             StavkaProdaje.Update(stavkaa);
-
-
+            
             prozor.SelektovaniNamestaj.KolicinaUMagacinu = prozor.SelektovaniNamestaj.KolicinaUMagacinu - stavkaa.Kolicina;
             Namestaj.Update(prozor.SelektovaniNamestaj);
-            //dgProdajaNamestaj.ItemsSource = (Namestaj)prozor.SelektovaniNamestaj;
 
-            //StavkaProdaje.Create(stavkaa);
-            //}
-            /*prozor.SelektovanaStavka.Id = Projekat.Instance.StavkeProdaje.Count + 1;
-            prozor.SelektovanaStavka.IdNamestaja = 1;
-            prozor.SelektovanaStavka.IdProdaje = prodaja.Id;
-            prozor.SelektovanaStavka.Kolicina = 1;
-            StavkaProdaje.Create(prozor.SelektovanaStavka);*/
-            //if(prozor.ShowDialog() == true)
-            //{
-            //prodaja.IdStavki.Add(prozor.SelektovanaStavka.Id);
-            //}
+            /*foreach (var i in Projekat.Instance.StavkeProdaje)
+            {
+                if (i.IdProdaje == prodaja.Id)
+                {
+                    listaNamestaja.Add(i.Namestaj);
+                    
+                }
+                //dgProdajaNamestaj.ItemsSource = i;
+            }*/
+            //listaNamestaja.Add(stavkaa);
+            listaStavki.Add(stavkaa);
+            dgProdajaNamestaj.ItemsSource = listaStavki;
+            //dgProdajaNamestaj.ItemsSource = prozor.listaNamestaja;
+
         }
     }
 }

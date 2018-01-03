@@ -40,3 +40,4 @@ D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\System.Windows.Interac
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\MahApps.Metro.pdb
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\MahApps.Metro.xml
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\App.baml
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\GeneratedInternalTypeHelper.g.cs

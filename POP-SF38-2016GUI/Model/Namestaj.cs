@@ -86,6 +86,15 @@ namespace POP_SF382016.Model
             }
         }
 
+        public int IdTipaNamestaja
+        {
+            get { return idTipaNamestaja; }
+            set
+            {
+                idTipaNamestaja = value;
+                OnPropertyChanged("IdTipaNamestaja");
+            }
+        }
         [XmlIgnore]
         public TipNamestaja TipNamestaja
         {
@@ -144,15 +153,7 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("IdAkcije");
             }
         }*/
-        public int IdTipaNamestaja
-        {
-            get { return idTipaNamestaja; }
-            set
-            {
-                idTipaNamestaja = value;
-                OnPropertyChanged("IdTipaNamestaja");
-            }
-        }
+        
 
         public bool Obrisan
         {
@@ -278,7 +279,7 @@ namespace POP_SF382016.Model
                 cmd.CommandText = "UPDATE Namestaj SET TipNamestajaId=@TipNamestajaId, Naziv=@Naziv, " +
                     "Sifra=@Sifra, Cena=@Cena, Kolicina=@Kolicina, Obrisan=@Obrisan WHERE Id=@Id;";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                //sql injection google
+                
                 cmd.Parameters.AddWithValue("Id", n.Id);
                 cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
                 cmd.Parameters.AddWithValue("Naziv", n.Naziv);

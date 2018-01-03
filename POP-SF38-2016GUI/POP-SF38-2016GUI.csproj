@@ -82,6 +82,7 @@
     <Compile Include="UI\NamestajWindow.xaml.cs">
       <DependentUpon>NamestajWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\PopustValidation.cs" />
     <Compile Include="UI\ProdajeWindow.xaml.cs">
       <DependentUpon>ProdajeWindow.xaml</DependentUpon>
     </Compile>
@@ -97,6 +98,7 @@
     <Compile Include="UI\UslugeWindow.xaml.cs">
       <DependentUpon>UslugeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ValidatorConverter.cs" />
     <Compile Include="util\GenericSerializer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

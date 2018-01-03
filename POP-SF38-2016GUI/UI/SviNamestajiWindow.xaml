@@ -12,11 +12,9 @@
                 <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Naziv}"/>
                 <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
                 <DataGridTextColumn Header="Na stanju" Width="*" Binding="{Binding Path=KolicinaUMagacinu}"/>
-                <DataGridTextColumn Header="Kolicina" Width="*" />
-                <DataGridComboBoxColumn Header="Koliko" Width="*" x:Name="koliko"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <Label Name="lbKoliko" Content="Koliko:" Margin="35,306,293.4,83"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbKoliko" Margin="142,301,45.4,83" Text="{Binding Path=Kolicina}"/>
 
         <Button Content="Sacuvaj" Margin="98,355,237.4,28" Name="PickSave"/>

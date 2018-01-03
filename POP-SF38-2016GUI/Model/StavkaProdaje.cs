@@ -203,6 +203,21 @@ namespace POP_SF382016.Model
             }
         }
 
+        public static void Delete(StavkaProdaje p)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "DELETE FROM Stavka WHERE Id=@Id;";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", p.Id);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
         #endregion
     }
 }

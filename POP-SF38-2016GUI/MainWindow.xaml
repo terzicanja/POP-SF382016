@@ -18,6 +18,8 @@
             <RowDefinition Height="404*"/>
             <RowDefinition Height="116*"/>
         </Grid.RowDefinitions>
+        <TextBox Name="tbSearch" Grid.Column="1" Margin="21.6,20,244.6,9.6" />
+        <Button Content="Search" Grid.Column="1" Margin="374.6,20,120.6,9.6" Click="DugmeSearch"/>
         <DataGrid BorderThickness="0" LoadingRow="dgPrikaz_LoadingRow" Grid.Row="1" Grid.Column="1" FontSize="15" Name="dgPrikaz" Margin="9.6,0.4,12.6,0.4" CanUserAddRows="False"
                   AutoGeneratingColumn="dgPrikaz_AutoGeneratingColumn" IsReadOnly="True"/>
         <Button Grid.Row="2" Content="Dodaj" Name="Dodaj" Margin="21.6,43.6,496.6,45.2" Grid.Column="1" Click="DugmeDodaj"/>

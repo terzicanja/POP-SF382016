@@ -2,6 +2,7 @@
 using POP_SF382016.utill;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,8 @@ namespace POP_SF38_2016GUI.UI
         private StavkaProdaje stavka;
         private NaAkciji naAkciji;
         private Radnja radnja;
+        //public ObservableCollection<Namestaj> listaStavki;
+        public ObservableCollection<Namestaj> listaNamestaja;
         
         public SviNamestajiWindow(Radnja radnja = Radnja.Sacuvaj)
         {
@@ -43,19 +46,21 @@ namespace POP_SF38_2016GUI.UI
             this.radnja = radnja;
             this.stavka = new StavkaProdaje();
             this.naAkciji = new NaAkciji();
+            //this.listaStavki = new ObservableCollection<Namestaj>();
+            this.listaNamestaja = new ObservableCollection<Namestaj>();
             
 
             if(radnja == Radnja.Preuzmi)
             {
-                dgSviNamestaji.Columns[3].Visibility = Visibility.Collapsed;
                 PickSave.Click += PickNamestaj;
+                lbKoliko.Visibility = Visibility.Collapsed;
+                tbKoliko.Visibility = Visibility.Collapsed;
             }
             else
             {
                 PickSave.Click += SacuvajStavku;
             }
-
-            koliko.ItemsSource = new List<int> { 1, 2, 3, 4 };
+            
 
             //int idNamestajaZaProdaju = SelektovaniNamestaj.Id;
             //int kolicinaN = koliko.ToString()
@@ -92,26 +97,21 @@ namespace POP_SF38_2016GUI.UI
 
             //var novaProdaja = new ProdajaNamestaja();
             //ProdajeWindow prodajeWindow = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
-
-
-            /*SelektovaniNamestaj.KolicinaUMagacinu = SelektovaniNamestaj.KolicinaUMagacinu - stavka.Kolicina;
-            Namestaj.Update(SelektovaniNamestaj);*/
-
-            /*stavka.Namestaj.KolicinaUMagacinu = stavka.Namestaj.KolicinaUMagacinu - stavka.Kolicina;
-            Namestaj.Update(stavka.Namestaj);*/
-
+            
             
             stavka.Id = listaStavki.Count+1;
             stavka.IdNamestaja = SelektovaniNamestaj.Id;
             //stavka.IdProdaje = novaProdaja.Id;
             stavka.IdProdaje = 1;
             stavka.Kolicina = int.Parse(tbKoliko.Text);
-
-            //StavkaProdaje.Update(stavka);
+            
             StavkaProdaje.Create(stavka);
-            //listaStavki.Add(stavka);
 
             SelektovanaStavka = stavka;
+
+            var namNaProdaji = stavka.Namestaj as Namestaj;
+            //listaNamestaja.Add(namNaProdaji);
+            //listaStavki.Add(namNaProdaji);
             //GenericSerializer.Serialize("stavka.xml", listaStavki);
             this.Close();
         }

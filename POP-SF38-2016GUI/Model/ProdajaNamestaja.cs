@@ -24,7 +24,7 @@ namespace POP_SF382016.Model
         private double pdv;
 
         //private ObservableCollection<int> idUsluga;
-        private double ukupanIznos;
+        public double ukupanIznos;
         /*private Korisnik korisnik;
 
 
@@ -264,6 +264,22 @@ namespace POP_SF382016.Model
                     tip.Kupac = tn.Kupac;
                     tip.UkupanIznos = tn.UkupanIznos;
                 }
+            }
+        }
+
+        public static void Delete(ProdajaNamestaja p)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "DELETE FROM Prodaja WHERE Id=@Id;";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", p.Id);
+
+                cmd.ExecuteNonQuery();
             }
         }
         #endregion

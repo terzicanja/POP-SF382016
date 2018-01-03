@@ -213,6 +213,7 @@ namespace POP_SF382016.Model
                     "KorisnickoIme = @KorisnickoIme, Lozinka = @Lozinka, TipKorisnika = @TipKorisnika, Obrisan = @Obrisan " +
                     "WHERE Id = @Id;";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", tn.Id);
                 cmd.Parameters.AddWithValue("Ime", tn.Ime);
                 cmd.Parameters.AddWithValue("Prezime", tn.Prezime);
                 cmd.Parameters.AddWithValue("KorisnickoIme", tn.KorisnickoIme);
@@ -236,6 +237,12 @@ namespace POP_SF382016.Model
                     k.Obrisan = tn.Obrisan;
                 }
             }
+        }
+
+        public static void Delete(Korisnik n)
+        {
+            n.Obrisan = true;
+            Update(n);
         }
         #endregion
     }
