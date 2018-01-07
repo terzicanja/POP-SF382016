@@ -89,6 +89,9 @@
     <Compile Include="UI\SalonWindow.xaml.cs">
       <DependentUpon>SalonWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\SveUslugeWindow.xaml.cs">
+      <DependentUpon>SveUslugeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SviNamestajiWindow.xaml.cs">
       <DependentUpon>SviNamestajiWindow.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\SalonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SveUslugeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

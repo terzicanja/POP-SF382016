@@ -514,6 +514,37 @@ namespace POP_SF38_2016GUI
         {
             switch (trenutnoAktivan)
             {
+                case "Salon":
+                    break;
+                case "Namestaj":
+                    view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text));
+                    view.Filter = NamestajFilter;
+                    dgPrikaz.ItemsSource = view;
+                    break;
+                case "Tip":
+                    view = CollectionViewSource.GetDefaultView(TipNamestaja.Search(tbSearch.Text));
+                    view.Filter = TipFilter;
+                    dgPrikaz.ItemsSource = view;
+                    break;
+                case "Usluge":
+                    view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text));
+                    view.Filter = UslugeFilter;
+                    dgPrikaz.ItemsSource = view;
+                    break;
+                case "Akcije":
+                    dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text);
+                    /*view = CollectionViewSource.GetDefaultView(Akcija.Search(tbSearch.Text));
+                    view.Filter = NamestajFilter;
+                    dgPrikaz.ItemsSource = view;*/
+                    break;
+                case "Prodaja":
+                    dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text);
+                    break;
+                case "Korisnici":
+                    view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text));
+                    view.Filter = KorisniciFilter;
+                    dgPrikaz.ItemsSource = view;
+                    break;
                 default:
                     break;
             }

@@ -118,6 +118,35 @@ namespace POP_SF382016.Model
             return tipoviNamestaja;
         }
 
+        public static ObservableCollection<TipNamestaja> Search(string srchtext)
+        {
+            var tipoviNamestaja = new ObservableCollection<TipNamestaja>();
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                //con.Open();
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+
+                cmd.CommandText = "SELECT * FROM TipNamestaja WHERE Naziv LIKE @srchtext;";
+                cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
+                da.SelectCommand = cmd;
+                da.Fill(ds, "TipNamestaja");
+
+                foreach (DataRow row in ds.Tables["TipNamestaja"].Rows)
+                {
+                    var tn = new TipNamestaja();
+                    tn.Id = Convert.ToInt32(row["Id"]);
+                    tn.Naziv = row["Naziv"].ToString();
+                    tn.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                    tipoviNamestaja.Add(tn);
+                }
+                return tipoviNamestaja;
+            }
+        }
+
         public static TipNamestaja Create(TipNamestaja tn)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))

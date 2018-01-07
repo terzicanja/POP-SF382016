@@ -210,6 +210,36 @@ namespace POP_SF382016.Model
             return prodaje;
         }
 
+        public static ObservableCollection<ProdajaNamestaja> Search(string srchtext)
+        {
+            var prodaje = new ObservableCollection<ProdajaNamestaja>();
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+
+                cmd.CommandText = "SELECT * FROM Prodaja WHERE Kupac LIKE @srchtext OR DatumProdaje LIKE @srchtext OR UkupanIznos LIKE @srchtext;";
+                cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Prodaja");
+
+                foreach (DataRow row in ds.Tables["Prodaja"].Rows)
+                {
+                    var tn = new ProdajaNamestaja();
+                    tn.Id = Convert.ToInt32(row["Id"]);
+                    tn.DatumProdaje = DateTime.Parse(row["DatumProdaje"].ToString());
+                    tn.BrojRacuna = Convert.ToInt32(row["BrojRacuna"]);
+                    tn.Kupac = row["Kupac"].ToString();
+                    tn.UkupanIznos = double.Parse(row["UkupanIznos"].ToString());
+
+                    prodaje.Add(tn);
+                }
+                return prodaje;
+            }
+        }
+
         public static ProdajaNamestaja Create(ProdajaNamestaja tn)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))

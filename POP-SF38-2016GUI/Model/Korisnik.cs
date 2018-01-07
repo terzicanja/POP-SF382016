@@ -175,6 +175,38 @@ namespace POP_SF382016.Model
             return korisnici;
         }
 
+        public static ObservableCollection<Korisnik> Search(string srchtext)
+        {
+            var korisnici = new ObservableCollection<Korisnik>();
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+
+                cmd.CommandText = "SELECT * FROM Korisnik WHERE Ime LIKE @srchtext OR Prezime LIKE @srchtext OR KorisnickoIme LIKE @srchtext;";
+                cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Korisnik");
+
+                foreach (DataRow row in ds.Tables["Korisnik"].Rows)
+                {
+                    var tn = new Korisnik();
+                    tn.Id = Convert.ToInt32(row["Id"]);
+                    tn.Ime = row["Ime"].ToString();
+                    tn.Prezime = row["Prezime"].ToString();
+                    tn.KorisnickoIme = row["KorisnickoIme"].ToString();
+                    tn.Lozinka = row["Lozinka"].ToString();
+                    tn.TipKorisnika = (TipKorisnika)Enum.Parse(typeof(TipKorisnika), (row["TipKorisnika"].ToString()));
+                    tn.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                    korisnici.Add(tn);
+                }
+                return korisnici;
+            }
+        }
+
         public static Korisnik Create(Korisnik tn)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))

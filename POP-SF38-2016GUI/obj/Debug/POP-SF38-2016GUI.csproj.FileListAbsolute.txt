@@ -41,3 +41,5 @@ D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\MahApps.Metro.pdb
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\bin\Debug\MahApps.Metro.xml
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\App.baml
 D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SveUslugeWindow.g.cs
+D:\POP\Projekat SalonNamestaja\POP-SF38-2016GUI\obj\Debug\UI\SveUslugeWindow.baml

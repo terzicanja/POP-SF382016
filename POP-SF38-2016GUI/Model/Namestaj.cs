@@ -244,6 +244,48 @@ namespace POP_SF382016.Model
             return namestaji;
         }
 
+        public static ObservableCollection<Namestaj> Search(string srchtext)
+        {
+            var namestaji = new ObservableCollection<Namestaj>();
+
+            using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+                cmd.CommandText = "SELECT * FROM Namestaj JOIN TipNamestaja On Namestaj.TipNamestajaId=TipNamestaja.Id WHERE (Namestaj.Obrisan = 0) AND (Namestaj.Naziv LIKE @srchtext OR Cena LIKE @srchtext OR TipNamestaja.Naziv LIKE @srchtext);";
+                cmd.Parameters.Add(new SqlParameter("@srchtext", "%" + srchtext + "%"));
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Namestaj n = new Namestaj()
+                    {
+                        Id = reader.GetInt32(0),
+                        IdTipaNamestaja = reader.GetInt32(1),
+                        Naziv = reader.GetString(2),
+                        Sifra = reader.GetString(3),
+                        Cena = (double)reader.GetDecimal(4),
+                        KolicinaUMagacinu = reader.GetInt32(5)
+                    };
+                    namestaji.Add(n);
+                }
+
+                foreach (var tip in Projekat.Instance.TipoviNamestaja)
+                {
+                    foreach (var na in namestaji)
+                    {
+                        if(na.IdTipaNamestaja == tip.Id)
+                        {
+                            na.TipNamestaja = tip;
+                        }
+                    }
+                }
+                return namestaji;
+            }
+        }
+
         public static Namestaj Create(Namestaj n)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))

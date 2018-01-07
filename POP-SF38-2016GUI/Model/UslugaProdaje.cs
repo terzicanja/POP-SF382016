@@ -170,6 +170,49 @@ namespace POP_SF382016.Model
             return tn;
         }
 
+        public static void Update(UslugaProdaje tn)
+        {
+            //azuriranje baze
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "UPDATE UslugaProdaje SET IdProdaje = @IdProdaje, IdUsluge = @IdUsluge WHERE Id=@Id;";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", tn.Id);
+                cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
+                cmd.Parameters.AddWithValue("IdUsluge", tn.IdUsluge);
+
+                cmd.ExecuteNonQuery();
+            }
+            //azuriranje modela
+            foreach (var tip in Projekat.Instance.UslugeProdaje)
+            {
+                if (tn.Id == tip.Id)
+                {
+                    tip.IdProdaje = tn.IdProdaje;
+                    tip.IdUsluge = tn.IdUsluge;
+                }
+            }
+        }
+
+        public static void Delete(UslugaProdaje p)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "DELETE FROM UslugaProdaje WHERE Id=@Id;";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", p.Id);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
         #endregion
     }
 }

@@ -27,15 +27,21 @@
                 <DataGridTextColumn Header="Kolicina" Width="*" Binding="{Binding Path=Kolicina}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ListBox Margin="11,10.8,31.4,31.4" Name="lbUsluge" DataContext="{Binding Path=DodatnaUsluga}" SelectionMode="Multiple" Grid.Column="1" Grid.Row="2">
 
-        </ListBox>
+        <DataGrid Margin="11,10.8,31.4,31.4" AutoGenerateColumns="False" Name="dgProdajaUsluga" DataContext="{Binding Path=SelektovanaUslugaZaProdaju}" Grid.Column="1" Grid.Row="2" SelectionMode="Single" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=DodatnaUsluga.Usluga}"/>
+                <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=DodatnaUsluga.Cena}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
         <Button Content="Dodaj Namestaj" Margin="36,31.8,10,121.2" Click="SviNamestajiZaProdaju" Grid.Row="1"/>
-        <Button Content="Dodaj uslugu" Margin="36,23.8,10,92.4" Click="SviNamestajiZaProdaju" Grid.Row="2"/>
+        <Button Content="Ukloni Namestaj" Margin="36,95.8,10,57.2" Click="UkloniNamestaj" Grid.Row="1"/>
+        <Button Content="Dodaj uslugu" Margin="36,23.8,10,92.4" Click="SveUslugeZaProdaju" Grid.Row="2"/>
 
 
         <Label Grid.Row="3" Grid.Column="0" Content="Ukupan iznos:" FontSize="15" Margin="21,129.6,20,23.6"/>
-        <Label Margin="38,27.6,200.4,95.6" Content="{Binding UkupanIznos}" Grid.Row="3" Grid.Column="1" />
+        <Label Margin="11,9.6,227.4,113.4" Content="{Binding UkupanIznos}" Grid.Row="3" Grid.Column="1" />
         <TextBox Grid.Row="3" Width="Auto" Name="tbUkupanIznos" Margin="11,119.6,25.4,23.6" Text="{Binding Path=UkupanIznos}" Grid.Column="1"/>
 
         <Button Content="Sacuvaj" Margin="11,23.4,320.4,21.6" Click="SacuvajIzmene" Grid.Row="4" Grid.Column="1"/>

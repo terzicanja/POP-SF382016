@@ -129,6 +129,35 @@ namespace POP_SF382016.Model
             return usluge;
         }
 
+        public static ObservableCollection<DodatnaUsluga> Search(string srchtext)
+        {
+            var usluge = new ObservableCollection<DodatnaUsluga>();
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+
+                cmd.CommandText = "SELECT * FROM Usluga WHERE Naziv LIKE @srchtext OR Cena LIKE @srchtext;";
+                cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Usluga");
+
+                foreach (DataRow row in ds.Tables["Usluga"].Rows)
+                {
+                    var tn = new DodatnaUsluga();
+                    tn.Id = Convert.ToInt32(row["Id"]);
+                    tn.Usluga = row["Naziv"].ToString();
+                    tn.Cena = Convert.ToInt32(row["Cena"]);
+                    tn.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                    usluge.Add(tn);
+                }
+                return usluge;
+            }
+        }
+
         public static DodatnaUsluga Create(DodatnaUsluga dn)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))

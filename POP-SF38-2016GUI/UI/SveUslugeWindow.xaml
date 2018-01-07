@@ -1,0 +1,19 @@
+﻿<Window x:Class="POP_SF38_2016GUI.UI.SveUslugeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
+        mc:Ignorable="d"
+        Title="SveUslugeWindow" Height="344.131" Width="375.915">
+    <Grid>
+        <DataGrid Name="dgSveUsluge" Margin="10,10,10.6,68.4" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Usluga}"/>
+                <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Sacuvaj" Margin="46,268,255.6,10.4" Name="PickSave" Click="PickUsluga"/>
+        <Button Content="Izadji" Margin="198,268,90.6,10.4"/>
+    </Grid>
+</Window>

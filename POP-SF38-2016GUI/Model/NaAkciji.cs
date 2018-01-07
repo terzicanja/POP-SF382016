@@ -187,6 +187,21 @@ namespace POP_SF382016.Model
             }
         }
 
+        public static void Delete(NaAkciji p)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "DELETE FROM NaAkciji WHERE Id=@Id;";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", p.Id);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
         #endregion
     }
 }

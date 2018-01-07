@@ -214,6 +214,37 @@ namespace POP_SF382016.Model
             return akcije;
         }
 
+        public static ObservableCollection<Akcija> Search(string srchtext)
+        {
+            var akcije = new ObservableCollection<Akcija>();
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                //con.Open();
+                SqlCommand cmd = con.CreateCommand();
+                SqlDataAdapter da = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+
+                cmd.CommandText = "SELECT * FROM Akcija WHERE Naziv LIKE @srchtext OR Popust LIKE @srchtext OR PocetakAkcije LIKE @srchtext OR KrajAkcije LIKE @srchtext;";
+                cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Akcija");
+
+                foreach (DataRow row in ds.Tables["Akcija"].Rows)
+                {
+                    var tn = new Akcija();
+                    tn.Id = Convert.ToInt32(row["Id"]);
+                    tn.Naziv = row["Naziv"].ToString();
+                    tn.PocetakAkcije = DateTime.Parse(row["PocetakAkcije"].ToString());
+                    tn.KrajAkcije = DateTime.Parse(row["KrajAkcije"].ToString());
+                    tn.Popust = Convert.ToInt32(row["Popust"]);
+
+                    akcije.Add(tn);
+                }
+                return akcije;
+            }
+        }
+
         public static Akcija Create(Akcija tn)
         {
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))

@@ -26,6 +26,8 @@ namespace POP_SF38_2016GUI.UI
         private Akcija akcija;
         private Operacija operacija;
         public ObservableCollection<NaAkciji> listaNaAkciji;
+        public NaAkciji SelektovaniNamestaj;
+        private NaAkciji akcijaa;
 
         public AkcijeWindow(Akcija akcija, Operacija operacija)
         {
@@ -34,21 +36,20 @@ namespace POP_SF38_2016GUI.UI
             this.akcija = akcija;
             this.operacija = operacija;
             this.listaNaAkciji = new ObservableCollection<NaAkciji>();
+            SelektovaniNamestaj = new NaAkciji();
 
+            tbNaziv.DataContext = akcija;
             tbPopust.DataContext = akcija;
             dtPocetka.DataContext = akcija;
             dtKraj.DataContext = akcija;
-
-            //dgPopustNamestaj.IsSynchronizedWithCurrentItem = true;
-            //dgPopustNamestaj.DataContext = akcija;
-            //dgPopustNamestaj.SelectedValue = SelectedNamestaj;
+            dgPopustNamestaj.DataContext = akcija;
+            
 
             //dgPopustNamestaj.ItemsSource = akcija.IdNamestaja;
             //POSLE BAZA NE VALJA
-
+            dgPopustNamestaj.ItemsSource = listaNaAkciji;
 
             //dgPopustNamestaj.ItemsSource = dgPopustNamestaj.SelectedItem
-            
         }
         
 
@@ -65,6 +66,7 @@ namespace POP_SF38_2016GUI.UI
             {
                 case Operacija.Dodavanje:
                     //akcija.Id = lista.Count + 1;
+                    akcija.Naziv = tbNaziv.Text;
                     akcija.Popust = Double.Parse(tbPopust.Text);
                     akcija.PocetakAkcije = DateTime.Parse(dtPocetka.Text);
                     akcija.KrajAkcije = DateTime.Parse(dtKraj.Text);
@@ -80,11 +82,11 @@ namespace POP_SF38_2016GUI.UI
                     {
                         if (n.Id == akcija.Id)
                         {
+                            n.Naziv = akcija.Naziv;
                             n.Popust = akcija.Popust;
                             n.PocetakAkcije = akcija.PocetakAkcije;
                             n.KrajAkcije = akcija.KrajAkcije;
-
-
+                            
                             Akcija.Update(n);
                             break;
                         }
@@ -105,13 +107,13 @@ namespace POP_SF38_2016GUI.UI
             SviNamestajiWindow prozor = new SviNamestajiWindow(SviNamestajiWindow.Radnja.Preuzmi);
             prozor.ShowDialog();
 
-            var akcijaa = prozor.SelektovanNaAkciji;
+            akcijaa = prozor.SelektovanNaAkciji;
             akcijaa.IdAkcije = akcija.Id;
             akcijaa.IdNamestaja = akcijaa.IdNamestaja;
             NaAkciji.Update(akcijaa);
 
             listaNaAkciji.Add(akcijaa);
-            dgPopustNamestaj.ItemsSource = listaNaAkciji;
+            
             
             /*if(dgPopustNamestaj.SelectedItem is Namestaj n)
             //if(prozor.SelektovaniNamestaj is Namestaj n)
@@ -123,6 +125,12 @@ namespace POP_SF38_2016GUI.UI
                 //IdNamestajaNaAkciji.Add(prozor.SelektovaniNamestaj.Id);
             }*/
         }
-        
+
+        private void UkloniNamestaj(object sender, RoutedEventArgs e)
+        {
+            SelektovaniNamestaj = dgPopustNamestaj.SelectedItem as NaAkciji;
+            listaNaAkciji.Remove(SelektovaniNamestaj);
+            NaAkciji.Delete(SelektovaniNamestaj);
+        }
     }
 }
