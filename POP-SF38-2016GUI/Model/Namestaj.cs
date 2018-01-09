@@ -167,9 +167,7 @@ namespace POP_SF382016.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
         
-
-        //treba izmeniti kod tipa da je int i da je to id, i dodati akciju i uraditi isto
-        //public int? AkcijaId treba taj upitnik da bi bilo null a ne 0 (nullable)
+//public int? AkcijaId treba taj upitnik da bi bilo null a ne 0 (nullable)
 
         public override string ToString()
         {
@@ -244,21 +242,41 @@ namespace POP_SF382016.Model
             return namestaji;
         }
 
-        public static ObservableCollection<Namestaj> Search(string srchtext)
+        public static ObservableCollection<Namestaj> Search(string srchtext, string sorttext)
         {
             var namestaji = new ObservableCollection<Namestaj>();
 
             using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
-                con.Open();
+                //con.Open();
                 SqlCommand cmd = con.CreateCommand();
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();
-                cmd.CommandText = "SELECT * FROM Namestaj JOIN TipNamestaja On Namestaj.TipNamestajaId=TipNamestaja.Id WHERE (Namestaj.Obrisan = 0) AND (Namestaj.Naziv LIKE @srchtext OR Cena LIKE @srchtext OR TipNamestaja.Naziv LIKE @srchtext);";
-                cmd.Parameters.Add(new SqlParameter("@srchtext", "%" + srchtext + "%"));
-                SqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read())
+                //string selectCommand = "SELECT * FROM Namestaj JOIN TipNamestaja On Namestaj.TipNamestajaId=TipNamestaja.Id WHERE (Namestaj.Obrisan = 0) AND (Namestaj.Naziv LIKE @srchtext OR Cena LIKE @srchtext OR TipNamestaja.Naziv LIKE @srchtext) ORDER BY ";
+                string selectCommand = "SELECT * FROM Namestaj WHERE (Obrisan = 0) AND (Naziv LIKE @srchtext OR Cena LIKE @srchtext) ORDER BY ";
+                selectCommand += sorttext;
+                cmd.CommandText = selectCommand;
+                //cmd.CommandText = "SELECT * FROM Namestaj JOIN TipNamestaja On Namestaj.TipNamestajaId=TipNamestaja.Id WHERE (Namestaj.Obrisan = 0) AND (Namestaj.Naziv LIKE @srchtext OR Cena LIKE @srchtext OR TipNamestaja.Naziv LIKE @srchtext);";
+                cmd.Parameters.Add(new SqlParameter("@srchtext", "%" + srchtext + "%"));
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Namestaj");
+
+                foreach (DataRow row in ds.Tables["Namestaj"].Rows)
+                {
+                    var n = new Namestaj();
+                    n.Id = Convert.ToInt32(row["Id"]);
+                    n.IdTipaNamestaja = Convert.ToInt32(row["TipNamestajaId"]);
+                    n.Naziv = row["Naziv"].ToString();
+                    n.Sifra = row["Sifra"].ToString();
+                    n.Cena = double.Parse(row["Cena"].ToString());
+                    n.KolicinaUMagacinu = Convert.ToInt32(row["Kolicina"]);
+                    n.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                    namestaji.Add(n);
+                }
+
+                /*while (reader.Read())
                 {
                     Namestaj n = new Namestaj()
                     {
@@ -281,7 +299,7 @@ namespace POP_SF382016.Model
                             na.TipNamestaja = tip;
                         }
                     }
-                }
+                }*/
                 return namestaji;
             }
         }

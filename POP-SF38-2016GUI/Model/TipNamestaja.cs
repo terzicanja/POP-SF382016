@@ -118,7 +118,7 @@ namespace POP_SF382016.Model
             return tipoviNamestaja;
         }
 
-        public static ObservableCollection<TipNamestaja> Search(string srchtext)
+        public static ObservableCollection<TipNamestaja> Search(string srchtext, string sorttext)
         {
             var tipoviNamestaja = new ObservableCollection<TipNamestaja>();
 
@@ -129,8 +129,13 @@ namespace POP_SF382016.Model
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                cmd.CommandText = "SELECT * FROM TipNamestaja WHERE Naziv LIKE @srchtext;";
+                string selectCommand = "SELECT * FROM TipNamestaja WHERE Naziv LIKE @srchtext ORDER BY ";
+
+                selectCommand += sorttext;
+                cmd.CommandText = selectCommand;
+                //cmd.CommandText = "SELECT * FROM TipNamestaja WHERE Naziv LIKE @srchtext ORDER BY @sorttext;";
                 cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
+                //cmd.Parameters.AddWithValue("@sorttext", sorttext);
                 da.SelectCommand = cmd;
                 da.Fill(ds, "TipNamestaja");
 
@@ -157,7 +162,6 @@ namespace POP_SF382016.Model
 
                 cmd.CommandText = "INSERT INTO TipNamestaja (Naziv, Obrisan) VALUES (@Naziv, @Obrisan);";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                //sql injection google
                 cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
                 cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
 

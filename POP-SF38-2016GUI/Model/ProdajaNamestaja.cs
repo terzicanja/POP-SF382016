@@ -210,7 +210,7 @@ namespace POP_SF382016.Model
             return prodaje;
         }
 
-        public static ObservableCollection<ProdajaNamestaja> Search(string srchtext)
+        public static ObservableCollection<ProdajaNamestaja> Search(string srchtext, string sorttext)
         {
             var prodaje = new ObservableCollection<ProdajaNamestaja>();
 
@@ -220,7 +220,10 @@ namespace POP_SF382016.Model
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                cmd.CommandText = "SELECT * FROM Prodaja WHERE Kupac LIKE @srchtext OR DatumProdaje LIKE @srchtext OR UkupanIznos LIKE @srchtext;";
+                string selectCommand = "SELECT * FROM Prodaja WHERE Kupac LIKE @srchtext OR DatumProdaje LIKE @srchtext OR UkupanIznos LIKE @srchtext ORDER BY ";
+                selectCommand += sorttext;
+                cmd.CommandText = selectCommand;
+                //cmd.CommandText = "SELECT * FROM Prodaja WHERE Kupac LIKE @srchtext OR DatumProdaje LIKE @srchtext OR UkupanIznos LIKE @srchtext;";
                 cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
                 da.SelectCommand = cmd;
                 da.Fill(ds, "Prodaja");

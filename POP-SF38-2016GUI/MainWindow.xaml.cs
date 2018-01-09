@@ -28,15 +28,6 @@ namespace POP_SF38_2016GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Namestaj IzabraniNamestaj { get; set; }
-        public TipNamestaja IzabraniTipNamestaja { get; set; }
-        public Salon IzabraniSalon { get; set; }
-        public DodatnaUsluga IzabranaUsluga { get; set; }
-        public Akcija IzabranaAkcija { get; set; }
-        public ProdajaNamestaja IzabranaProdaja { get; set; }
-        public Korisnik IzabraniKorisnik { get; set; }
-        public object IzabranaStavka { get; set; }
-
         ICollectionView view;
         public ProdajaNamestaja SelektovanaProdaja = null;
         private TipKorisnika tipKorisnika;
@@ -48,12 +39,6 @@ namespace POP_SF38_2016GUI
 
             this.tipKorisnika = tipKorisnika;
             SelektovanaProdaja = new ProdajaNamestaja();
-            /*
-            var noviTip = TipNamestaja.Create(new TipNamestaja()
-            {
-                Naziv = "novi",
-                Obrisan = false
-            });*/
 
             //view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
             //view.Filter = PrikazFilter;
@@ -132,6 +117,10 @@ namespace POP_SF38_2016GUI
             view.Filter = NamestajFilter;
             dgPrikaz.ItemsSource = view;
 
+            cbSort.Items.Clear();
+            cbSort.Items.Add("Nazivu");
+            cbSort.Items.Add("Ceni");
+            cbSort.Items.Add("Kolicini");
             /*
             Button btn = Dodaj;
             btn.Name = "Dodaj";
@@ -149,6 +138,20 @@ namespace POP_SF38_2016GUI
             view.Filter = TipFilter;
             dgPrikaz.ItemsSource = view;
 
+            cbSort.Items.Clear();
+            cbSort.Items.Add("Nazivu");
+            
+            /*if(cbSort.SelectedIndex > -1)
+            {
+                //string orderby = cbSort.SelectedItem.ToString();
+                string orderby = cbSort.SelectionBoxItem.ToString();
+                if (orderby == "Nazivu")
+                {
+                    view = CollectionViewSource.GetDefaultView(TipNamestaja.Search(tbSearch.Text, "Naziv"));
+                    view.Filter = TipFilter;
+                    dgPrikaz.ItemsSource = view;
+                }
+            }*/
         }
 
         private void UslugePrikaz(object sender, RoutedEventArgs e)
@@ -159,6 +162,10 @@ namespace POP_SF38_2016GUI
             view = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatneUsluge);
             view.Filter = UslugeFilter;
             dgPrikaz.ItemsSource = view;
+
+            cbSort.Items.Clear();
+            cbSort.Items.Add("Nazivu");
+            cbSort.Items.Add("Ceni");
         }
 
         private void AkcijePrikaz(object sender, RoutedEventArgs e)
@@ -168,6 +175,12 @@ namespace POP_SF38_2016GUI
             /*view = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcije);
             view.Filter = AkcijeFilter;
             dgPrikaz.ItemsSource = view;*/
+
+            cbSort.Items.Clear();
+            cbSort.Items.Add("Nazivu");
+            cbSort.Items.Add("Pocetku akcije");
+            cbSort.Items.Add("Kraju akcije");
+            cbSort.Items.Add("Popustu");
         }
         
         private void ProdajePrikaz(object sender, RoutedEventArgs e)
@@ -175,6 +188,10 @@ namespace POP_SF38_2016GUI
             trenutnoAktivan = "Prodaja";
             dgPrikaz.ItemsSource = Projekat.Instance.ProdajeNamestaja;
 
+            cbSort.Items.Clear();
+            cbSort.Items.Add("Datumu prodaje");
+            cbSort.Items.Add("Kupcu");
+            cbSort.Items.Add("Ukupnom iznosu");
 
             //dgPrikaz.SelectedItem = IzabranaProdaja;
             //view = CollectionViewSource.GetDefaultView(Projekat.Instance.ProdajaNamestaja);
@@ -189,6 +206,12 @@ namespace POP_SF38_2016GUI
             view = CollectionViewSource.GetDefaultView(Projekat.Instance.Korisnici);
             view.Filter = KorisniciFilter;
             dgPrikaz.ItemsSource = view;
+
+            cbSort.Items.Clear();
+            cbSort.Items.Add("Imenu");
+            cbSort.Items.Add("Prezimenu");
+            cbSort.Items.Add("Korisnickom imenu");
+            cbSort.Items.Add("Lozinci");
         }
 
 
@@ -438,48 +461,6 @@ namespace POP_SF38_2016GUI
         }
         #endregion
 
-
-        /*private void Proba(object p)
-        {
-            lbPrikaz.Items.Clear();
-            //var nesto = Projekat.Instance.p;
-            foreach (var s in p)
-            {
-                if (!s.Obrisan)
-                {
-                    lbPrikaz.Items.Add(s);
-                }
-            }
-        }*/
-
-        /*private void Prikaz()
-        {
-            switch (trenutnoAktivan)
-            {
-                case "Salon":
-                    Proba(Projekat.Instance.Salon);
-                    Dodaj.Visibility = Visibility.Hidden;
-                    break;
-                case "Namestaj":
-                    dgPrikaz.ItemsSource = Projekat.Instance.Namestaj;
-                    //Proba(Projekat.Instance.Namestaj);
-                    Dodaj.Click += DodajNamestaj;
-                    break;
-                case "Tip":
-                    Proba(Projekat.Instance.TipoviNamestaja);
-                    Dodaj.Click += DodajTipNamestaja;
-                    break;
-                case "Usluge":
-                    Proba(Projekat.Instance.DodatnaUsluga);
-                    break;
-                case "Akcije":
-                    Proba(Projekat.Instance.Akcija);
-                    break;
-                default:
-                    break;
-            }
-        }*/
-
         private void DugmeDodaj(object sender, RoutedEventArgs e)
         {
             switch (trenutnoAktivan)
@@ -517,31 +498,28 @@ namespace POP_SF38_2016GUI
                 case "Salon":
                     break;
                 case "Namestaj":
-                    view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text));
+                    view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Id"));
                     view.Filter = NamestajFilter;
                     dgPrikaz.ItemsSource = view;
                     break;
                 case "Tip":
-                    view = CollectionViewSource.GetDefaultView(TipNamestaja.Search(tbSearch.Text));
+                    view = CollectionViewSource.GetDefaultView(TipNamestaja.Search(tbSearch.Text, "Id"));
                     view.Filter = TipFilter;
                     dgPrikaz.ItemsSource = view;
                     break;
                 case "Usluge":
-                    view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text));
+                    view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text, "Id"));
                     view.Filter = UslugeFilter;
                     dgPrikaz.ItemsSource = view;
                     break;
                 case "Akcije":
-                    dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text);
-                    /*view = CollectionViewSource.GetDefaultView(Akcija.Search(tbSearch.Text));
-                    view.Filter = NamestajFilter;
-                    dgPrikaz.ItemsSource = view;*/
+                    dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "Id");
                     break;
                 case "Prodaja":
-                    dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text);
+                    dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "Id");
                     break;
                 case "Korisnici":
-                    view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text));
+                    view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Id"));
                     view.Filter = KorisniciFilter;
                     dgPrikaz.ItemsSource = view;
                     break;
@@ -618,7 +596,6 @@ namespace POP_SF38_2016GUI
         }
 
         
-        //wpf control !!!!!!!!
         //i sve u try catch
         
 
@@ -640,6 +617,107 @@ namespace POP_SF38_2016GUI
         {
             e.Row.Header = (e.Row.GetIndex()+1).ToString();
             //+1 je da krene da broji od 1
+        }
+
+
+        private void cbSort_DropDownClosed(object sender, EventArgs e)
+        {
+            string orderby = cbSort.SelectionBoxItem.ToString();
+            switch (trenutnoAktivan)
+            {
+                case "Salon":
+                    break;
+                case "Namestaj":
+                    if (orderby == "Nazivu")
+                    {
+                        view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Naziv"));
+                    }
+                    else if (orderby == "Ceni")
+                    {
+                        view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Cena"));
+                    }
+                    else if (orderby == "Kolicini")
+                    {
+                        view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Kolicina"));
+                    }
+                    view.Filter = NamestajFilter;
+                    dgPrikaz.ItemsSource = view;
+                    break;
+                case "Tip":
+                    if (orderby == "Nazivu")
+                    {
+                        view = CollectionViewSource.GetDefaultView(TipNamestaja.Search(tbSearch.Text, "Naziv"));
+                        view.Filter = TipFilter;
+                        dgPrikaz.ItemsSource = view;
+                    }
+                    break;
+                case "Usluge":
+                    if (orderby == "Nazivu")
+                    {
+                        view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text, "Naziv"));
+                    }
+                    else if (orderby == "Ceni")
+                    {
+                        view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text, "Cena"));
+                    }
+                    view.Filter = UslugeFilter;
+                    dgPrikaz.ItemsSource = view;
+                    break;
+                case "Akcije":
+                    if (orderby == "Nazivu")
+                    {
+                        dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "Naziv");
+                    }
+                    else if (orderby == "Popustu")
+                    {
+                        dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "Popust");
+                    }
+                    else if (orderby == "Pocetku akcije")
+                    {
+                        dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "PocetakAkcije");
+                    }
+                    else if (orderby == "Kraju akcije")
+                    {
+                        dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "KrajAkcije");
+                    }
+                    break;
+                case "Prodaja":
+                    if (orderby == "Datumu prodaje")
+                    {
+                        dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "DatumProdaje");
+                    }
+                    else if (orderby == "Kupcu")
+                    {
+                        dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "Kupac");
+                    }
+                    else if (orderby == "Ukupnom iznosu")
+                    {
+                        dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "UkupanIznos");
+                    }
+                    break;
+                case "Korisnici":
+                    if (orderby == "Imenu")
+                    {
+                        view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Ime"));
+                    }
+                    else if (orderby == "Prezimenu")
+                    {
+                        view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Prezime"));
+                    }
+                    else if (orderby == "Korisnickom imenu")
+                    {
+                        view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "KorisnickoIme"));
+                    }
+                    else if (orderby == "Lozinci")
+                    {
+                        view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Lozinka"));
+                    }
+                    view.Filter = KorisniciFilter;
+                    dgPrikaz.ItemsSource = view;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

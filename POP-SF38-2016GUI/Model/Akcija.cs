@@ -214,7 +214,7 @@ namespace POP_SF382016.Model
             return akcije;
         }
 
-        public static ObservableCollection<Akcija> Search(string srchtext)
+        public static ObservableCollection<Akcija> Search(string srchtext, string sorttext)
         {
             var akcije = new ObservableCollection<Akcija>();
 
@@ -225,7 +225,10 @@ namespace POP_SF382016.Model
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                cmd.CommandText = "SELECT * FROM Akcija WHERE Naziv LIKE @srchtext OR Popust LIKE @srchtext OR PocetakAkcije LIKE @srchtext OR KrajAkcije LIKE @srchtext;";
+                string selectCommand = "SELECT * FROM Akcija WHERE Naziv LIKE @srchtext OR Popust LIKE @srchtext OR PocetakAkcije LIKE @srchtext OR KrajAkcije LIKE @srchtext ORDER BY ";
+                selectCommand += sorttext;
+                cmd.CommandText = selectCommand;
+                //cmd.CommandText = "SELECT * FROM Akcija WHERE Naziv LIKE @srchtext OR Popust LIKE @srchtext OR PocetakAkcije LIKE @srchtext OR KrajAkcije LIKE @srchtext;";
                 cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
                 da.SelectCommand = cmd;
                 da.Fill(ds, "Akcija");

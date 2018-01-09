@@ -12,7 +12,7 @@
         <Label Grid.Row="0" Grid.Column="0" Content="Popust:" FontSize="15" Margin="25,89,457.8,418"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbPopust" Margin="113,89,316.8,418" >
             <TextBox.Text>
-                <Binding Path="Popust" UpdateSourceTrigger="LostFocus">
+                <Binding Path="Popust" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <local:PopustValidation/>
                     </Binding.ValidationRules>
@@ -35,7 +35,20 @@
         <Button Content="Ukloni Namestaj" Margin="33,376,448.8,125" Click="UkloniNamestaj"/>
         <!--<TextBox Grid.Row="0" Width="Auto" Name="tbUsluga" Margin="129,69,9.8,210.2"/>-->
 
-        <Button Content="Sacuvaj" Margin="33,482,385.8,21" Click="SacuvajIzmene"/>
+        <Button Content="Sacuvaj" Margin="33,482,385.8,21" Click="SacuvajIzmene">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError),ElementName=tbPopust}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
         <Button Content="Izadji" Margin="356,482,46.8,21" Click="ZatvoriAkcijeWindow"/>
     </Grid>

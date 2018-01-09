@@ -175,7 +175,7 @@ namespace POP_SF382016.Model
             return korisnici;
         }
 
-        public static ObservableCollection<Korisnik> Search(string srchtext)
+        public static ObservableCollection<Korisnik> Search(string srchtext, string sorttext)
         {
             var korisnici = new ObservableCollection<Korisnik>();
 
@@ -185,7 +185,10 @@ namespace POP_SF382016.Model
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                cmd.CommandText = "SELECT * FROM Korisnik WHERE Ime LIKE @srchtext OR Prezime LIKE @srchtext OR KorisnickoIme LIKE @srchtext;";
+                string selectCommand = "SELECT * FROM Korisnik WHERE Ime LIKE @srchtext OR Prezime LIKE @srchtext OR KorisnickoIme LIKE @srchtext ORDER BY ";
+                selectCommand += sorttext;
+                cmd.CommandText = selectCommand;
+                //cmd.CommandText = "SELECT * FROM Korisnik WHERE Ime LIKE @srchtext OR Prezime LIKE @srchtext OR KorisnickoIme LIKE @srchtext;";
                 cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
                 da.SelectCommand = cmd;
                 da.Fill(ds, "Korisnik");
