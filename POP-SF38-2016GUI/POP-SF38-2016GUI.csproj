@@ -73,6 +73,8 @@
     <Compile Include="UI\DetaljiProdajeWindow.xaml.cs">
       <DependentUpon>DetaljiProdajeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\DoubleValidation.cs" />
+    <Compile Include="UI\IntValidation.cs" />
     <Compile Include="UI\KorisniciWindow.xaml.cs">
       <DependentUpon>KorisniciWindow.xaml</DependentUpon>
     </Compile>
@@ -89,6 +91,7 @@
     <Compile Include="UI\SalonWindow.xaml.cs">
       <DependentUpon>SalonWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\StringValidation.cs" />
     <Compile Include="UI\SveUslugeWindow.xaml.cs">
       <DependentUpon>SveUslugeWindow.xaml</DependentUpon>
     </Compile>

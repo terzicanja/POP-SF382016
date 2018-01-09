@@ -12,11 +12,33 @@
             <RowDefinition Height="115*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Usluga:" FontSize="15" Margin="10,10,242.6,118.2"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbUsluga" Margin="78,10,9.6,118.2" Text="{Binding Path=Usluga}"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbUsluga" Margin="78,10,9.6,118.2">
+            <TextBox.Text>
+                <Binding Path="Usluga" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label Grid.Row="0" Grid.Column="0" Content="Cena:" FontSize="15" Margin="10,50,231.6,75.2"/>
         <TextBox Grid.Row="0" Width="Auto" Name="tbCena" Margin="78,50,9.6,75.2" Text="{Binding Path=Cena}"/>
 
-        <Button Content="Sacuvaj" Margin="33,46.8,225.6,21.4" Click="SacuvajIzmene" Grid.Row="1"/>
+        <Button Content="Sacuvaj" Margin="33,46.8,225.6,21.4" Click="SacuvajIzmene" Grid.Row="1">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError),ElementName=tbUsluga}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Content="Izadji" Margin="187,46.8,46.6,21.4" Click="ZatvoriUslugeWindow" Grid.Row="1"/>
     </Grid>
 </Window>

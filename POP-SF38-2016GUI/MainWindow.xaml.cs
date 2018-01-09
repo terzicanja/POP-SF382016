@@ -211,7 +211,6 @@ namespace POP_SF38_2016GUI
             cbSort.Items.Add("Imenu");
             cbSort.Items.Add("Prezimenu");
             cbSort.Items.Add("Korisnickom imenu");
-            cbSort.Items.Add("Lozinci");
         }
 
 
@@ -281,7 +280,10 @@ namespace POP_SF38_2016GUI
         {
             var noviKorisnik = new Korisnik()
             {
-                Ime = ""
+                Ime = "",
+                Prezime = "",
+                Lozinka = "",
+                KorisnickoIme = ""
             };
             var prozor = new KorisniciWindow(noviKorisnik, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
@@ -628,15 +630,27 @@ namespace POP_SF38_2016GUI
                 case "Salon":
                     break;
                 case "Namestaj":
-                    if (orderby == "Nazivu")
+                    if (orderby == "Nazivu" && opadajuce.IsChecked==true)
+                    {
+                        view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Naziv DESC"));
+                    }
+                    else if (orderby == "Nazivu" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Naziv"));
                     }
-                    else if (orderby == "Ceni")
+                    else if (orderby == "Ceni" && opadajuce.IsChecked == true)
+                    {
+                        view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Cena DESC"));
+                    }
+                    else if (orderby == "Ceni" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Cena"));
                     }
-                    else if (orderby == "Kolicini")
+                    else if (orderby == "Kolicini" && opadajuce.IsChecked == true)
+                    {
+                        view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Kolicina DESC"));
+                    }
+                    else if (orderby == "Kolicini" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(Namestaj.Search(tbSearch.Text, "Kolicina"));
                     }
@@ -644,73 +658,121 @@ namespace POP_SF38_2016GUI
                     dgPrikaz.ItemsSource = view;
                     break;
                 case "Tip":
-                    if (orderby == "Nazivu")
+                    if (orderby == "Nazivu" && opadajuce.IsChecked == true)
+                    {
+                        view = CollectionViewSource.GetDefaultView(TipNamestaja.Search(tbSearch.Text, "Naziv DESC"));
+                    }
+                    else if (orderby == "Nazivu" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(TipNamestaja.Search(tbSearch.Text, "Naziv"));
-                        view.Filter = TipFilter;
-                        dgPrikaz.ItemsSource = view;
                     }
+                    view.Filter = TipFilter;
+                    dgPrikaz.ItemsSource = view;
                     break;
                 case "Usluge":
-                    if (orderby == "Nazivu")
+                    if (orderby == "Nazivu" && opadajuce.IsChecked == true)
+                    {
+                        view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text, "Naziv DESC"));
+                    }
+                    else if (orderby == "Nazivu" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text, "Naziv"));
                     }
-                    else if (orderby == "Ceni")
+                    else if (orderby == "Ceni" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text, "Cena"));
+                    }
+                    else if (orderby == "Ceni" && opadajuce.IsChecked == true)
+                    {
+                        view = CollectionViewSource.GetDefaultView(DodatnaUsluga.Search(tbSearch.Text, "Cena DESC"));
                     }
                     view.Filter = UslugeFilter;
                     dgPrikaz.ItemsSource = view;
                     break;
                 case "Akcije":
-                    if (orderby == "Nazivu")
+                    if (orderby == "Nazivu" && rastuce.IsChecked == true)
                     {
                         dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "Naziv");
                     }
-                    else if (orderby == "Popustu")
+                    else if (orderby == "Nazivu" && opadajuce.IsChecked == true)
+                    {
+                        dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "Naziv DESC");
+                    }
+                    else if (orderby == "Popustu" && rastuce.IsChecked == true)
                     {
                         dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "Popust");
                     }
-                    else if (orderby == "Pocetku akcije")
+                    else if (orderby == "Popustu" && opadajuce.IsChecked == true)
+                    {
+                        dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "Popust DESC");
+                    }
+                    else if (orderby == "Pocetku akcije" && rastuce.IsChecked == true)
                     {
                         dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "PocetakAkcije");
                     }
-                    else if (orderby == "Kraju akcije")
+                    else if (orderby == "Pocetku akcije" && opadajuce.IsChecked == true)
+                    {
+                        dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "PocetakAkcije DESC");
+                    }
+                    else if (orderby == "Kraju akcije" && rastuce.IsChecked == true)
                     {
                         dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "KrajAkcije");
                     }
+                    else if (orderby == "Kraju akcije" && opadajuce.IsChecked == true)
+                    {
+                        dgPrikaz.ItemsSource = Akcija.Search(tbSearch.Text, "KrajAkcije DESC");
+                    }
                     break;
                 case "Prodaja":
-                    if (orderby == "Datumu prodaje")
+                    if (orderby == "Datumu prodaje" && rastuce.IsChecked == true)
                     {
                         dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "DatumProdaje");
                     }
-                    else if (orderby == "Kupcu")
+                    else if (orderby == "Datumu prodaje" && opadajuce.IsChecked == true)
+                    {
+                        dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "DatumProdaje DESC");
+                    }
+                    else if (orderby == "Kupcu" && rastuce.IsChecked == true)
                     {
                         dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "Kupac");
                     }
-                    else if (orderby == "Ukupnom iznosu")
+                    else if (orderby == "Kupcu" && opadajuce.IsChecked == true)
+                    {
+                        dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "Kupac DESC");
+                    }
+                    else if (orderby == "Ukupnom iznosu" && rastuce.IsChecked == true)
                     {
                         dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "UkupanIznos");
                     }
+                    else if (orderby == "Ukupnom iznosu" && opadajuce.IsChecked == true)
+                    {
+                        dgPrikaz.ItemsSource = ProdajaNamestaja.Search(tbSearch.Text, "UkupanIznos DESC");
+                    }
                     break;
                 case "Korisnici":
-                    if (orderby == "Imenu")
+                    if (orderby == "Imenu" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Ime"));
                     }
-                    else if (orderby == "Prezimenu")
+                    else if (orderby == "Imenu" && opadajuce.IsChecked == true)
+                    {
+                        view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Ime DESC"));
+                    }
+                    else if (orderby == "Prezimenu" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Prezime"));
                     }
-                    else if (orderby == "Korisnickom imenu")
+                    else if (orderby == "Prezimenu" && opadajuce.IsChecked == true)
+                    {
+                        view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Prezime DESC"));
+                    }
+                    else if (orderby == "Korisnickom imenu" && rastuce.IsChecked == true)
                     {
                         view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "KorisnickoIme"));
                     }
-                    else if (orderby == "Lozinci")
+                    else if (orderby == "Korisnickom imenu" && opadajuce.IsChecked == true)
                     {
-                        view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "Lozinka"));
+                        view = CollectionViewSource.GetDefaultView(Korisnik.Search(tbSearch.Text, "KorisnickoIme DESC"));
                     }
                     view.Filter = KorisniciFilter;
                     dgPrikaz.ItemsSource = view;

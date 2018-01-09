@@ -19,7 +19,15 @@
             <ColumnDefinition Width="223*"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Kupac:" FontSize="15" Margin="36,54,10,8.2"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbKupac" Margin="11,48,80.4,8.2" Text="{Binding Path=Kupac}" Grid.Column="1"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbKupac" Margin="11,48,80.4,8.2" Grid.Column="1">
+            <TextBox.Text>
+                <Binding Path="Kupac" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <DataGrid Margin="11,10.8,31.4,6.2" AutoGenerateColumns="False" DataContext="{Binding Path=SelektovanaStavka}" Name="dgProdajaNamestaj" SelectionMode="Single" IsReadOnly="True" Grid.Column="1" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Namestaj.Naziv}"/>
@@ -44,7 +52,21 @@
         <Label Margin="11,9.6,227.4,113.4" Content="{Binding UkupanIznos}" Grid.Row="3" Grid.Column="1" />
         <TextBox Grid.Row="3" Width="Auto" Name="tbUkupanIznos" Margin="11,119.6,25.4,23.6" Text="{Binding Path=UkupanIznos}" Grid.Column="1"/>
 
-        <Button Content="Sacuvaj" Margin="11,23.4,320.4,21.6" Click="SacuvajIzmene" Grid.Row="4" Grid.Column="1"/>
+        <Button Content="Sacuvaj" Margin="11,23.4,320.4,21.6" Click="SacuvajIzmene" Grid.Row="4" Grid.Column="1">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError),ElementName=tbKupac}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button Content="Izadji" Margin="252,23.4,63.4,21.6" Click="ZatvoriProdajeWindow" Grid.Column="1" Grid.Row="4"/>
     </Grid>
 </Window>

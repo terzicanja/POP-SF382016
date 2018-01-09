@@ -46,7 +46,6 @@ namespace POP_SF38_2016GUI.UI
             view.Filter = TipFilter;
 
             tbNaziv.DataContext = namestaj;
-            tbSifra.DataContext = namestaj;
             tbCena.DataContext = namestaj;
             tbKolicina.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
@@ -65,8 +64,6 @@ namespace POP_SF38_2016GUI.UI
                 }
             }*/
             //cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
-            cbAkcija.DataContext = namestaj;
-            cbAkcija.ItemsSource = Projekat.Instance.Akcije;
         }
 
         private bool TipFilter(object obj)
@@ -80,50 +77,20 @@ namespace POP_SF38_2016GUI.UI
             var listaNamestaja = Projekat.Instance.Namestaji;
             var listaAkcija = Projekat.Instance.Akcije;
             var izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
-            var izabranaAkcija = (Akcija)cbAkcija.SelectedItem;
-
+            int max = listaNamestaja.Max(t => t.Id) + 1;
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    //namestaj.Id = listaNamestaja.Count + 1;
+                    //Random random = new Random();
+                    //int randomNumber = random.Next(10, 99);
+                    //namestaj.Id = namestaj.Id;
                     namestaj.Naziv = tbNaziv.Text;
-                    namestaj.Sifra = tbSifra.Text;
+                    namestaj.Sifra = tbNaziv.Text.Substring(0, 2) + max.ToString() + izabraniTipNamestaja.Naziv.Substring(0, 2); //+ randomNumber.ToString();
                     namestaj.Cena = Double.Parse(tbCena.Text);
                     namestaj.KolicinaUMagacinu = int.Parse(tbKolicina.Text);
                     namestaj.IdTipaNamestaja = izabraniTipNamestaja.Id;
-                    //namestaj.IdAkcije = izabranaAkcija.Id;
-
-                    if(izabranaAkcija != null)
-                    {
-                        foreach (var ak in listaAkcija)
-                        {
-                            if(ak.Id == izabranaAkcija.Id)
-                            {
-                                //ak.IdNamestaja.Add(namestaj.Id);
-                                //OVO RADI, ALI BAZE....
-                            }
-                        }
-                    }
-
-                    /*
-                    foreach (var ak in listaAkcija)
-                    {
-                        if (izabranaAkcija != null)
-                        {
-                            ak.IdNamestaja.Add(namestaj.Id);
-                        }
-                    }*/
-
-                    /*foreach (var ak in listaAkcija)
-                    {
-                        if (ak.Id == izabranaAkcija.Id)
-                        {
-                            ak.IdNamestaja.Add(namestaj.Id);
-                        }
-                    }*/
 
                     Namestaj.Create(namestaj);
-                    //listaNamestaja.Add(namestaj);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in listaNamestaja)
@@ -131,54 +98,17 @@ namespace POP_SF38_2016GUI.UI
                         if (n.Id == namestaj.Id)
                         {
                             n.Naziv = namestaj.Naziv;
-                            n.TipNamestaja = namestaj.TipNamestaja; //i ovako za sve
+                            n.TipNamestaja = namestaj.TipNamestaja;
                             n.Sifra = namestaj.Sifra;
                             n.Cena = namestaj.Cena;
                             n.KolicinaUMagacinu = namestaj.KolicinaUMagacinu;
-                            //n.Akcija = namestaj.Akcija;
 
-                            if (izabranaAkcija != null)
-                            {
-                                foreach (var ak in listaAkcija)
-                                {
-                                    if (ak.Id == izabranaAkcija.Id)
-                                    {
-                                        //ak.IdNamestaja.Add(namestaj.Id);
-                                        //TAKODJE BAZEE
-                                    }
-                                }
-                            }
                             Namestaj.Update(n);
-
-                            /*
-                            foreach (var ak in listaAkcija)
-                            {
-                                if (izabranaAkcija != null)
-                                {
-                                    ak.IdNamestaja.Add(namestaj.Id);
-                                }
-                            }
-                            */
-                            /*
-                            foreach (var ak in listaAkcija)
-                            {
-                                if(ak.Id == n.IdAkcije)
-                                {
-                                    ak.IdNamestaja.Add(n.Id);
-                                }
-                            }*/
-
-                            //n.Sifra = this.tbSifra.Text;
-                            //n.Cena = Double.Parse(this.tbCena.Text);
-                            //n.KolicinaUMagacinu = int.Parse(this.tbKolicina.Text);
-                            //n.IdTipaNamestaja = izabraniTipNamestaja.Id;
                             break;
                         }
                     }
                     break;
             }
-            //GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
-            GenericSerializer.Serialize("akcija.xml", listaAkcija);
             Close();
         }
 
