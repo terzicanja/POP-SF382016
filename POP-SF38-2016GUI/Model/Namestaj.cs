@@ -19,51 +19,9 @@ namespace POP_SF382016.Model
         private string sifra;
         private double cena;
         private int kolicinaUMagacinu;
-        //public int idAkcije;
         public int idTipaNamestaja;
         private bool obrisan;
         private TipNamestaja tipNamestaja;
-
-        //private Akcija akcija;
-
-        /*[XmlIgnore]
-        public TipNamestaja TipNamestaja
-        {
-            get
-            {
-                if(tipNamestaja == null)
-                {
-                    tipNamestaja = TipNamestaja.GetById(IdTipaNamestaja);
-                }
-                return tipNamestaja;
-            }
-            set
-            {
-                tipNamestaja = value;
-                IdTipaNamestaja = tipNamestaja.Id;
-                OnPropertyChanged("TipNamestaja");
-            }
-        }*/
-        /*
-        [XmlIgnore]
-        public Akcija Akcija
-        {
-            get
-            {
-                if(akcija == null)
-                {
-                    akcija = Akcija.GetById(IdAkcije);
-                }
-                return akcija;
-            }
-            set
-            {
-                akcija = value;
-                IdAkcije = akcija.Id;
-                OnPropertyChanged("Akcija");
-            }
-        }
-        */
 
 
         public int Id
@@ -143,16 +101,6 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("KolicinaUMagacinu");
             }
         }
-        /*
-        public int IdAkcije
-        {
-            get { return idAkcije; }
-            set
-            {
-                idAkcije = value;
-                OnPropertyChanged("IdAkcije");
-            }
-        }*/
         
 
         public bool Obrisan
@@ -167,7 +115,6 @@ namespace POP_SF382016.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
         
-//public int? AkcijaId treba taj upitnik da bi bilo null a ne 0 (nullable)
 
         public override string ToString()
         {
@@ -180,7 +127,7 @@ namespace POP_SF382016.Model
             {
                 if (namestaj.Id == id)
                 {
-                    return namestaj; //mozda nije id nego naziv ili nzm i onda pozivan Tipnamestaja.getbyid(idtipnamestaja)
+                    return namestaj;
                 }
             }
             return null;
@@ -203,7 +150,6 @@ namespace POP_SF382016.Model
                 Sifra = sifra,
                 Cena = cena,
                 KolicinaUMagacinu = kolicinaUMagacinu,
-                //IdAkcije = idAkcije,
                 Obrisan = obrisan, 
                 TipNamestaja = tipNamestaja,
                 IdTipaNamestaja = idTipaNamestaja
@@ -248,12 +194,10 @@ namespace POP_SF382016.Model
 
             using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
-                //con.Open();
                 SqlCommand cmd = con.CreateCommand();
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                //string selectCommand = "SELECT * FROM Namestaj JOIN TipNamestaja On Namestaj.TipNamestajaId=TipNamestaja.Id WHERE (Namestaj.Obrisan = 0) AND (Namestaj.Naziv LIKE @srchtext OR Cena LIKE @srchtext OR TipNamestaja.Naziv LIKE @srchtext) ORDER BY ";
                 string selectCommand = "SELECT * FROM Namestaj WHERE (Obrisan = 0) AND (Naziv LIKE @srchtext OR Cena LIKE @srchtext) ORDER BY ";
                 selectCommand += sorttext;
                 cmd.CommandText = selectCommand;
@@ -275,31 +219,6 @@ namespace POP_SF382016.Model
 
                     namestaji.Add(n);
                 }
-
-                /*while (reader.Read())
-                {
-                    Namestaj n = new Namestaj()
-                    {
-                        Id = reader.GetInt32(0),
-                        IdTipaNamestaja = reader.GetInt32(1),
-                        Naziv = reader.GetString(2),
-                        Sifra = reader.GetString(3),
-                        Cena = (double)reader.GetDecimal(4),
-                        KolicinaUMagacinu = reader.GetInt32(5)
-                    };
-                    namestaji.Add(n);
-                }
-
-                foreach (var tip in Projekat.Instance.TipoviNamestaja)
-                {
-                    foreach (var na in namestaji)
-                    {
-                        if(na.IdTipaNamestaja == tip.Id)
-                        {
-                            na.TipNamestaja = tip;
-                        }
-                    }
-                }*/
                 return namestaji;
             }
         }

@@ -14,39 +14,12 @@ namespace POP_SF382016.Model
     public class ProdajaNamestaja : INotifyPropertyChanged, ICloneable
     {
         private int id;
-        //private List<int> idNamestaja;
-        //private ObservableCollection<int> idStavki;
         private DateTime datumProdaje;
         private int brojRacuna;
-        //private int idKupca;
         private string kupac;
-
         private double pdv;
-
-        //private ObservableCollection<int> idUsluga;
         public double ukupanIznos;
-        /*private Korisnik korisnik;
-
-
-        public Korisnik Korisnik
-        {
-            get
-            {
-                if(korisnik == null)
-                {
-                    korisnik = Korisnik.GetById(IdKupca);
-                }
-                return korisnik;
-            }
-            set
-            {
-                korisnik = value;
-                IdKupca = korisnik.Id;
-                OnPropertyChanged("IdKupca");
-            }
-        }*/
-
-
+        
 
         public int Id
         {
@@ -58,15 +31,6 @@ namespace POP_SF382016.Model
             }
         }
 
-        /*public ObservableCollection<int> IdStavki
-        {
-            get { return idStavki; }
-            set
-            {
-                idStavki = value;
-                OnPropertyChanged("IdStavki");
-            }
-        }*/
 
         public DateTime DatumProdaje
         {
@@ -108,16 +72,6 @@ namespace POP_SF382016.Model
             }*/
         }
 
-        /*public ObservableCollection<int> IdUsluga
-        {
-            get { return idUsluga; }
-            set
-            {
-                idUsluga = value;
-                OnPropertyChanged("IdUsluga");
-            }
-        }*/
-
         public double UkupanIznos
         {
             get { return ukupanIznos; }
@@ -127,18 +81,9 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("UkupanIznos");
             }
         }
-
-
-
-        //public List<Namestaj> NamestajZaProdaju { get; set; }
-
-        //public List<DodatnaUsluga> DodatnaUsluga { get; set; }
         
-
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-
+        
 
         public override string ToString()
         {
@@ -170,12 +115,9 @@ namespace POP_SF382016.Model
             return new ProdajaNamestaja()
             {
                 Id = id,
-                //IdStavki = new ObservableCollection<int>(idStavki),
                 DatumProdaje = datumProdaje,
                 BrojRacuna = brojRacuna,
                 Kupac = kupac,
-                //PDV = 0.2,
-                //IdUsluga = new ObservableCollection<int>(idUsluga),
                 UkupanIznos = ukupanIznos
             };
         }
@@ -223,7 +165,6 @@ namespace POP_SF382016.Model
                 string selectCommand = "SELECT * FROM Prodaja WHERE Kupac LIKE @srchtext OR DatumProdaje LIKE @srchtext OR UkupanIznos LIKE @srchtext ORDER BY ";
                 selectCommand += sorttext;
                 cmd.CommandText = selectCommand;
-                //cmd.CommandText = "SELECT * FROM Prodaja WHERE Kupac LIKE @srchtext OR DatumProdaje LIKE @srchtext OR UkupanIznos LIKE @srchtext;";
                 cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
                 da.SelectCommand = cmd;
                 da.Fill(ds, "Prodaja");

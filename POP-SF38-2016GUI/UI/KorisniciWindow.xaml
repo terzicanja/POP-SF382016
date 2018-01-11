@@ -7,11 +7,20 @@
         mc:Ignorable="d"
         Title="KorisniciWindow" Height="490.943" Width="467.717" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="59*"/>
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="162*"/>
+            <RowDefinition Height="112*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="179*"/>
+            <ColumnDefinition Width="282*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Ime:" FontSize="15" Margin="10,23,316.6,400.6"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbIme" Margin="141,23,46.6,405.6">
+        <Label Grid.Row="0" Grid.Column="0" Content="Ime:" FontSize="15" Margin="10,23,34.2,3.2"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbIme" Margin="5.8,23,46.6,3.2" MaxLength="20" Grid.Column="1">
             <TextBox.Text>
                 <Binding Path="Ime" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -20,8 +29,8 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Grid.Row="0" Grid.Column="0" Content="Prezime:" FontSize="15" Margin="10,61,316.6,366.6"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbPrezime" Margin="141,61,46.6,366.6">
+        <Label Grid.Row="1" Grid.Column="0" Content="Prezime:" FontSize="15" Margin="10,1.8,34.2,3.4"/>
+        <TextBox Grid.Row="1" Width="Auto" Name="tbPrezime" Margin="5.8,1.8,46.6,3.4" MaxLength="40" Grid.Column="1">
             <TextBox.Text>
                 <Binding Path="Prezime" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -30,8 +39,8 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Grid.Row="0" Grid.Column="0" Content="Username:" FontSize="15" Margin="10,100,316.6,316.6"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbUser" Margin="141,100,46.6,325.6">
+        <Label Grid.Row="2" Grid.Column="0" Content="Username:" FontSize="15" Margin="10,1.6,34.2,7.4"/>
+        <TextBox Grid.Row="2" Width="Auto" Name="tbUser" Margin="5.8,1.6,46.6,2.4" MaxLength="40" Grid.Column="1">
             <TextBox.Text>
                 <Binding Path="KorisnickoIme" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -40,8 +49,8 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Grid.Row="0" Grid.Column="0" Content="Lozinka:" FontSize="15" Margin="10,141,316.6,284.6"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbPass" Margin="141,141,46.6,284.6">
+        <Label Grid.Row="3" Grid.Column="0" Content="Lozinka:" FontSize="15" Margin="10,2.6,34.2,14.2"/>
+        <TextBox Grid.Row="3" Width="Auto" Name="tbPass" Margin="5.8,2.6,46.6,7.2" MaxLength="50" Grid.Column="1">
             <TextBox.Text>
                 <Binding Path="Lozinka" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -50,10 +59,10 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Grid.Row="0" Grid.Column="0" Content="Tip korisnika:" FontSize="15" Margin="10,191,280.6,236.6"/>
-        <ComboBox Name="cbTipKorisnika" HorizontalAlignment="Left" Margin="141,190,0,0" VerticalAlignment="Top" Width="203" Height="35" SelectedItem="{Binding Path=TipKorisnika}"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Tip korisnika:" FontSize="15" Margin="10,6.8,280.6,92.6" Grid.ColumnSpan="2"/>
+        <ComboBox Name="cbTipKorisnika" HorizontalAlignment="Left" Margin="6.8,5.8,0,0" VerticalAlignment="Top" Width="229" Height="35" SelectedItem="{Binding Path=TipKorisnika}" Grid.Column="1" Grid.Row="4"/>
 
-        <Button Content="Sacuvaj" Margin="52,393,258.6,20.6" Click="SacuvajIzmene">
+        <Button Content="Sacuvaj" Margin="52,43.4,7.2,20.6" Click="SacuvajIzmene" Grid.Row="5">
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -71,6 +80,6 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button Content="Izadji" Margin="263,393,46.6,20.6" Click="ZatvoriKorisniciWindow"/>
+        <Button Content="Izadji" Margin="125.8,43.4,46.6,20.6" Click="ZatvoriKorisniciWindow" Grid.Column="1" Grid.Row="5"/>
     </Grid>
 </Window>

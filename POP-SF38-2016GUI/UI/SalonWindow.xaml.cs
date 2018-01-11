@@ -52,7 +52,7 @@ namespace POP_SF38_2016GUI.UI
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
-            var lista = Projekat.Instance.Salon;
+            var lista = Projekat.Instance.Saloni;
 
             switch (operacija)
             {
@@ -69,12 +69,13 @@ namespace POP_SF38_2016GUI.UI
                             n.PIB = salon.PIB;
                             n.MaticniBroj = salon.MaticniBroj;
                             n.ZiroRacun = salon.ZiroRacun;
+
+                            Salon.Update(n);
                             break;
                         }
                     }
                     break;
             }
-            GenericSerializer.Serialize("salon.xml", lista);
             Close();
         }
 

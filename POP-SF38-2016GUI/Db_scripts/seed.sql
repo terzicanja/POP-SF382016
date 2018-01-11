@@ -11,6 +11,9 @@ VALUES (2, 'Crni regal', 'cr2re', 345, 7, 0);
 INSERT INTO Namestaj (TipNamestajaId, Naziv, Sifra, Cena, Kolicina, Obrisan)
 VALUES (3, 'Ugggg', 'ug1po', 765, 5, 0);
 
+INSERT INTO Salon (Naziv, Adresa, Telefon, Email, Sajt, PIB, MaticniBroj, ZiroRacun, Obrisan)
+VALUES ('Salon namestaja', 'Bulevar Oslobodjenja', '021 777 789', 'email@mail.com', 'salon.ba', 12345, 6789, '1234abcd', 0);
+
 INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES ('Prevoz', 220, 0);
 INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES ('Montiranje', 7800, 0);
 INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES ('Nesto', 399, 0);

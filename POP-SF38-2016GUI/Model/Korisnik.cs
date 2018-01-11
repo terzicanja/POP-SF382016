@@ -98,8 +98,6 @@ namespace POP_SF382016.Model
             }
         }
 
-        
-
         public event PropertyChangedEventHandler PropertyChanged;
 
 
@@ -114,7 +112,7 @@ namespace POP_SF382016.Model
             {
                 if (a.Id == id)
                 {
-                    return a; //mozda nije id nego naziv ili nzm i onda pozivan Tipnamestaja.getbyid(idtipnamestaja)
+                    return a;
                 }
             }
             return null;
@@ -188,7 +186,6 @@ namespace POP_SF382016.Model
                 string selectCommand = "SELECT * FROM Korisnik WHERE Ime LIKE @srchtext OR Prezime LIKE @srchtext OR KorisnickoIme LIKE @srchtext ORDER BY ";
                 selectCommand += sorttext;
                 cmd.CommandText = selectCommand;
-                //cmd.CommandText = "SELECT * FROM Korisnik WHERE Ime LIKE @srchtext OR Prezime LIKE @srchtext OR KorisnickoIme LIKE @srchtext;";
                 cmd.Parameters.AddWithValue("@srchtext", "%" + srchtext + "%");
                 da.SelectCommand = cmd;
                 da.Fill(ds, "Korisnik");

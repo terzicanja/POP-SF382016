@@ -32,6 +32,7 @@ namespace POP_SF38_2016GUI.UI
 
         private Namestaj namestaj;
         private Operacija operacija;
+        private TipNamestaja izabraniTipNamestaja;
 
         public NamestajWindow(Namestaj namestaj, Operacija operacija)
         {
@@ -39,6 +40,7 @@ namespace POP_SF38_2016GUI.UI
 
             this.namestaj = namestaj;
             this.operacija = operacija;
+            this.izabraniTipNamestaja = new TipNamestaja();
 
             var listaTipova = Projekat.Instance.TipoviNamestaja;
 
@@ -50,20 +52,6 @@ namespace POP_SF38_2016GUI.UI
             tbKolicina.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
             cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
-            /*for (int i=0; i<cbTipNamestaja.Items.Count; i++)
-            {
-                //if((ComboBoxItem)(cbTipNamestaja.Items[i]))
-            }
-
-
-            foreach (var t in listaTipova)
-            {
-                if(t.Obrisan == true)
-                {
-                    cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
-                }
-            }*/
-            //cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
         }
 
         private bool TipFilter(object obj)
@@ -76,8 +64,20 @@ namespace POP_SF38_2016GUI.UI
         {
             var listaNamestaja = Projekat.Instance.Namestaji;
             var listaAkcija = Projekat.Instance.Akcije;
-            var izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
+            izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
+            if (izabraniTipNamestaja == null)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Molim Vas izaberite tip namestaja.", "Obavestenje", MessageBoxButton.OK);
+                return;
+            }
+            
             int max = listaNamestaja.Max(t => t.Id) + 1;
+
+            if (ForceValidation() == true)
+            {
+                return;
+            }
+
             switch (operacija)
             {
                 case Operacija.Dodavanje:
@@ -115,6 +115,22 @@ namespace POP_SF38_2016GUI.UI
         private void ZatvoriNamestajWindow(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be2 = tbKolicina.GetBindingExpression(TextBox.TextProperty);
+            be2.UpdateSource();
+            BindingExpression be3 = tbCena.GetBindingExpression(TextBox.TextProperty);
+            be3.UpdateSource();
+
+            if (Validation.GetHasError(tbNaziv) == true || Validation.GetHasError(tbKolicina) || Validation.GetHasError(tbCena))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace POP_SF38_2016GUI
     {
         ICollectionView view;
         public ProdajaNamestaja SelektovanaProdaja = null;
-        private TipKorisnika tipKorisnika;
+        public TipKorisnika tipKorisnika;
         public ProdajaNamestaja novaProdaja = null;
 
         public MainWindow(TipKorisnika tipKorisnika)
@@ -40,9 +40,6 @@ namespace POP_SF38_2016GUI
             this.tipKorisnika = tipKorisnika;
             SelektovanaProdaja = new ProdajaNamestaja();
 
-            //view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
-            //view.Filter = PrikazFilter;
-            //dgPrikaz.ItemsSource = view;
             dgPrikaz.IsSynchronizedWithCurrentItem = true;
             dgPrikaz.DataContext = this;
 
@@ -55,8 +52,19 @@ namespace POP_SF38_2016GUI
                 case TipKorisnika.Administrator:
                     break;
                 case TipKorisnika.Prodavac:
-                    //STA PRODAVAC SME DA RADII?????!?!?!!!
-                    //Dodaj.Visibility = Visibility.Collapsed;
+                    Dodaj.Visibility = Visibility.Collapsed;
+                    Obrisi.Visibility = Visibility.Collapsed;
+                    Izmeni.Visibility = Visibility.Collapsed;
+                    btnKorisnici.Visibility = Visibility.Collapsed;
+
+                    switch (trenutnoAktivan)
+                    {
+                        case "Prodaja":
+                            Dodaj.Visibility = Visibility.Visible;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     break;
@@ -87,6 +95,11 @@ namespace POP_SF38_2016GUI
         {
             return !((Akcija)obj).Obrisan;
         }*/
+        private bool AkcijeFilter(object obj)
+        {
+            Akcija akk = obj as Akcija;
+            return (akk.Id > 0);
+        }
 
         private bool KorisniciFilter(object obj)
         {
@@ -101,9 +114,14 @@ namespace POP_SF38_2016GUI
         private void SalonPrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Salon";
-            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Salon);
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Saloni);
             view.Filter = SalonFilter;
             dgPrikaz.ItemsSource = view;
+
+            if (tipKorisnika == TipKorisnika.Prodavac)
+            {
+                Dodaj.Visibility = Visibility.Collapsed;
+            }
             //dgPrikaz.ItemsSource = Projekat.Instance.Salon;
         }
 
@@ -121,6 +139,11 @@ namespace POP_SF38_2016GUI
             cbSort.Items.Add("Nazivu");
             cbSort.Items.Add("Ceni");
             cbSort.Items.Add("Kolicini");
+
+            if (tipKorisnika == TipKorisnika.Prodavac)
+            {
+                Dodaj.Visibility = Visibility.Collapsed;
+            }
             /*
             Button btn = Dodaj;
             btn.Name = "Dodaj";
@@ -140,7 +163,12 @@ namespace POP_SF38_2016GUI
 
             cbSort.Items.Clear();
             cbSort.Items.Add("Nazivu");
-            
+
+            if (tipKorisnika == TipKorisnika.Prodavac)
+            {
+                Dodaj.Visibility = Visibility.Collapsed;
+            }
+
             /*if(cbSort.SelectedIndex > -1)
             {
                 //string orderby = cbSort.SelectedItem.ToString();
@@ -166,21 +194,30 @@ namespace POP_SF38_2016GUI
             cbSort.Items.Clear();
             cbSort.Items.Add("Nazivu");
             cbSort.Items.Add("Ceni");
+
+            if (tipKorisnika == TipKorisnika.Prodavac)
+            {
+                Dodaj.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void AkcijePrikaz(object sender, RoutedEventArgs e)
         {
             trenutnoAktivan = "Akcije";
-            dgPrikaz.ItemsSource = Projekat.Instance.Akcije;
-            /*view = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcije);
+            //dgPrikaz.ItemsSource = Projekat.Instance.Akcije;
+            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcije);
             view.Filter = AkcijeFilter;
-            dgPrikaz.ItemsSource = view;*/
+            dgPrikaz.ItemsSource = view;
 
             cbSort.Items.Clear();
             cbSort.Items.Add("Nazivu");
             cbSort.Items.Add("Pocetku akcije");
             cbSort.Items.Add("Kraju akcije");
             cbSort.Items.Add("Popustu");
+            if (tipKorisnika == TipKorisnika.Prodavac)
+            {
+                Dodaj.Visibility = Visibility.Collapsed;
+            }
         }
         
         private void ProdajePrikaz(object sender, RoutedEventArgs e)
@@ -193,6 +230,10 @@ namespace POP_SF38_2016GUI
             cbSort.Items.Add("Kupcu");
             cbSort.Items.Add("Ukupnom iznosu");
 
+            if (tipKorisnika == TipKorisnika.Prodavac)
+            {
+                Dodaj.Visibility = Visibility.Visible;
+            }
             //dgPrikaz.SelectedItem = IzabranaProdaja;
             //view = CollectionViewSource.GetDefaultView(Projekat.Instance.ProdajaNamestaja);
             //view.Filter = ProdajeFilter;
@@ -259,6 +300,7 @@ namespace POP_SF38_2016GUI
             Akcija.Create(novaAkcija);
             var prozor = new AkcijeWindow(novaAkcija, NamestajWindow.Operacija.Dodavanje);
             prozor.ShowDialog();
+            view.Refresh();
         }
 
         private void DodajProdaju()
@@ -622,7 +664,7 @@ namespace POP_SF38_2016GUI
         }
 
 
-        private void cbSort_DropDownClosed(object sender, EventArgs e)
+        private void Sort(object sender, RoutedEventArgs e)
         {
             string orderby = cbSort.SelectionBoxItem.ToString();
             switch (trenutnoAktivan)

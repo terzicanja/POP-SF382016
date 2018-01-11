@@ -7,13 +7,21 @@
         mc:Ignorable="d"
         Title="SveUslugeWindow" Height="344.131" Width="375.915">
     <Grid>
-        <DataGrid Name="dgSveUsluge" Margin="10,10,10.6,68.4" AutoGenerateColumns="False" CanUserAddRows="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="257*"/>
+            <RowDefinition Height="58*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="163*"/>
+            <ColumnDefinition Width="207*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Name="dgSveUsluge" Margin="10,10,10.6,10.547" AutoGenerateColumns="False" CanUserAddRows="False" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Usluga}"/>
                 <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Sacuvaj" Margin="46,268,255.6,10.4" Name="PickSave" Click="PickUsluga"/>
-        <Button Content="Izadji" Margin="198,268,90.6,10.4"/>
+        <Button Content="Sacuvaj" Margin="46,11.453,48.2,10.4" Name="PickSave" Click="PickUsluga" Grid.Row="1"/>
+        <Button Content="Izadji" Margin="35.8,11.453,90.6,10.4" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>

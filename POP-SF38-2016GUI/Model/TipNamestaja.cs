@@ -47,13 +47,9 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("Obrisan");
             }
         }
-
         
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-
-
+        
         public override string ToString()
         {
             return $"{Naziv}";
@@ -65,7 +61,7 @@ namespace POP_SF382016.Model
             {
                 if(tip.Id == id)
                 {
-                    return tip; //mozda nije id nego naziv ili nzm i onda pozivan Tipnamestaja.getbyid(idtipnamestaja)
+                    return tip;
                 }
             }
             return null;
@@ -124,7 +120,6 @@ namespace POP_SF382016.Model
 
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
-                //con.Open();
                 SqlCommand cmd = con.CreateCommand();
                 SqlDataAdapter da = new SqlDataAdapter();
                 DataSet ds = new DataSet();

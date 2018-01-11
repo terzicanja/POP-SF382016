@@ -26,6 +26,7 @@ namespace POP_SF38_2016GUI.UI
         private Akcija akcija;
         private Operacija operacija;
         public ObservableCollection<NaAkciji> listaNaAkciji;
+        public ObservableCollection<NaAkciji> zaBrisanje;
         public NaAkciji SelektovaniNamestaj;
         private NaAkciji akcijaa;
 
@@ -36,6 +37,7 @@ namespace POP_SF38_2016GUI.UI
             this.akcija = akcija;
             this.operacija = operacija;
             this.listaNaAkciji = new ObservableCollection<NaAkciji>();
+            this.zaBrisanje = new ObservableCollection<NaAkciji>();
             SelektovaniNamestaj = new NaAkciji();
 
             tbNaziv.DataContext = akcija;
@@ -43,37 +45,55 @@ namespace POP_SF38_2016GUI.UI
             dtPocetka.DataContext = akcija;
             dtKraj.DataContext = akcija;
             dgPopustNamestaj.DataContext = akcija;
-            
 
-            //dgPopustNamestaj.ItemsSource = akcija.IdNamestaja;
-            //POSLE BAZA NE VALJA
+            foreach (var ak in Projekat.Instance.NaAkcijama)
+            {
+                if(ak.IdAkcije == akcija.Id)
+                {
+                    listaNaAkciji.Add(ak);
+                }
+            }
+
             dgPopustNamestaj.ItemsSource = listaNaAkciji;
 
-            //dgPopustNamestaj.ItemsSource = dgPopustNamestaj.SelectedItem
         }
-        
+
+        private bool AkcijeFilter(object obj)
+        {
+            Akcija akk = obj as Akcija;
+            return (akk.Id > 0);
+        }
+
 
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var lista = Projekat.Instance.Akcije;
             var listaNamestaja = Projekat.Instance.Namestaji;
 
-            /*akcija.Id = Projekat.Instance.Akcije.Count + 1;
-            akcija.Naziv = "a";
-            Akcija.Create(akcija);*/
+
+            foreach (var o in Projekat.Instance.NaAkcijama)
+            {
+                foreach (var v in listaNaAkciji)
+                {
+                    if (o.IdNamestaja == v.Namestaj.Id && ((o.Akcija.PocetakAkcije > DateTime.Parse(dtPocetka.Text) && o.Akcija.PocetakAkcije < DateTime.Parse(dtKraj.Text))
+                    || (o.Akcija.KrajAkcije > DateTime.Parse(dtPocetka.Text) && o.Akcija.KrajAkcije < DateTime.Parse(dtKraj.Text))
+                    || (o.Akcija.PocetakAkcije < DateTime.Parse(dtPocetka.Text) && o.Akcija.KrajAkcije > DateTime.Parse(dtKraj.Text))))
+                    {
+                        MessageBoxResult obavestenje = MessageBox.Show("Namestaj "+v.Namestaj.Naziv+" je vec na akciji u tom vremenskom periodu", "Obavestenje", MessageBoxButton.OK);
+                        return;
+                    }
+                }
+            }
+
 
             switch (operacija)
             {
                 case Operacija.Dodavanje:
-                    //akcija.Id = lista.Count + 1;
                     akcija.Naziv = tbNaziv.Text;
                     akcija.Popust = Double.Parse(tbPopust.Text);
                     akcija.PocetakAkcije = DateTime.Parse(dtPocetka.Text);
                     akcija.KrajAkcije = DateTime.Parse(dtKraj.Text);
-                    //akcija.IdNamestaja.Add(akcija.IdNamestaja)
-                    //akcija.IdNamestaja = Namestaj.GetById(int.Parse(dgPopustNamestaj.SelectedItem.ToString()));
-                    //dgPopustNamestaj.ItemsSource = akcija.IdNamestaja;
-                    //PocetakAkcije = this.DatumPocetka.Text
+                    
 
                     Akcija.Update(akcija);
                     break;
@@ -86,7 +106,12 @@ namespace POP_SF38_2016GUI.UI
                             n.Popust = akcija.Popust;
                             n.PocetakAkcije = akcija.PocetakAkcije;
                             n.KrajAkcije = akcija.KrajAkcije;
-                            
+                            foreach (var item in zaBrisanje)
+                            {
+                                listaNaAkciji.Remove(item);
+                                NaAkciji.Delete(item);
+                            }
+                            dgPopustNamestaj.ItemsSource = listaNaAkciji;
                             Akcija.Update(n);
                             break;
                         }
@@ -98,7 +123,26 @@ namespace POP_SF38_2016GUI.UI
 
         private void ZatvoriAkcijeWindow(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            switch (operacija)
+            {
+                case Operacija.Dodavanje:
+                    foreach (var a in Projekat.Instance.NaAkcijama)
+                    {
+                        if (a.IdAkcije == akcija.Id)
+                        {
+                            NaAkciji.Delete(a);
+                        }
+                    }
+                    Akcija.Delete(akcija);
+                    this.Close();
+                    break;
+                case Operacija.Izmena:
+                    this.Close();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         private void SviNamestaji(object sender, RoutedEventArgs e)
@@ -108,29 +152,19 @@ namespace POP_SF38_2016GUI.UI
             prozor.ShowDialog();
 
             akcijaa = prozor.SelektovanNaAkciji;
-            akcijaa.IdAkcije = akcija.Id;
+            //akcijaa.IdAkcije = akcija.Id;
             akcijaa.IdNamestaja = akcijaa.IdNamestaja;
             NaAkciji.Update(akcijaa);
 
             listaNaAkciji.Add(akcijaa);
-            
-            
-            /*if(dgPopustNamestaj.SelectedItem is Namestaj n)
-            //if(prozor.SelektovaniNamestaj is Namestaj n)
-            {
-                //NamestajNaPopustu.Add(n.Id);
-                akcija.IdNamestaja.Add(n.Id);
-                dgPopustNamestaj.DataContext = akcija.IdNamestaja;
-                //lista.Add(prozor.SelektovaniNamestaj);
-                //IdNamestajaNaAkciji.Add(prozor.SelektovaniNamestaj.Id);
-            }*/
         }
 
         private void UkloniNamestaj(object sender, RoutedEventArgs e)
         {
             SelektovaniNamestaj = dgPopustNamestaj.SelectedItem as NaAkciji;
+            zaBrisanje.Add(SelektovaniNamestaj);
             listaNaAkciji.Remove(SelektovaniNamestaj);
-            NaAkciji.Delete(SelektovaniNamestaj);
+            //NaAkciji.Delete(SelektovaniNamestaj);
         }
     }
 }

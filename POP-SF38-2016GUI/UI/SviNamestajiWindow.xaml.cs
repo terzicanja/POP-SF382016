@@ -31,10 +31,11 @@ namespace POP_SF38_2016GUI.UI
         public Namestaj SelektovaniNamestaj = null;
         public StavkaProdaje SelektovanaStavka = null;
         public NaAkciji SelektovanNaAkciji = null;
+        private Akcija aakcija;
         private StavkaProdaje stavka;
         private NaAkciji naAkciji;
         private Radnja radnja;
-        //public ObservableCollection<Namestaj> listaStavki;
+        private int max;
         public ObservableCollection<Namestaj> listaNamestaja;
         
         public SviNamestajiWindow(Radnja radnja = Radnja.Sacuvaj)
@@ -44,13 +45,17 @@ namespace POP_SF38_2016GUI.UI
             SelektovaniNamestaj = new Namestaj();
             this.DataContext = SelektovaniNamestaj;
             this.radnja = radnja;
+            this.aakcija = new Akcija();
             this.stavka = new StavkaProdaje();
             this.naAkciji = new NaAkciji();
-            //this.listaStavki = new ObservableCollection<Namestaj>();
             this.listaNamestaja = new ObservableCollection<Namestaj>();
-            
 
-            if(radnja == Radnja.Preuzmi)
+
+            var listaa = Projekat.Instance.Akcije;
+            max = Projekat.Instance.Akcije.Max(t => t.Id);
+
+
+            if (radnja == Radnja.Preuzmi)
             {
                 PickSave.Click += PickNamestaj;
                 lbKoliko.Visibility = Visibility.Collapsed;
@@ -61,13 +66,8 @@ namespace POP_SF38_2016GUI.UI
                 PickSave.Click += SacuvajStavku;
             }
             
-
-            //int idNamestajaZaProdaju = SelektovaniNamestaj.Id;
-            //int kolicinaN = koliko.ToString()
             SelektovanaStavka = new StavkaProdaje();
             SelektovanNaAkciji = new NaAkciji();
-
-            //dgSviNamestaji.SelectedValue = selectedna
 
             dgSviNamestaji.DataContext = this;
             dgSviNamestaji.ItemsSource = Projekat.Instance.Namestaji;
@@ -75,28 +75,62 @@ namespace POP_SF38_2016GUI.UI
 
         private void PickNamestaj(object sender, RoutedEventArgs e)
         {
-            var listaNamNaAkciji = Projekat.Instance.NaAkcijama;
             SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
 
-            naAkciji.IdNamestaja = SelektovaniNamestaj.Id;
-            naAkciji.IdAkcije = 1;
+            foreach (var ak in Projekat.Instance.Akcije)
+            {
+                if (ak.Id == max)
+                {
+                    aakcija = ak;
+                }
+            }
+
+            if (SelektovaniNamestaj != null)
+            {
+                foreach (var o in Projekat.Instance.NaAkcijama)
+                {
+                    if (o.IdAkcije == max)
+                    {
+                        if (SelektovaniNamestaj.Id == o.IdNamestaja)
+                        {
+                            MessageBoxResult obavestenje = MessageBox.Show("Namestaj je vec na akciji", "Obavestenje", MessageBoxButton.OK);
+                            return;
+                        }
+                    }
+                    if (o.IdNamestaja == SelektovaniNamestaj.Id && ((o.Akcija.PocetakAkcije > aakcija.PocetakAkcije && o.Akcija.PocetakAkcije < aakcija.KrajAkcije) 
+                        || (o.Akcija.KrajAkcije > aakcija.PocetakAkcije && o.Akcija.KrajAkcije < aakcija.KrajAkcije) 
+                        || (o.Akcija.PocetakAkcije < aakcija.PocetakAkcije && o.Akcija.KrajAkcije > aakcija.KrajAkcije)))
+                    {
+                        MessageBoxResult obavestenje = MessageBox.Show("Namestaj je vec na akciji u tom vremenskom periodu", "Obavestenje", MessageBoxButton.OK);
+                        return;
+                    }
+                }
+                naAkciji.IdNamestaja = SelektovaniNamestaj.Id;
+                naAkciji.IdAkcije = max;
+
+                NaAkciji.Create(naAkciji);
+
+                SelektovanNaAkciji = naAkciji;
+
+                this.DialogResult = true;
+                this.Close();
+            }
+            
+            /*naAkciji.IdNamestaja = SelektovaniNamestaj.Id;
+            naAkciji.IdAkcije = max;
 
             NaAkciji.Create(naAkciji);
 
             SelektovanNaAkciji = naAkciji;
-            
+
             this.DialogResult = true;
-            this.Close();
+            this.Close();*/
         }
 
         private void SacuvajStavku(object sender, RoutedEventArgs e)
         {
             var listaStavki = Projekat.Instance.StavkeProdaje;
             SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
-
-
-            //var novaProdaja = new ProdajaNamestaja();
-            //ProdajeWindow prodajeWindow = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
             
             
             stavka.Id = listaStavki.Count+1;
@@ -112,9 +146,17 @@ namespace POP_SF38_2016GUI.UI
             var namNaProdaji = stavka.Namestaj as Namestaj;
             //listaNamestaja.Add(namNaProdaji);
             //listaStavki.Add(namNaProdaji);
-            //GenericSerializer.Serialize("stavka.xml", listaStavki);
             this.Close();
         }
-        
+
+        private void DugmeSearch(object sender, RoutedEventArgs e)
+        {
+            dgSviNamestaji.ItemsSource = Namestaj.Search(tbSearch.Text, "Id");
+        }
+
+        private void ZatvoriProzor(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

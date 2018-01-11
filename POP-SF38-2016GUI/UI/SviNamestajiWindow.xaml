@@ -5,19 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF38_2016GUI.UI"
         mc:Ignorable="d"
-        Title="SviNamestajiWindow" Height="457.813" Width="436.458" WindowStartupLocation="CenterScreen">
+        Title="SviNamestajiWindow" Height="504.613" Width="492.858" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid Name="dgSviNamestaji" Margin="10,10,10.4,126.6" AutoGenerateColumns="False" CanUserAddRows="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="302*"/>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="72*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="217*"/>
+            <ColumnDefinition Width="270*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Name="tbSearch" Margin="72,13,10.8,9.8" />
+        <Button Content="Search" Grid.Column="1" Margin="14.2,13,192.4,10.8" Click="DugmeSearch"/>
+        <DataGrid Name="dgSviNamestaji" Margin="10,7.8,10.4,2.2" AutoGenerateColumns="False" CanUserAddRows="False" Grid.ColumnSpan="2" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Naziv}"/>
                 <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
                 <DataGridTextColumn Header="Na stanju" Width="*" Binding="{Binding Path=KolicinaUMagacinu}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Name="lbKoliko" Content="Koliko:" Margin="35,306,293.4,83"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbKoliko" Margin="142,301,45.4,83" Text="{Binding Path=Kolicina}"/>
+        <Label Name="lbKoliko" Content="Koliko:" Margin="119,2.8,23.8,11.2" Grid.Row="2"/>
+        <TextBox Grid.Row="2" Width="Auto" Name="tbKoliko" Margin="14.2,2.8,45.4,11.2" Grid.Column="1">
+            <TextBox.Text>
+                <Binding Path="Kolicina" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:IntValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <Button Content="Sacuvaj" Margin="98,355,237.4,28" Name="PickSave"/>
-        <Button Content="Izadji" Margin="301,355,45.4,22"/>
+        <Button Content="Sacuvaj" Margin="98,7.8,23.8,28.2" Name="PickSave" Grid.Row="3">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError),ElementName=tbKoliko}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="Izadji" Margin="122.2,7.8,45.4,22.2" Grid.Column="1" Grid.Row="3" Click="ZatvoriProzor"/>
     </Grid>
 </Window>

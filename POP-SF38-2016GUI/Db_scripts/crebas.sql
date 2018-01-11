@@ -16,6 +16,19 @@ CREATE TABLE Namestaj(
 	FOREIGN KEY (TipNamestajaId) REFERENCES TipNamestaja(Id)
 );
 
+CREATE TABLE Salon(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	Naziv VARCHAR(100),
+	Adresa VARCHAR(80),
+	Telefon VARCHAR(30),
+	Email VARCHAR(30),
+	Sajt VARCHAR(60),
+	PIB INT,
+	MaticniBroj INT,
+	ZiroRacun VARCHAR(60),
+	Obrisan BIT
+);
+
 CREATE TABLE Usluga(
 	Id INT PRIMARY KEY IDENTITY(1, 1),
 	Naziv VARCHAR(80),

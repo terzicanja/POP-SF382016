@@ -19,32 +19,6 @@ namespace POP_SF382016.Model
         private DateTime pocetakAkcije;
         private DateTime krajAkcije;
         private double popust;
-        //private List<int> idNamestaja;
-        //private ObservableCollection<int> idNamestaja;
-
-
-        //private bool obrisan;
-
-        //private Namestaj namestaj;
-        //public Namestaj selectedNamestaj;
-
-        /*[XmlIgnore]
-        public Namestaj Namestaj
-        {
-            get
-            {
-                if(namestaj == null)
-                {
-                    foreach (var i in IdNamestaja)
-                    {
-                        namestaj = Namestaj.GetById(IdNamestaja);
-                    }
-                    namestaj = Namestaj.GetById(IdNamestaja);
-                    return namestaj;
-                }
-            }
-        }*/
-
         
 
         public int Id
@@ -96,52 +70,10 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("Popust");
             }
         }
-
-        /*public ObservableCollection<int> IdNamestaja
-        {
-            get { return idNamestaja; }
-            set
-            {
-                idNamestaja = value;
-                OnPropertyChanged("IdNamestaja");
-            }
-        }*/
-
-        /*public Namestaj SelectedNamestaj
-        {
-            get { return selectedNamestaj; }
-            set
-            {
-                if (selectedNamestaj == value) return;
-                selectedNamestaj = value;
-            }
-        }
-        private void IzabraniNamestaj()
-        {
-            var listaAkcija = Projekat.Instance.Akcija;
-            
-        }*/
-
-
-
-        /*public bool Obrisan
-        {
-            get { return obrisan; }
-            set
-            {
-                obrisan = value;
-                OnPropertyChanged("Obrisan");
-            }
-        }*/
-
-
         
-        //public List<Namestaj> NamestajNaPopustu { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-
-
+        
 
         public override string ToString()
         {
@@ -174,13 +106,10 @@ namespace POP_SF382016.Model
             return new Akcija()
             {
                 Id = id,
+                Naziv = naziv,
                 PocetakAkcije = pocetakAkcije,
                 KrajAkcije = krajAkcije,
-                Popust = popust,
-                //IdNamestaja = idNamestaja,
-                //IdNamestaja = new ObservableCollection<int>(idNamestaja),
-
-                //Obrisan = obrisan
+                Popust = popust
             };
         }
 
@@ -301,6 +230,22 @@ namespace POP_SF382016.Model
                     tip.KrajAkcije = tn.KrajAkcije;
                     tip.Popust = tn.Popust;
                 }
+            }
+        }
+
+        public static void Delete(Akcija p)
+        {
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "DELETE FROM Akcija WHERE Id=@Id;";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                cmd.Parameters.AddWithValue("Id", p.Id);
+
+                cmd.ExecuteNonQuery();
             }
         }
 

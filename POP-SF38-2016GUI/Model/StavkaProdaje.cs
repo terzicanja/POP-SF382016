@@ -160,7 +160,6 @@ namespace POP_SF382016.Model
                 
                 cmd.CommandText = "INSERT INTO Stavka (IdProdaje, IdNamestaja, Kolicina) VALUES (@IdProdaje, @IdNamestaja, @Kolicina);";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                //sql injection google
                 cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
                 cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
                 cmd.Parameters.AddWithValue("Kolicina", tn.Kolicina);

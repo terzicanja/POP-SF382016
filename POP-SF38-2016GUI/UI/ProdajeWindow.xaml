@@ -19,7 +19,7 @@
             <ColumnDefinition Width="223*"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Kupac:" FontSize="15" Margin="36,54,10,8.2"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbKupac" Margin="11,48,80.4,8.2" Grid.Column="1">
+        <TextBox Grid.Row="0" Width="Auto" MaxLength="50" Name="tbKupac" Margin="11,48,80.4,8.2" Grid.Column="1">
             <TextBox.Text>
                 <Binding Path="Kupac" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>

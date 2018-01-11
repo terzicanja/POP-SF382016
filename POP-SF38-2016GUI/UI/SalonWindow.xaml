@@ -7,24 +7,39 @@
         mc:Ignorable="d"
         Title="SalonWindow" Height="500.071" Width="405.682" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Grid.Row="0" Grid.Column="0" Content="Naziv:" FontSize="15" Margin="10,10,242.2,420.4"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbNaziv" Margin="78,10,9.2,420.4" Text="{Binding Path=Naziv}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Adresa:" FontSize="15" Margin="10,50,242.2,380.4"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbAdresa" Margin="78,50,9.2,380.4" Text="{Binding Path=Adresa}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Telefon:" FontSize="15" Margin="10,90,242.2,340.4"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbTelefon" Margin="78,90,9.2,340.4" Text="{Binding Path=Telefon}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="E-mail:" FontSize="15" Margin="10,130,242.2,300.4"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbEmail" Margin="78,130,9.2,300.4" Text="{Binding Path=Email}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Sajt:" FontSize="15" Margin="10,170,242.2,260.4"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbSajt" Margin="78,170,9.2,260.4" Text="{Binding Path=Sajt}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="PIB:" FontSize="15" Margin="10,210,242.2,220.4"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbPIB" Margin="78,210,9.2,220.4" Text="{Binding Path=PIB}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Maticni broj:" FontSize="15" Margin="10,250,242.2,180.4"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbMaticniBroj" Margin="109,250,9.2,180.4" Text="{Binding Path=MaticniBroj}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Ziro racun:" FontSize="15" Margin="10,290,242.2,132.4"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbZiroRacun" Margin="109,290,9.2,132.4" Text="{Binding Path=ZiroRacun}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition Width="82*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="138*"/>
+            <RowDefinition Height="86*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Naziv:" FontSize="15" Margin="33,10,42.8,1.933"/>
+        <TextBox Grid.Row="0" Width="Auto" MaxLength="100" Name="tbNaziv" Margin="9.2,10,9.2,1.933" Text="{Binding Path=Naziv}" Grid.Column="1"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Adresa:" FontSize="15" Margin="33,3.067,21.8,2.2"/>
+        <TextBox Grid.Row="1" Width="Auto" MaxLength="80" Name="tbAdresa" Margin="9.2,3.067,9.2,2.2" Text="{Binding Path=Adresa}" Grid.Column="1"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Telefon:" FontSize="15" Margin="33,2.8,21.8,3.4"/>
+        <TextBox Grid.Row="2" Width="Auto" MaxLength="30" Name="tbTelefon" Margin="9.2,2.8,9.2,3.4" Text="{Binding Path=Telefon}" Grid.Column="1"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="E-mail:" FontSize="15" Margin="33,1.6,21.8,2.2"/>
+        <TextBox Grid.Row="3" Width="Auto" MaxLength="30" Name="tbEmail" Margin="9.2,1.6,9.2,2.2" Text="{Binding Path=Email}" Grid.Column="1"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Sajt:" FontSize="15" Margin="33,2.8,21.8,1.6"/>
+        <TextBox Grid.Row="4" Width="Auto" MaxLength="60" Name="tbSajt" Margin="9.2,2.8,9.2,1.6" Text="{Binding Path=Sajt}" Grid.Column="1"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="PIB:" FontSize="15" Margin="33,3.4,21.8,2"/>
+        <TextBox Grid.Row="5" Width="Auto" Name="tbPIB" Margin="9.2,3.4,9.2,2" Text="{Binding Path=PIB}" Grid.Column="1"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Maticni broj:" FontSize="15" Margin="33,3,16.8,2.4"/>
+        <TextBox Grid.Row="6" Width="Auto" Name="tbMaticniBroj" Margin="9.2,3,9.2,2.4" Text="{Binding Path=MaticniBroj}" Grid.Column="1"/>
+        <Label Grid.Row="7" Grid.Column="0" Content="Ziro racun:" FontSize="15" Margin="33,2.6,16.8,105.8"/>
+        <TextBox Grid.Row="7" Width="Auto" MaxLength="60" Name="tbZiroRacun" Margin="9.2,2.6,9.2,105.8" Text="{Binding Path=ZiroRacun}" Grid.Column="1"/>
 
-        <Button Content="Sacuvaj" Margin="33,410,263.2,21.4" Click="SacuvajIzmene"/>
-        <Button Content="Izadji" Margin="256,410,46.2,21.4" Click="ZatvoriSalonWindow"/>
+        <Button Content="Sacuvaj" Margin="33,27.2,16.8,21.4" Click="SacuvajIzmene" Grid.Row="8"/>
+        <Button Content="Izadji" Margin="103.2,27.2,46.2,21.4" Click="ZatvoriSalonWindow" Grid.Row="8" Grid.Column="1"/>
     </Grid>
 </Window>

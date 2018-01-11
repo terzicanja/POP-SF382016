@@ -18,11 +18,13 @@
             <RowDefinition Height="404*"/>
             <RowDefinition Height="116*"/>
         </Grid.RowDefinitions>
-        <TextBox Name="tbSearch" Grid.Column="1" Margin="9.6,12,378.6,17.6" />
-        <Button Content="Search" Grid.Column="1" Margin="221.6,12,273.6,17.6" Click="DugmeSearch"/>
-        <ComboBox Grid.Column="1" Margin="379.6,12,117.6,25.6" Name="cbSort" DropDownClosed="cbSort_DropDownClosed"></ComboBox>
-        <RadioButton Name="opadajuce" Grid.Column="1" Margin="482.6,10,8.6,36.6">Opadajuce</RadioButton>
-        <RadioButton Name="rastuce" Grid.Column="1" Margin="482.6,33,8.6,13.6">Rastuce</RadioButton>
+        <TextBox Name="tbSearch" Margin="18,12,496.6,17.6" Grid.ColumnSpan="2" />
+        <Button Content="Search" Grid.Column="1" Margin="103.6,12,391.6,17.6" Click="DugmeSearch"/>
+        <Label Content="Sortiraj po:" Grid.Column="1" Margin="218.6,12,291.6,25.6"/>
+        <ComboBox Grid.Column="1" Margin="303.6,12,193.6,25.6" Name="cbSort"/>
+        <RadioButton Name="opadajuce" Grid.Column="1" Margin="408.6,12,82.6,34.6">Opadajuce</RadioButton>
+        <RadioButton Name="rastuce" Grid.Column="1" Margin="408.6,40,82.6,6.6">Rastuce</RadioButton>
+        <Button Content="Sort" Margin="512.6,18,9.6,11.6" Grid.Column="1" Click="Sort"/>
         <DataGrid BorderThickness="0" LoadingRow="dgPrikaz_LoadingRow" Grid.Row="1" Grid.Column="1" FontSize="15" Name="dgPrikaz" Margin="9.6,0.4,12.6,10.4" CanUserAddRows="False"
                   AutoGeneratingColumn="dgPrikaz_AutoGeneratingColumn" IsReadOnly="True"/>
         <Button Grid.Row="2" Content="Dodaj" Name="Dodaj" Margin="21.6,43.6,496.6,45.2" Grid.Column="1" Click="DugmeDodaj"/>
@@ -35,7 +37,7 @@
         <Button Content="Dodatne usluge" Margin="0,152.4,0.4,219.4" Grid.Row="1" Click="UslugePrikaz"/>
         <Button Content="Akcije" Margin="0,201.4,0.4,170.4" Grid.Row="1" Click="AkcijePrikaz"/>
         <Button Content="Prodaje" Margin="0,250.4,0.4,121.4" Grid.Row="1" Click="ProdajePrikaz"/>
-        <Button Content="Korisnici" Margin="0,299.4,0.4,72.4" Grid.Row="1" Click="KorisniciPrikaz"/>
+        <Button Content="Korisnici" Name="btnKorisnici" Margin="0,299.4,0.4,72.4" Grid.Row="1" Click="KorisniciPrikaz"/>
 
     </Grid>
 </Window>

@@ -49,7 +49,6 @@ namespace POP_SF38_2016GUI.UI
                     usluga.Cena = int.Parse(tbCena.Text);
 
                     DodatnaUsluga.Create(usluga);
-                    //lista.Add(usluga);
                     break;
                 case Operacija.Izmena:
                     foreach (var n in lista)
@@ -63,7 +62,6 @@ namespace POP_SF38_2016GUI.UI
                     }
                     break;
             }
-            //GenericSerializer.Serialize("dodatna_usluga.xml", lista);
             Close();
         }
 
@@ -71,7 +69,5 @@ namespace POP_SF38_2016GUI.UI
         {
             this.Close();
         }
-
-
     }
 }

@@ -7,10 +7,33 @@
         mc:Ignorable="d"
         Title="AkcijeWindow" Height="577.305" Width="615.562" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Naziv:" FontSize="15" Margin="25,31,468.8,473"/>
-        <TextBox Name="tbNaziv" Text="{Binding Path=Naziv}" Margin="113,26,142.8,473"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Popust:" FontSize="15" Margin="25,89,457.8,418"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbPopust" Margin="113,89,316.8,418" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="82*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="56*"/>
+            <RowDefinition Height="71*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="89*"/>
+            <RowDefinition Height="82*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="179*"/>
+            <ColumnDefinition Width="219*"/>
+            <ColumnDefinition Width="210*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Naziv:" FontSize="15" Margin="92,26,28.2,12.4"/>
+        <TextBox Name="tbNaziv" Margin="42.8,26,33.8,7.4" Grid.Column="1" Grid.ColumnSpan="2" MaxLength="70">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:StringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Grid.Row="1" Grid.Column="0" Content="Popust:" FontSize="15" Margin="78,6.6,28.2,6.6"/>
+        <TextBox Grid.Row="1" Width="Auto" Name="tbPopust" Margin="42.8,6.6,15.4,6.6" Grid.Column="1" >
             <TextBox.Text>
                 <Binding Path="Popust" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -19,23 +42,23 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Grid.Row="0" Grid.Column="0" Content="Datum pocetka:" FontSize="15" Margin="25,145,457.8,361"/>
-        <DatePicker HorizontalAlignment="Left" Margin="156,145,0,369" Name="dtPocetka" SelectedDate="{Binding Path=PocetakAkcije}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Datum zavrsetka:" FontSize="15" Margin="25,199,457.8,303"/>
-        <DatePicker HorizontalAlignment="Left" Margin="156,199,0,308" Name="dtKraj" SelectedDate="{Binding Path=KrajAkcije}"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Namestaji na popustu:" FontSize="15" Margin="10,283,434.8,229"/>
-        <DataGrid AutoGenerateColumns="False" Margin="188,272,9.8,102" DataContext="{Binding Path=Namestaj}" Name="dgPopustNamestaj" SelectionMode="Extended" IsReadOnly="True">
+        <Label Grid.Row="2" Grid.Column="0" Content="Datum pocetka:" FontSize="15" Margin="25,8.4,28.2,1.6"/>
+        <DatePicker HorizontalAlignment="Left" Margin="42.8,8.4,0,9.6" Name="dtPocetka" SelectedDate="{Binding Path=PocetakAkcije}" Grid.Column="1" Grid.Row="2" Width="161"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Datum zavrsetka:" FontSize="15" Margin="25,10.4,28.2,70.8" Grid.RowSpan="2"/>
+        <DatePicker HorizontalAlignment="Left" Margin="42.8,10.4,0,11.6" Name="dtKraj" SelectedDate="{Binding Path=KrajAkcije}" Grid.Column="1" Grid.Row="3" Width="161"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Namestaji na popustu:" FontSize="15" Margin="10,27.4,5.2,7.8"/>
+        <DataGrid AutoGenerateColumns="False" Margin="8.8,27.4,9.8,19.4" DataContext="{Binding Path=Namestaj}" Name="dgPopustNamestaj" SelectionMode="Extended" IsReadOnly="True" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="id" Width="*" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Namestaj.Naziv}"/>
                 <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Namestaj.Cena}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Dodaj Namestaj" Margin="33,324,448.8,177" Click="SviNamestaji"/>
-        <Button Content="Ukloni Namestaj" Margin="33,376,448.8,125" Click="UkloniNamestaj"/>
+        <Button Content="Dodaj Namestaj" Margin="33,8.2,19.2,5.2" Click="SviNamestaji" Grid.Row="5"/>
+        <Button Content="Ukloni Namestaj" Margin="33,8.8,19.2,33.4" Click="UkloniNamestaj" Grid.Row="6"/>
         <!--<TextBox Grid.Row="0" Width="Auto" Name="tbUsluga" Margin="129,69,9.8,210.2"/>-->
 
-        <Button Content="Sacuvaj" Margin="33,482,385.8,21" Click="SacuvajIzmene">
+        <Button Content="Sacuvaj" Margin="42.8,16.6,35.4,21" Click="SacuvajIzmene" Grid.Row="7" Grid.Column="1">
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">
                     <Setter Property="IsEnabled" Value="False"/>
@@ -43,6 +66,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Path=(Validation.HasError),ElementName=tbPopust}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError),ElementName=tbNaziv}" Value="False"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True"/>
                         </MultiDataTrigger>
@@ -51,6 +75,6 @@
             </Button.Style>
         </Button>
 
-        <Button Content="Izadji" Margin="356,482,46.8,21" Click="ZatvoriAkcijeWindow"/>
+        <Button Content="Izadji" Margin="35.6,16.6,33.8,21" Click="ZatvoriAkcijeWindow" Grid.Column="2" Grid.Row="7"/>
     </Grid>
 </Window>

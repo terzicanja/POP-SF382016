@@ -7,11 +7,20 @@
         mc:Ignorable="d"
         Title="LoginWindow" Height="369.886" Width="417.613" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Grid.Row="0" Grid.Column="0" Content="Username:" FontSize="15" Margin="25,65,227.4,225"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbUser" Margin="123,65,42.2,236"/>
-        <Label Grid.Row="0" Grid.Column="0" Content="Password:" FontSize="15" Margin="25,131,227.2,159"/>
-        <TextBox Grid.Row="0" Width="Auto" Name="tbPass" Margin="123,131,42.2,170"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="113*"/>
+            <ColumnDefinition Width="298*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="119*"/>
+            <RowDefinition Height="98*"/>
+            <RowDefinition Height="123*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Username:" FontSize="15" Margin="25,65,227.2,3.8" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="0" Width="Auto" Name="tbUser" Margin="10.2,65,42.2,14.8" Grid.Column="1"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Password:" FontSize="15" Margin="25,12.2,227.2,35.8" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="1" Width="Auto" Name="tbPass" Margin="10.2,12.2,42.2,46.8" Grid.Column="1"/>
 
-        <Button Content="Login" Margin="123,248,173.2,46" Click="Login"/>
+        <Button Content="Login" Margin="10.2,31.2,173.2,46" Click="Login" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Window>

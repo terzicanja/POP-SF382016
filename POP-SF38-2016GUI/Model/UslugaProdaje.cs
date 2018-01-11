@@ -85,9 +85,7 @@ namespace POP_SF382016.Model
                 OnPropertyChanged("DodatnaUsluga");
             }
         }
-
-
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)

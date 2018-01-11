@@ -55,10 +55,8 @@ namespace POP_SF38_2016GUI.UI
                     korisnik.TipKorisnika = (TipKorisnika)cbTipKorisnika.SelectedItem;*/
 
                     Korisnik.Create(korisnik);
-                    //listaKorisnika.Add(korisnik);
                     break;
                 case Operacija.Izmena:
-                    //Korisnik.Update(korisnik);
                     foreach (var n in listaKorisnika)
                     {
                         if(n.Id == korisnik.Id)
@@ -75,7 +73,6 @@ namespace POP_SF38_2016GUI.UI
                     }
                     break;
             }
-            //GenericSerializer.Serialize("korisnik.xml", listaKorisnika);
             Close();
         }
 
