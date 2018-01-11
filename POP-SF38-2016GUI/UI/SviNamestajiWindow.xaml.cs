@@ -132,13 +132,27 @@ namespace POP_SF38_2016GUI.UI
             var listaStavki = Projekat.Instance.StavkeProdaje;
             SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
             
+
+            if (!(string.IsNullOrWhiteSpace(tbKoliko.Text)))
+            {
+                if (int.Parse(tbKoliko.Text) > SelektovaniNamestaj.KolicinaUMagacinu)
+                {
+                    MessageBoxResult obavestenje = MessageBox.Show("Unesite kolicinu 1-" + SelektovaniNamestaj.KolicinaUMagacinu, "Obavestenje", MessageBoxButton.OK);
+                    return;
+                }
+            }
+            else if (string.IsNullOrWhiteSpace(tbKoliko.Text))
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Unesite kolicinu", "Obavestenje", MessageBoxButton.OK);
+                return;
+            }
             
-            stavka.Id = listaStavki.Count+1;
+            stavka.Id = listaStavki.Count + 1;
             stavka.IdNamestaja = SelektovaniNamestaj.Id;
             //stavka.IdProdaje = novaProdaja.Id;
             stavka.IdProdaje = 1;
             stavka.Kolicina = int.Parse(tbKoliko.Text);
-            
+
             StavkaProdaje.Create(stavka);
 
             SelektovanaStavka = stavka;
@@ -147,6 +161,7 @@ namespace POP_SF38_2016GUI.UI
             //listaNamestaja.Add(namNaProdaji);
             //listaStavki.Add(namNaProdaji);
             this.Close();
+
         }
 
         private void DugmeSearch(object sender, RoutedEventArgs e)

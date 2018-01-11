@@ -70,6 +70,10 @@ namespace POP_SF38_2016GUI.UI
             var lista = Projekat.Instance.Akcije;
             var listaNamestaja = Projekat.Instance.Namestaji;
 
+            if (ForceValidation() == true)
+            {
+                return;
+            }
 
             foreach (var o in Projekat.Instance.NaAkcijama)
             {
@@ -165,6 +169,20 @@ namespace POP_SF38_2016GUI.UI
             zaBrisanje.Add(SelektovaniNamestaj);
             listaNaAkciji.Remove(SelektovaniNamestaj);
             //NaAkciji.Delete(SelektovaniNamestaj);
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be2 = tbPopust.GetBindingExpression(TextBox.TextProperty);
+            be2.UpdateSource();
+
+            if (Validation.GetHasError(tbNaziv) == true || Validation.GetHasError(tbPopust) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

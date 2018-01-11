@@ -44,9 +44,23 @@ namespace POP_SF38_2016GUI.UI
         {
             var listaKorisnika = Projekat.Instance.Korisnici;
 
+            if (ForceValidation() == true)
+            {
+                return;
+            }
+
+            
             switch (operacija)
             {
                 case Operacija.Dodavanje:
+                    foreach (var k in Projekat.Instance.Korisnici)
+                    {
+                        if (k.KorisnickoIme == tbUser.Text)
+                        {
+                            MessageBoxResult obavestenje = MessageBox.Show("Korisnicko ime je zauzeto.", "Obavestenje", MessageBoxButton.OK);
+                            return;
+                        }
+                    }
                     /*korisnik.Id = listaKorisnika.Count + 1;
                     korisnik.Ime = tbIme.Text;
                     korisnik.Prezime = tbPrezime.Text;
@@ -79,6 +93,24 @@ namespace POP_SF38_2016GUI.UI
         private void ZatvoriKorisniciWindow(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbIme.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be2 = tbPrezime.GetBindingExpression(TextBox.TextProperty);
+            be2.UpdateSource();
+            BindingExpression be3 = tbUser.GetBindingExpression(TextBox.TextProperty);
+            be3.UpdateSource();
+            BindingExpression be4 = tbPass.GetBindingExpression(TextBox.TextProperty);
+            be4.UpdateSource();
+
+            if (Validation.GetHasError(tbIme) == true || Validation.GetHasError(tbPrezime) == true || Validation.GetHasError(tbUser) == true || Validation.GetHasError(tbPass) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

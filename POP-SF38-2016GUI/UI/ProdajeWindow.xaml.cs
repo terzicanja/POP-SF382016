@@ -26,7 +26,7 @@ namespace POP_SF38_2016GUI.UI
         private ProdajaNamestaja prodaja;
         private UslugaProdaje uslugaProdaje;
         private StavkaProdaje SelektovaniNamestaj;
-        private ObservableCollection<DodatnaUsluga> SelektovanaUsluga;
+        private UslugaProdaje SelektovanaUsluga;
         private ObservableCollection<UslugaProdaje> SelektovanaUslugaProdaje;
         private Operacija operacija;
         public double cenaBezPDV;
@@ -45,7 +45,7 @@ namespace POP_SF38_2016GUI.UI
             this.listaUsluga = new ObservableCollection<UslugaProdaje>();
 
             uslugaProdaje = new UslugaProdaje();
-            SelektovanaUsluga = new ObservableCollection<DodatnaUsluga>();
+            SelektovanaUsluga = new UslugaProdaje();
 
             
             tbUkupanIznos.DataContext = prodaja;
@@ -195,6 +195,13 @@ namespace POP_SF38_2016GUI.UI
                             StavkaProdaje.Delete(i);
                         }
                     }
+                    foreach (var u in Projekat.Instance.UslugeProdaje)
+                    {
+                        if (u.IdProdaje == prodaja.Id)
+                        {
+                            UslugaProdaje.Delete(u);
+                        }
+                    }
                     ProdajaNamestaja.Delete(prodaja);
 
                     this.Close();
@@ -254,6 +261,13 @@ namespace POP_SF38_2016GUI.UI
             //listaStavki.Remove(SelektovaniNamestaj);
             StavkaProdaje.Delete(SelektovaniNamestaj);
             listaStavki.Remove(SelektovaniNamestaj);
+        }
+
+        private void UkloniUslugu(object sender, RoutedEventArgs e)
+        {
+            SelektovanaUsluga = dgProdajaUsluga.SelectedItem as UslugaProdaje;
+            UslugaProdaje.Delete(SelektovanaUsluga);
+            listaUsluga.Remove(SelektovanaUsluga);
         }
     }
 }

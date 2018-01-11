@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <TextBox Name="tbSearch" Margin="72,13,10.8,9.8" />
         <Button Content="Search" Grid.Column="1" Margin="14.2,13,192.4,10.8" Click="DugmeSearch"/>
-        <DataGrid Name="dgSviNamestaji" Margin="10,7.8,10.4,2.2" AutoGenerateColumns="False" CanUserAddRows="False" Grid.ColumnSpan="2" Grid.Row="1">
+        <DataGrid Name="dgSviNamestaji" Margin="10,7.8,10.4,2.2" SelectedIndex="0" AutoGenerateColumns="False" CanUserAddRows="False" Grid.ColumnSpan="2" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naziv" Width="*" Binding="{Binding Path=Naziv}"/>
                 <DataGridTextColumn Header="Cena" Width="*" Binding="{Binding Path=Cena}"/>
@@ -27,15 +27,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Name="lbKoliko" Content="Koliko:" Margin="119,2.8,23.8,11.2" Grid.Row="2"/>
-        <TextBox Grid.Row="2" Width="Auto" Name="tbKoliko" Margin="14.2,2.8,45.4,11.2" Grid.Column="1">
-            <TextBox.Text>
-                <Binding Path="Kolicina" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <local:IntValidation/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+        <TextBox Grid.Row="2" Width="Auto" Name="tbKoliko" Margin="14.2,2.8,45.4,11.2" Grid.Column="1" Text="{Binding Path=Kolicina}"/>
+
+
 
         <Button Content="Sacuvaj" Margin="98,7.8,23.8,28.2" Name="PickSave" Grid.Row="3">
             <Button.Style>

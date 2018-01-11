@@ -126,7 +126,7 @@ namespace POP_SF38_2016GUI.UI
             BindingExpression be3 = tbCena.GetBindingExpression(TextBox.TextProperty);
             be3.UpdateSource();
 
-            if (Validation.GetHasError(tbNaziv) == true || Validation.GetHasError(tbKolicina) || Validation.GetHasError(tbCena))
+            if (Validation.GetHasError(tbNaziv) == true || Validation.GetHasError(tbKolicina) == true || Validation.GetHasError(tbCena) == true)
             {
                 return true;
             }
