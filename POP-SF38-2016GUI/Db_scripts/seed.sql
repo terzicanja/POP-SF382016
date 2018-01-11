@@ -37,11 +37,3 @@ INSERT INTO Akcija (Naziv, PocetakAkcije, KrajAkcije, Popust)
 VALUES ('Uskrsnji popust', '2015-11-03', '2017-02-12', 15);
 
 INSERT INTO NaAkciji (IdAkcije, IdNamestaja) VALUES (1, 1);
-
-DELETE FROM Stavka WHERE Id BETWEEN 69 AND 1211;
-DELETE FROM Prodaja WHERE Id BETWEEN 3 AND 1116;
-DELETE FROM UslugaProdaje WHERE Id BETWEEN 4 AND 1011;
-DELETE FROM NaAkciji WHERE Id BETWEEN 3 AND 6;
-DELETE FROM Akcija WHERE Id BETWEEN 7 AND 1037;
-
-SELECT * FROM TipNamestaja ORDER BY Naziv;

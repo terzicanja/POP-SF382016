@@ -130,6 +130,7 @@ namespace POP_SF38_2016GUI.UI
         private void SacuvajStavku(object sender, RoutedEventArgs e)
         {
             var listaStavki = Projekat.Instance.StavkeProdaje;
+            
             SelektovaniNamestaj = dgSviNamestaji.SelectedItem as Namestaj;
             
 
@@ -171,7 +172,7 @@ namespace POP_SF38_2016GUI.UI
 
         private void ZatvoriProzor(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF382016.Model
 {
@@ -209,66 +210,80 @@ namespace POP_SF382016.Model
 
         public static Korisnik Create(Korisnik tn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
+                    SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, TipKorisnika, Obrisan) " +
-                    "VALUES (@Ime, @Prezime, @KorisnickoIme, @Lozinka, @TipKorisnika, @Obrisan);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Ime", tn.Ime);
-                cmd.Parameters.AddWithValue("Prezime", tn.Prezime);
-                cmd.Parameters.AddWithValue("KorisnickoIme", tn.KorisnickoIme);
-                cmd.Parameters.AddWithValue("Lozinka", tn.Lozinka);
-                cmd.Parameters.AddWithValue("TipKorisnika", tn.TipKorisnika.ToString());
-                cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
+                    cmd.CommandText = "INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, TipKorisnika, Obrisan) " +
+                        "VALUES (@Ime, @Prezime, @KorisnickoIme, @Lozinka, @TipKorisnika, @Obrisan);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Ime", tn.Ime);
+                    cmd.Parameters.AddWithValue("Prezime", tn.Prezime);
+                    cmd.Parameters.AddWithValue("KorisnickoIme", tn.KorisnickoIme);
+                    cmd.Parameters.AddWithValue("Lozinka", tn.Lozinka);
+                    cmd.Parameters.AddWithValue("TipKorisnika", tn.TipKorisnika.ToString());
+                    cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
 
-                tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+
+                Projekat.Instance.Korisnici.Add(tn);
+
+                return tn;
             }
-
-            Projekat.Instance.Korisnici.Add(tn);
-
-            return tn;
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+                return null;
+            }
+            
         }
 
         public static void Update(Korisnik tn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE Korisnik SET Ime = @Ime, Prezime = @Prezime, " +
-                    "KorisnickoIme = @KorisnickoIme, Lozinka = @Lozinka, TipKorisnika = @TipKorisnika, Obrisan = @Obrisan " +
-                    "WHERE Id = @Id;";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Id", tn.Id);
-                cmd.Parameters.AddWithValue("Ime", tn.Ime);
-                cmd.Parameters.AddWithValue("Prezime", tn.Prezime);
-                cmd.Parameters.AddWithValue("KorisnickoIme", tn.KorisnickoIme);
-                cmd.Parameters.AddWithValue("Lozinka", tn.Lozinka);
-                cmd.Parameters.AddWithValue("TipKorisnika", tn.TipKorisnika);
-                cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
-
-                cmd.ExecuteNonQuery();
-            }
-
-
-            foreach (var k in Projekat.Instance.Korisnici)
-            {
-                if (tn.Id == k.Id)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    k.Ime = tn.Ime;
-                    k.Prezime = tn.Prezime;
-                    k.KorisnickoIme = tn.KorisnickoIme;
-                    k.Lozinka = tn.Lozinka;
-                    k.TipKorisnika = tn.TipKorisnika;
-                    k.Obrisan = tn.Obrisan;
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE Korisnik SET Ime = @Ime, Prezime = @Prezime, " +
+                        "KorisnickoIme = @KorisnickoIme, Lozinka = @Lozinka, TipKorisnika = @TipKorisnika, Obrisan = @Obrisan " +
+                        "WHERE Id = @Id;";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Id", tn.Id);
+                    cmd.Parameters.AddWithValue("Ime", tn.Ime);
+                    cmd.Parameters.AddWithValue("Prezime", tn.Prezime);
+                    cmd.Parameters.AddWithValue("KorisnickoIme", tn.KorisnickoIme);
+                    cmd.Parameters.AddWithValue("Lozinka", tn.Lozinka);
+                    cmd.Parameters.AddWithValue("TipKorisnika", tn.TipKorisnika);
+                    cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+
+                foreach (var k in Projekat.Instance.Korisnici)
+                {
+                    if (tn.Id == k.Id)
+                    {
+                        k.Ime = tn.Ime;
+                        k.Prezime = tn.Prezime;
+                        k.KorisnickoIme = tn.KorisnickoIme;
+                        k.Lozinka = tn.Lozinka;
+                        k.TipKorisnika = tn.TipKorisnika;
+                        k.Obrisan = tn.Obrisan;
+                    }
                 }
             }
+            catch (Exception){}
+            
         }
 
         public static void Delete(Korisnik n)

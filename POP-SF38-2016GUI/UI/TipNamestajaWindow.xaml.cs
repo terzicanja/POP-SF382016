@@ -45,6 +45,11 @@ namespace POP_SF38_2016GUI.UI
         {
             var listaTipova = Projekat.Instance.TipoviNamestaja;
 
+            if (ForceValidation() == true)
+            {
+                return;
+            }
+
             switch (operacija)
             {
                 case Operacija.Dodavanje:
@@ -69,6 +74,18 @@ namespace POP_SF38_2016GUI.UI
         private void ZatvoriTipNamestajaWindow(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+
+            if (Validation.GetHasError(tbNaziv) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -260,7 +260,10 @@ namespace POP_SF38_2016GUI
         {
             var noviNamestaj = new Namestaj()
             {
-                Naziv = ""
+                Naziv = "",
+                IdTipaNamestaja = 1,
+                Cena = 0,
+                KolicinaUMagacinu = 0
             };
             var namestajProzor = new NamestajWindow(noviNamestaj, NamestajWindow.Operacija.Dodavanje);
             namestajProzor.ShowDialog();
@@ -291,11 +294,10 @@ namespace POP_SF38_2016GUI
         {
             var novaAkcija = new Akcija()
             {
-                Naziv = "bazz",
-                Popust = 11,
+                Naziv = "",
+                Popust = 10,
                 PocetakAkcije = DateTime.Today,
                 KrajAkcije = DateTime.Now,
-                //IdNamestaja = new ObservableCollection<int>()
             };
             Akcija.Create(novaAkcija);
             var prozor = new AkcijeWindow(novaAkcija, NamestajWindow.Operacija.Dodavanje);
@@ -308,9 +310,8 @@ namespace POP_SF38_2016GUI
             novaProdaja = new ProdajaNamestaja()
             {
                 DatumProdaje = DateTime.Now,
-                Kupac = "proba za bazu",
-                BrojRacuna = 123
-                //IdUsluga = new ObservableCollection<int>()
+                Kupac = "",
+                //BrojRacuna = 123
             };
             ProdajaNamestaja.Create(novaProdaja);
             var prozor = new ProdajeWindow(novaProdaja, NamestajWindow.Operacija.Dodavanje);
@@ -626,13 +627,8 @@ namespace POP_SF38_2016GUI
                     ObrisiKorisnika();
                     break;
                 case "Prodaja":
-                    //MessageBoxResult obavestenjeP = MessageBox.Show("Nije moguce obrisati prodaju", "Obavestenje", MessageBoxButton.OK);
-
-                    SelektovanaProdaja = dgPrikaz.SelectedItem as ProdajaNamestaja;
-
-                    var propro = new DetaljiProdajeWindow(SelektovanaProdaja);
-                    propro.ShowDialog();
-
+                    MessageBoxResult obavestenjeP = MessageBox.Show("Nije moguce obrisati prodaju", "Obavestenje", MessageBoxButton.OK);
+                    
                     break;
                 default:
                     break;

@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace POP_SF382016.Model
@@ -152,54 +153,70 @@ namespace POP_SF382016.Model
 
         public static StavkaProdaje Create(StavkaProdaje tn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
-                
-                cmd.CommandText = "INSERT INTO Stavka (IdProdaje, IdNamestaja, Kolicina) VALUES (@IdProdaje, @IdNamestaja, @Kolicina);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
-                cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
-                cmd.Parameters.AddWithValue("Kolicina", tn.Kolicina);
+                    SqlCommand cmd = con.CreateCommand();
 
-                tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    cmd.CommandText = "INSERT INTO Stavka (IdProdaje, IdNamestaja, Kolicina) VALUES (@IdProdaje, @IdNamestaja, @Kolicina);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
+                    cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
+                    cmd.Parameters.AddWithValue("Kolicina", tn.Kolicina);
+
+                    tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+
+                Projekat.Instance.StavkeProdaje.Add(tn);
+
+                return tn;
             }
-
-            Projekat.Instance.StavkeProdaje.Add(tn);
-
-            return tn;
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+                return null;
+            }
+            
         }
 
         public static void Update(StavkaProdaje tn)
         {
-            //azuriranje baze
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE Stavka SET IdProdaje = @IdProdaje, IdNamestaja = @IdNamestaja, Kolicina = @Kolicina WHERE Id=@Id;";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Id", tn.Id);
-                cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
-                cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
-                cmd.Parameters.AddWithValue("Kolicina", tn.Kolicina);
-
-                cmd.ExecuteNonQuery();
-            }
-            //azuriranje modela
-            foreach (var tip in Projekat.Instance.StavkeProdaje)
-            {
-                if (tn.Id == tip.Id)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    tip.IdProdaje = tn.IdProdaje;
-                    tip.IdNamestaja = tn.IdNamestaja;
-                    tip.Kolicina = tn.Kolicina;
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE Stavka SET IdProdaje = @IdProdaje, IdNamestaja = @IdNamestaja, Kolicina = @Kolicina WHERE Id=@Id;";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Id", tn.Id);
+                    cmd.Parameters.AddWithValue("IdProdaje", tn.IdProdaje);
+                    cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
+                    cmd.Parameters.AddWithValue("Kolicina", tn.Kolicina);
+
+                    cmd.ExecuteNonQuery();
+                }
+                //azuriranje modela
+                foreach (var tip in Projekat.Instance.StavkeProdaje)
+                {
+                    if (tn.Id == tip.Id)
+                    {
+                        tip.IdProdaje = tn.IdProdaje;
+                        tip.IdNamestaja = tn.IdNamestaja;
+                        tip.Kolicina = tn.Kolicina;
+                    }
                 }
             }
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+            }
+            
         }
 
         public static void Delete(StavkaProdaje p)

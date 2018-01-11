@@ -40,7 +40,10 @@ namespace POP_SF38_2016GUI.UI
         private void SacuvajIzmene(object sender, RoutedEventArgs e)
         {
             var lista = Projekat.Instance.DodatneUsluge;
-
+            if (ForceValidation() == true)
+            {
+                return;
+            }
             switch (operacija)
             {
                 case Operacija.Dodavanje:
@@ -68,6 +71,20 @@ namespace POP_SF38_2016GUI.UI
         private void ZatvoriUslugeWindow(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbUsluga.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be2 = tbCena.GetBindingExpression(TextBox.TextProperty);
+            be2.UpdateSource();
+
+            if (Validation.GetHasError(tbUsluga) == true || Validation.GetHasError(tbCena) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

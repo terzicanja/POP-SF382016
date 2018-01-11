@@ -86,10 +86,3 @@ CREATE TABLE NaAkciji(
 	FOREIGN KEY (IdAkcije) REFERENCES Akcija(Id),
 	FOREIGN KEY (IdNamestaja) REFERENCES Namestaj(Id)
 );
-
-
-
-DROP TABLE Korisnik;
-
-
-SELECT * FROM Namestaj;

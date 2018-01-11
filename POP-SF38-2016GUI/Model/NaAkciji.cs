@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace POP_SF382016.Model
@@ -139,52 +140,67 @@ namespace POP_SF382016.Model
 
         public static NaAkciji Create(NaAkciji tn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
+                    SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO NaAkciji (IdAkcije, IdNamestaja) VALUES (@IdAkcije, @IdNamestaja);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                //sql injection google
-                cmd.Parameters.AddWithValue("IdAkcije", tn.IdAkcije);
-                cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
+                    cmd.CommandText = "INSERT INTO NaAkciji (IdAkcije, IdNamestaja) VALUES (@IdAkcije, @IdNamestaja);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    //sql injection google
+                    cmd.Parameters.AddWithValue("IdAkcije", tn.IdAkcije);
+                    cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
 
-                tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+
+                Projekat.Instance.NaAkcijama.Add(tn);
+
+                return tn;
             }
-
-            Projekat.Instance.NaAkcijama.Add(tn);
-
-            return tn;
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+                return null;
+            }
+            
         }
 
         public static void Update(NaAkciji tn)
         {
-            //azuriranje baze
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE NaAkciji SET IdAkcije = @IdAkcije, IdNamestaja = @IdNamestaja WHERE Id=@Id;";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Id", tn.Id);
-                cmd.Parameters.AddWithValue("IdAkcije", tn.IdAkcije);
-                cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
-
-                cmd.ExecuteNonQuery();
-            }
-            //azuriranje modela
-            foreach (var tip in Projekat.Instance.NaAkcijama)
-            {
-                if (tn.Id == tip.Id)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    tip.IdAkcije = tn.IdAkcije;
-                    tip.IdNamestaja = tn.IdNamestaja;
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE NaAkciji SET IdAkcije = @IdAkcije, IdNamestaja = @IdNamestaja WHERE Id=@Id;";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Id", tn.Id);
+                    cmd.Parameters.AddWithValue("IdAkcije", tn.IdAkcije);
+                    cmd.Parameters.AddWithValue("IdNamestaja", tn.IdNamestaja);
+
+                    cmd.ExecuteNonQuery();
+                }
+                //azuriranje modela
+                foreach (var tip in Projekat.Instance.NaAkcijama)
+                {
+                    if (tn.Id == tip.Id)
+                    {
+                        tip.IdAkcije = tn.IdAkcije;
+                        tip.IdNamestaja = tn.IdNamestaja;
+                    }
                 }
             }
+            catch (Exception)
+            {
+            }
+            
         }
 
         public static void Delete(NaAkciji p)

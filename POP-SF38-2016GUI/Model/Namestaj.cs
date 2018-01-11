@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace POP_SF382016.Model
@@ -225,63 +226,77 @@ namespace POP_SF382016.Model
 
         public static Namestaj Create(Namestaj n)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
+                    SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO Namestaj (TipNamestajaId, Naziv, Sifra, Cena, Kolicina, Obrisan) VALUES (@TipNamestajaId, @Naziv, @Sifra, @Cena, @Kolicina, @Obrisan);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
-                cmd.Parameters.AddWithValue("Naziv", n.Naziv);
-                cmd.Parameters.AddWithValue("Sifra", n.Sifra);
-                cmd.Parameters.AddWithValue("Cena", n.Cena);
-                cmd.Parameters.AddWithValue("Kolicina", n.KolicinaUMagacinu);
-                cmd.Parameters.AddWithValue("Obrisan", n.Obrisan);
+                    cmd.CommandText = "INSERT INTO Namestaj (TipNamestajaId, Naziv, Sifra, Cena, Kolicina, Obrisan) VALUES (@TipNamestajaId, @Naziv, @Sifra, @Cena, @Kolicina, @Obrisan);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
+                    cmd.Parameters.AddWithValue("Naziv", n.Naziv);
+                    cmd.Parameters.AddWithValue("Sifra", n.Sifra);
+                    cmd.Parameters.AddWithValue("Cena", n.Cena);
+                    cmd.Parameters.AddWithValue("Kolicina", n.KolicinaUMagacinu);
+                    cmd.Parameters.AddWithValue("Obrisan", n.Obrisan);
 
-                n.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    n.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+                Projekat.Instance.Namestaji.Add(n);
+
+                return n;
             }
-            Projekat.Instance.Namestaji.Add(n);
-
-            return n;
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+                return null;
+            }
+            
         }
 
         public static void Update(Namestaj n)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE Namestaj SET TipNamestajaId=@TipNamestajaId, Naziv=@Naziv, " +
-                    "Sifra=@Sifra, Cena=@Cena, Kolicina=@Kolicina, Obrisan=@Obrisan WHERE Id=@Id;";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                
-                cmd.Parameters.AddWithValue("Id", n.Id);
-                cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
-                cmd.Parameters.AddWithValue("Naziv", n.Naziv);
-                cmd.Parameters.AddWithValue("Sifra", n.Sifra);
-                cmd.Parameters.AddWithValue("Cena", n.Cena);
-                cmd.Parameters.AddWithValue("Kolicina", n.KolicinaUMagacinu);
-                cmd.Parameters.AddWithValue("Obrisan", n.Obrisan);
-
-                cmd.ExecuteNonQuery();
-            }
-
-            foreach (var nam in Projekat.Instance.Namestaji)
-            {
-                if(n.Id == nam.Id)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    nam.IdTipaNamestaja = n.IdTipaNamestaja;
-                    nam.Naziv = n.Naziv;
-                    nam.Sifra = n.Sifra;
-                    nam.Cena = n.Cena;
-                    nam.KolicinaUMagacinu = n.KolicinaUMagacinu;
-                    nam.Obrisan = n.Obrisan;
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE Namestaj SET TipNamestajaId=@TipNamestajaId, Naziv=@Naziv, " +
+                        "Sifra=@Sifra, Cena=@Cena, Kolicina=@Kolicina, Obrisan=@Obrisan WHERE Id=@Id;";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+
+                    cmd.Parameters.AddWithValue("Id", n.Id);
+                    cmd.Parameters.AddWithValue("TipNamestajaId", n.IdTipaNamestaja);
+                    cmd.Parameters.AddWithValue("Naziv", n.Naziv);
+                    cmd.Parameters.AddWithValue("Sifra", n.Sifra);
+                    cmd.Parameters.AddWithValue("Cena", n.Cena);
+                    cmd.Parameters.AddWithValue("Kolicina", n.KolicinaUMagacinu);
+                    cmd.Parameters.AddWithValue("Obrisan", n.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                foreach (var nam in Projekat.Instance.Namestaji)
+                {
+                    if (n.Id == nam.Id)
+                    {
+                        nam.IdTipaNamestaja = n.IdTipaNamestaja;
+                        nam.Naziv = n.Naziv;
+                        nam.Sifra = n.Sifra;
+                        nam.Cena = n.Cena;
+                        nam.KolicinaUMagacinu = n.KolicinaUMagacinu;
+                        nam.Obrisan = n.Obrisan;
+                    }
                 }
             }
+            catch (Exception){}
+            
         }
 
         public static void Delete(Namestaj n)

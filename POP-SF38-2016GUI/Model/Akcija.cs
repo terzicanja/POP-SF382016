@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 
 namespace POP_SF382016.Model
@@ -179,58 +180,72 @@ namespace POP_SF382016.Model
 
         public static Akcija Create(Akcija tn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
+                    SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO Akcija (Naziv, PocetakAkcije, KrajAkcije, Popust) VALUES (@Naziv, @PocetakAkcije, @KrajAkcije, @Popust);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.CommandText = "INSERT INTO Akcija (Naziv, PocetakAkcije, KrajAkcije, Popust) VALUES (@Naziv, @PocetakAkcije, @KrajAkcije, @Popust);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
-                cmd.Parameters.AddWithValue("PocetakAkcije", tn.PocetakAkcije);
-                cmd.Parameters.AddWithValue("KrajAkcije", tn.KrajAkcije);
-                cmd.Parameters.AddWithValue("Popust", tn.Popust);
+                    cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
+                    cmd.Parameters.AddWithValue("PocetakAkcije", tn.PocetakAkcije);
+                    cmd.Parameters.AddWithValue("KrajAkcije", tn.KrajAkcije);
+                    cmd.Parameters.AddWithValue("Popust", tn.Popust);
 
-                tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+
+                Projekat.Instance.Akcije.Add(tn);
+
+                return tn;
             }
-
-            Projekat.Instance.Akcije.Add(tn);
-
-            return tn;
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+                return null;
+            }
+            
         }
 
         public static void Update(Akcija tn)
         {
-            //azuriranje baze
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE Akcija SET Naziv = @Naziv, PocetakAkcije = @PocetakAkcije, KrajAkcije = @KrajAkcije, Popust = @Popust WHERE Id=@Id;";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Id", tn.Id);
-                cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
-                cmd.Parameters.AddWithValue("PocetakAkcije", tn.PocetakAkcije);
-                cmd.Parameters.AddWithValue("KrajAkcije", tn.KrajAkcije);
-                cmd.Parameters.AddWithValue("Popust", tn.Popust);
-
-                cmd.ExecuteNonQuery();
-            }
-            //azuriranje modela
-            foreach (var tip in Projekat.Instance.Akcije)
-            {
-                if (tn.Id == tip.Id)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    tip.Naziv = tn.Naziv;
-                    tip.PocetakAkcije = tn.PocetakAkcije;
-                    tip.KrajAkcije = tn.KrajAkcije;
-                    tip.Popust = tn.Popust;
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE Akcija SET Naziv = @Naziv, PocetakAkcije = @PocetakAkcije, KrajAkcije = @KrajAkcije, Popust = @Popust WHERE Id=@Id;";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Id", tn.Id);
+                    cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
+                    cmd.Parameters.AddWithValue("PocetakAkcije", tn.PocetakAkcije);
+                    cmd.Parameters.AddWithValue("KrajAkcije", tn.KrajAkcije);
+                    cmd.Parameters.AddWithValue("Popust", tn.Popust);
+
+                    cmd.ExecuteNonQuery();
+                }
+                foreach (var tip in Projekat.Instance.Akcije)
+                {
+                    if (tn.Id == tip.Id)
+                    {
+                        tip.Naziv = tn.Naziv;
+                        tip.PocetakAkcije = tn.PocetakAkcije;
+                        tip.KrajAkcije = tn.KrajAkcije;
+                        tip.Popust = tn.Popust;
+                    }
                 }
             }
+            catch (Exception)
+            {
+            }
+            
         }
 
         public static void Delete(Akcija p)

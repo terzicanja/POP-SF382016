@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF382016.Model
 {
@@ -186,59 +187,75 @@ namespace POP_SF382016.Model
 
         public static ProdajaNamestaja Create(ProdajaNamestaja tn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
+                    SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO Prodaja (DatumProdaje, BrojRacuna, Kupac, UkupanIznos) VALUES (@DatumProdaje, @BrojRacuna, @Kupac, @UkupanIznos);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                
-                cmd.Parameters.AddWithValue("DatumProdaje", tn.DatumProdaje);
-                cmd.Parameters.AddWithValue("BrojRacuna", tn.BrojRacuna);
-                cmd.Parameters.AddWithValue("Kupac", tn.Kupac);
-                cmd.Parameters.AddWithValue("UkupanIznos", tn.UkupanIznos);
+                    cmd.CommandText = "INSERT INTO Prodaja (DatumProdaje, BrojRacuna, Kupac, UkupanIznos) VALUES (@DatumProdaje, @BrojRacuna, @Kupac, @UkupanIznos);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    cmd.Parameters.AddWithValue("DatumProdaje", tn.DatumProdaje);
+                    cmd.Parameters.AddWithValue("BrojRacuna", tn.BrojRacuna);
+                    cmd.Parameters.AddWithValue("Kupac", tn.Kupac);
+                    cmd.Parameters.AddWithValue("UkupanIznos", tn.UkupanIznos);
+
+                    tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+
+                Projekat.Instance.ProdajeNamestaja.Add(tn);
+
+                return tn;
             }
-
-            Projekat.Instance.ProdajeNamestaja.Add(tn);
-
-            return tn;
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+                return null;
+            }
+            
         }
 
         public static void Update(ProdajaNamestaja tn)
         {
-            //azuriranje baze
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE Prodaja SET DatumProdaje = @DatumProdaje, BrojRacuna = @BrojRacuna, " +
-                    "Kupac = @Kupac, UkupanIznos = @UkupanIznos WHERE Id=@Id;";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Id", tn.Id);
-                cmd.Parameters.AddWithValue("DatumProdaje", tn.DatumProdaje);
-                cmd.Parameters.AddWithValue("BrojRacuna", tn.BrojRacuna);
-                cmd.Parameters.AddWithValue("Kupac", tn.Kupac);
-                cmd.Parameters.AddWithValue("UkupanIznos", tn.UkupanIznos);
-
-                cmd.ExecuteNonQuery();
-            }
-            //azuriranje modela
-            foreach (var tip in Projekat.Instance.ProdajeNamestaja)
-            {
-                if (tn.Id == tip.Id)
+                //azuriranje baze
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    tip.DatumProdaje = tn.DatumProdaje;
-                    tip.BrojRacuna = tn.BrojRacuna;
-                    tip.Kupac = tn.Kupac;
-                    tip.UkupanIznos = tn.UkupanIznos;
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE Prodaja SET DatumProdaje = @DatumProdaje, BrojRacuna = @BrojRacuna, " +
+                        "Kupac = @Kupac, UkupanIznos = @UkupanIznos WHERE Id=@Id;";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Id", tn.Id);
+                    cmd.Parameters.AddWithValue("DatumProdaje", tn.DatumProdaje);
+                    cmd.Parameters.AddWithValue("BrojRacuna", tn.BrojRacuna);
+                    cmd.Parameters.AddWithValue("Kupac", tn.Kupac);
+                    cmd.Parameters.AddWithValue("UkupanIznos", tn.UkupanIznos);
+
+                    cmd.ExecuteNonQuery();
+                }
+                //azuriranje modela
+                foreach (var tip in Projekat.Instance.ProdajeNamestaja)
+                {
+                    if (tn.Id == tip.Id)
+                    {
+                        tip.DatumProdaje = tn.DatumProdaje;
+                        tip.BrojRacuna = tn.BrojRacuna;
+                        tip.Kupac = tn.Kupac;
+                        tip.UkupanIznos = tn.UkupanIznos;
+                    }
                 }
             }
+            catch (Exception)
+            {
+            }
+            
         }
 
         public static void Delete(ProdajaNamestaja p)

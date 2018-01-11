@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF382016.Model
 {
@@ -163,51 +164,67 @@ namespace POP_SF382016.Model
 
         public static DodatnaUsluga Create(DodatnaUsluga dn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
+                    SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES (@Naziv, @Cena, @Obrisan);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Naziv", dn.Usluga);
-                cmd.Parameters.AddWithValue("Cena", dn.Cena);
-                cmd.Parameters.AddWithValue("Obrisan", dn.Obrisan);
+                    cmd.CommandText = "INSERT INTO Usluga (Naziv, Cena, Obrisan) VALUES (@Naziv, @Cena, @Obrisan);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Naziv", dn.Usluga);
+                    cmd.Parameters.AddWithValue("Cena", dn.Cena);
+                    cmd.Parameters.AddWithValue("Obrisan", dn.Obrisan);
 
-                dn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    dn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+                Projekat.Instance.DodatneUsluge.Add(dn);
+                return dn;
             }
-            Projekat.Instance.DodatneUsluge.Add(dn);
-            return dn;
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+                return null;
+            }
+            
         }
 
         public static void Update(DodatnaUsluga dn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE Usluga SET Naziv=@Naziv, Cena=@Cena, Obrisan=@Obrisan WHERE Id=@Id;";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Id", dn.Id);
-                cmd.Parameters.AddWithValue("Naziv", dn.Usluga);
-                cmd.Parameters.AddWithValue("Cena", dn.Cena);
-                cmd.Parameters.AddWithValue("Obrisan", dn.Obrisan);
-
-                cmd.ExecuteNonQuery();
-            }
-
-            foreach (var du in Projekat.Instance.DodatneUsluge)
-            {
-                if (dn.Id == du.Id)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    du.Usluga = dn.Usluga;
-                    du.Cena = dn.Cena;
-                    du.Obrisan = dn.Obrisan;
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE Usluga SET Naziv=@Naziv, Cena=@Cena, Obrisan=@Obrisan WHERE Id=@Id;";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Id", dn.Id);
+                    cmd.Parameters.AddWithValue("Naziv", dn.Usluga);
+                    cmd.Parameters.AddWithValue("Cena", dn.Cena);
+                    cmd.Parameters.AddWithValue("Obrisan", dn.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                foreach (var du in Projekat.Instance.DodatneUsluge)
+                {
+                    if (dn.Id == du.Id)
+                    {
+                        du.Usluga = dn.Usluga;
+                        du.Cena = dn.Cena;
+                        du.Obrisan = dn.Obrisan;
+                    }
                 }
             }
+            catch (Exception)
+            {
+            }
+            
         }
 
         public static void Delete(DodatnaUsluga n)

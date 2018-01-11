@@ -48,10 +48,6 @@
         <Button Content="Dodaj uslugu" Margin="36,23.8,10,92.4" Click="SveUslugeZaProdaju" Grid.Row="2"/>
         <Button Content="Ukloni uslugu" Margin="36,75.8,10,28.4" Click="UkloniUslugu" Grid.Row="2"/>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Ukupan iznos:" FontSize="15" Margin="21,129.6,20,23.6"/>
-        <Label Margin="11,9.6,227.4,113.4" Content="{Binding UkupanIznos}" Grid.Row="3" Grid.Column="1" />
-        <TextBox Grid.Row="3" Width="Auto" Name="tbUkupanIznos" Margin="11,119.6,25.4,23.6" Text="{Binding Path=UkupanIznos}" Grid.Column="1"/>
-
         <Button Content="Sacuvaj" Margin="11,23.4,320.4,21.6" Click="SacuvajIzmene" Grid.Row="4" Grid.Column="1">
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource MetroButton}">

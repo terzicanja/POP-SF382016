@@ -79,13 +79,17 @@ namespace POP_SF38_2016GUI.UI
             {
                 foreach (var v in listaNaAkciji)
                 {
-                    if (o.IdNamestaja == v.Namestaj.Id && ((o.Akcija.PocetakAkcije > DateTime.Parse(dtPocetka.Text) && o.Akcija.PocetakAkcije < DateTime.Parse(dtKraj.Text))
+                    if (v.Id != 0)
+                    {
+                        if (o.IdNamestaja == v.Namestaj.Id && ((o.Akcija.PocetakAkcije > DateTime.Parse(dtPocetka.Text) && o.Akcija.PocetakAkcije < DateTime.Parse(dtKraj.Text))
                     || (o.Akcija.KrajAkcije > DateTime.Parse(dtPocetka.Text) && o.Akcija.KrajAkcije < DateTime.Parse(dtKraj.Text))
                     || (o.Akcija.PocetakAkcije < DateTime.Parse(dtPocetka.Text) && o.Akcija.KrajAkcije > DateTime.Parse(dtKraj.Text))))
-                    {
-                        MessageBoxResult obavestenje = MessageBox.Show("Namestaj "+v.Namestaj.Naziv+" je vec na akciji u tom vremenskom periodu", "Obavestenje", MessageBoxButton.OK);
-                        return;
+                        {
+                            MessageBoxResult obavestenje = MessageBox.Show("Namestaj " + v.Namestaj.Naziv + " je vec na akciji u tom vremenskom periodu", "Obavestenje", MessageBoxButton.OK);
+                            return;
+                        }
                     }
+                    
                 }
             }
 

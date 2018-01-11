@@ -31,15 +31,19 @@ namespace POP_SF38_2016GUI.UI
         {
             var korisnici = Projekat.Instance.Korisnici;
 
-            foreach (var k in korisnici)
+            try
             {
-                if(!k.Obrisan && k.KorisnickoIme == tbUser.Text && k.Lozinka == tbPass.Text)
+                foreach (var k in korisnici)
                 {
-                    var mainProzor = new MainWindow(k.TipKorisnika);
-                    this.Close();
-                    mainProzor.ShowDialog();
+                    if (!k.Obrisan && k.KorisnickoIme == tbUser.Text && k.Lozinka == tbPass.Text)
+                    {
+                        var mainProzor = new MainWindow(k.TipKorisnika);
+                        this.Close();
+                        mainProzor.ShowDialog();
+                    }
                 }
             }
+            catch (Exception){}
         }
     }
 }

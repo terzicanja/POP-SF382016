@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF382016.Model
 {
@@ -149,51 +150,67 @@ namespace POP_SF382016.Model
 
         public static TipNamestaja Create(TipNamestaja tn)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
+                    SqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO TipNamestaja (Naziv, Obrisan) VALUES (@Naziv, @Obrisan);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
-                cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
+                    cmd.CommandText = "INSERT INTO TipNamestaja (Naziv, Obrisan) VALUES (@Naziv, @Obrisan);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
+                    cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
 
-                tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    tn.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+
+                Projekat.Instance.TipoviNamestaja.Add(tn);
+
+                return tn;
             }
-
-            Projekat.Instance.TipoviNamestaja.Add(tn);
-
-            return tn;
+            catch (Exception)
+            {
+                MessageBoxResult obavestenje = MessageBox.Show("Doslo je do greske.", "Obavestenje", MessageBoxButton.OK);
+                return null;
+            }
+            
         }
 
         public static void Update(TipNamestaja tn)
         {
-            //azuriranje baze
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE TipNamestaja SET Naziv = @Naziv, Obrisan = @Obrisan WHERE Id=@Id;";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
-                cmd.Parameters.AddWithValue("Id", tn.Id);
-                cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
-                cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
-
-                cmd.ExecuteNonQuery();
-            }
-            //azuriranje modela
-            foreach (var tip in Projekat.Instance.TipoviNamestaja)
-            {
-                if(tn.Id == tip.Id)
+                //azuriranje baze
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    tip.Naziv = tn.Naziv;
-                    tip.Obrisan = tn.Obrisan;
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE TipNamestaja SET Naziv = @Naziv, Obrisan = @Obrisan WHERE Id=@Id;";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.Parameters.AddWithValue("Id", tn.Id);
+                    cmd.Parameters.AddWithValue("Naziv", tn.Naziv);
+                    cmd.Parameters.AddWithValue("Obrisan", tn.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+                }
+                //azuriranje modela
+                foreach (var tip in Projekat.Instance.TipoviNamestaja)
+                {
+                    if (tn.Id == tip.Id)
+                    {
+                        tip.Naziv = tn.Naziv;
+                        tip.Obrisan = tn.Obrisan;
+                    }
                 }
             }
+            catch (Exception)
+            {
+            }
+            
         }
 
         public static void Delete(TipNamestaja tn)
